@@ -3,15 +3,6 @@ import { AppBar, Tabs, Tab } from '@material-ui/core';
 import { Home, Send, Person } from '@material-ui/icons';
 import styled from 'styled-components';
 
-const StyledAppBar = styled(AppBar)`
-    && {
-        background-color: rgba(0, 0, 0, 0.5);
-        color: #ff99a0;
-        font-size: 1rem;
-        font-weight: 800;
-    }
-`;
-
 function TopHeader() {
     const [value, setValue] = React.useState(0);
 
@@ -31,3 +22,14 @@ function TopHeader() {
 }
 
 export default TopHeader;
+
+// styled-components
+
+const StyledAppBar = styled(AppBar)`
+    && {
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #ff99a0;
+        font-size: 1rem;
+        font-weight: 800;
+    }
+`;

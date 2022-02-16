@@ -1,30 +1,38 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import { Menubox } from '.';
 import { Logo } from '..';
 
 function NavigationBar() {
     // true 이면 메뉴 바 나옴
     const [istoggle, setIsToggle] = useState(false); // eslint-disable-line no-unused-vars
 
+    const handleClick = () => {
+        setIsToggle(current => !current);
+    };
+
     return (
-        <Nav>
-            <Logo />
-            <MenuDiv>
-                <div className="menu">Home</div>
-                <div className="menu">Personal Color</div>
-                <div className="menu">Color Analysis</div>
-                <div className="menu">Fashion Matching</div>
-            </MenuDiv>
-            <MenuDiv>
-                <div className="login">Log In</div>
-                <div className="signup">
-                    <span>Sign Up</span>
-                </div>
-            </MenuDiv>
-            <MenuIconDiv>
-                <MenuImg />
-            </MenuIconDiv>
-        </Nav>
+        <>
+            {istoggle && <Menubox />}
+            <Nav>
+                <Logo />
+                <MenuDiv>
+                    <div className="menu">Home</div>
+                    <div className="menu">Personal Color</div>
+                    <div className="menu">Color Analysis</div>
+                    <div className="menu">Fashion Matching</div>
+                </MenuDiv>
+                <MenuDiv>
+                    <div className="login">Log In</div>
+                    <div className="signup">
+                        <span>Sign Up</span>
+                    </div>
+                </MenuDiv>
+                <MenuIconDiv>
+                    <MenuImg onClick={handleClick} />
+                </MenuIconDiv>
+            </Nav>
+        </>
     );
 }
 
@@ -101,7 +109,7 @@ const MenuIconDiv = styled.div`
 
         ${({ theme }) => theme.flexStyled.flexCenter};
 
-        margin: 0 2vw;
+        margin: 0 3vw;
     } ;
 `;
 
@@ -114,7 +122,7 @@ const MenuImg = styled.img.attrs(() => ({
     @media ${({ theme }) => theme.device.laptop} {
         display: block;
 
-        height: 5vh;
+        height: 4vh;
 
         filter: invert(38%) sepia(8%) saturate(4242%) hue-rotate(182deg) brightness(94%) contrast(91%);
 

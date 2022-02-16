@@ -24,7 +24,3 @@ class Fashion(models.Model):
     img_url = models.URLField()
     rate = models.FloatField()
     date = models.DateTimeField()
-    
-
-
-

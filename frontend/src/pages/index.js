@@ -2,3 +2,6 @@
 // 예시 : export { IconDiv, NavLink, UserPicture } from './nav';
 
 export { Home } from './home';
+export { UploadFace } from './personalcolor/UploadFace';
+export { Fashion } from './fashion/Fashion';
+export { Loading } from './personalcolor/Loading';

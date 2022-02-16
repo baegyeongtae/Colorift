@@ -11,12 +11,14 @@ function Logo() {
 export { Logo };
 
 const LogoDiv = styled.div`
-    width: 30%;
-
     ${({ theme }) => theme.flexStyled.flexCenter};
+
+    margin: 0 2vw;
 `;
 
 const LogoImg = styled.img`
+    display: block;
+
     width: 100px;
     height: 30px;
 `;

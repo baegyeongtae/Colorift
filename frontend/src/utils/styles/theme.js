@@ -23,6 +23,11 @@ const color = {
 
 // 자주 사용하는 flex 스타일 속성
 const flexStyled = {
+    flexCenter: `
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    `,
     flexColumn: `
         display: flex;
         flex-direction: column;

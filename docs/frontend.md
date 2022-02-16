@@ -2,20 +2,20 @@
 
 ### 공통 라이브러리
 
-"npm": "^8.5.0",
-"react": "^17.0.2",
-"react-dom": "^17.0.2",
-"react-router-dom": "^6.2.1",
-"recoil": "^0.6.1",
-"styled-components": "^5.3.3",
+-"npm": "^8.5.0",
+-"react": "^17.0.2",
+-"react-dom": "^17.0.2",
+-"react-router-dom": "^6.2.1",
+-"recoil": "^0.6.1",
+-"styled-components": "^5.3.3",
 
-"@emotion/react": "^11.7.1",
-"@emotion/styled": "^11.6.0",
-"@material-ui/core": "^4.12.3",
-"@material-ui/icons": "^4.11.2",
-"@material-ui/styles": "^4.11.4",
-"@mui/icons-material": "^5.4.2",
-"@mui/material": "^5.4.2",
+-"@emotion/react": "^11.7.1",
+-"@emotion/styled": "^11.6.0",
+-"@material-ui/core": "^4.12.3",
+-"@material-ui/icons": "^4.11.2",
+-"@material-ui/styles": "^4.11.4",
+-"@mui/icons-material": "^5.4.2",
+-"@mui/material": "^5.4.2",
 
 ### 임미선
 

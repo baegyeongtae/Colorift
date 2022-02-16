@@ -86,7 +86,7 @@ const LeftCircleDiv = styled.div`
         border-radius: 75px;
         text-align: center;
         margin-top: 86px;
-        margin-left: 40px;
+        margin-left: 45px;
         margin-bottom: 10px;
         font-size: 12px;
         color: #fff;

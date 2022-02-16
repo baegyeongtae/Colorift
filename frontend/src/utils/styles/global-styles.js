@@ -18,9 +18,7 @@ const GlobalStyle = createGlobalStyle`
 
     ol,
     ul,
-    li {
-        list-style: none;
-    }
+    li
 
     @font-face {
         font-family: 'Mulish';

@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { UploadFace, Fashion, Loading } from './pages/index';
+import { UploadFace, PersonalColorChoice, Loading, ColorResult } from './pages/index';
 
 function App() {
     return (
@@ -12,7 +12,8 @@ function App() {
                 <Route path="/example" element={<Example />} /> */}
                 <Route path="/uploadface" element={<UploadFace />} />
                 <Route path="/loading" element={<Loading />} />
-                <Route path="/fashion" element={<Fashion />} />
+                <Route path="/colorresult" element={<ColorResult />} />
+                <Route path="/personalcolorchoice" element={<PersonalColorChoice />} />
             </Routes>
         </BrowserRouter>
     );

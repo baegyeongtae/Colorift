@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Stack from '@mui/material/Stack';
 import Result from '../../components/Result';
 import ProgressBar from '../../components/ProgressBar';
+import Footer from '../../components/Footer';
 
 function ColorResult() {
     return (
@@ -98,6 +99,8 @@ function ColorResult() {
                     <CustomButton>결과보기</CustomButton>
                 </Stack>
             </ContainerDiv>
+
+            <Footer />
         </>
     );
 }

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Stack from '@mui/material/Stack';
+import Footer from '../../components/Footer';
 import PhotoUpload from '../../components/PhotoUpload';
 
 function UploadFace() {
@@ -51,6 +52,8 @@ function UploadFace() {
                     <CustomButton2>결과보기</CustomButton2>
                 </Stack>
             </ContainerDiv>
+
+            <Footer />
         </>
     );
 }

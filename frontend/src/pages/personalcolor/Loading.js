@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Footer from '../../components/Footer';
 import loader from '../../images/loader.png';
 
 function Loading() {
@@ -30,6 +31,8 @@ function Loading() {
                 <img src={loader} alt="loader" width="130px" height="130px" />
                 <TextH1>피부톤을 분석하는 중입니다.</TextH1>
             </ContainerDiv>
+
+            <Footer />
         </>
     );
 }

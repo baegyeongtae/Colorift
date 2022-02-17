@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Menubox } from './Menubox';
 import { Logo } from '..';
 import { useScroll } from '../../utils/hooks/useScroll';
+import { ContainerDiv } from '../ContainerDiv';
 
 function NavigationBar() {
     // true 이면 메뉴 바 나옴
@@ -25,34 +26,36 @@ function NavigationBar() {
             <header>
                 {istoggle && <Menubox clickProps={handleToggleClick} />}
                 <Nav pathname={pathname} scrollY={scrollY}>
-                    <Logo />
-                    <MenuDiv pathname={pathname} scrollY={scrollY}>
-                        <Link to="/">
-                            <div className="menu">Home</div>
-                        </Link>
-                        <Link to="/example">
-                            <div className="menu">Personal Color</div>
-                        </Link>
-                        <Link to="/personalcolor">
-                            <div className="menu">Color Analysis</div>
-                        </Link>
-                        <Link to="/fassion">
-                            <div className="menu">Fashion Matching</div>
-                        </Link>
-                    </MenuDiv>
-                    <MenuDiv pathname={pathname} scrollY={scrollY}>
-                        <Link to="/login">
-                            <div className="login">Log In</div>
-                        </Link>
-                        <Link to="/signup">
-                            <div className="signup">
-                                <span>Sign Up</span>
-                            </div>
-                        </Link>
-                    </MenuDiv>
-                    <MenuIconDiv>
-                        <MenuImg onClick={handleToggleClick} pathname={pathname} scrollY={scrollY} />
-                    </MenuIconDiv>
+                    <ContainerFlexDiv>
+                        <Logo />
+                        <MenuDiv pathname={pathname} scrollY={scrollY}>
+                            <Link to="/">
+                                <div className="menu">Home</div>
+                            </Link>
+                            <Link to="/example">
+                                <div className="menu">Personal Color</div>
+                            </Link>
+                            <Link to="/personalcolor">
+                                <div className="menu">Color Analysis</div>
+                            </Link>
+                            <Link to="/fassion">
+                                <div className="menu">Fashion Matching</div>
+                            </Link>
+                        </MenuDiv>
+                        <UserDiv pathname={pathname} scrollY={scrollY}>
+                            <Link to="/login">
+                                <div className="login">Log In</div>
+                            </Link>
+                            <Link to="/signup">
+                                <div className="signup">
+                                    <span>Sign Up</span>
+                                </div>
+                            </Link>
+                        </UserDiv>
+                        <MenuIconDiv>
+                            <MenuImg onClick={handleToggleClick} pathname={pathname} scrollY={scrollY} />
+                        </MenuIconDiv>
+                    </ContainerFlexDiv>
                 </Nav>
             </header>
             <main>
@@ -78,17 +81,24 @@ const Nav = styled.nav`
         pathname === '/' && scrollY === 0 ? 'transparent' : theme.color.nav};
 
     box-shadow: ${({ pathname }) => pathname !== '/' && '0px 4px 4px rgba(0, 0, 0, 0.25)'};
+`;
 
-    ${({ theme }) => theme.flexStyled.flexRow};
-    justify-content: space-between;
+const ContainerFlexDiv = styled(ContainerDiv)`
+    display: grid;
+    grid-template-columns: 1fr 8fr 3fr;
+
+    height: 100%;
+
+    @media ${({ theme }) => theme.device.laptop} {
+        ${({ theme }) => theme.flexStyled.flexRow};
+        justify-content: space-between;
+        align-items: center;
+    } ;
 `;
 
 const MenuDiv = styled.div`
-    ${({ theme }) => theme.flexStyled.flexRow};
-    justify-content: center;
-    align-items: center;
-
-    flex-basis: 20vw;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 
     div {
         color: ${({ pathname, scrollY }) => (pathname === '/' && scrollY === 0 ? '#A6A6A6' : '#616161')};
@@ -102,38 +112,35 @@ const MenuDiv = styled.div`
         cursor: pointer;
     }
 
-    .menu {
-        width: 15vw;
-    }
-
     .menu:hover {
         color: ${({ pathname, scrollY, theme }) => (pathname === '/' && scrollY === 0 ? 'white' : theme.color.blue)};
 
         background-color: ${({ pathname, scrollY }) => (pathname === '/' && scrollY === 0 ? '' : '#dde4f6')};
     }
 
-    .login,
-    .signup {
-        width: 100px;
+    @media ${({ theme }) => theme.device.laptop} {
+        display: none;
+    } ;
+`;
 
-        span {
-            color: white;
+const UserDiv = styled(MenuDiv)`
+    grid-template-columns: repeat(2, 1fr);
 
-            background-color: ${({ theme }) => theme.color.blue};
+    span {
+        color: white;
 
-            padding: 10px;
+        background-color: ${({ theme }) => theme.color.blue};
 
-            margin-right: 1vw;
-        }
+        padding: 10px;
+
+        margin-right: 1vw;
     }
 
     .login {
         color: ${({ pathname, scrollY }) => pathname === '/' && scrollY === 0 && 'white'};
-    }
 
-    @media ${({ theme }) => theme.device.laptop} {
-        display: none;
-    } ;
+        margin-left: 40%;
+    }
 `;
 
 const MenuIconDiv = styled.div`

@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Home } from './pages';
-import { NavigationBar } from './components'; // 삭제 예정
+import { NavigationBar } from './components';
 
 function App() {
     return (

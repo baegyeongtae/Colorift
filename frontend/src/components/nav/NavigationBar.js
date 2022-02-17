@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
-import { Menubox } from '.';
+import { Menubox } from './Menubox';
 import { Logo } from '..';
 
 function NavigationBar() {

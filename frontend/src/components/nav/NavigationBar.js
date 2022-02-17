@@ -7,13 +7,13 @@ function NavigationBar() {
     // true 이면 메뉴 바 나옴
     const [istoggle, setIsToggle] = useState(false); // eslint-disable-line no-unused-vars
 
-    const handleClick = () => {
+    const handleToggleClick = () => {
         setIsToggle(current => !current);
     };
 
     return (
         <>
-            {istoggle && <Menubox />}
+            {istoggle && <Menubox clickProps={handleToggleClick} />}
             <Nav>
                 <Logo />
                 <MenuDiv>
@@ -29,7 +29,7 @@ function NavigationBar() {
                     </div>
                 </MenuDiv>
                 <MenuIconDiv>
-                    <MenuImg onClick={handleClick} />
+                    <MenuImg onClick={handleToggleClick} />
                 </MenuIconDiv>
             </Nav>
         </>

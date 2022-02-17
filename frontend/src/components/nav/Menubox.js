@@ -1,8 +1,12 @@
 import styled, { keyframes } from 'styled-components';
 
-function Menubox() {
+function Menubox({ clickProps }) {
+    const handleClick = () => {
+        clickProps();
+    };
+
     return (
-        <BackgroundDiv>
+        <BackgroundDiv onClick={handleClick}>
             <BoxDiv>
                 <div className="menu">Home</div>
                 <div className="menu">Personal Color</div>

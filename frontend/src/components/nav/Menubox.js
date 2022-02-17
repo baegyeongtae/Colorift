@@ -2,18 +2,20 @@ import styled, { keyframes } from 'styled-components';
 
 function Menubox() {
     return (
-        <BoxDiv>
-            <div className="menu">Home</div>
-            <div className="menu">Personal Color</div>
-            <div className="menu">Color Analysis</div>
-            <div className="menu">Fashion Matching</div>
-            <div>
-                <div>Log In</div>
+        <BackgroundDiv>
+            <BoxDiv>
+                <div className="menu">Home</div>
+                <div className="menu">Personal Color</div>
+                <div className="menu">Color Analysis</div>
+                <div className="menu">Fashion Matching</div>
                 <div>
-                    <span>Sign Up</span>
+                    <div>Log In</div>
+                    <div>
+                        <span>Sign Up</span>
+                    </div>
                 </div>
-            </div>
-        </BoxDiv>
+            </BoxDiv>
+        </BackgroundDiv>
     );
 }
 
@@ -21,13 +23,39 @@ export { Menubox };
 
 // styled-components
 
+const backgroundKeyframe = keyframes`
+    0% {
+        background: rgba(0, 0, 0, 0);
+        backdrop-filter: blur(0);
+    }
+    100% {
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(1.5px);
+    }
+`;
+
 const boxKeyframe = keyframes`
-     0% {
+    0% {
         right: -50vw;
- }
- 100% {
-    right: 0;
- }
+    }
+    100% {
+        right: 0;
+    }
+`;
+
+const BackgroundDiv = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+
+    width: 100vw;
+    height: 100vh;
+
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1.5px);
+
+    animation: ${backgroundKeyframe} 1s ease-in-out 1;
 `;
 
 const BoxDiv = styled.div`

@@ -67,7 +67,7 @@ const MenuDiv = styled.div`
     justify-content: center;
     align-items: center;
 
-    margin: 0 7vw;
+    flex-basis: 15vw;
 
     div {
         color: #616161;
@@ -82,7 +82,7 @@ const MenuDiv = styled.div`
     }
 
     .menu {
-        width: 250px;
+        width: 15vw;
     }
 
     .menu:hover {

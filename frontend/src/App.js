@@ -6,14 +6,15 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/nav" element={<NavigationBar />} />
-                {/* <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<SignUp />} />
-                <Route path="/findpassword" element={<FindPassword />} />
-                <Route path="/example" element={<Example />} />
-                <Route path="/personalcolor" element={<PersonalColor />} />
-                <Route path="/fassion" element={<Fassion />} /> */}
+                <Route path="/" element={<NavigationBar />}>
+                    <Route path="" element={<Home />} />
+                    {/* <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<SignUp />} />
+                    <Route path="/findpassword" element={<FindPassword />} />
+                    <Route path="/example" element={<Example />} />
+                    <Route path="/personalcolor" element={<PersonalColor />} />
+                    <Route path="/fassion" element={<Fassion />} /> */}
+                </Route>
             </Routes>
         </BrowserRouter>
     );

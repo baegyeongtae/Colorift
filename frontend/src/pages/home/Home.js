@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
+// nav 테스트용 코드입니다.
 function Home() {
     return (
-        <ContainerDiv>
-            <TextH>예시입니다.</TextH>
-            <ExampleDiv />
-        </ContainerDiv>
+        <>
+            <DivOne />
+            <DivTwo />
+            <DivThree />
+        </>
     );
 }
 
@@ -13,23 +15,23 @@ export { Home };
 
 // styled-components
 
-const TextH = styled.h1`
-    // 가로 사이즈가 모바일 사이즈에 해당하면 배경 컬러 변경
-    @media ${({ theme }) => theme.device.mobile} {
-        background-color: ${({ theme }) => theme.color.winter};
-    }
+const DivOne = styled.div`
+    width: 100vw;
+    height: 100vh;
 
-    color: ${({ theme }) => theme.color.blue};
-    background-color: ${props => props.theme.color.autumn};
+    background-color: black;
 `;
 
-const ContainerDiv = styled.div`
-    ${({ theme }) => theme.flexStyled.flexColumn};
+const DivTwo = styled.div`
+    width: 100vw;
+    height: 100vh;
+
+    background-color: green;
 `;
 
-const ExampleDiv = styled.div`
-    width: 300px;
-    height: 100px;
+const DivThree = styled.div`
+    width: 100vw;
+    height: 100vh;
 
-    background-color: ${({ theme }) => theme.color.lightgray};
+    background-color: blue;
 `;

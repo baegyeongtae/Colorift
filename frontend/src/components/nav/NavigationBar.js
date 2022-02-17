@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import { Menubox } from '.';
 import { Logo } from '..';
@@ -13,25 +14,30 @@ function NavigationBar() {
 
     return (
         <>
-            {istoggle && <Menubox clickProps={handleToggleClick} />}
-            <Nav>
-                <Logo />
-                <MenuDiv>
-                    <div className="menu">Home</div>
-                    <div className="menu">Personal Color</div>
-                    <div className="menu">Color Analysis</div>
-                    <div className="menu">Fashion Matching</div>
-                </MenuDiv>
-                <MenuDiv>
-                    <div className="login">Log In</div>
-                    <div className="signup">
-                        <span>Sign Up</span>
-                    </div>
-                </MenuDiv>
-                <MenuIconDiv>
-                    <MenuImg onClick={handleToggleClick} />
-                </MenuIconDiv>
-            </Nav>
+            <header>
+                {istoggle && <Menubox clickProps={handleToggleClick} />}
+                <Nav>
+                    <Logo />
+                    <MenuDiv>
+                        <div className="menu">Home</div>
+                        <div className="menu">Personal Color</div>
+                        <div className="menu">Color Analysis</div>
+                        <div className="menu">Fashion Matching</div>
+                    </MenuDiv>
+                    <MenuDiv>
+                        <div className="login">Log In</div>
+                        <div className="signup">
+                            <span>Sign Up</span>
+                        </div>
+                    </MenuDiv>
+                    <MenuIconDiv>
+                        <MenuImg onClick={handleToggleClick} />
+                    </MenuIconDiv>
+                </Nav>
+            </header>
+            <main>
+                <Outlet />
+            </main>
         </>
     );
 }

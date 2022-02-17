@@ -20,11 +20,8 @@ const ProgressbarBox = styled.div`
     height: 15px;
 
     border-radius: 10px;
-
     background-color: #f3f3f3;
-
     overflow: hidden;
-
     margin: 10px 0;
 `;
 

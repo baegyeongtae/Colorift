@@ -47,6 +47,10 @@ export { NavigationBar };
 // styled-components
 
 const Nav = styled.nav`
+    position: fixed;
+    top: 0;
+    z-index: 99;
+
     width: 100vw;
     height: 7vh;
 
@@ -63,7 +67,7 @@ const MenuDiv = styled.div`
     justify-content: center;
     align-items: center;
 
-    margin: 0 100px;
+    margin: 0 7vw;
 
     div {
         color: #616161;
@@ -78,7 +82,7 @@ const MenuDiv = styled.div`
     }
 
     .menu {
-        width: 300px;
+        width: 250px;
     }
 
     .menu:hover {

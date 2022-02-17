@@ -48,7 +48,7 @@ const boxKeyframe = keyframes`
 `;
 
 const BackgroundDiv = styled.div`
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     z-index: 999;
@@ -63,7 +63,7 @@ const BackgroundDiv = styled.div`
 `;
 
 const BoxDiv = styled.div`
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     z-index: 9999;

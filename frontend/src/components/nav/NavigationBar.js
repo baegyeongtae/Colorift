@@ -13,6 +13,7 @@ function NavigationBar() {
     // 현재 url 받아오기
     const location = useLocation();
     const { pathname } = location;
+    console.log(pathname);
 
     // 현재 스크롤 위치 받아오기
     const { scrollY } = useScroll();
@@ -30,16 +31,16 @@ function NavigationBar() {
                         <Logo />
                         <MenuDiv pathname={pathname} scrollY={scrollY}>
                             <Link to="/">
-                                <div className="menu">Home</div>
+                                <div className="menu home">Home</div>
                             </Link>
                             <Link to="/example">
-                                <div className="menu">Personal Color</div>
+                                <div className="menu example">Personal Color</div>
                             </Link>
                             <Link to="/personalcolor">
-                                <div className="menu">Color Analysis</div>
+                                <div className="menu personalcolor">Color Analysis</div>
                             </Link>
                             <Link to="/fassion">
-                                <div className="menu">Fashion Matching</div>
+                                <div className="menu fassion">Fasshion Matching</div>
                             </Link>
                         </MenuDiv>
                         <UserDiv pathname={pathname} scrollY={scrollY}>
@@ -116,6 +117,23 @@ const MenuDiv = styled.div`
         color: ${({ pathname, scrollY, theme }) => (pathname === '/' && scrollY === 0 ? 'white' : theme.color.blue)};
 
         background-color: ${({ pathname, scrollY }) => (pathname === '/' && scrollY === 0 ? '' : '#dde4f6')};
+    }
+
+    .home {
+        color: ${({ pathname, scrollY, theme }) =>
+            pathname === '/' && scrollY === 0 ? 'white' : pathname === '/' && scrollY !== 0 && theme.color.blue};
+    }
+
+    .example {
+        color: ${({ pathname, theme }) => pathname === '/example' && theme.color.blue};
+    }
+
+    .personalcolor {
+        color: ${({ pathname, theme }) => pathname === '/personalcolor' && theme.color.blue};
+    }
+
+    .fassion {
+        color: ${({ pathname, theme }) => pathname === '/fassion' && theme.color.blue};
     }
 
     @media ${({ theme }) => theme.device.laptop} {

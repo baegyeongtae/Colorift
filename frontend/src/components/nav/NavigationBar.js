@@ -51,7 +51,7 @@ function NavigationBar() {
                         </Link>
                     </MenuDiv>
                     <MenuIconDiv>
-                        <MenuImg onClick={handleToggleClick} />
+                        <MenuImg onClick={handleToggleClick} pathname={pathname} scrollY={scrollY} />
                     </MenuIconDiv>
                 </Nav>
             </header>
@@ -88,10 +88,10 @@ const MenuDiv = styled.div`
     justify-content: center;
     align-items: center;
 
-    flex-basis: 15vw;
+    flex-basis: 20vw;
 
     div {
-        color: #616161;
+        color: ${({ pathname, scrollY }) => (pathname === '/' && scrollY === 0 ? '#A6A6A6' : '#616161')};
         font-weight: bold;
 
         height: 100%;
@@ -159,7 +159,10 @@ const MenuImg = styled.img.attrs(() => ({
 
         height: 4vh;
 
-        filter: invert(38%) sepia(8%) saturate(4242%) hue-rotate(182deg) brightness(94%) contrast(91%);
+        filter: ${({ pathname, scrollY }) =>
+            pathname === '/' && scrollY === 0
+                ? 'invert(100%) sepia(0%) saturate(7493%) hue-rotate(148deg) brightness(117%) contrast(101%)'
+                : 'invert(38%) sepia(8%) saturate(4242%) hue-rotate(182deg) brightness(94%) contrast(91%)'};
 
         cursor: pointer;
     }

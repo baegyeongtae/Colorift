@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Stack from '@mui/material/Stack';
 import Result from '../../components/Result';
 import ProgressBar from '../../components/ProgressBar';
 
@@ -32,11 +33,70 @@ function ColorResult() {
 
             <ContainerDiv>
                 <TextH1>회원님은 봄 웜톤 입니다.</TextH1>
-                <ProgressBarDiv>
-                    봄 웜톤
-                    <ProgressBar percent={70} />
-                    70%
-                </ProgressBarDiv>
+            </ContainerDiv>
+
+            <ContainerDiv>
+                <ProgressDiv>
+                    <dl>
+                        <dt className="progress">봄 웜톤</dt>
+                        <dt className="progress">여름 쿨톤</dt>
+                        <dt className="progress">가을 웜톤</dt>
+                        <dt className="progress">겨울 쿨톤</dt>
+                    </dl>
+                    <dl>
+                        <dt className="progress">
+                            <ProgressBar percent={70} />
+                        </dt>
+                        <dt className="progress">
+                            <ProgressBar percent={8} />
+                        </dt>
+                        <dt className="progress">
+                            <ProgressBar percent={43} />
+                        </dt>
+                        <dt className="progress">
+                            <ProgressBar percent={20} />
+                        </dt>
+                    </dl>
+                    <dl>
+                        <dt className="progress">70%</dt>
+                        <dt className="progress">8%</dt>
+                        <dt className="progress">43%</dt>
+                        <dt className="progress">20%</dt>
+                    </dl>
+                </ProgressDiv>
+            </ContainerDiv>
+
+            <TextH3>회원님에게 어울리는 컬러</TextH3>
+
+            <ContainerDiv>
+                <div className="wrapper">
+                    <div className="circle" />
+                    <div className="circle" />
+                    <div className="circle" />
+                    <div className="circle" />
+                    <div className="circle" />
+                </div>
+                <div className="wrapper">
+                    <div className="circle" />
+                    <div className="circle" />
+                    <div className="circle" />
+                    <div className="circle" />
+                    <div className="circle" />
+                </div>
+                <div className="wrapper">
+                    <div className="circle" />
+                    <div className="circle" />
+                    <div className="circle" />
+                    <div className="circle" />
+                    <div className="circle" />
+                </div>
+            </ContainerDiv>
+
+            <ContainerDiv>
+                <Stack spacing={2} direction="row">
+                    <CustomButton>업로드</CustomButton>
+                    <CustomButton>결과보기</CustomButton>
+                </Stack>
             </ContainerDiv>
         </>
     );
@@ -52,10 +112,10 @@ const CurrentCircleDiv = styled.div`
 
         width: 73.36px;
         height: 73.36px;
-        border-radius: 75px;
+        border-radius: 50%;
         text-align: center;
         margin-top: 86px;
-        margin-left: 45px;
+        margin-left: 0 auto;
         margin-bottom: 10px;
         font-size: 12px;
         color: #fff;
@@ -70,21 +130,27 @@ const LeftCircleDiv = styled.div`
         background-color: ${({ theme }) => theme.color.lightgray};
         width: 73.36px;
         height: 73.36px;
-        border-radius: 75px;
+        border-radius: 50%;
+        position: relative;
         text-align: center;
+        display: inline-block;
         margin-top: 86px;
-        margin-left: 45px;
+        margin-left: 0 auto;
         margin-bottom: 10px;
         font-size: 12px;
         color: #fff;
+
+        ::after {
+            content: '';
+            width: 42px;
+            height: 2px;
+            background-color: ${({ theme }) => theme.color.lightgray};
+            position: absolute;
+            top: 50%;
+            left: 100%;
+        }
     }
 
-    *::before,
-    *::after {
-        height: 0px;
-
-        border: 3px solid #c4c4c4;
-    }
     color: ${({ theme }) => theme.color.white};
     background-color: ${props => props.theme.color.blue};
 `;
@@ -94,7 +160,10 @@ const ContainerCircleDiv = styled.div`
         background-color: ${({ theme }) => theme.color.white};
         display: flex;
         margin-bottom: 10px;
+        margin: 0 auto;
+        justify-content: space-evenly;
     }
+
     color: ${({ theme }) => theme.color.white};
     background-color: ${props => props.theme.color.white};
 `;
@@ -106,8 +175,26 @@ const ContainerDiv = styled.div`
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
-        margin-bottom: 20px;
-        margin-top: 110px;
+        margin-bottom: 8px;
+        margin-top: 8px;
+
+        .wrapper {
+            width: 100%;
+            height: auto;
+            position: relative;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin-bottom: 7px;
+        }
+
+        .circle {
+            width: 48px;
+            height: 48px;
+            position: relative;
+            border-radius: 50%;
+            background-color: ${({ theme }) => theme.color.blue};
+        }
     }
     color: ${({ theme }) => theme.color.white};
     background-color: ${props => props.theme.color.white};
@@ -117,7 +204,7 @@ const TextH1 = styled.h1`
     @media ${({ theme }) => theme.device.mobile} {
         font-size: ${({ theme }) => theme.fontSizes.smalltext};
         font-weight: bold;
-        margin-bottom: 10px;
+        margin: 8px;
     }
     color: ${({ theme }) => theme.color.white};
     background-color: ${props => props.theme.color.white};
@@ -126,8 +213,17 @@ const TextH1 = styled.h1`
 const TextH2 = styled.h2`
     @media ${({ theme }) => theme.device.mobile} {
         font-size: ${({ theme }) => theme.fontSizes.mobiletext};
-        list-style: inside;
         margin-top: 20px;
+    }
+    color: ${({ theme }) => theme.color.white};
+    background-color: ${props => props.theme.color.white};
+`;
+
+const TextH3 = styled.h3`
+    @media ${({ theme }) => theme.device.mobile} {
+        font-size: ${({ theme }) => theme.fontSizes.smalltext};
+        margin: 25px;
+        font-weight: 550;
     }
     color: ${({ theme }) => theme.color.white};
     background-color: ${props => props.theme.color.white};
@@ -150,14 +246,31 @@ const LineDiv = styled.div`
     background-color: ${props => props.theme.color.white};
 `;
 
-const ProgressBarDiv = styled.div`
+const CustomButton = styled('span')`
+    @media ${({ theme }) => theme.device.mobile} {
+        font-weight: bold;
+        font-size: 0.875rem;
+        background-color: ${({ theme }) => theme.color.blue};
+        padding: 10px 20px;
+        border-radius: 0px;
+        color: white;
+        transition: all 150ms ease;
+        cursor: pointer;
+        border: none;
+    }
+`;
+
+const ProgressDiv = styled.div`
     @media ${({ theme }) => theme.device.mobile} {
         font-size: ${({ theme }) => theme.fontSizes.smalltext};
         color: ${({ theme }) => theme.color.darkgray};
         display: flex;
         flex-direction: row;
-        text-align: center;
-        line-height: %;
+        align-items: center;
+
+        .progress {
+            margin: 8px;
+        }
     }
     color: ${({ theme }) => theme.color.white};
     background-color: ${props => props.theme.color.white};

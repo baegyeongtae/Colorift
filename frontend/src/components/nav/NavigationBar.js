@@ -1,12 +1,20 @@
 import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { Menubox } from './Menubox';
 import { Logo } from '..';
+import { useScroll } from '../../utils/hooks/useScroll';
 
 function NavigationBar() {
     // true 이면 메뉴 바 나옴
-    const [istoggle, setIsToggle] = useState(false); // eslint-disable-line no-unused-vars
+    const [istoggle, setIsToggle] = useState(false);
+
+    // 현재 url 받아오기
+    const location = useLocation();
+    const { pathname } = location;
+
+    // 현재 스크롤 위치 받아오기
+    const { scrollY } = useScroll();
 
     const handleToggleClick = () => {
         setIsToggle(current => !current);
@@ -16,15 +24,15 @@ function NavigationBar() {
         <>
             <header>
                 {istoggle && <Menubox clickProps={handleToggleClick} />}
-                <Nav>
+                <Nav pathname={pathname} scrollY={scrollY}>
                     <Logo />
-                    <MenuDiv>
+                    <MenuDiv pathname={pathname} scrollY={scrollY}>
                         <div className="menu">Home</div>
                         <div className="menu">Personal Color</div>
                         <div className="menu">Color Analysis</div>
                         <div className="menu">Fashion Matching</div>
                     </MenuDiv>
-                    <MenuDiv>
+                    <MenuDiv pathname={pathname} scrollY={scrollY}>
                         <div className="login">Log In</div>
                         <div className="signup">
                             <span>Sign Up</span>
@@ -54,9 +62,10 @@ const Nav = styled.nav`
     width: 100vw;
     height: 7vh;
 
-    background-color: ${({ theme }) => theme.color.nav};
+    background-color: ${({ pathname, scrollY, theme }) =>
+        pathname === '/' && scrollY === 0 ? 'transparent' : theme.color.nav};
 
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: ${({ pathname }) => pathname !== '/' && '0px 4px 4px rgba(0, 0, 0, 0.25)'};
 
     ${({ theme }) => theme.flexStyled.flexRow};
     justify-content: space-between;
@@ -86,9 +95,9 @@ const MenuDiv = styled.div`
     }
 
     .menu:hover {
-        color: #3c64b1;
+        color: ${({ pathname, scrollY, theme }) => (pathname === '/' && scrollY === 0 ? 'white' : theme.color.blue)};
 
-        background-color: #dde4f6;
+        background-color: ${({ pathname, scrollY }) => (pathname === '/' && scrollY === 0 ? '' : '#dde4f6')};
     }
 
     .login,
@@ -104,6 +113,10 @@ const MenuDiv = styled.div`
 
             margin-right: 1vw;
         }
+    }
+
+    .login {
+        color: ${({ pathname, scrollY }) => pathname === '/' && scrollY === 0 && 'white'};
     }
 
     @media ${({ theme }) => theme.device.laptop} {

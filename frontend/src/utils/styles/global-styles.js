@@ -22,6 +22,10 @@ const GlobalStyle = createGlobalStyle`
         list-style: none;
     }
 
+    a {
+        text-decoration: none;
+    }
+
     @font-face {
         font-family: 'Mulish';
         font-style: normal;

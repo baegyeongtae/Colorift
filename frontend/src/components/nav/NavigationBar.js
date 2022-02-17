@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Menubox } from './Menubox';
 import { Logo } from '..';
@@ -27,16 +27,28 @@ function NavigationBar() {
                 <Nav pathname={pathname} scrollY={scrollY}>
                     <Logo />
                     <MenuDiv pathname={pathname} scrollY={scrollY}>
-                        <div className="menu">Home</div>
-                        <div className="menu">Personal Color</div>
-                        <div className="menu">Color Analysis</div>
-                        <div className="menu">Fashion Matching</div>
+                        <Link to="/">
+                            <div className="menu">Home</div>
+                        </Link>
+                        <Link to="/example">
+                            <div className="menu">Personal Color</div>
+                        </Link>
+                        <Link to="/personalcolor">
+                            <div className="menu">Color Analysis</div>
+                        </Link>
+                        <Link to="/fassion">
+                            <div className="menu">Fashion Matching</div>
+                        </Link>
                     </MenuDiv>
                     <MenuDiv pathname={pathname} scrollY={scrollY}>
-                        <div className="login">Log In</div>
-                        <div className="signup">
-                            <span>Sign Up</span>
-                        </div>
+                        <Link to="/login">
+                            <div className="login">Log In</div>
+                        </Link>
+                        <Link to="/signup">
+                            <div className="signup">
+                                <span>Sign Up</span>
+                            </div>
+                        </Link>
                     </MenuDiv>
                     <MenuIconDiv>
                         <MenuImg onClick={handleToggleClick} />

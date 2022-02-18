@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from .conf import aws
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
+    'rest_framework',
+    'app',
 ]
 
 MIDDLEWARE = [
@@ -121,3 +125,21 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# AWS
+AWS_ACCESS_KEY_ID = aws['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = aws['AWS_SECRET_ACCESS_KEY']
+AWS_REGION = aws['AWS_REGION']
+
+# S3 Storages
+AWS_STORAGE_BUCKET_NAME = aws['AWS_STORAGE_BUCKET_NAME']
+AWS_S3_CUSTOM_DOMAIN = aws['AWS_S3_CUSTOM_DOMAIN']
+#AWS_S3_OBJECT_PARAMETERS = aws['AWS_S3_OBJECT_PARAMETERS']
+DEFAULT_FILE_STORAGE = aws['DEFAULT_FILE_STORAGE']
+
+REST_FRAMEWORK = {
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.FileUploadParser',
+    ]
+}

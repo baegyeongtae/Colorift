@@ -2,3 +2,4 @@
 // 예시 : export { IconDiv, NavLink, UserPicture } from './nav';
 
 export { Home } from './home';
+export { Example } from './example';

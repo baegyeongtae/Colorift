@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Outlet, useLocation, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Menubox } from './Menubox';
 import { Logo } from '..';
-import { useScroll } from '../../utils/hooks/useScroll';
+import { useGetScrollY } from '../../utils/hooks/useGetScrollY';
 import { ContainerDiv } from '../ContainerDiv';
 
 function NavigationBar() {
@@ -13,10 +13,9 @@ function NavigationBar() {
     // 현재 url 받아오기
     const location = useLocation();
     const { pathname } = location;
-    console.log(pathname);
 
     // 현재 스크롤 위치 받아오기
-    const { scrollY } = useScroll();
+    const { scrollY } = useGetScrollY();
 
     const handleToggleClick = () => {
         setIsToggle(current => !current);

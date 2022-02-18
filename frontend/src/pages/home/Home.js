@@ -1,7 +1,10 @@
 import styled from 'styled-components';
+import { useScrollToTop } from '../../utils/hooks/useScrollToTop';
 
 // nav 테스트용 코드입니다.
 function Home() {
+    useScrollToTop();
+
     return (
         <>
             <DivOne>

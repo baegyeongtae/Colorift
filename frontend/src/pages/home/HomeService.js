@@ -40,6 +40,7 @@ export function HomeService() {
                     }
                 />
             </DescriptionDiv>
+            <BarContainerDiv />
         </ServiceContainerDiv>
     );
 }
@@ -51,14 +52,14 @@ const ServiceContainerDiv = styled(ContainerDiv)`
     justify-content: center;
     align-items: center;
 
-    height: 60vh;
+    height: 80vh;
 `;
 
 const SubTitle = styled.h2`
     font-size: ${({ theme }) => theme.fontSizes.bigtext};
     font-weight: bold;
 
-    height: 23%;
+    height: 20%;
 `;
 
 const DescriptionDiv = styled.div`
@@ -66,4 +67,10 @@ const DescriptionDiv = styled.div`
 
     ${({ theme }) => theme.flexStyled.flexRow};
     justify-content: space-around;
+`;
+
+const BarContainerDiv = styled.div`
+    height: 50%;
+
+    background-color: yellow;
 `;

@@ -47,8 +47,12 @@ const BannerContainerDiv = styled(ContainerDiv)`
 
     height: 100%;
 
-    @media ${({ theme }) => theme.device.mobile} {
-        grid-template-rows: 1fr 1fr 1fr;
+    @media ${({ theme }) => theme.device.tablet} {
+        all: unset;
+
+        height: 100%;
+
+        ${({ theme }) => theme.flexStyled.flexCenter}
     }
 `;
 
@@ -57,10 +61,24 @@ const TextDiv = styled.div`
     justify-content: center;
 
     width: 100%;
+
+    @media ${({ theme }) => theme.device.tablet} {
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        text-align: center;
+    }
 `;
 
 const ExampleImgDiv = styled.div`
     ${({ theme }) => theme.flexStyled.flexCenter};
+
+    @media ${({ theme }) => theme.device.laptop} {
+        display: none;
+
+        img {
+            display: none;
+        }
+    }
 `;
 
 const TitleH = styled.h1`
@@ -74,9 +92,16 @@ const SubTitleP = styled.p`
     color: #a4b2b6;
 
     margin: 1vw 0;
+
+    @media ${({ theme }) => theme.device.tablet} {
+        margin: 5vw 0;
+    }
 `;
 
 const ButtonDiv = styled.div`
     display: grid;
     grid-template-columns: 210px auto;
+    @media ${({ theme }) => theme.device.tablet} {
+        justify-content: center;
+    }
 `;

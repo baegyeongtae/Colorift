@@ -4,3 +4,4 @@
 export { Home } from './Home';
 export { HomeService } from './HomeService';
 export { HomeBanner } from './HomeBanner';
+export { HomeSeason } from './HomeSeason';

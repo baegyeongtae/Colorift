@@ -1,11 +1,12 @@
 import styled from 'styled-components';
+import { DescriptionP } from '.';
 
 export function HomeServiceIcon({ image, title, text }) {
     return (
         <ServiceIconDiv>
             <ServiceIconImg src={`./image/${image}.svg`} />
             <ServiceIconTitleP>{title}</ServiceIconTitleP>
-            <ServiceIconTextP>{text}</ServiceIconTextP>
+            <DescriptionP>{text}</DescriptionP>
         </ServiceIconDiv>
     );
 }
@@ -39,13 +40,5 @@ const ServiceIconTitleP = styled.p`
 
     @media ${({ theme }) => theme.device.laptop} {
         font-size: ${({ theme }) => theme.fontSizes.bigtext};
-    }
-`;
-
-const ServiceIconTextP = styled.p`
-    text-align: center;
-
-    @media ${({ theme }) => theme.device.laptop} {
-        font-size: ${({ theme }) => theme.fontSizes.mediumtext};
     }
 `;

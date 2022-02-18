@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { ContainerDiv, HomeServiceIcon } from '../../components';
+import { ContainerDiv, HomeServiceIcon, SubTitle } from '../../components';
 
-export function HomeService({ theme }) {
+export function HomeService() {
     return (
         <ServiceArticle>
             <ServiceContainerDiv>
@@ -64,13 +64,6 @@ const ServiceContainerDiv = styled(ContainerDiv)`
     ${({ theme }) => theme.flexStyled.flexColumn};
     justify-content: center;
     align-items: center;
-`;
-
-const SubTitle = styled.h2`
-    font-size: ${({ theme }) => theme.fontSizes.bigtext};
-    font-weight: bold;
-
-    text-align: center;
 `;
 
 const DescriptionDiv = styled.div`

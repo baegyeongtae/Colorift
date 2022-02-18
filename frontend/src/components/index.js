@@ -3,5 +3,5 @@
 export { Logo } from './Logo';
 // eslint-disable-next-line import/no-cycle
 export { NavigationBar } from './nav/NavigationBar';
-export { HomeButton, HomeServiceIcon } from './home';
+export { HomeButton, HomeServiceIcon, SubTitle, DescriptionP } from './home';
 export { ContainerDiv } from './ContainerDiv';

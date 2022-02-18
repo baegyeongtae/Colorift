@@ -2,3 +2,4 @@
 
 export { HomeButton } from './HomeButton';
 export { HomeServiceIcon } from './HomeServiceIcon';
+export { SubTitle, DescriptionP } from './HomeText';

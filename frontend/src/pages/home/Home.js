@@ -1,27 +1,22 @@
 import styled from 'styled-components';
 import { useScrollToTop } from '../../utils/hooks/useScrollToTop';
-import { HomeBanner } from './HomeBanner';
+import { HomeBanner, HomeService } from '.';
 
 // nav 테스트용 코드입니다.
-function Home() {
+export function Home() {
     useScrollToTop();
 
     return (
         <>
-            <OneSection>
-                <HomeBanner />
-            </OneSection>
-            <DivTwo />
-            <DivThree />
+            <HomeBanner />
+            <HomeService />
         </>
     );
 }
 
-export { Home };
-
 // styled-components
 
-const OneSection = styled.section`
+const Section = styled.section`
     height: 100vh;
 `;
 

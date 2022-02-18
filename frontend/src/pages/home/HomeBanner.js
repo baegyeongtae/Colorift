@@ -34,7 +34,7 @@ export function HomeBanner() {
 // styled-components
 
 const BannerArticle = styled.article`
-    height: 55%;
+    height: 55vh;
 
     background-image: url('./image/color.jpg');
     background-repeat: no-repeat;

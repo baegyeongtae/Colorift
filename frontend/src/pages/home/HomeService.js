@@ -57,7 +57,7 @@ export function HomeService({ theme }) {
 const ServiceArticle = styled.article`
     height: auto;
 
-    margin: 7% 0;
+    margin: 100px 0;
 `;
 
 const ServiceContainerDiv = styled(ContainerDiv)`
@@ -77,9 +77,17 @@ const DescriptionDiv = styled.div`
     width: 100%;
     height: 400px;
 
+    margin: 50px 0;
+
     ${({ theme }) => theme.flexStyled.flexRow};
     justify-content: space-around;
     align-items: center;
+
+    @media ${({ theme }) => theme.device.laptop} {
+        height: 700px;
+
+        ${({ theme }) => theme.flexStyled.flexColumn};
+    }
 `;
 
 const BarContainerDiv = styled.div`

@@ -17,6 +17,10 @@ const ServiceIconDiv = styled.div`
     align-items: center;
 
     width: 30%;
+
+    @media ${({ theme }) => theme.device.laptop} {
+        width: 60%;
+    }
 `;
 
 const ServiceIconImg = styled.img`
@@ -32,8 +36,16 @@ const ServiceIconTitleP = styled.p`
     font-weight: bold;
 
     margin: 20px 0;
+
+    @media ${({ theme }) => theme.device.laptop} {
+        font-size: ${({ theme }) => theme.fontSizes.bigtext};
+    }
 `;
 
 const ServiceIconTextP = styled.p`
     text-align: center;
+
+    @media ${({ theme }) => theme.device.laptop} {
+        font-size: ${({ theme }) => theme.fontSizes.mediumtext};
+    }
 `;

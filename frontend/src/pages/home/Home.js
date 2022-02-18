@@ -24,14 +24,12 @@ function Home() {
                                 <br />
                                 또한, 퍼스널 컬러와 패션 아이템의 조화로움을 알려드립니다.
                             </SubTitleP>
-                            <div>
+                            <ButtonDiv>
                                 <HomeButton text="퍼스널 컬러 찾기" />
                                 <HomeButton text="패션 매칭하기" />
-                            </div>
+                            </ButtonDiv>
                         </TextDiv>
-                        <ExampleImgDiv>
-                            <img src="./image/browser.png" alt="샘플 이미지" />
-                        </ExampleImgDiv>
+                        <ExampleImgDiv />
                     </BannerContainerDiv>
                 </BannerArticle>
             </DivOne>
@@ -53,7 +51,7 @@ const DivOne = styled.div`
 `;
 
 const BannerArticle = styled.article`
-    height: 50vh;
+    height: 55vh;
 
     background-image: url('./image/color.jpg');
     background-repeat: no-repeat;
@@ -65,6 +63,10 @@ const BannerContainerDiv = styled(ContainerDiv)`
     grid-template-columns: 1fr 1fr;
 
     height: 100%;
+
+    @media ${({ theme }) => theme.device.mobile} {
+        grid-template-rows: 1fr 1fr 1fr;
+    }
 `;
 
 const TextDiv = styled.div`
@@ -87,6 +89,13 @@ const TitleH = styled.h1`
 const SubTitleP = styled.p`
     font-size: ${({ theme }) => theme.fontSizes.mediumtext};
     color: #a4b2b6;
+
+    margin: 1vw 0;
+`;
+
+const ButtonDiv = styled.div`
+    display: grid;
+    grid-template-columns: 210px auto;
 `;
 
 // 삭제 예정

@@ -7,8 +7,8 @@ export function HomeButton({ text }) {
 // styled-components
 
 const HomeStyleButton = styled.button`
-    width: 10vw;
-    height: 6vh;
+    width: 200px;
+    height: 50px;
 
     color: white;
     font-weight: bold;

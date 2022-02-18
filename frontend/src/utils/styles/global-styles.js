@@ -12,6 +12,17 @@ const GlobalStyle = createGlobalStyle`
         font-weight: 500;
     }
 
+    html {
+        @media screen and (min-width: 391px) and (max-width: 1200px) {
+            font-size: 12px;
+        }
+
+        @media screen and (max-width: 390px) {
+            font-size: 10px;
+        }
+
+    }
+
     button {
         all: unset;
     }

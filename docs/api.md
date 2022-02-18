@@ -28,12 +28,12 @@
 * **Success Response:**
 
   * **Code:** `201 Created` <br />
-    **Content:** `{ "color" : "summer" }`
+    **Content:** `{ "color" : "summer" }`<br />
  
 * **Error Response:**
 
   * **Code:** `400 Bad Request` <br />
-    **Content:** `{ "error" : "django built-in error message" }`
+    **Content:** `{ "error" : "django built-in error message" }`<br />
 
 <br></br>
 ## 퍼스널 컬러 테스트 기록 리스트 조회
@@ -58,12 +58,12 @@
 * **Success Response:**
 
   * **Code:** `200 OK` <br />
-    **Content:** `{ "colorTestList" : [ { "id" : 3, "color" : "winter", "date" : "2022-02-18" }, ... ] }`
+    **Content:** `{ "colorTestList" : [ { "id" : 3, "color" : "winter", "date" : "2022-02-18" }, ... ] }`<br />
  
 * **Error Response:**
 
   * **Code:** `404 Not Found` <br />
-    **Content:** `{ "error" : "django built-in error message" }`
+    **Content:** `{ "error" : "django built-in error message" }`<br />
 
 <br></br>
 ## 퍼스널 컬러 테스트 기록 상세 조회
@@ -88,12 +88,12 @@
 * **Success Response:**
 
   * **Code:** `200 OK` <br />
-    **Content:** `{ "colorTestDetail" : { "id" : 3, "color" : "winter", "date" : "2022-02-18", "imageURL" : "http://s3-hosted-image-url" } }`
+    **Content:** `{ "colorTestDetail" : { "id" : 3, "color" : "winter", "date" : "2022-02-18", "imageURL" : "http://s3-hosted-image-url" } }`<br />
  
 * **Error Response:**
 
   * **Code:** `404 Not Found` <br />
-    **Content:** `{ "error" : "django built-in error message" }`
+    **Content:** `{ "error" : "django built-in error message" }`<br />
 
 <br></br>
 ## 퍼스널 컬러 테스트 기록 삭제
@@ -118,12 +118,12 @@
 * **Success Response:**
 
   * **Code:** `200 OK` <br />
-    **Content:** `{ "success" : "record successfully deleted" }`
+    **Content:** `{ "success" : "record successfully deleted" }`<br />
  
 * **Error Response:**
 
   * **Code:** `404 Not Found / 400 Bad Request / 500 Internal Server Error ...` <br />
-    **Content:** `{ "error" : "django built-in error message" }`
+    **Content:** `{ "error" : "django built-in error message" }`<br />
 
 <br></br>
 ## 패션매칭 테스트
@@ -148,12 +148,12 @@
 * **Success Response:**
 
   * **Code:** `201 Created` <br />
-    **Content:** `{ "color" : "summer" }`
+    **Content:** `{ "color" : "summer" }`<br />
  
 * **Error Response:**
 
   * **Code:** `400 Bad Request` <br />
-    **Content:** `{ "error" : "django built-in error message" }`
+    **Content:** `{ "error" : "django built-in error message" }`<br />
 
 <br></br>
 ## 패션매칭 테스트 기록 리스트 조회
@@ -178,12 +178,12 @@
 * **Success Response:**
 
   * **Code:** `200 OK` <br />
-    **Content:** `{ "fashionTestList" : [ { "id" : 3, "color" : "winter", "date" : "2022-02-18", "imageURL" : "http://s3-hosted-image-url" }, ... ] }`
+    **Content:** `{ "fashionTestList" : [ { "id" : 3, "color" : "winter", "date" : "2022-02-18", "imageURL" : "http://s3-hosted-image-url" }, ... ] }`<br />
  
 * **Error Response:**
 
   * **Code:** `404 Not Found` <br />
-    **Content:** `{ "error" : "django built-in error message" }`
+    **Content:** `{ "error" : "django built-in error message" }`<br />
 
 <br></br>
 ## 패션매칭 테스트 기록 상세 조회
@@ -208,12 +208,12 @@
 * **Success Response:**
 
   * **Code:** `200 OK` <br />
-    **Content:** `{ "fashionTestDetail" : { "id" : 3, "color" : "winter", "date" : "2022-02-18", "imageURL" : "http://s3-hosted-image-url" } }`
+    **Content:** `{ "fashionTestDetail" : { "id" : 3, "color" : "winter", "date" : "2022-02-18", "imageURL" : "http://s3-hosted-image-url" } }`<br />
  
 * **Error Response:**
 
   * **Code:** `404 Not Found` <br />
-    **Content:** `{ "error" : "django built-in error message" }`
+    **Content:** `{ "error" : "django built-in error message" }`<br />
 
 <br></br>
 ## 패션매칭 테스트 기록 삭제
@@ -238,9 +238,9 @@
 * **Success Response:**
 
   * **Code:** `200 OK` <br />
-    **Content:** `{ "success" : "record successfully deleted" }`
+    **Content:** `{ "success" : "record successfully deleted" }`<br />
  
 * **Error Response:**
 
   * **Code:** `404 Not Found / 400 Bad Request / 500 Internal Server Error ...` <br />
-    **Content:** `{ "error" : "django built-in error message" }`
+    **Content:** `{ "error" : "django built-in error message" }`<br />

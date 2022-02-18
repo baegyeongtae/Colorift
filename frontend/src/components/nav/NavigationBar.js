@@ -26,7 +26,7 @@ function NavigationBar() {
             <header>
                 {istoggle && <Menubox clickProps={handleToggleClick} />}
                 <Nav pathname={pathname} scrollY={scrollY}>
-                    <ContainerFlexDiv>
+                    <ContainerGridDiv>
                         <Logo />
                         <MenuDiv pathname={pathname} scrollY={scrollY}>
                             <Link to="/">
@@ -55,7 +55,7 @@ function NavigationBar() {
                         <MenuIconDiv>
                             <MenuImg onClick={handleToggleClick} pathname={pathname} scrollY={scrollY} />
                         </MenuIconDiv>
-                    </ContainerFlexDiv>
+                    </ContainerGridDiv>
                 </Nav>
             </header>
             <main>
@@ -83,7 +83,7 @@ const Nav = styled.nav`
     box-shadow: ${({ pathname }) => pathname !== '/' && '0px 4px 4px rgba(0, 0, 0, 0.25)'};
 `;
 
-const ContainerFlexDiv = styled(ContainerDiv)`
+const ContainerGridDiv = styled(ContainerDiv)`
     display: grid;
     grid-template-columns: 1fr 8fr 3fr;
 

@@ -1,8 +1,7 @@
 // 폰트 사이즈
 const pixelToRem = size => `${size / 16}rem`;
 const fontSizes = {
-    title: pixelToRem(70),
-    subtitle: pixelToRem(50),
+    title: pixelToRem(40),
     bigtext: pixelToRem(30),
     mediumtext: pixelToRem(20),
     smalltext: pixelToRem(12),

@@ -6,3 +6,4 @@ export { HomeService } from './HomeService';
 export { HomeBanner } from './HomeBanner';
 export { HomeSeason } from './HomeSeason';
 export { HomeAI } from './HomeAI';
+export { HomeFooter } from './HomeFooter';

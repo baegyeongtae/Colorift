@@ -34,11 +34,15 @@ export function HomeBanner() {
 // styled-components
 
 const BannerArticle = styled.article`
-    height: 55vh;
+    height: 600px;
 
     background-image: url('./image/color.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+
+    @media ${({ theme }) => theme.device.laptop} {
+        height: 55vh;
+    }
 `;
 
 const BannerContainerDiv = styled(ContainerDiv)`
@@ -101,7 +105,9 @@ const SubTitleP = styled.p`
 const ButtonDiv = styled.div`
     display: grid;
     grid-template-columns: 210px auto;
+
     @media ${({ theme }) => theme.device.tablet} {
+        grid-template-columns: 47vw auto;
         justify-content: center;
     }
 `;

@@ -3,14 +3,14 @@ import { Article, ContainerDiv, SubTitle, DescriptionP, HomeButton } from '../..
 
 export function HomeFooter() {
     return (
-        <Article height="700px" color="#f8f7f3">
+        <Article height="500px" color="#f8f7f3">
             <FlexContainerDiv>
                 <SubTitle>시작할 준비 되셨나요?</SubTitle>
-                <DescriptionP>
+                <DescriptionCenterP>
                     퍼스널 컬러 분석과 진단을 통해
                     <br />
                     알맞는 패션으로 패피가 되어보세요!
-                </DescriptionP>
+                </DescriptionCenterP>
                 <ButtonDiv>
                     <HomeButton text="퍼스널 컬러 찾기" maxWidth="200px" width="40vw" />
                     <HomeButton text="패션 매칭하기" maxWidth="200px" width="40vw" />
@@ -32,5 +32,18 @@ const FlexContainerDiv = styled(ContainerDiv)`
 
 const ButtonDiv = styled.div`
     ${({ theme }) => theme.flexStyled.flexRow};
-    ${({ theme }) => theme.flexStyled.flexCenter};
+    justify-content: space-between;
+
+    width: 60%;
+
+    @media ${({ theme }) => theme.device.tablet} {
+        ${({ theme }) => theme.flexStyled.flexColumn};
+        align-items: center;
+
+        height: 40%;
+    }
+`;
+
+const DescriptionCenterP = styled(DescriptionP)`
+    margin: 30px 0;
 `;

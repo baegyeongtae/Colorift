@@ -54,8 +54,7 @@ const ServiceSubTitle = styled(SubTitle)`
 
 const ServiceContainerDiv = styled(ContainerDiv)`
     ${({ theme }) => theme.flexStyled.flexColumn};
-    justify-content: center;
-    align-items: center;
+    ${({ theme }) => theme.flexStyled.flexCenter};
 `;
 
 const DescriptionDiv = styled.div`

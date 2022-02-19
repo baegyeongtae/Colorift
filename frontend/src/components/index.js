@@ -3,5 +3,6 @@
 export { Logo } from './Logo';
 export { NavigationBar } from './nav/NavigationBar';
 export { ContainerDiv } from './ContainerDiv';
-export { HomeButton, HomeServiceIcon, SubTitle, DescriptionP, HomeColorBar, HomeContainerDiv } from './home';
+export { BigTextP, DescriptionP } from './TextStyle';
+export { HomeButton, HomeServiceIcon, HomeColorBar, HomeContainerDiv } from './home';
 export { Article } from './Article';

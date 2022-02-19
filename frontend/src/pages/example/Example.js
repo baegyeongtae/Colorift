@@ -1,43 +1,15 @@
-import styled from 'styled-components';
 import { useScrollToTop } from '../../utils/hooks/useScrollToTop';
+import { ExampleHeader } from '.';
 
 function Example() {
     useScrollToTop();
 
     return (
         <>
-            <DivOne />
-            <DivTwo />
-            <DivThree />
+            <ExampleHeader />
+            <div />
         </>
     );
 }
 
 export { Example };
-
-// styled-components
-
-// 테스트용 컴포넌트
-const DivOne = styled.div`
-    width: 100vw;
-    height: 100vh;
-
-    background-color: pink;
-`;
-
-// 테스트용 컴포넌트
-const DivTwo = styled.div`
-    width: 100vw;
-    height: 100vh;
-
-    background-color: green;
-`;
-
-// 테스트용 컴포넌트
-const DivThree = styled.div`
-    width: 100vw;
-    height: 100vh;
-
-    background-color: ${({ theme }) => theme.color.lightgray};
-    background-color: blue;
-`;

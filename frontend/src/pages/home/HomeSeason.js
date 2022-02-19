@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { SubTitle, DescriptionP, HomeButton, Article, HomeContainerDiv } from '../../components';
+import { BigTextP, DescriptionP, HomeButton, Article, HomeContainerDiv } from '../../components';
 
 export function HomeSeason() {
     return (
@@ -9,7 +9,7 @@ export function HomeSeason() {
                     <img src="./image/color_circle.png" alt="계절별 퍼스널 컬러 이미지" />
                 </SeasonImgDiv>
                 <TextContainerDiv>
-                    <SubTitle>계절과 어울리는 피부톤</SubTitle>
+                    <BigTextP>계절과 어울리는 피부톤</BigTextP>
                     <DescriptionLeftP>
                         사람의 피부톤은 계절에 비유할 수 있습니다.
                         <br />

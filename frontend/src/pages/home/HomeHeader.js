@@ -74,7 +74,7 @@ const TitleH = styled.h1`
     color: white;
 `;
 
-const SubTitleP = styled.p`
+const SubTitleP = styled.h2`
     font-size: ${({ theme }) => theme.fontSizes.mediumtext};
     color: #a4b2b6;
 

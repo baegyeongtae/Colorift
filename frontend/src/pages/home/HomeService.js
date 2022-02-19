@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ContainerDiv, HomeServiceIcon, SubTitle, Article } from '../../components';
+import { ContainerDiv, HomeServiceIcon, BigTextP, Article } from '../../components';
 
 export function HomeService() {
     return (
@@ -48,7 +48,7 @@ export function HomeService() {
 
 // styled-components
 
-const ServiceSubTitle = styled(SubTitle)`
+const ServiceSubTitle = styled(BigTextP)`
     margin: 100px 0 50px 0;
 `;
 

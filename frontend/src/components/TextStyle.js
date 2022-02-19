@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 // styled-components
 
-export const SubTitle = styled.h2`
+export const BigTextP = styled.p`
     font-size: ${({ theme }) => theme.fontSizes.bigtext};
     font-weight: bold;
 `;

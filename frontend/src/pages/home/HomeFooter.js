@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import { Article, ContainerDiv, SubTitle, DescriptionP, HomeButton } from '../../components';
+import { Article, ContainerDiv, BigTextP, DescriptionP, HomeButton } from '../../components';
 
 export function HomeFooter() {
     return (
         <Article height="500px" color="#f8f7f3">
             <FlexContainerDiv>
-                <SubTitle>시작할 준비 되셨나요?</SubTitle>
+                <BigTextP>시작할 준비 되셨나요?</BigTextP>
                 <DescriptionCenterP>
                     퍼스널 컬러 분석과 진단을 통해
                     <br />

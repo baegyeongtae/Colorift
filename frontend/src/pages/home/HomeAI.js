@@ -1,13 +1,12 @@
-import styled from 'styled-components';
 import { TextContainerDiv, DescriptionLeftP, SeasonImgDiv } from './HomeSeason';
-import { SubTitle, Article, HomeContainerDiv } from '../../components';
+import { BigTextP, Article, HomeContainerDiv } from '../../components';
 
 export function HomeAI() {
     return (
         <Article>
             <HomeContainerDiv>
                 <TextContainerDiv>
-                    <SubTitle>AI 분석</SubTitle>
+                    <BigTextP>AI 분석</BigTextP>
                     <DescriptionLeftP>
                         피부의 명도와채도, 적색도와 황색도,
                         <br />

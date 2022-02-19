@@ -19,8 +19,8 @@ export function HomeBanner() {
                         또한, 퍼스널 컬러와 패션 아이템의 조화로움을 알려드립니다.
                     </SubTitleP>
                     <ButtonDiv>
-                        <HomeButton text="퍼스널 컬러 찾기" />
-                        <HomeButton text="패션 매칭하기" />
+                        <HomeButton text="퍼스널 컬러 찾기" maxWidth="200px" width="45vw" />
+                        <HomeButton text="패션 매칭하기" maxWidth="200px" width="45vw" />
                     </ButtonDiv>
                 </TextDiv>
                 <ExampleImgDiv>

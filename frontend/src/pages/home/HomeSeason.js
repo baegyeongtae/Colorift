@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ContainerDiv, SubTitle, DescriptionP } from '../../components';
+import { ContainerDiv, SubTitle, DescriptionP, HomeButton } from '../../components';
 
 export function HomeSeason() {
     return (
@@ -21,6 +21,7 @@ export function HomeSeason() {
                         <br />
                         분석된 결과를 토대로 어울리는 색상을 추천해드립니다.
                     </DescriptionLeftP>
+                    <HomeButton text="퍼스널 컬러 예시 보기" />
                 </TextContainerDiv>
             </SeasonContainerDiv>
         </SeasonArticle>
@@ -30,13 +31,15 @@ export function HomeSeason() {
 // styled-components
 
 const SeasonArticle = styled.article`
-    height: 500px;
+    height: 700px;
 
     background-color: #f8f7f3;
 `;
 
 const SeasonContainerDiv = styled(ContainerDiv)`
+    height: 100%;
     ${({ theme }) => theme.flexStyled.flexRow};
+    align-items: center;
 `;
 
 const SeasonImgDiv = styled.div`
@@ -50,7 +53,7 @@ const TextContainerDiv = styled.div`
 
     text-align: left;
 
-    padding: 50px 0;
+    padding: 50px 100px 50px 0;
 
     ${({ theme }) => theme.flexStyled.flexColumn};
 `;

@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { ContainerDiv, SubTitle, DescriptionP, HomeButton, Article } from '../../components';
+import { ContainerDiv, SubTitle, DescriptionP, HomeButton } from '../../components';
 
-export function HomeSeason() {
+export function HomeAI() {
     return (
-        <Article height="700px" color="#f8f7f3">
+        <SeasonArticle>
             <SeasonContainerDiv>
                 <SeasonImgDiv>
                     <img src="./image/color_circle.png" alt="계절별 퍼스널 컬러 이미지" />
@@ -24,11 +24,17 @@ export function HomeSeason() {
                     <HomeButton text="퍼스널 컬러 예시 보기" />
                 </TextContainerDiv>
             </SeasonContainerDiv>
-        </Article>
+        </SeasonArticle>
     );
 }
 
 // styled-components
+
+const SeasonArticle = styled.article`
+    height: 700px;
+
+    background-color: #f8f7f3;
+`;
 
 const SeasonContainerDiv = styled(ContainerDiv)`
     height: 100%;

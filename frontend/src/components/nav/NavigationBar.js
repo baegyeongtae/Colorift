@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Outlet, useLocation, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Menubox } from './Menubox';
-import { Logo } from '..';
+import { Logo } from '../Logo';
 import { useGetScrollY } from '../../utils/hooks/useGetScrollY';
 import { ContainerDiv } from '../ContainerDiv';
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ContainerDiv, HomeServiceIcon, SubTitle } from '../../components';
+import { ContainerDiv, HomeServiceIcon, SubTitle, Article } from '../../components';
 
 export function HomeService() {
     return (
@@ -54,7 +54,7 @@ export function HomeService() {
 
 // styled-components
 
-const ServiceArticle = styled.article`
+const ServiceArticle = styled(Article)`
     height: auto;
 
     margin: 100px 0;

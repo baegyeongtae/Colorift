@@ -28,7 +28,7 @@
         "react/prop-types": "off",
         "no-unused-vars": "off",
         "no-console": "off",
-        "import/no-cycle": "[2, { maxDepth: 1 }]"
+        "import/no-cycle": "[2, { maxDepth: 2 }]"
     },
     "extends": [
         "plugin:react/recommended",

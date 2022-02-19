@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { DescriptionP } from '.';
+import { DescriptionP } from './HomeText';
 
 export function HomeServiceIcon({ image, title, text }) {
     return (

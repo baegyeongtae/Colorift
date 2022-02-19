@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ContainerDiv, HomeButton } from '../../components';
+import { ContainerDiv, HomeButton, Article } from '../../components';
 
 export function HomeBanner() {
     return (
@@ -33,7 +33,7 @@ export function HomeBanner() {
 
 // styled-components
 
-const BannerArticle = styled.article`
+const BannerArticle = styled(Article)`
     height: 600px;
 
     background-image: url('./image/color.jpg');

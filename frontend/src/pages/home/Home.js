@@ -1,5 +1,5 @@
 import { useScrollToTop } from '../../utils/hooks/useScrollToTop';
-import { HomeBanner, HomeService, HomeSeason } from '.';
+import { HomeBanner, HomeService, HomeSeason, HomeAI } from '.';
 
 // nav 테스트용 코드입니다.
 export function Home() {
@@ -10,6 +10,7 @@ export function Home() {
             <HomeBanner />
             <HomeService />
             <HomeSeason />
+            <HomeAI />
         </>
     );
 }

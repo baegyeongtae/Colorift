@@ -5,7 +5,7 @@ export function HomeService() {
     return (
         <ServiceArticle>
             <ServiceContainerDiv>
-                <SubTitle>제공되는 서비스</SubTitle>
+                <ServiceSubTitle>제공되는 서비스</ServiceSubTitle>
                 <DescriptionDiv>
                     <HomeServiceIcon
                         image="paint"
@@ -41,12 +41,6 @@ export function HomeService() {
                         }
                     />
                 </DescriptionDiv>
-                <BarContainerDiv>
-                    <ColorBarDiv width="70" top="0" color="spring" />
-                    <ColorBarDiv width="60" top="30" color="summer" />
-                    <ColorBarDiv width="50" top="60" color="autumn" />
-                    <ColorBarDiv width="40" top="90" color="winter" />
-                </BarContainerDiv>
             </ServiceContainerDiv>
         </ServiceArticle>
     );
@@ -56,8 +50,10 @@ export function HomeService() {
 
 const ServiceArticle = styled(Article)`
     height: auto;
+`;
 
-    margin: 100px 0;
+const ServiceSubTitle = styled(SubTitle)`
+    margin: 100px 0 50px 0;
 `;
 
 const ServiceContainerDiv = styled(ContainerDiv)`
@@ -70,8 +66,6 @@ const DescriptionDiv = styled.div`
     width: 100%;
     height: 400px;
 
-    margin: 50px 0;
-
     ${({ theme }) => theme.flexStyled.flexRow};
     justify-content: space-around;
     align-items: center;
@@ -81,26 +75,4 @@ const DescriptionDiv = styled.div`
 
         ${({ theme }) => theme.flexStyled.flexColumn};
     }
-`;
-
-const BarContainerDiv = styled.div`
-    width: 100%;
-    height: 200px;
-
-    position: relative;
-`;
-
-const ColorBarDiv = styled.div`
-    width: ${({ width }) => width}%;
-    height: 20px;
-
-    position: absolute;
-    top: ${({ top }) => top}%;
-    right: 0;
-
-    background-color: ${({ theme, color }) =>
-        (color === 'spring' && theme.color.spring) ||
-        (color === 'summer' && theme.color.summer) ||
-        (color === 'autumn' && theme.color.autumn) ||
-        (color === 'winter' && theme.color.winter)};
 `;

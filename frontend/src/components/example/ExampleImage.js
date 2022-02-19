@@ -26,8 +26,10 @@ const ExampleImg = styled.img`
     display: block;
 
     width: 25%;
+    height: 400px;
 
-    @media ${({ theme }) => theme.device.mobile} {
+    @media ${({ theme }) => theme.device.tablet} {
         width: 50%;
+        height: 40vh;
     }
 `;

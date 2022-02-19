@@ -5,7 +5,7 @@ export function ExampleArticle({ text, season }) {
         <Article>
             <ExampleTitle text={text} />
             <ExampleImage season={season} />
-            <ExampleColor />
+            <ExampleColor season={season} />
         </Article>
     );
 }

@@ -15,9 +15,9 @@ function Example() {
         <>
             <ExampleHeader />
             <ExampleArticle text={titleText.spring} season="spring" />
-            <ExampleArticle text={titleText.spring} season="spring" />
-            <ExampleArticle text={titleText.spring} season="spring" />
-            <ExampleArticle text={titleText.spring} season="spring" />
+            <ExampleArticle text={titleText.summer} season="summer" />
+            <ExampleArticle text={titleText.autumn} season="autumn" />
+            <ExampleArticle text={titleText.winter} season="winter" />
         </>
     );
 }

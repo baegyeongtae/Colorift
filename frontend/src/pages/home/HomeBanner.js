@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { ContainerDiv, HomeButton, Article } from '../../components';
+import { HomeContainerDiv, HomeButton, Article } from '../../components';
 
 export function HomeBanner() {
     return (
         <BannerArticle height="600px">
-            <BannerContainerDiv>
+            <HomeContainerDiv>
                 <TextDiv>
                     <TitleH>
                         퍼스널 컬러를 통해
@@ -26,7 +26,7 @@ export function HomeBanner() {
                 <ExampleImgDiv>
                     <img src="./image/browser.png" alt="샘플 이미지" />
                 </ExampleImgDiv>
-            </BannerContainerDiv>
+            </HomeContainerDiv>
         </BannerArticle>
     );
 }
@@ -37,25 +37,6 @@ const BannerArticle = styled(Article)`
     background-image: url('./image/color.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-
-    @media ${({ theme }) => theme.device.laptop} {
-        height: 55vh;
-    }
-`;
-
-const BannerContainerDiv = styled(ContainerDiv)`
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-
-    height: 100%;
-
-    @media ${({ theme }) => theme.device.tablet} {
-        all: unset;
-
-        height: 100%;
-
-        ${({ theme }) => theme.flexStyled.flexCenter}
-    }
 `;
 
 const TextDiv = styled.div`
@@ -65,8 +46,8 @@ const TextDiv = styled.div`
     width: 100%;
 
     @media ${({ theme }) => theme.device.tablet} {
-        display: grid;
-        grid-template-rows: auto 1fr auto;
+        align-items: center;
+
         text-align: center;
     }
 `;
@@ -75,10 +56,12 @@ const ExampleImgDiv = styled.div`
     ${({ theme }) => theme.flexStyled.flexCenter};
 
     @media ${({ theme }) => theme.device.laptop} {
-        display: none;
+        width: 100%;
+
+        margin: 30px 0;
 
         img {
-            display: none;
+            width: 90vw;
         }
     }
 `;
@@ -93,10 +76,10 @@ const SubTitleP = styled.p`
     font-size: ${({ theme }) => theme.fontSizes.mediumtext};
     color: #a4b2b6;
 
-    margin: 1vw 0;
+    margin: 2vh 0;
 
     @media ${({ theme }) => theme.device.tablet} {
-        margin: 5vw 0;
+        margin: 3vh 0;
     }
 `;
 

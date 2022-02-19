@@ -4,3 +4,4 @@ export { HomeButton } from './HomeButton';
 export { HomeServiceIcon } from './HomeServiceIcon';
 export { SubTitle, DescriptionP } from './HomeText';
 export { HomeColorBar } from './HomeColorBar';
+export { HomeContainerDiv } from './HomeContainerDiv';

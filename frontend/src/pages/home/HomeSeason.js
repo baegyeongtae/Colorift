@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { ContainerDiv, SubTitle, DescriptionP, HomeButton, Article } from '../../components';
+import { SubTitle, DescriptionP, HomeButton, Article, HomeContainerDiv } from '../../components';
 
 export function HomeSeason() {
     return (
         <Article height="700px" color="#f8f7f3">
-            <SeasonContainerDiv>
+            <HomeContainerDiv>
                 <SeasonImgDiv>
                     <img src="./image/color_circle.png" alt="계절별 퍼스널 컬러 이미지" />
                 </SeasonImgDiv>
@@ -23,50 +23,39 @@ export function HomeSeason() {
                     </DescriptionLeftP>
                     <HomeButton text="퍼스널 컬러 예시 보기" />
                 </TextContainerDiv>
-            </SeasonContainerDiv>
+            </HomeContainerDiv>
         </Article>
     );
 }
 
 // styled-components
 
-const SeasonContainerDiv = styled(ContainerDiv)`
-    height: 100%;
-    ${({ theme }) => theme.flexStyled.flexRow};
-    align-items: center;
-
-    @media ${({ theme }) => theme.device.laptop} {
-        ${({ theme }) => theme.flexStyled.flexColumn};
-        align-items: center;
-    }
-`;
-
 const SeasonImgDiv = styled.div`
-    width: 50%;
+    width: 400px;
 
     text-align: center;
+
+    margin: 0 auto;
 
     img {
         width: 400px;
     }
 
     @media ${({ theme }) => theme.device.laptop} {
-        width: 100%;
+        width: 100vw;
 
         margin: auto 0;
 
         img {
-            width: 60vw;
+            width: 60%;
         }
     }
 `;
 
 const TextContainerDiv = styled.div`
-    width: 50%;
+    width: 80%;
 
     text-align: left;
-
-    margin-right: 100px;
 
     ${({ theme }) => theme.flexStyled.flexColumn};
 
@@ -75,7 +64,7 @@ const TextContainerDiv = styled.div`
 
         text-align: center;
 
-        margin: 0 50px 50px 50px;
+        padding: 50px;
     }
 `;
 

@@ -2,6 +2,6 @@
 
 export { Logo } from './Logo';
 export { NavigationBar } from './nav/NavigationBar';
-export { HomeButton, HomeServiceIcon, SubTitle, DescriptionP, HomeColorBar } from './home';
 export { ContainerDiv } from './ContainerDiv';
+export { HomeButton, HomeServiceIcon, SubTitle, DescriptionP, HomeColorBar, HomeContainerDiv } from './home';
 export { Article } from './Article';

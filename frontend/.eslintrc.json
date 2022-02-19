@@ -10,16 +10,12 @@
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
-    "plugins": [
-        "react"
-    ],
+    "plugins": ["react"],
     "rules": {
         "react/jsx-filename-extension": [
-            1, 
-            { 
-                "extensions": [
-                ".js", ".jsx"
-                ] 
+            1,
+            {
+                "extensions": [".js", ".jsx"]
             }
         ],
         "react/jsx-uses-react": "off",
@@ -30,9 +26,5 @@
         "no-console": "off",
         "import/no-cycle": "[2, { maxDepth: 1 }]"
     },
-    "extends": [
-        "plugin:react/recommended",
-        "airbnb",
-        "prettier"
-    ]
+    "extends": ["plugin:react/recommended", "airbnb", "prettier"]
 }

@@ -3,7 +3,7 @@
 // eslint-disable-next-line import/no-cycle
 export { Home } from './Home';
 export { HomeService } from './HomeService';
-export { HomeBanner } from './HomeBanner';
+export { HomeHeader } from './HomeHeader';
 export { HomeSeason } from './HomeSeason';
 export { HomeAI } from './HomeAI';
 export { HomeFooter } from './HomeFooter';

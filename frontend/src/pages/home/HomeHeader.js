@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { HomeContainerDiv, HomeButton, Article } from '../../components';
+import { HomeContainerDiv, HomeButton } from '../../components';
 
-export function HomeBanner() {
+export function HomeHeader() {
     return (
-        <BannerArticle height="600px">
+        <Header>
             <HomeContainerDiv>
                 <TextDiv>
                     <TitleH>
@@ -27,13 +27,15 @@ export function HomeBanner() {
                     <img src="./image/browser.png" alt="샘플 이미지" />
                 </ExampleImgDiv>
             </HomeContainerDiv>
-        </BannerArticle>
+        </Header>
     );
 }
 
 // styled-components
 
-const BannerArticle = styled(Article)`
+const Header = styled.header`
+    height: 600px;
+
     background-image: url('./image/color.jpg');
     background-repeat: no-repeat;
     background-size: cover;

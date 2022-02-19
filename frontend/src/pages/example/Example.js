@@ -1,6 +1,9 @@
 import styled from 'styled-components';
+import { useScrollToTop } from '../../utils/hooks/useScrollToTop';
 
 function Example() {
+    useScrollToTop();
+
     return (
         <>
             <DivOne />

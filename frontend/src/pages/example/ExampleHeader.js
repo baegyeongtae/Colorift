@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ContainerDiv, BigTextP, DescriptionP } from '../../components';
+import { ContainerDiv, BigTextP, DescriptionP, ExampleTitle } from '../../components';
 
 export function ExampleHeader() {
     return (
@@ -19,13 +19,15 @@ export function ExampleHeader() {
 const Header = styled.header`
     height: 500px;
 
+    margin-top: 7vh;
+
     background: linear-gradient(269.7deg, #3c64b1 -91.94%, #000d27 97.3%);
 `;
 
 const ExampleContainerDiv = styled(ContainerDiv)`
     height: 100%;
 
-    line-height: 5vh;
+    line-height: 50px;
 
     ${({ theme }) => theme.flexStyled.flexColumn};
     ${({ theme }) => theme.flexStyled.flexCenter};

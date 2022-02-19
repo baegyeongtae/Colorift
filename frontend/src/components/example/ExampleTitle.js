@@ -21,4 +21,6 @@ const ExampleTitleDiv = styled.div`
 
 const TitleContainerDiv = styled(ContainerDiv)`
     line-height: 100px;
+
+    padding-left: 10px;
 `;

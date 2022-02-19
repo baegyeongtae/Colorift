@@ -3,7 +3,7 @@ import { ContainerDiv, HomeServiceIcon, SubTitle, Article } from '../../componen
 
 export function HomeService() {
     return (
-        <ServiceArticle>
+        <Article height="auto">
             <ServiceContainerDiv>
                 <ServiceSubTitle>제공되는 서비스</ServiceSubTitle>
                 <DescriptionDiv>
@@ -42,15 +42,11 @@ export function HomeService() {
                     />
                 </DescriptionDiv>
             </ServiceContainerDiv>
-        </ServiceArticle>
+        </Article>
     );
 }
 
 // styled-components
-
-const ServiceArticle = styled(Article)`
-    height: auto;
-`;
 
 const ServiceSubTitle = styled(SubTitle)`
     margin: 100px 0 50px 0;

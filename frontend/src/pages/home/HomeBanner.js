@@ -3,7 +3,7 @@ import { ContainerDiv, HomeButton, Article } from '../../components';
 
 export function HomeBanner() {
     return (
-        <BannerArticle>
+        <BannerArticle height="600px">
             <BannerContainerDiv>
                 <TextDiv>
                     <TitleH>
@@ -34,8 +34,6 @@ export function HomeBanner() {
 // styled-components
 
 const BannerArticle = styled(Article)`
-    height: 600px;
-
     background-image: url('./image/color.jpg');
     background-repeat: no-repeat;
     background-size: cover;

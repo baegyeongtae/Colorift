@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import { TextContainerDiv, DescriptionLeftP, SeasonImgDiv } from './HomeSeason';
 import { BigTextP, Article, HomeContainerDiv } from '../../components';
 
@@ -22,3 +23,5 @@ export function HomeAI() {
         </Article>
     );
 }
+
+// styled-components

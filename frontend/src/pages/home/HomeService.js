@@ -5,7 +5,7 @@ export function HomeService() {
     return (
         <Article>
             <ServiceContainerDiv>
-                <ServiceSubTitle>제공되는 서비스</ServiceSubTitle>
+                <BigTextP>제공되는 서비스</BigTextP>
                 <DescriptionDiv>
                     <HomeServiceIcon
                         image="paint"
@@ -48,18 +48,18 @@ export function HomeService() {
 
 // styled-components
 
-const ServiceSubTitle = styled(BigTextP)`
-    margin: 100px 0 50px 0;
-`;
-
 const ServiceContainerDiv = styled(ContainerDiv)`
     ${({ theme }) => theme.flexStyled.flexColumn};
     ${({ theme }) => theme.flexStyled.flexCenter};
+
+    padding-top: 150px;
 `;
 
 const DescriptionDiv = styled.div`
     width: 100%;
     height: 400px;
+
+    margin-top: 50px;
 
     ${({ theme }) => theme.flexStyled.flexRow};
     justify-content: space-around;

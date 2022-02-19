@@ -1,5 +1,5 @@
 import { useScrollToTop } from '../../utils/hooks/useScrollToTop';
-import { ExampleHeader } from '.';
+import { ExampleHeader, ExampleColor } from '.';
 
 function Example() {
     useScrollToTop();
@@ -7,7 +7,7 @@ function Example() {
     return (
         <>
             <ExampleHeader />
-            <div />
+            <ExampleColor />
         </>
     );
 }

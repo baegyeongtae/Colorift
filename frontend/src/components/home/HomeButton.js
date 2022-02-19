@@ -11,7 +11,7 @@ export function HomeButton({ text, maxWidth, width }) {
 // styled-components
 
 const HomeStyleButton = styled.button`
-    max-width: ${({ maxWidth }) => maxWidth || ''};
+    max-width: ${({ maxWidth }) => maxWidth};
     width: ${({ width }) => width || '100%'};
     height: 50px;
 

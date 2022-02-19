@@ -57,10 +57,8 @@ const TextDiv = styled.div`
 const ExampleImgDiv = styled.div`
     ${({ theme }) => theme.flexStyled.flexCenter};
 
-    @media ${({ theme }) => theme.device.laptop} {
+    @media ${({ theme }) => theme.device.tablet} {
         width: 100%;
-
-        margin: 30px 0;
 
         img {
             width: 90vw;

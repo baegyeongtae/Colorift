@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Article = styled.article`
-    height: ${({ height }) => height || 'auto'};
+    height: ${({ height }) => height};
 
-    background-color: ${({ color }) => color || 'white'};
+    background-color: ${({ color }) => color};
 `;

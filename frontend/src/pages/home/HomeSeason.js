@@ -4,7 +4,7 @@ import { BigTextP, DescriptionP, HomeButton, Article, HomeContainerDiv } from '.
 export function HomeSeason() {
     return (
         <Article color="#f8f7f3">
-            <HomeContainerDiv>
+            <SeasonContainerDiv>
                 <SeasonImgDiv>
                     <img src="./image/color_circle.png" alt="계절별 퍼스널 컬러 이미지" />
                 </SeasonImgDiv>
@@ -23,12 +23,22 @@ export function HomeSeason() {
                     </DescriptionLeftP>
                     <HomeButton text="퍼스널 컬러 예시 보기" />
                 </TextContainerDiv>
-            </HomeContainerDiv>
+            </SeasonContainerDiv>
         </Article>
     );
 }
 
 // styled-components
+
+const SeasonContainerDiv = styled(HomeContainerDiv)`
+    div:nth-child(1) {
+        order: 1;
+    }
+
+    div:nth-child(2) {
+        order: 2;
+    }
+`;
 
 export const SeasonImgDiv = styled.div`
     width: 400px;
@@ -41,10 +51,10 @@ export const SeasonImgDiv = styled.div`
         width: 400px;
     }
 
-    @media ${({ theme }) => theme.device.laptop} {
+    @media ${({ theme }) => theme.device.tablet} {
         width: 100vw;
 
-        margin: auto 0;
+        margin: 0 0 30px 0;
 
         img {
             width: 60%;
@@ -64,7 +74,7 @@ export const TextContainerDiv = styled.div`
 
         text-align: center;
 
-        padding: 50px;
+        padding: 0 50px;
     }
 `;
 

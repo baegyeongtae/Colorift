@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export function HomeButton({ text, maxWidth, width }) {
     return (
-        <HomeStyleButton maxWidth={maxWidth} width={width}>
+        <HomeStyleButton type="button" maxWidth={maxWidth} width={width}>
             {text}
         </HomeStyleButton>
     );

@@ -7,3 +7,4 @@ export { BigTextP, DescriptionP } from './TextStyle';
 export { HomeButton, HomeServiceIcon, HomeColorBar, HomeContainerDiv } from './home';
 export { Article } from './Article';
 export { ExampleTitle, ExampleImage, ExampleColor } from './example';
+export { ScrollUpIcon } from './ScrollUpIcon';

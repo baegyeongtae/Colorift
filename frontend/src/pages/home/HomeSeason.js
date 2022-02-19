@@ -6,7 +6,7 @@ export function HomeSeason() {
         <SeasonArticle>
             <SeasonContainerDiv>
                 <SeasonImgDiv>
-                    <img src="./image/color_circle.png" alt="계절별 퍼스널 컬러 이미지" width="400px" />
+                    <img src="./image/color_circle.png" alt="계절별 퍼스널 컬러 이미지" />
                 </SeasonImgDiv>
                 <TextContainerDiv>
                     <SubTitle>계절과 어울리는 피부톤</SubTitle>
@@ -40,12 +40,31 @@ const SeasonContainerDiv = styled(ContainerDiv)`
     height: 100%;
     ${({ theme }) => theme.flexStyled.flexRow};
     align-items: center;
+
+    @media ${({ theme }) => theme.device.laptop} {
+        ${({ theme }) => theme.flexStyled.flexColumn};
+        align-items: center;
+    }
 `;
 
 const SeasonImgDiv = styled.div`
     width: 50%;
 
     text-align: center;
+
+    img {
+        width: 400px;
+    }
+
+    @media ${({ theme }) => theme.device.laptop} {
+        width: 100%;
+
+        margin: auto 0;
+
+        img {
+            width: 60vw;
+        }
+    }
 `;
 
 const TextContainerDiv = styled.div`
@@ -53,9 +72,17 @@ const TextContainerDiv = styled.div`
 
     text-align: left;
 
-    padding: 50px 100px 50px 0;
+    margin-right: 100px;
 
     ${({ theme }) => theme.flexStyled.flexColumn};
+
+    @media ${({ theme }) => theme.device.laptop} {
+        all: unset;
+
+        text-align: center;
+
+        margin: 0 50px 50px 50px;
+    }
 `;
 
 const DescriptionLeftP = styled(DescriptionP)`

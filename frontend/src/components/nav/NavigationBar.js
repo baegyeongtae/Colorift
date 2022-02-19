@@ -89,7 +89,7 @@ const ContainerGridDiv = styled(ContainerDiv)`
 
     height: 100%;
 
-    @media ${({ theme }) => theme.device.laptop} {
+    @media ${({ theme }) => theme.device.tablet} {
         ${({ theme }) => theme.flexStyled.flexRow};
         justify-content: space-between;
         align-items: center;
@@ -135,7 +135,7 @@ const MenuDiv = styled.div`
         color: ${({ pathname, theme }) => pathname === '/fassion' && theme.color.blue};
     }
 
-    @media ${({ theme }) => theme.device.laptop} {
+    @media ${({ theme }) => theme.device.tablet} {
         display: none;
     } ;
 `;
@@ -163,7 +163,7 @@ const UserDiv = styled(MenuDiv)`
 const MenuIconDiv = styled.div`
     display: none;
 
-    @media ${({ theme }) => theme.device.laptop} {
+    @media ${({ theme }) => theme.device.tablet} {
         display: block;
 
         ${({ theme }) => theme.flexStyled.flexCenter};
@@ -178,7 +178,7 @@ const MenuImg = styled.img.attrs(() => ({
 }))`
     display: none;
 
-    @media ${({ theme }) => theme.device.laptop} {
+    @media ${({ theme }) => theme.device.tablet} {
         display: block;
 
         height: 4vh;

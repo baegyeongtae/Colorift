@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Color, Fashion, ColorInput, FashionInput
+from .models import User, Color, Fashion
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -9,19 +9,26 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 """
-퍼스널 컬러 테스트를 한 결과를 저장한 상세데이터 serializer
+ColorSerializer : personal color test 상세 데이터 (하나에 대한)
+ColorInputSerializer : personal color test시 POST 요청으로 전달된 image 유효성 검사
+ColorDigestSerializer : personal color test 요약 데이터 (전체 리스트)
 """
 
 
 class ColorSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(use_url=True)
+
     class Meta:
         model = Color
-        fields = '__all__'
+        fields = ['id', 'user', 'color', 'image', 'date']
 
 
-"""
-'color/list' 기록들을 전송하기 위한 요약결과를 만들어주는 serializer
-"""
+class ColorInputSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(use_url=True)
+
+    class Meta:
+        model = Color
+        fields = ['image']
 
 
 class ColorDigestSerializer(serializers.ModelSerializer):
@@ -31,22 +38,31 @@ class ColorDigestSerializer(serializers.ModelSerializer):
 
 
 """
-패션매칭 테스트를 한 결과를 저장한 상세데이터 serializer
+FashionSerializer : personal color test 상세 데이터 (하나에 대한)
+FashionInputSerializer : personal color test시 POST 요청으로 전달된 image 유효성 검사
+FashionDigestSerializer : personal color test 요약 데이터 (전체 리스트)
 """
 
 
 class FashionSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(use_url=True)
+
     class Meta:
         model = Fashion
-        fields = '__all__'
+        fields = ['color', 'image', 'date', 'total_match_rate', 'color_match_rate', 'brightness_match_rate', 'saturation_match_rate']
 
 
-"""
-'fashion/list' 기록들을 전송하기 위한 요약결과를 만들어주는 serializer
-"""
+class FashionInputSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(use_url=True)
+
+    class Meta:
+        model = Color
+        fields = ['color', 'image']
 
 
 class FashionDigestSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(use_url=True)
+
     class Meta:
         model = Fashion
-        fields = ['id', '', '']
+        fields = ['id', 'date', 'image']

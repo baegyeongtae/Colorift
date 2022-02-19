@@ -41,6 +41,8 @@ export function ExampleColor() {
 
 const ColorContainerDiv = styled(ContainerDiv)`
     padding: 50px 0;
+
+    text-align: center;
 `;
 
 const ColorDiv = styled.div`
@@ -53,4 +55,11 @@ const ColorDiv = styled.div`
     border-radius: 50%;
 
     background-color: ${({ color }) => color};
+
+    @media ${({ theme }) => theme.device.mobile} {
+        width: 70px;
+        height: 70px;
+
+        margin: 10px;
+    }
 `;

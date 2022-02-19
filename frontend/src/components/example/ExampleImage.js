@@ -19,10 +19,15 @@ export function ExampleImage({ season }) {
 
 const ImageContainerDiv = styled(ContainerDiv)`
     ${({ theme }) => theme.flexStyled.flexRow};
+    flex-wrap: wrap;
 `;
 
 const ExampleImg = styled.img`
     display: block;
 
     width: 25%;
+
+    @media ${({ theme }) => theme.device.mobile} {
+        width: 50%;
+    }
 `;

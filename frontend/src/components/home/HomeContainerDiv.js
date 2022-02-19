@@ -14,6 +14,6 @@ export const HomeContainerDiv = styled(ContainerDiv)`
         display: grid;
         grid-template-row: 1fr 1fr;
 
-        padding-top: 10vh;
+        padding: 10vh 0;
     }
 `;

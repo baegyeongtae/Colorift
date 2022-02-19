@@ -1,94 +1,25 @@
 import styled from 'styled-components';
-import { ContainerDiv, SubTitle, DescriptionP, HomeButton } from '../../components';
+import { TextContainerDiv, DescriptionLeftP, SeasonImgDiv } from './HomeSeason';
+import { SubTitle, Article, HomeContainerDiv } from '../../components';
 
 export function HomeAI() {
     return (
-        <SeasonArticle>
-            <SeasonContainerDiv>
-                <SeasonImgDiv>
-                    <img src="./image/color_circle.png" alt="계절별 퍼스널 컬러 이미지" />
-                </SeasonImgDiv>
+        <Article>
+            <HomeContainerDiv>
                 <TextContainerDiv>
-                    <SubTitle>계절과 어울리는 피부톤</SubTitle>
+                    <SubTitle>AI 분석</SubTitle>
                     <DescriptionLeftP>
-                        사람의 피부톤은 계절에 비유할 수 있습니다.
+                        피부의 명도와채도, 적색도와 황색도,
                         <br />
-                        봄(Spring)은 따뜻한 색상을, 여름(Summer)은 시원한 색상을, 가을(Autumn)은 차분한 색상을,
-                        겨울(Winter)은 선명한 색상을 뜻합니다.
+                        RGB를 분석하여 얼굴의 각 구간에 알맞는 특성을
                         <br />
-                        <br />
-                        저희 Color Fit은 먼저 사용자의 피부톤을 정밀 분석하고
-                        <br />
-                        분석된 결과를 토대로 어울리는 색상을 추천해드립니다.
+                        비교하고 퍼스널 컬러를 추출합니다.
                     </DescriptionLeftP>
-                    <HomeButton text="퍼스널 컬러 예시 보기" />
                 </TextContainerDiv>
-            </SeasonContainerDiv>
-        </SeasonArticle>
+                <SeasonImgDiv>
+                    <img src="./image/chart.jpg" alt="AI 분석 이미지" />
+                </SeasonImgDiv>
+            </HomeContainerDiv>
+        </Article>
     );
 }
-
-// styled-components
-
-const SeasonArticle = styled.article`
-    height: 700px;
-
-    background-color: #f8f7f3;
-`;
-
-const SeasonContainerDiv = styled(ContainerDiv)`
-    height: 100%;
-    ${({ theme }) => theme.flexStyled.flexRow};
-    align-items: center;
-
-    @media ${({ theme }) => theme.device.laptop} {
-        ${({ theme }) => theme.flexStyled.flexColumn};
-        align-items: center;
-    }
-`;
-
-const SeasonImgDiv = styled.div`
-    width: 50%;
-
-    text-align: center;
-
-    img {
-        width: 400px;
-    }
-
-    @media ${({ theme }) => theme.device.laptop} {
-        width: 100%;
-
-        margin: auto 0;
-
-        img {
-            width: 60vw;
-        }
-    }
-`;
-
-const TextContainerDiv = styled.div`
-    width: 50%;
-
-    text-align: left;
-
-    margin-right: 100px;
-
-    ${({ theme }) => theme.flexStyled.flexColumn};
-
-    @media ${({ theme }) => theme.device.laptop} {
-        all: unset;
-
-        text-align: center;
-
-        margin: 0 50px 50px 50px;
-    }
-`;
-
-const DescriptionLeftP = styled(DescriptionP)`
-    text-align: left;
-
-    line-height: 1.7rem;
-
-    padding: 30px 0;
-`;

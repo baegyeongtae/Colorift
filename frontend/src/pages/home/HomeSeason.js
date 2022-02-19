@@ -3,7 +3,7 @@ import { SubTitle, DescriptionP, HomeButton, Article, HomeContainerDiv } from '.
 
 export function HomeSeason() {
     return (
-        <Article height="700px" color="#f8f7f3">
+        <Article color="#f8f7f3">
             <HomeContainerDiv>
                 <SeasonImgDiv>
                     <img src="./image/color_circle.png" alt="계절별 퍼스널 컬러 이미지" />
@@ -30,12 +30,12 @@ export function HomeSeason() {
 
 // styled-components
 
-const SeasonImgDiv = styled.div`
+export const SeasonImgDiv = styled.div`
     width: 400px;
 
     text-align: center;
 
-    margin: 0 auto;
+    margin: 100px auto;
 
     img {
         width: 400px;
@@ -52,7 +52,7 @@ const SeasonImgDiv = styled.div`
     }
 `;
 
-const TextContainerDiv = styled.div`
+export const TextContainerDiv = styled.div`
     width: 80%;
 
     text-align: left;
@@ -68,7 +68,7 @@ const TextContainerDiv = styled.div`
     }
 `;
 
-const DescriptionLeftP = styled(DescriptionP)`
+export const DescriptionLeftP = styled(DescriptionP)`
     text-align: left;
 
     line-height: 1.7rem;

@@ -3,7 +3,7 @@ import { ContainerDiv, HomeServiceIcon, SubTitle, Article } from '../../componen
 
 export function HomeService() {
     return (
-        <Article height="auto">
+        <Article>
             <ServiceContainerDiv>
                 <ServiceSubTitle>제공되는 서비스</ServiceSubTitle>
                 <DescriptionDiv>

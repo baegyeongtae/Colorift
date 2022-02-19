@@ -1,5 +1,5 @@
 import { useScrollToTop } from '../../utils/hooks/useScrollToTop';
-import { ExampleHeader, ExampleColor } from '.';
+import { ExampleHeader, ExampleArticle } from '.';
 
 function Example() {
     const titleText = {
@@ -14,10 +14,10 @@ function Example() {
     return (
         <>
             <ExampleHeader />
-            <ExampleColor text={titleText.spring} season="spring" />
-            <ExampleColor text={titleText.spring} season="spring" />
-            <ExampleColor text={titleText.spring} season="spring" />
-            <ExampleColor text={titleText.spring} season="spring" />
+            <ExampleArticle text={titleText.spring} season="spring" />
+            <ExampleArticle text={titleText.spring} season="spring" />
+            <ExampleArticle text={titleText.spring} season="spring" />
+            <ExampleArticle text={titleText.spring} season="spring" />
         </>
     );
 }

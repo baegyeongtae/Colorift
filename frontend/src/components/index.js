@@ -6,4 +6,4 @@ export { ContainerDiv } from './ContainerDiv';
 export { BigTextP, DescriptionP } from './TextStyle';
 export { HomeButton, HomeServiceIcon, HomeColorBar, HomeContainerDiv } from './home';
 export { Article } from './Article';
-export { ExampleTitle } from './example';
+export { ExampleTitle, ExampleImage, ExampleColor } from './example';

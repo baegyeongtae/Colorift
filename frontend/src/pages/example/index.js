@@ -2,4 +2,4 @@
 
 export { Example } from './Example';
 export { ExampleHeader } from './ExampleHeader';
-export { ExampleColor } from './ExampleColor';
+export { ExampleArticle } from './ExampleArticle';

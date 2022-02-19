@@ -17,7 +17,7 @@ export function ExampleHeader() {
 // styled-components
 
 const Header = styled.header`
-    height: 500px;
+    height: 400px;
 
     margin-top: 7vh;
 

@@ -3,4 +3,4 @@
 
 export { Home } from './home';
 export { UploadFace, Loading, ColorResult } from './personalcolor';
-export { PersonalColorChoice } from './fashion/PersonalColorChoice';
+export { PersonalColorChoice, MatchingLoading, UploadFashion, FashionResult } from './fashion';

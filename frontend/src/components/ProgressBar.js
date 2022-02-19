@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 // eslint-disable-next-line react/prop-types
-export default function ProgressBar({ percent }) {
+export function ProgressBar({ percent }) {
     return (
         <ProgressbarBox>
             <ProgressbarGauge percent={percent} />

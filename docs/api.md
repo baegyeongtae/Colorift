@@ -178,7 +178,7 @@
 * **Success Response:**
 
   * **Code:** `200 OK` <br />
-    **Content:** `{ "fashionTestList" : [ { "id" : 3, "color" : "winter", "date" : "2022-02-18", "imageURL" : "http://s3-hosted-image-url" }, ... ] }`<br />
+    **Content:** `{ "fashionTestList" : [ { "id" : 3, "date" : "2022-02-18", "imageURL" : "http://s3-hosted-image-url" }, ... ] }`<br />
  
 * **Error Response:**
 
@@ -208,7 +208,7 @@
 * **Success Response:**
 
   * **Code:** `200 OK` <br />
-    **Content:** `{ "fashionTestDetail" : { "id" : 3, "color" : "winter", "colorMatchRate" : 82, "brightnessMatchRate" : 60, "saturationMatchRate" : 75, "totalRate" : 67, "date" : "2022-02-18", "imageURL" : "http://s3-hosted-image-url" } }`<br />
+    **Content:** `{ "fashionTestDetail" : { "id" : 3, "color" : "winter", "colorMatchRate" : 82, "brightnessMatchRate" : 60, "saturationMatchRate" : 75, "totalMatchRate" : 67, "date" : "2022-02-18", "imageURL" : "http://s3-hosted-image-url" } }`<br />
  
 * **Error Response:**
 

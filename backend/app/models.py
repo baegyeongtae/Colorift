@@ -7,15 +7,18 @@ class User(models.Model):
 
 
 class Color(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    color = models.CharField(max_length=6)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    color = models.CharField(choices=['spring', 'summer', 'fall', 'winter'])
     image = models.ImageField()
     date = models.DateField()
 
 
 class Fashion(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    color = models.CharField(max_length=6)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    color = models.CharField(choices=['spring', 'summer', 'fall', 'winter'])
     image = models.ImageField()
-    rate = models.FloatField()
     date = models.DateField()
+    total_match_rate = models.IntegerField()
+    color_match_rate = models.IntegerField()
+    brightness_match_rate = models.IntegerField()
+    saturation_match_rate = models.IntegerField()

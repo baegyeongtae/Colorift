@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet, useLocation, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Menubox } from './Menubox';
@@ -8,7 +8,7 @@ import { ContainerDiv } from '../ContainerDiv';
 
 function NavigationBar() {
     // true 이면 메뉴 바 나옴
-    const [istoggle, setIsToggle] = useState(false);
+    const [isToggle, setIsToggle] = useState(false);
 
     // 현재 url 받아오기
     const location = useLocation();
@@ -21,10 +21,17 @@ function NavigationBar() {
         setIsToggle(current => !current);
     };
 
+    const setScrollDisable = () => {
+        if (isToggle) document.body.style.overflow = 'hidden';
+        if (!isToggle) document.body.style.overflow = 'unset';
+    };
+
+    useEffect(() => setScrollDisable(), [isToggle]);
+
     return (
         <>
             <header>
-                {istoggle && <Menubox clickProps={handleToggleClick} />}
+                {isToggle && <Menubox clickProps={handleToggleClick} />}
                 <Nav pathname={pathname} scrollY={scrollY}>
                     <ContainerGridDiv>
                         <Logo />

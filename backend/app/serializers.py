@@ -20,15 +20,13 @@ class ColorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Color
-        fields = ['id', 'user', 'color', 'image', 'date']
+        fields = ['id', 'color', 'image', 'date']
 
 
-class ColorInputSerializer(serializers.ModelSerializer):
-    image = serializers.ImageField(use_url=True)
-
+class ColorOutputSerializer(serializers.ModelSerializer):
     class Meta:
         model = Color
-        fields = ['image']
+        fields = ['color']
 
 
 class ColorDigestSerializer(serializers.ModelSerializer):

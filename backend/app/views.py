@@ -2,7 +2,7 @@ from django.http import Http404
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.parsers import JSONParser
+from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
 from app.models import User, Color, Fashion
 from app.serializers import *
 from datetime import date
@@ -13,19 +13,25 @@ class ColorTest(APIView):
     POST : [personal color test] 얼굴 이미지 받아서 personal color 결과 반환
     """
 
+    parser_classes = [FormParser, MultiPartParser]
+
+    def color_ai_model(self):
+        return 'SP'
+
     def post(self, request, format=None):
-        serializers = ColorInputSerializer(data=request.data)
-        if serializers.is_valid():
+        file_obj = request.data['image']
+        if file_obj:
             user = User.objects.get(pk="example@gmail.com")  # 아직 로그인 로직이 없어서 테스트용으로 만든 user
             '''
             머신러닝 모델 거치고 결과를 반환, 로그인 유저라면 저장 아니라면 저장안함
             로그인 유저라면 사진과 색결과를 함께 저장해주어야 한다
             '''
+            color_result = color_ai_model()
             if True:  # 유저가 있는 경우
-                color = {'user': user, 'image': serializers.validated_data['image'], 'color': 'SP', 'date': date.today()}
-                _serializers = ColorSerializer(data=color)
-                _serializers.save()
-                return Response({'color': 'SP'}, status=status.HTTP_201_CREATED)
+                _serializer = ColorSerializer(data={'image': file_obj, 'color': 'SP', 'date': date.today()})
+                if _serializer.is_valid():
+                    _serializer.save()
+                    return Response({color: 'SP'}, status=status.HTTP_201_CREATED)
             else:
                 return Response({'color': 'SP'}, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)

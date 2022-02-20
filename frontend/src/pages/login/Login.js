@@ -6,9 +6,9 @@ export function Login() {
         <Article height="100vh">
             <CenterContainerDiv>
                 <LoginDiv>
-                    <TitleMarginP color="#3C64B1" className="title column">
+                    <TitleP color="#3C64B1" className="title column">
                         Login
-                    </TitleMarginP>
+                    </TitleP>
                     <UserInputDiv text="Email" />
                     <UserInputDiv text="Password" type="password" />
                     <UserButton
@@ -49,21 +49,15 @@ export function Login() {
 
 // styled-components
 
-const CenterContainerDiv = styled(ContainerDiv)`
+export const CenterContainerDiv = styled(ContainerDiv)`
     ${({ theme }) => theme.flexStyled.flexCenter};
 
     height: 100%;
+
+    margin-top: 7vh;
 `;
 
-const TitleMarginP = styled(TitleP)`
-    margin: 0 0 50px 10px;
-
-    @media screen and (max-width: 420px) {
-        margin: 0 0 20px;
-    }
-`;
-
-const LoginDiv = styled.div`
+export const LoginDiv = styled.div`
     display: grid;
     grid-template-rows: 1.5fr repeat(4, 1fr);
     grid-template-columns: repeat(2, 1fr);
@@ -75,6 +69,8 @@ const LoginDiv = styled.div`
         grid-column-end: 3;
 
         justify-self: start;
+
+        margin: 0 0 50px 10px;
     }
 
     .login_button {
@@ -94,14 +90,16 @@ const LoginDiv = styled.div`
 
         font-size: 1.6rem;
 
-        .column {
-            grid-column-start: 1;
-            grid-column-end: 2;
-        }
-
         .title {
             grid-row-start: 1;
             grid-row-end: 2;
+
+            margin: 0 0 20px 0;
+        }
+
+        .column {
+            grid-column-start: 1;
+            grid-column-end: 2;
         }
 
         .login_button {

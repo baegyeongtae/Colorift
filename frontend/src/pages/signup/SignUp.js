@@ -1,12 +1,13 @@
 import styled from 'styled-components';
-import { Article, ContainerDiv, UserInputDiv, TitleP, UserButton } from '../../components';
+import { Article, UserInputDiv, TitleP, UserButton } from '../../components';
+import { CenterContainerDiv, LoginDiv } from '../login/Login';
 
 export function SignUp() {
     return (
         <Article height="100vh">
             <CenterContainerDiv>
-                <LoginDiv>
-                    <div className="row title">
+                <SignUpDiv>
+                    <div className="title column">
                         <TitleP color="#3C64B1">Sign Up</TitleP>
                         <p>가입하면 분석 결과를 저장할 수 있습니다.</p>
                     </div>
@@ -22,12 +23,12 @@ export function SignUp() {
                     >
                         중복 확인
                     </UserButton>
-                    <div className="row">
+                    <div className="column">
                         <UserInputDiv text="Password" type="password" />
                         <p className="password_rule">비밀번호는 영문/숫자/특수문자 포함 8자 이상 입력해주세요.</p>
                         <p className="password_rule password_error">비밀번호가 유효하지 않습니다.</p>
                     </div>
-                    <div className="row">
+                    <div className="column">
                         <UserInputDiv text="Password Check" type="password" />
                         <p className="password_rule password_error">비밀번호가 일치하지 않습니다.</p>
                     </div>
@@ -35,12 +36,12 @@ export function SignUp() {
                         type="button"
                         width="40%"
                         height="50%"
-                        className="row button"
+                        className="column button"
                         onClick={() => window.open('/', '_self')}
                     >
                         회원가입
                     </UserButton>
-                </LoginDiv>
+                </SignUpDiv>
             </CenterContainerDiv>
         </Article>
     );
@@ -48,20 +49,10 @@ export function SignUp() {
 
 // styled-components
 
-const CenterContainerDiv = styled(ContainerDiv)`
-    ${({ theme }) => theme.flexStyled.flexCenter};
-
-    height: 100%;
-`;
-
-const LoginDiv = styled.div`
-    display: grid;
+const SignUpDiv = styled(LoginDiv)`
     grid-template-rows: 1fr repeat(4, 1fr);
-    grid-template-columns: repeat(2, 1fr);
-    align-items: center;
-    justify-items: center;
 
-    .row {
+    .column {
         grid-column-start: 1;
         grid-column-end: 3;
         justify-self: start;
@@ -69,10 +60,6 @@ const LoginDiv = styled.div`
 
     .title {
         margin: 0 0 50px 10px;
-
-        @media screen and (max-width: 420px) {
-            margin: 0 0 20px 0;
-        }
     }
 
     .password_rule {
@@ -91,16 +78,16 @@ const LoginDiv = styled.div`
     }
 
     @media screen and (max-width: 420px) {
-        all: unset;
-
-        display: grid;
-        grid-template-rows: 1fr 0.8fr 0.5fr 1fr 1fr 1fr;
-        align-items: center;
+        grid-template-rows: 1fr 0.8fr 0.5fr repeat(3, 1fr);
         justify-items: center;
 
         font-size: 1.6rem;
 
-        .row {
+        .title {
+            margin: 0 0 20px 0;
+        }
+
+        .column {
             grid-column-start: 1;
             grid-column-end: 2;
             justify-self: center;
@@ -116,8 +103,6 @@ const LoginDiv = styled.div`
         .button {
             width: 50%;
             height: 50%;
-
-            margin-bottom: 20px;
         }
     }
 `;

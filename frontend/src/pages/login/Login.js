@@ -56,10 +56,10 @@ const CenterContainerDiv = styled(ContainerDiv)`
 `;
 
 const TitleMarginP = styled(TitleP)`
-    margin-bottom: 50px;
+    margin: 0 0 50px 10px;
 
     @media screen and (max-width: 420px) {
-        margin-bottom: 20px;
+        margin: 0 0 20px 0;
     }
 `;
 

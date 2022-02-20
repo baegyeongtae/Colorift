@@ -14,7 +14,7 @@ export function UserInputDiv({ text, type }) {
 const FlexColumnDiv = styled.div`
     width: 250px;
 
-    margin: 10px 0;
+    margin: 10px;
 
     ${({ theme }) => theme.flexStyled.flexColumn};
 `;

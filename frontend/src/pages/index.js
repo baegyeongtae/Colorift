@@ -4,3 +4,4 @@
 export { Home } from './home';
 export { Example } from './example';
 export { Login } from './login/Login';
+export { SignUp } from './signup/SignUp';

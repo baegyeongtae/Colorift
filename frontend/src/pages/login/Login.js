@@ -6,7 +6,7 @@ export function Login() {
         <Article height="100vh">
             <CenterContainerDiv>
                 <LoginDiv>
-                    <TitleMarginP color="#3C64B1" className="title">
+                    <TitleMarginP color="#3C64B1" className="title column">
                         Login
                     </TitleMarginP>
                     <UserInputDiv text="Email" />
@@ -15,7 +15,7 @@ export function Login() {
                         type="submit"
                         width="80%"
                         height="80%"
-                        className="login_button"
+                        className="login_button column"
                         onClick={() => window.open('/', '_self')}
                     >
                         로그인
@@ -59,7 +59,7 @@ const TitleMarginP = styled(TitleP)`
     margin: 0 0 50px 10px;
 
     @media screen and (max-width: 420px) {
-        margin: 0 0 20px 0;
+        margin: 0 0 20px;
     }
 `;
 
@@ -94,18 +94,19 @@ const LoginDiv = styled.div`
 
         font-size: 1.6rem;
 
+        .column {
+            grid-column-start: 1;
+            grid-column-end: 2;
+        }
+
         .title {
             grid-row-start: 1;
             grid-row-end: 2;
-            grid-column-start: 1;
-            grid-column-end: 2;
         }
 
         .login_button {
             grid-row-start: 4;
             grid-row-end: 5;
-            grid-column-start: 1;
-            grid-column-end: 2;
 
             width: 100%;
             height: 60%;

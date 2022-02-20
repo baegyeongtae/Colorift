@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export function UserInputDiv({ text, type }) {
+export function UserInputDiv({ text, type, width }) {
     return (
-        <FlexColumnDiv>
+        <FlexColumnDiv className="input_div">
             <p>{text}</p>
             <Input type={type || 'text'} />
         </FlexColumnDiv>
@@ -12,9 +12,9 @@ export function UserInputDiv({ text, type }) {
 // styled-components
 
 const FlexColumnDiv = styled.div`
-    width: 100%;
+    width: ${({ width }) => width || '100%'};
 
-    margin: 10px;
+    margin: 10px 0;
 
     ${({ theme }) => theme.flexStyled.flexColumn};
 `;

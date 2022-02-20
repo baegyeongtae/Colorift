@@ -7,13 +7,11 @@ export function SignUp() {
         <Article height="100vh">
             <CenterContainerDiv>
                 <SignUpDiv>
-                    <div className="column">
+                    <div className="column title_div">
                         <TitleP color="#3C64B1">Sign Up</TitleP>
                         <p>가입하면 분석 결과를 저장할 수 있습니다.</p>
                     </div>
-                    <div>
-                        <UserInputDiv text="Email" />
-                    </div>
+                    <UserInputDiv text="Email" />
                     <UserButton
                         type="submit"
                         width="80%"
@@ -52,6 +50,10 @@ export function SignUp() {
 const SignUpDiv = styled(LoginDiv)`
     grid-template-rows: 1fr repeat(4, 1fr);
 
+    .input_div {
+        width: 250px;
+    }
+
     .column {
         grid-column-start: 1;
         grid-column-end: 3;
@@ -59,12 +61,14 @@ const SignUpDiv = styled(LoginDiv)`
     }
 
     .title {
-        margin: 0 0 50px 10px;
+        margin: 0;
+    }
+
+    .title_div {
+        margin-bottom: 50px;
     }
 
     .password_rule {
-        margin-left: 10px;
-
         font-size: 0.8rem;
     }
 
@@ -83,7 +87,11 @@ const SignUpDiv = styled(LoginDiv)`
 
         font-size: 1.6rem;
 
-        .title {
+        .input_div {
+            width: 300px;
+        }
+
+        .title_div {
             margin: 0 0 20px 0;
         }
 

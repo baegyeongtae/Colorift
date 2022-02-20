@@ -23,8 +23,7 @@
         "import/prefer-default-export": "off",
         "react/prop-types": "off",
         "no-unused-vars": "off",
-        "no-console": "off",
-        "import/no-cycle": "[2, { maxDepth: 2 }]"
+        "no-console": "off"
     },
     "extends": ["plugin:react/recommended", "airbnb", "prettier"]
 }

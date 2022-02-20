@@ -12,9 +12,15 @@ export function HomeFooter() {
                     알맞는 패션으로 패피가 되어보세요!
                 </DescriptionCenterP>
                 <ButtonDiv>
-                    <HomeButton text="퍼스널 컬러 찾기" maxWidth="200px" width="40vw" />
-                    <HomeButton text="패션 매칭하기" maxWidth="200px" width="40vw" />
-                    <HomeButton text="회원가입" maxWidth="200px" width="40vw" />
+                    <HomeButton maxWidth="200px" width="40vw">
+                        퍼스널 컬러 찾기
+                    </HomeButton>
+                    <HomeButton maxWidth="200px" width="40vw">
+                        패션 매칭하기
+                    </HomeButton>
+                    <HomeButton maxWidth="200px" width="40vw">
+                        회원가입
+                    </HomeButton>
                 </ButtonDiv>
             </FlexContainerDiv>
         </Article>

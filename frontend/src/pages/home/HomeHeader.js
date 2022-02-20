@@ -1,16 +1,16 @@
 import styled from 'styled-components';
-import { HomeContainerDiv, HomeButton } from '../../components';
+import { HomeContainerDiv, HomeButton, TitleP } from '../../components';
 
 export function HomeHeader() {
     return (
         <Header>
             <HomeContainerDiv>
                 <TextDiv>
-                    <TitleH>
+                    <TitleP>
                         퍼스널 컬러를 통해
                         <br />
                         나만의 스타일을 찾아보세요.
-                    </TitleH>
+                    </TitleP>
                     <SubTitleP>
                         AI 알고리즘으로 정확한 분석을 통해 본인의 피부톤을 이해하고
                         <br />
@@ -19,8 +19,12 @@ export function HomeHeader() {
                         또한, 퍼스널 컬러와 패션 아이템의 조화로움을 알려드립니다.
                     </SubTitleP>
                     <ButtonDiv>
-                        <HomeButton text="퍼스널 컬러 찾기" maxWidth="200px" width="45vw" />
-                        <HomeButton text="패션 매칭하기" maxWidth="200px" width="45vw" />
+                        <HomeButton maxWidth="200px" width="45vw">
+                            퍼스널 컬러 찾기
+                        </HomeButton>
+                        <HomeButton maxWidth="200px" width="45vw">
+                            패션 매칭하기
+                        </HomeButton>
                     </ButtonDiv>
                 </TextDiv>
                 <ExampleImgDiv>
@@ -66,13 +70,7 @@ const ExampleImgDiv = styled.div`
     }
 `;
 
-const TitleH = styled.h1`
-    font-size: ${({ theme }) => theme.fontSizes.title};
-    font-weight: bold;
-    color: white;
-`;
-
-const SubTitleP = styled.h2`
+const SubTitleP = styled.p`
     font-size: ${({ theme }) => theme.fontSizes.mediumtext};
     color: #a4b2b6;
 

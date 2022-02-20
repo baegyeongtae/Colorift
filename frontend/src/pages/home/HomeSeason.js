@@ -21,7 +21,7 @@ export function HomeSeason() {
                         <br />
                         분석된 결과를 토대로 어울리는 색상을 추천해드립니다.
                     </DescriptionLeftP>
-                    <HomeButton text="퍼스널 컬러 예시 보기" />
+                    <HomeButton>퍼스널 컬러 예시 보기</HomeButton>
                 </TextContainerDiv>
             </SeasonContainerDiv>
         </Article>

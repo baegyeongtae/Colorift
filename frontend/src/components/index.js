@@ -8,6 +8,6 @@ export { BigTextP, DescriptionP, TitleP } from './TextStyle';
 export { HomeServiceIcon, HomeColorBar, HomeContainerDiv } from './home';
 export { Article, BackgroundDiv } from './AreaStyled';
 export { ExampleTitle, ExampleImage, ExampleColor } from './example';
-export { ScrollUpIcon } from './ScrollUpIcon';
+export { ScrollUpIcon, ModalCloseIcon } from './icon';
 export { UserInputDiv, FindPasswordModal } from './login';
 export { HomeButton, UserButton } from './Button';

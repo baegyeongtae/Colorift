@@ -7,7 +7,7 @@ export function SignUp() {
         <Article height="100vh">
             <CenterContainerDiv>
                 <SignUpDiv>
-                    <div className="title column">
+                    <div className="column">
                         <TitleP color="#3C64B1">Sign Up</TitleP>
                         <p>가입하면 분석 결과를 저장할 수 있습니다.</p>
                     </div>

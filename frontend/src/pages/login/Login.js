@@ -18,10 +18,10 @@ export function Login() {
             <Article height="100vh">
                 <CenterContainerDiv>
                     <LoginDiv>
-                        <TitleP color="#3C64B1" className="title column">
+                        <TitleP color="#3C64B1" className="column">
                             Login
                         </TitleP>
-                        <UserInputDiv text="Email" />
+                        <UserInputDiv text="Email" type="email" />
                         <UserInputDiv text="Password" type="password" />
                         <UserButton
                             type="submit"

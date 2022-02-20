@@ -12,7 +12,7 @@ export function UserInputDiv({ text, type }) {
 // styled-components
 
 const FlexColumnDiv = styled.div`
-    width: 250px;
+    width: 100%;
 
     margin: 10px;
 

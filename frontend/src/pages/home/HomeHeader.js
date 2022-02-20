@@ -6,7 +6,7 @@ export function HomeHeader() {
         <Header>
             <HomeContainerDiv>
                 <TextDiv>
-                    <TitleP>
+                    <TitleP color="white">
                         퍼스널 컬러를 통해
                         <br />
                         나만의 스타일을 찾아보세요.

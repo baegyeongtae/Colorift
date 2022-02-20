@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-export function UserInputDiv({ text }) {
+export function UserInputDiv({ text, type }) {
     return (
         <FlexColumnDiv>
             <p>{text}</p>
-            <Input type="text" />
+            <Input type={type || 'text'} />
         </FlexColumnDiv>
     );
 }

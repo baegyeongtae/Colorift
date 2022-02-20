@@ -53,8 +53,6 @@ export const CenterContainerDiv = styled(ContainerDiv)`
     ${({ theme }) => theme.flexStyled.flexCenter};
 
     height: 100%;
-
-    margin-top: 7vh;
 `;
 
 export const LoginDiv = styled.div`

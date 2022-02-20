@@ -6,10 +6,11 @@ export function Login() {
         <Article height="100vh">
             <CenterContainerDiv>
                 <LoginDiv>
-                    <TitleP color="#3C64B1" className="title">
+                    <TitleMarginP color="#3C64B1" className="title">
                         Login
-                    </TitleP>
+                    </TitleMarginP>
                     <UserInputDiv text="Email" />
+                    <UserInputDiv text="Password" type="password" />
                     <UserButton
                         type="submit"
                         width="80%"
@@ -19,18 +20,25 @@ export function Login() {
                     >
                         로그인
                     </UserButton>
-                    <UserInputDiv text="Password" type="password" />
+
                     <p>비밀번호를 잊어버리셨나요?</p>
                     <UserButton
                         type="button"
                         width="80%"
                         height="50%"
+                        className="button"
                         onClick={() => window.open('/findpassword', '_self')}
                     >
                         비밀번호 찾기
                     </UserButton>
                     <p>회원이 아니신가요?</p>
-                    <UserButton type="button" width="80%" height="50%" onClick={() => window.open('/signup', '_self')}>
+                    <UserButton
+                        type="button"
+                        width="80%"
+                        height="50%"
+                        className="button"
+                        onClick={() => window.open('/signup', '_self')}
+                    >
                         회원가입
                     </UserButton>
                 </LoginDiv>
@@ -47,9 +55,13 @@ const CenterContainerDiv = styled(ContainerDiv)`
     height: 100%;
 `;
 
+const TitleMarginP = styled(TitleP)`
+    margin-bottom: 50px;
+`;
+
 const LoginDiv = styled.div`
     display: grid;
-    grid-template-rows: 5fr 3fr 3fr 3fr 3fr;
+    grid-template-rows: 1.5fr 1fr 1fr 1fr 1fr;
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
     justify-items: center;
@@ -66,5 +78,38 @@ const LoginDiv = styled.div`
         grid-column-end: 3;
         grid-row-start: 2;
         grid-row-end: 4;
+    }
+
+    @media screen and (max-width: 420px) {
+        all: unset;
+
+        display: grid;
+        grid-template-rows: 1.5fr 1fr 1fr 2fr 0.5fr 0.5fr 0.5fr 0.5fr;
+        align-items: center;
+        justify-items: center;
+
+        .title {
+            grid-row-start: 1;
+            grid-row-end: 2;
+            grid-column-start: 1;
+            grid-column-end: 2;
+        }
+
+        .login_button {
+            grid-row-start: 4;
+            grid-row-end: 5;
+            grid-column-start: 1;
+            grid-column-end: 2;
+
+            height: 60%;
+
+            margin-bottom: 30px;
+        }
+
+        .button {
+            height: 90%;
+
+            margin-bottom: 20px;
+        }
     }
 `;

@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { Outlet, useLocation, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Menubox } from './Menubox';
-import { Logo } from '../Logo';
+import { Logo, ContainerDiv } from '..';
 import { useGetScrollY } from '../../utils/hooks/useGetScrollY';
-import { ContainerDiv } from '../ContainerDiv';
+import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 
 function NavigationBar() {
     // true 이면 메뉴 바 나옴
@@ -21,12 +21,7 @@ function NavigationBar() {
         setIsToggle(current => !current);
     };
 
-    const setScrollDisable = () => {
-        if (isToggle) document.body.style.overflow = 'hidden';
-        if (!isToggle) document.body.style.overflow = 'unset';
-    };
-
-    useEffect(() => setScrollDisable(), [isToggle]);
+    useEffect(() => setScrollDisabled(isToggle), [isToggle]);
 
     return (
         <>

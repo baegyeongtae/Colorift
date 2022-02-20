@@ -1,49 +1,62 @@
 import styled from 'styled-components';
-import { Article, ContainerDiv, UserInputDiv, TitleP, UserButton } from '../../components';
+import { useState, useEffect } from 'react';
+import { Article, ContainerDiv, UserInputDiv, TitleP, UserButton, FindPasswordModal } from '../../components';
+import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 
 export function Login() {
-    return (
-        <Article height="100vh">
-            <CenterContainerDiv>
-                <LoginDiv>
-                    <TitleP color="#3C64B1" className="title column">
-                        Login
-                    </TitleP>
-                    <UserInputDiv text="Email" />
-                    <UserInputDiv text="Password" type="password" />
-                    <UserButton
-                        type="submit"
-                        width="80%"
-                        height="80%"
-                        className="login_button column"
-                        onClick={() => window.open('/', '_self')}
-                    >
-                        로그인
-                    </UserButton>
+    const [findModal, setFindModal] = useState(false);
 
-                    <p>비밀번호를 잊어버리셨나요?</p>
-                    <UserButton
-                        type="button"
-                        width="80%"
-                        height="50%"
-                        className="button"
-                        onClick={() => window.open('/findpassword', '_self')}
-                    >
-                        비밀번호 찾기
-                    </UserButton>
-                    <p>회원이 아니신가요?</p>
-                    <UserButton
-                        type="button"
-                        width="80%"
-                        height="50%"
-                        className="button"
-                        onClick={() => window.open('/signup', '_self')}
-                    >
-                        회원가입
-                    </UserButton>
-                </LoginDiv>
-            </CenterContainerDiv>
-        </Article>
+    function handleToggleModal() {
+        setFindModal(current => !current);
+    }
+
+    useEffect(() => setScrollDisabled(findModal), [findModal]);
+
+    return (
+        <>
+            {findModal && <FindPasswordModal clickProps={() => handleToggleModal()} />}
+            <Article height="100vh">
+                <CenterContainerDiv>
+                    <LoginDiv>
+                        <TitleP color="#3C64B1" className="title column">
+                            Login
+                        </TitleP>
+                        <UserInputDiv text="Email" />
+                        <UserInputDiv text="Password" type="password" />
+                        <UserButton
+                            type="submit"
+                            width="80%"
+                            height="80%"
+                            className="login_button column"
+                            onClick={() => window.open('/', '_self')}
+                        >
+                            로그인
+                        </UserButton>
+
+                        <p>비밀번호를 잊어버리셨나요?</p>
+                        <UserButton
+                            type="button"
+                            width="80%"
+                            height="50%"
+                            className="button"
+                            onClick={() => handleToggleModal()}
+                        >
+                            비밀번호 찾기
+                        </UserButton>
+                        <p>회원이 아니신가요?</p>
+                        <UserButton
+                            type="button"
+                            width="80%"
+                            height="50%"
+                            className="button"
+                            onClick={() => window.open('/signup', '_self')}
+                        >
+                            회원가입
+                        </UserButton>
+                    </LoginDiv>
+                </CenterContainerDiv>
+            </Article>
+        </>
     );
 }
 

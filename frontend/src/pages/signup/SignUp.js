@@ -17,7 +17,7 @@ export function SignUp() {
                         type="submit"
                         width="80%"
                         height="50%"
-                        className="login_button"
+                        className="check_button"
                         onClick={() => alert('중복 확인 완료')}
                     >
                         중복 확인
@@ -56,7 +56,7 @@ const CenterContainerDiv = styled(ContainerDiv)`
 
 const LoginDiv = styled.div`
     display: grid;
-    grid-template-rows: 1.3fr repeat(4, 1fr);
+    grid-template-rows: 1fr repeat(4, 1fr);
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
     justify-items: center;
@@ -77,6 +77,8 @@ const LoginDiv = styled.div`
 
     .password_rule {
         margin-left: 10px;
+
+        font-size: 0.8rem;
     }
 
     .password_error {
@@ -92,34 +94,28 @@ const LoginDiv = styled.div`
         all: unset;
 
         display: grid;
-        grid-template-rows: repeat(3, 1fr) 2fr repeat(4, 0.5fr);
+        grid-template-rows: 1fr 0.8fr 0.5fr 1fr 1fr 1fr;
         align-items: center;
-        justify-items: start;
+        justify-items: center;
 
         font-size: 1.6rem;
 
-        .title {
-            grid-row-start: 1;
-            grid-row-end: 2;
+        .row {
             grid-column-start: 1;
             grid-column-end: 2;
+            justify-self: center;
         }
 
-        .login_button {
-            grid-row-start: 4;
-            grid-row-end: 5;
-            grid-column-start: 1;
-            grid-column-end: 2;
+        .check_button {
+            width: 30%;
+            height: 100%;
 
-            width: 100%;
-            height: 60%;
-
-            margin-bottom: 30px;
+            justify-self: end;
         }
 
         .button {
-            width: 100%;
-            height: 100%;
+            width: 50%;
+            height: 50%;
 
             margin-bottom: 20px;
         }

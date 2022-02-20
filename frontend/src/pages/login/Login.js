@@ -65,7 +65,7 @@ const TitleMarginP = styled(TitleP)`
 
 const LoginDiv = styled.div`
     display: grid;
-    grid-template-rows: 1.5fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1.5fr repeat(4, 1fr);
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
     justify-items: center;
@@ -88,7 +88,7 @@ const LoginDiv = styled.div`
         all: unset;
 
         display: grid;
-        grid-template-rows: 1fr 1fr 1fr 2fr 0.5fr 0.5fr 0.5fr 0.5fr;
+        grid-template-rows: repeat(3, 1fr) 2fr repeat(4, 0.5fr);
         align-items: center;
         justify-items: start;
 

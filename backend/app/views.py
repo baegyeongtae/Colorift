@@ -2,10 +2,27 @@ from django.http import Http404
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 from app.models import User, Color, Fashion
 from app.serializers import *
 from datetime import date
+
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        # add custom claims
+        token['username'] = user.username
+
+        return token
+
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
 
 
 class ColorTest(APIView):
@@ -15,25 +32,21 @@ class ColorTest(APIView):
 
     parser_classes = [FormParser, MultiPartParser]
 
-    def color_ai_model(self):
+    def color_ai_model(self):  # 머신러닝 모델과 연결 필요
         return 'SP'
 
     def post(self, request, format=None):
         file_obj = request.data['image']
         if file_obj:
-            user = User.objects.get(pk="example@gmail.com")  # 아직 로그인 로직이 없어서 테스트용으로 만든 user
-            '''
-            머신러닝 모델 거치고 결과를 반환, 로그인 유저라면 저장 아니라면 저장안함
-            로그인 유저라면 사진과 색결과를 함께 저장해주어야 한다
-            '''
-            color_result = color_ai_model()
-            if True:  # 유저가 있는 경우
-                _serializer = ColorSerializer(data={'image': file_obj, 'color': 'SP', 'date': date.today()})
-                if _serializer.is_valid():
-                    _serializer.save()
-                    return Response({color: 'SP'}, status=status.HTTP_201_CREATED)
-            else:
-                return Response({'color': 'SP'}, status=status.HTTP_201_CREATED)
+            color_result = self.color_ai_model()  # 머신 러닝 모델과 연결 필요
+
+            # 로그인 유저의 경우 추가로 user_id도 저장해줘야 한다.
+            serializer = ColorSerializer(data={'image': file_obj, 'color': color_result, 'date': date.today()})
+            if serializer.is_valid():
+                serializer.save()
+
+            return Response({'color': color_result}, status=status.HTTP_201_CREATED)
+
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -43,6 +56,8 @@ class ColorTestDetail(APIView):
     GET : 이전 personal color test 기록 반환
     DELETE : personal color test 기록 삭제
     """
+
+    permission_classes = [IsAuthenticated]
 
     def get_object(self, pk):
         try:
@@ -66,8 +81,10 @@ class ColorTestList(APIView):
     GET : personal color test 기록'들' 반환
     """
 
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, format=None):
-        user = User.objects.get(pk="example@gmail.com")  # 아직 로그인 로직이 없어서 테스트용으로 만든 user
+        user = request.user
         colors = user.color_set.all()
         serializer = ColorDigestSerializer(colors, many=True)
         return Response(serializer.data)
@@ -78,15 +95,23 @@ class FashionTest(APIView):
     POST : [fashion matching test] personal color와 옷 이미지를 분석해 적합도(rate) 반환
     """
 
+    parser_classes = [FormParser, MultiPartParser]
+
+    def fashion_ai_model(self):  # 머신러닝 모델과 연결 필요
+        return 'SP'
+
     def post(self, request, format=None):
-        serializers = FashionSerializer(data=request.data)
-        if serializers.is_valid():
-            '''
-            머신러닝 모델 거치고 결과를 반환, 로그인 유저라면 저장 아니라면 저장안함
-            로그인 유저라면 사진과 색결과를 함께 저장해주어야 한다
-            '''
-            serializers.save()
-            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        file_obj = request.data['image']
+        if file_obj:
+            fashion_result = self.fashion_ai_model()  # 머신 러닝 모델과 연결 필요
+
+            # 로그인 유저의 경우 추가로 user_id도 저장해줘야 한다.
+            serializer = FashionSerializer(data={'image': file_obj, 'color': fashion_result, 'date': date.today()})
+            if serializer.is_valid():
+                serializer.save()
+
+            return Response({'fashion': fashion_result}, status=status.HTTP_201_CREATED)
+
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -96,6 +121,8 @@ class FashionTestDetail(APIView):
     GET : 이전 fashion matching test 기록 반환
     DELETE : fashion matching test 기록 삭제
     """
+
+    permission_classes = [IsAuthenticated]
 
     def get_object(self, pk):
         try:
@@ -119,7 +146,10 @@ class ColorTestList(APIView):
     GET : fashion matching test 기록'들' 반환
     """
 
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, format=None):
-        fashions = Fashion.objects.all()
+        user = request.user
+        fashions = user.fashion_set.all()
         serializer = FashionDigestSerializer(fashions, many=True)
         return Response(serializer.data)

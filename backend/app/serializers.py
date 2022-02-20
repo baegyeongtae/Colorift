@@ -1,11 +1,5 @@
 from rest_framework import serializers
-from .models import User, Color, Fashion
-
-
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['email']
+from .models import Color, Fashion
 
 
 """

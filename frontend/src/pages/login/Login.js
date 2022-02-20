@@ -57,6 +57,10 @@ const CenterContainerDiv = styled(ContainerDiv)`
 
 const TitleMarginP = styled(TitleP)`
     margin-bottom: 50px;
+
+    @media screen and (max-width: 420px) {
+        margin-bottom: 20px;
+    }
 `;
 
 const LoginDiv = styled.div`
@@ -84,9 +88,11 @@ const LoginDiv = styled.div`
         all: unset;
 
         display: grid;
-        grid-template-rows: 1.5fr 1fr 1fr 2fr 0.5fr 0.5fr 0.5fr 0.5fr;
+        grid-template-rows: 1fr 1fr 1fr 2fr 0.5fr 0.5fr 0.5fr 0.5fr;
         align-items: center;
-        justify-items: center;
+        justify-items: start;
+
+        font-size: 1.6rem;
 
         .title {
             grid-row-start: 1;
@@ -101,13 +107,15 @@ const LoginDiv = styled.div`
             grid-column-start: 1;
             grid-column-end: 2;
 
+            width: 100%;
             height: 60%;
 
             margin-bottom: 30px;
         }
 
         .button {
-            height: 90%;
+            width: 100%;
+            height: 100%;
 
             margin-bottom: 20px;
         }

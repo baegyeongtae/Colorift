@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { Outlet, useLocation, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Menubox } from './Menubox';
-import { Logo, ContainerDiv } from '..';
+import { Logo } from '..';
+import { ContainerDiv } from '../ContainerDiv';
 import { useGetScrollY } from '../../utils/hooks/useGetScrollY';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 
@@ -40,8 +41,8 @@ function NavigationBar() {
                             <Link to="/personalcolor">
                                 <div className="menu personalcolor">Color Analysis</div>
                             </Link>
-                            <Link to="/fassion">
-                                <div className="menu fassion">Fasshion Matching</div>
+                            <Link to="/fashion">
+                                <div className="menu fashion">Fashion Matching</div>
                             </Link>
                         </MenuDiv>
                         <UserDiv pathname={pathname} scrollY={scrollY}>

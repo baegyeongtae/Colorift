@@ -26,13 +26,7 @@ const GlobalStyle = createGlobalStyle`
     button {
         all: unset;
     }
-
-    ol,
-    ul,
-    li {
-        list-style: none;
-    }
-
+    
     a {
         text-decoration: none;
     }

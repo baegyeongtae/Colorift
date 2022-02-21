@@ -1,9 +1,13 @@
 /* eslint-disable import/no-cycle */
 // import 정리용 파일입니다.
 
+export { Result } from './Result';
+export { Footer } from './Footer';
+export { PhotoUpload } from './PhotoUpload';
+export { ProgressBar } from './ProgressBar';
 export { Logo } from './Logo';
+export { NavigationBar, Menubox } from './nav';
 export { ContainerDiv } from './ContainerDiv';
-export { NavigationBar } from './nav/NavigationBar';
 export { BigTextP, DescriptionP, TitleP } from './TextStyle';
 export { HomeServiceIcon, HomeColorBar, HomeContainerDiv } from './home';
 export { Article, BackgroundDiv } from './AreaStyled';

@@ -15,7 +15,7 @@ export function MyPage() {
         },
     ];
     return (
-        <Article marginTop="7vh" height="93vh">
+        <Article height="88vh" marginTop="7vh">
             <FlexContainerDiv>
                 <FlexRowDiv className="area">
                     <UserInfoDiv>
@@ -58,7 +58,17 @@ export function MyPage() {
                         </PersonalTableDiv>
                     </PersonalDiv>
                 </FlexRowDiv>
-                <FassionDiv className="area" />
+                <div className="area">
+                    <SubTitleP>My Style</SubTitleP>
+                    <FassionFlexDiv>
+                        <img src="../image/arrow.svg" alt="왼쪽 슬라이드 화살표" className="arrow left" />
+                        <div />
+                        <div />
+                        <div />
+                        <div />
+                        <img src="../image/arrow.svg" alt="왼쪽 슬라이드 화살표" className="arrow right" />
+                    </FassionFlexDiv>
+                </div>
             </FlexContainerDiv>
         </Article>
     );
@@ -151,6 +161,33 @@ const PersonalTableDiv = styled.div`
     }
 `;
 
-const FassionDiv = styled.div`
-    background-color: green;
+const FassionFlexDiv = styled.div`
+    ${({ theme }) => theme.flexStyled.flexRow};
+
+    margin-top: 30px;
+
+    .arrow {
+        width: 50px;
+
+        margin: 0 5px;
+
+        filter: invert(88%) sepia(0%) saturate(4%) hue-rotate(149deg) brightness(94%) contrast(81%);
+    }
+
+    .left {
+        transform: rotate(0.75turn);
+    }
+
+    .right {
+        transform: rotate(0.25turn);
+    }
+
+    div {
+        width: 300px;
+        height: 300px;
+
+        margin: 0 10px;
+
+        background-color: ${({ theme }) => theme.color.lightgray};
+    }
 `;

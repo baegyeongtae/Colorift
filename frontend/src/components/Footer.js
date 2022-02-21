@@ -10,7 +10,7 @@ const FooterDiv = styled.div`
         color: ${({ theme }) => theme.color.lightgray};
         position: relative;
         text-align: center;
-        width: 100vw;
+        width: 100%;
         height: 3vh;
         line-height: 3vh;
         bottom: 0;
@@ -19,7 +19,7 @@ const FooterDiv = styled.div`
 
     position: relative;
     text-align: center;
-    width: 100vw;
+    width: 100%;
     height: 5vh;
     line-height: 5vh;
     bottom: 0;

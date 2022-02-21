@@ -2,3 +2,4 @@
 
 export { ModalCloseIcon } from './ModalCloseIcon';
 export { ScrollUpIcon } from './ScrollUpIcon';
+export { Logo } from './Logo';

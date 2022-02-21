@@ -4,13 +4,13 @@ export function Footer() {
     return <FooterDiv>© COLOR FIT. All rights reserved.</FooterDiv>;
 }
 
-const FooterDiv = styled.div`
+const FooterDiv = styled.footer`
     @media ${({ theme }) => theme.device.mobile} {
         background-color: ${({ theme }) => theme.color.darkgray};
         color: ${({ theme }) => theme.color.lightgray};
         position: relative;
         text-align: center;
-        width: 100vw;
+        width: 100%;
         height: 3vh;
         line-height: 3vh;
         bottom: 0;
@@ -19,7 +19,7 @@ const FooterDiv = styled.div`
 
     position: relative;
     text-align: center;
-    width: 100vw;
+    width: 100%;
     height: 5vh;
     line-height: 5vh;
     bottom: 0;

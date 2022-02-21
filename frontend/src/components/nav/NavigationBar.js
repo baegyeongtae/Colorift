@@ -1,14 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet, useLocation, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Menubox } from './Menubox';
-import { Logo } from '..';
-import { useGetScrollY } from '../../utils/hooks/useGetScrollY';
+import { Logo, Footer } from '..';
 import { ContainerDiv } from '../ContainerDiv';
+import { useGetScrollY } from '../../utils/hooks/useGetScrollY';
+import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 
 function NavigationBar() {
     // true 이면 메뉴 바 나옴
-    const [istoggle, setIsToggle] = useState(false);
+    const [isToggle, setIsToggle] = useState(false);
 
     // 현재 url 받아오기
     const location = useLocation();
@@ -21,10 +22,12 @@ function NavigationBar() {
         setIsToggle(current => !current);
     };
 
+    useEffect(() => setScrollDisabled(isToggle), [isToggle]);
+
     return (
         <>
             <header>
-                {istoggle && <Menubox clickProps={handleToggleClick} />}
+                {isToggle && <Menubox clickProps={handleToggleClick} />}
                 <Nav pathname={pathname} scrollY={scrollY}>
                     <ContainerGridDiv>
                         <Logo />
@@ -61,6 +64,7 @@ function NavigationBar() {
             <main>
                 <Outlet />
             </main>
+            <Footer />
         </>
     );
 }
@@ -89,7 +93,7 @@ const ContainerGridDiv = styled(ContainerDiv)`
 
     height: 100%;
 
-    @media ${({ theme }) => theme.device.laptop} {
+    @media ${({ theme }) => theme.device.tablet} {
         ${({ theme }) => theme.flexStyled.flexRow};
         justify-content: space-between;
         align-items: center;
@@ -135,7 +139,7 @@ const MenuDiv = styled.div`
         color: ${({ pathname, theme }) => pathname === '/fassion' && theme.color.blue};
     }
 
-    @media ${({ theme }) => theme.device.laptop} {
+    @media ${({ theme }) => theme.device.tablet} {
         display: none;
     } ;
 `;
@@ -163,7 +167,7 @@ const UserDiv = styled(MenuDiv)`
 const MenuIconDiv = styled.div`
     display: none;
 
-    @media ${({ theme }) => theme.device.laptop} {
+    @media ${({ theme }) => theme.device.tablet} {
         display: block;
 
         ${({ theme }) => theme.flexStyled.flexCenter};
@@ -178,7 +182,7 @@ const MenuImg = styled.img.attrs(() => ({
 }))`
     display: none;
 
-    @media ${({ theme }) => theme.device.laptop} {
+    @media ${({ theme }) => theme.device.tablet} {
         display: block;
 
         height: 4vh;

@@ -1,40 +1,27 @@
-import styled from 'styled-components';
+import { useScrollToTop } from '../../utils/hooks/useScrollToTop';
+import { ExampleHeader, ExampleArticle } from '.';
+import { ScrollUpIcon } from '../../components';
 
 function Example() {
+    const titleText = {
+        spring: 'Spring 봄 웜톤',
+        summer: 'Summer 여름 쿨톤',
+        autumn: 'Autumn 가을 웜톤',
+        winter: 'Winter 겨울 쿨톤',
+    };
+
+    useScrollToTop();
+
     return (
         <>
-            <DivOne />
-            <DivTwo />
-            <DivThree />
+            <ScrollUpIcon />
+            <ExampleHeader />
+            <ExampleArticle text={titleText.spring} season="spring" />
+            <ExampleArticle text={titleText.summer} season="summer" />
+            <ExampleArticle text={titleText.autumn} season="autumn" />
+            <ExampleArticle text={titleText.winter} season="winter" />
         </>
     );
 }
 
 export { Example };
-
-// styled-components
-
-// 테스트용 컴포넌트
-const DivOne = styled.div`
-    width: 100vw;
-    height: 100vh;
-
-    background-color: pink;
-`;
-
-// 테스트용 컴포넌트
-const DivTwo = styled.div`
-    width: 100vw;
-    height: 100vh;
-
-    background-color: green;
-`;
-
-// 테스트용 컴포넌트
-const DivThree = styled.div`
-    width: 100vw;
-    height: 100vh;
-
-    background-color: ${({ theme }) => theme.color.lightgray};
-    background-color: blue;
-`;

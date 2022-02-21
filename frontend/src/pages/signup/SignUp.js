@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { Article, UserInputDiv, TitleP, UserButton } from '../../components';
+import { Article, UserInputDiv, TitleP, UserButton, Footer } from '../../components';
 import { CenterContainerDiv, LoginDiv } from '../login/Login';
 
 export function SignUp() {
     return (
-        <Article height="100vh">
+        <Article height="93vh" marginTop="7vh">
             <CenterContainerDiv>
                 <SignUpDiv>
                     <div className="column title_div">
@@ -41,6 +41,7 @@ export function SignUp() {
                     </UserButton>
                 </SignUpDiv>
             </CenterContainerDiv>
+            <Footer />
         </Article>
     );
 }

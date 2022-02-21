@@ -17,10 +17,16 @@ const color = {
     summer: '#1F8CAB',
     autumn: '#D5B009',
     winter: '#C50778',
+    nav: '#f4f6fb',
 };
 
 // 자주 사용하는 flex 스타일 속성
 const flexStyled = {
+    flexCenter: `
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    `,
     flexColumn: `
         display: flex;
         flex-direction: column;

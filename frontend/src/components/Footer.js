@@ -4,7 +4,7 @@ export function Footer() {
     return <FooterDiv>© COLOR FIT. All rights reserved.</FooterDiv>;
 }
 
-const FooterDiv = styled.div`
+const FooterDiv = styled.footer`
     @media ${({ theme }) => theme.device.mobile} {
         background-color: ${({ theme }) => theme.color.darkgray};
         color: ${({ theme }) => theme.color.lightgray};

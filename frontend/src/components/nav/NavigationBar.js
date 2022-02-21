@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Outlet, useLocation, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Menubox } from './Menubox';
-import { Logo } from '..';
+import { Logo, Footer } from '..';
 import { ContainerDiv } from '../ContainerDiv';
 import { useGetScrollY } from '../../utils/hooks/useGetScrollY';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
@@ -64,6 +64,7 @@ function NavigationBar() {
             <main>
                 <Outlet />
             </main>
+            <Footer />
         </>
     );
 }

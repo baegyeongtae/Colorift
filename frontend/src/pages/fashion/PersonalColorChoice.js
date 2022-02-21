@@ -120,7 +120,6 @@ function PersonalColorChoice() {
             <ButtonContainerDiv>
                 <CustomButton2>다음으로</CustomButton2>
             </ButtonContainerDiv>
-            <Footer />
         </>
     );
 }

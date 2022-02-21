@@ -9,5 +9,5 @@ export { HomeServiceIcon, HomeColorBar, HomeContainerDiv } from './home';
 export { Article, BackgroundDiv } from './AreaStyled';
 export { ExampleTitle, ExampleImage, ExampleColor } from './example';
 export { ScrollUpIcon, ModalCloseIcon } from './icon';
-export { UserInputDiv, FindPasswordModal } from './login';
+export { UserInputDiv, FindPasswordModal, Input } from './login';
 export { HomeButton, UserButton } from './Button';

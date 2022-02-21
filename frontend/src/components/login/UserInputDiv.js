@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export function UserInputDiv({ text, type, width }) {
+export function UserInputDiv({ text, type }) {
     return (
         <FlexColumnDiv className="input_div">
             <p>{text}</p>
@@ -19,7 +19,8 @@ const FlexColumnDiv = styled.div`
     ${({ theme }) => theme.flexStyled.flexColumn};
 `;
 
-const Input = styled.input`
+export const Input = styled.input`
+    width: ${({ width }) => width};
     height: 40px;
     padding: 0 10px;
 

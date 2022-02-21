@@ -11,6 +11,11 @@ from app.serializers import *
 from datetime import date
 
 
+""" 
+user 모델의 username으로 token claim customize (djangorestframework-simplejwt setting)
+"""
+
+
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
@@ -23,6 +28,40 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+
+
+"""
+회원가입, 탈퇴
+"""
+
+
+class CreateUser(APIView):
+
+    def post(self, request, format=None):
+        serializer = RegisterUserSerializer(data=request.data)
+        if serializer.is_valid():
+            new_user = serializer.save()
+            if new_user:
+                return Response(status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class DeleteUser(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, format=None):
+        try:
+            _user = User.objects.get(pk=request.user.id)
+            _user.delete()
+            return Response(status=status.HTTP_200_OK)
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+"""
+[personal color] : ColorTest(personal color test), ColorTestDetail(test 상세 결과), ColorTestList(test 결과 리스트)
+"""
 
 
 class ColorTest(APIView):
@@ -38,16 +77,20 @@ class ColorTest(APIView):
     def post(self, request, format=None):
         file_obj = request.data['image']
         if file_obj:
-            color_result = self.color_ai_model()  # 머신 러닝 모델과 연결 필요
+            res = self.color_ai_model()  # 머신 러닝 모델과 연결 필요
 
             # 로그인 유저의 경우 추가로 user_id도 저장해줘야 한다.
-            serializer = ColorSerializer(data={'image': file_obj, 'color': color_result, 'date': date.today()})
+            data = {'color': res, 'image': file_obj, 'date': date.today()}
+            if request.user.is_authenticated:
+                data['user'] = request.user.id
+
+            serializer = ColorSerializer(data=data)
             if serializer.is_valid():
                 serializer.save()
+                return Response({'color': res}, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-            return Response({'color': color_result}, status=status.HTTP_201_CREATED)
-
-        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class ColorTestDetail(APIView):
@@ -67,13 +110,19 @@ class ColorTestDetail(APIView):
 
     def get(self, request, pk, format=None):
         color = self.get_object(pk)
-        serializer = ColorSerializer(color)
-        return Response(serializer.data)
+        if request.user.id == color.user_id:
+            serializer = ColorSerializer(color)
+            return Response(serializer.data)
+        else:
+            return Response(status=status.HTTP_423_LOCKED)  # locked => 접근할수 없는 자원(내 자원이 아니어서)
 
     def delete(self, request, pk, format=None):
         color = self.get_object(pk)
-        color.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        if request.user.id == color.user_id:
+            color.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response(status=status.HTTP_423_LOCKED)
 
 
 class ColorTestList(APIView):
@@ -90,6 +139,11 @@ class ColorTestList(APIView):
         return Response(serializer.data)
 
 
+"""
+[fashion matching test] : FashionTest(fashion matching test), FashionTestDetail(test 상세 결과), FashionTestList(test 결과 리스트)
+"""
+
+
 class FashionTest(APIView):
     """
     POST : [fashion matching test] personal color와 옷 이미지를 분석해 적합도(rate) 반환
@@ -98,19 +152,23 @@ class FashionTest(APIView):
     parser_classes = [FormParser, MultiPartParser]
 
     def fashion_ai_model(self):  # 머신러닝 모델과 연결 필요
-        return 'SP'
+        return {'total_match_rate': 50, 'color_match_rate': 50, 'brightness_match_rate': 50, 'saturation_match_rate': 50}
 
     def post(self, request, format=None):
         file_obj = request.data['image']
         if file_obj:
-            fashion_result = self.fashion_ai_model()  # 머신 러닝 모델과 연결 필요
-
+            data = {'image': file_obj, 'color': request.data['color'], 'date': date.today()}
+            res = self.fashion_ai_model()  # 머신 러닝 모델과 연결 필요
+            data.update(res)
             # 로그인 유저의 경우 추가로 user_id도 저장해줘야 한다.
-            serializer = FashionSerializer(data={'image': file_obj, 'color': fashion_result, 'date': date.today()})
+            if request.user.is_authenticated:
+                data['user'] = request.user.id
+
+            serializer = FashionSerializer(data=data)
             if serializer.is_valid():
                 serializer.save()
 
-            return Response({'fashion': fashion_result}, status=status.HTTP_201_CREATED)
+            return Response({'fashion': res}, status=status.HTTP_201_CREATED)
 
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -141,7 +199,7 @@ class FashionTestDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class ColorTestList(APIView):
+class FashionTestList(APIView):
     """
     GET : fashion matching test 기록'들' 반환
     """

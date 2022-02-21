@@ -10,4 +10,4 @@ export { Article, BackgroundDiv } from './AreaStyled';
 export { ExampleTitle, ExampleImage, ExampleColor } from './example';
 export { ScrollUpIcon, ModalCloseIcon } from './icon';
 export { UserInputDiv, FindPasswordModal, Input } from './login';
-export { HomeButton, UserButton } from './Button';
+export { HomeButton, UserButton, GrayButton } from './button';

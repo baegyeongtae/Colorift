@@ -1,7 +1,19 @@
 import styled from 'styled-components';
-import { Article, ContainerDiv, UserButton, Input } from '../../components';
+import { Article, ContainerDiv, UserButton, Input, GrayButton } from '../../components';
 
 export function MyPage() {
+    const dummyData = [
+        {
+            id: 1,
+            date: '2022.02.10',
+            color: '봄 웜톤',
+        },
+        {
+            id: 2,
+            date: '2022.02.12',
+            color: '여름 쿨톤',
+        },
+    ];
     return (
         <Article marginTop="7vh" height="93vh">
             <FlexContainerDiv>
@@ -15,7 +27,36 @@ export function MyPage() {
                         <p className="option delete">회원탈퇴는 신중히 결정해주세요.</p>
                         <UserButton onClick={() => alert('회원탈퇴 완료')}>회원탈퇴</UserButton>
                     </UserInfoDiv>
-                    <PersonalDiv />
+                    <PersonalDiv>
+                        <SubTitleP>My Personal Color</SubTitleP>
+                        <PersonalTableDiv>
+                            <table>
+                                {dummyData.map(item => (
+                                    <tr key={item.id}>
+                                        <td className="id">{item.id}</td>
+                                        <td className="date">{item.date}</td>
+                                        <td className="color">{item.color}</td>
+                                        <td className="button">
+                                            <GrayButton
+                                                width="90%"
+                                                onClick={() => alert(`클릭하신 피부톤은 ${item.color}입니다`)}
+                                            >
+                                                상세보기
+                                            </GrayButton>
+                                        </td>
+                                        <td className="button">
+                                            <GrayButton
+                                                width="90%"
+                                                onClick={() => alert(`${item.id}번을 삭제했습니다`)}
+                                            >
+                                                삭제하기
+                                            </GrayButton>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </table>
+                        </PersonalTableDiv>
+                    </PersonalDiv>
                 </FlexRowDiv>
                 <FassionDiv className="area" />
             </FlexContainerDiv>
@@ -40,7 +81,7 @@ const FlexContainerDiv = styled(ContainerDiv)`
 const FlexRowDiv = styled.div`
     ${({ theme }) => theme.flexStyled.flexRow};
 
-    div {
+    > div {
         width: 50%;
     }
 `;
@@ -69,7 +110,45 @@ const UserInfoDiv = styled.div`
 `;
 
 const PersonalDiv = styled.div`
-    background-color: gray;
+    padding: 50px 0;
+`;
+
+const SubTitleP = styled.p`
+    font-size: ${({ theme }) => theme.fontSizes.mediumtext};
+    font-weight: bold;
+`;
+
+const PersonalTableDiv = styled.div`
+    width: 100%;
+    height: 100%;
+
+    margin-top: 5px;
+    padding: 20px;
+
+    border: 1px solid #dbdbdb;
+    border-radius: 15px;
+
+    text-align: center;
+
+    tr {
+        height: 40px;
+    }
+
+    .id {
+        width: 20px;
+    }
+
+    .date {
+        width: 150px;
+    }
+
+    .color {
+        width: 200px;
+    }
+
+    .button {
+        width: 100px;
+    }
 `;
 
 const FassionDiv = styled.div`

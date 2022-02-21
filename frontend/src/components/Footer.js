@@ -8,7 +8,7 @@ const FooterDiv = styled.div`
     @media ${({ theme }) => theme.device.mobile} {
         background-color: ${({ theme }) => theme.color.darkgray};
         color: ${({ theme }) => theme.color.lightgray};
-        position: fixed !important;
+        position: relative;
         text-align: center;
         width: 100vw;
         height: 3vh;
@@ -17,7 +17,7 @@ const FooterDiv = styled.div`
         font-size: ${({ theme }) => theme.fontSizes.mobiletext};
     }
 
-    position: fixed !important;
+    position: relative;
     text-align: center;
     width: 100vw;
     height: 5vh;

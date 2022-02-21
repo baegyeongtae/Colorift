@@ -16,10 +16,19 @@ export function ProgressBar({ percent }) {
 // `;
 
 const ProgressbarBox = styled.div`
-    width: 220px;
-    height: 15px;
+    @media ${({ theme }) => theme.device.mobile} {
+        width: 220px;
+        height: 15px;
 
-    border-radius: 10px;
+        border-radius: 10px;
+        background-color: #f3f3f3;
+        overflow: hidden;
+        margin: 8px 0;
+    }
+    width: 300px;
+    height: 20px;
+
+    border-radius: 8px;
     background-color: #f3f3f3;
     overflow: hidden;
     margin: 10px 0;

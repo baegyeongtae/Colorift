@@ -30,7 +30,9 @@ function Loading() {
                 <TextH1>피부톤을 분석하는 중입니다.</TextH1>
             </LoadingContainerDiv>
 
-            <Footer />
+            <FooterContainerDiv>
+                <Footer />
+            </FooterContainerDiv>
         </>
     );
 }
@@ -46,7 +48,7 @@ const CircleContainerDiv = styled(ContainerDiv)`
     justify-content: space-around;
     align-items: center;
     margin-bottom: 20px;
-    margin-top: 70px;
+    margin-top: 120px;
     color: white;
 
     .wrapper {
@@ -72,8 +74,8 @@ const CircleContainerDiv = styled(ContainerDiv)`
     }
 
     .current_circle {
-        width: 160px;
-        height: 160px;
+        width: 130px;
+        height: 130px;
         position: relative;
         border-radius: 50%;
         background-color: ${({ theme }) => theme.color.blue};
@@ -81,8 +83,8 @@ const CircleContainerDiv = styled(ContainerDiv)`
     }
 
     .left_circle {
-        width: 160px;
-        height: 160px;
+        width: 130px;
+        height: 130px;
         position: relative;
         border-radius: 50%;
         background-color: ${({ theme }) => theme.color.lightgray};
@@ -154,6 +156,11 @@ const LoadingContainerDiv = styled(ContainerDiv)`
     margin-top: 100px;
 `;
 
+const FooterContainerDiv = styled.div`
+    position: absolute;
+    bottom: 0;
+`;
+
 const TextH1 = styled.h1`
     @media ${({ theme }) => theme.device.mobile} {
         font-size: ${({ theme }) => theme.fontSizes.mediumtext};
@@ -168,11 +175,11 @@ const TextH1 = styled.h1`
 const TextH2 = styled.h2`
     @media ${({ theme }) => theme.device.mobile} {
         font-size: ${({ theme }) => theme.fontSizes.mobiletext};
-        list-style: inside;
         margin-top: 20px;
     }
-    margin-top: 45px;
+    margin-top: 38px;
     font-weight: bold;
+    font-size: ${({ theme }) => theme.fontSizes.mediumtext};
     color: ${({ theme }) => theme.color.white};
     background-color: ${props => props.theme.color.white};
 `;

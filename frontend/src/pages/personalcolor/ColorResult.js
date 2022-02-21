@@ -7,7 +7,7 @@ function ColorResult() {
         <>
             <CircleContainerDiv>
                 <div className="wrapper">
-                    <div className="current_circle">
+                    <div className="left_circle">
                         <TextH2>
                             얼굴 사진 <br /> 업로드
                         </TextH2>
@@ -18,7 +18,7 @@ function ColorResult() {
                             정밀 분석
                         </TextH2>
                     </div>
-                    <div className="left_circle">
+                    <div className="current_circle">
                         <TextH2>
                             퍼스널 컬러 <br /> 분석 결과
                         </TextH2>
@@ -32,11 +32,13 @@ function ColorResult() {
 
             <TextH1>회원님은 봄 웜톤 입니다.</TextH1>
 
-            <TextContainerDiv>
-                <TextH3>회원님에게 어울리는 컬러</TextH3>
-            </TextContainerDiv>
-
             <ColorContainerDiv>
+                <div className="wrapper">
+                    <div className="text">회원님에게 어울리는 컬러</div>
+                    <div className="blank_circle" />
+                    <div className="blank_circle" />
+                    <div className="blank_circle" />
+                </div>
                 <div className="wrapper">
                     <div className="circle" />
                     <div className="circle" />
@@ -59,7 +61,7 @@ function ColorResult() {
 
             <ButtonContainerDiv>
                 <Stack spacing={2} direction="row">
-                    <CustomButton>업로드</CustomButton>
+                    <CustomButton>업로드 </CustomButton>
                     <CustomButton>결과보기</CustomButton>
                 </Stack>
             </ButtonContainerDiv>
@@ -80,7 +82,7 @@ const CircleContainerDiv = styled(ContainerDiv)`
     justify-content: space-around;
     align-items: center;
     margin-bottom: 20px;
-    margin-top: 70px;
+    margin-top: 120px;
     color: white;
 
     .wrapper {
@@ -106,8 +108,8 @@ const CircleContainerDiv = styled(ContainerDiv)`
     }
 
     .current_circle {
-        width: 160px;
-        height: 160px;
+        width: 130px;
+        height: 130px;
         position: relative;
         border-radius: 50%;
         background-color: ${({ theme }) => theme.color.blue};
@@ -115,8 +117,8 @@ const CircleContainerDiv = styled(ContainerDiv)`
     }
 
     .left_circle {
-        width: 160px;
-        height: 160px;
+        width: 130px;
+        height: 130px;
         position: relative;
         border-radius: 50%;
         background-color: ${({ theme }) => theme.color.lightgray};
@@ -184,8 +186,10 @@ const ColorContainerDiv = styled(ContainerDiv)`
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    margin-bottom: 8px;
-    margin-top: 15px;
+    margin-bottom: 20px;
+    margin-top: 80px;
+    margin-left: 200px;
+    margin-right: 200px;
 
     .wrapper {
         width: 100%;
@@ -205,14 +209,28 @@ const ColorContainerDiv = styled(ContainerDiv)`
         background-color: ${({ theme }) => theme.color.blue};
     }
 
-    @media ${({ theme }) => theme.device.mobile} {
+    .blank_circle {
+        width: 50px;
+        height: 70px;
+        position: relative;
+        border-radius: 50%;
+        background-color: white;
+    }
+
+    .text {
+        font-size: 1.15rem;
+    }
+
+    @media ${({ theme }) => theme.device.laptop} {
         background-color: ${({ theme }) => theme.color.white};
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
         margin-bottom: 8px;
-        margin-top: 15px;
+        margin-top: 50px;
+        margin-left: 80px;
+        margin-right: 80px;
 
         .wrapper {
             width: 100%;
@@ -225,11 +243,67 @@ const ColorContainerDiv = styled(ContainerDiv)`
         }
 
         .circle {
-            width: 60px;
-            height: 60px;
+            width: 100px;
+            height: 100px;
             position: relative;
             border-radius: 50%;
             background-color: ${({ theme }) => theme.color.blue};
+        }
+
+        .blank_circle {
+            width: 50px;
+            height: 70px;
+            position: relative;
+            border-radius: 50%;
+            background-color: white;
+        }
+
+        .text {
+            font-size: 1.15rem;
+        }
+    }
+
+    @media ${({ theme }) => theme.device.mobile} {
+        all: unset;
+
+        background-color: ${({ theme }) => theme.color.white};
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-bottom: 8px;
+        margin-top: 30px;
+        margin-left: 20px;
+        margin-right: 20px;
+
+        .wrapper {
+            width: 100%;
+            height: auto;
+            position: relative;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin-bottom: 7px;
+        }
+
+        .circle {
+            width: 55px;
+            height: 55px;
+            position: relative;
+            border-radius: 50%;
+            background-color: ${({ theme }) => theme.color.blue};
+        }
+
+        .blank_circle {
+            width: 30px;
+            height: 30px;
+            position: relative;
+            border-radius: 50%;
+            background-color: white;
+        }
+
+        .text {
+            font-size: ${({ theme }) => theme.fontSizes.smalltext};
         }
     }
 `;
@@ -243,6 +317,16 @@ const ResultContainerDiv = styled(ContainerDiv)`
     margin-bottom: 8px;
     margin-top: 8px;
 
+    @media ${({ theme }) => theme.device.tablet} {
+        background-color: ${({ theme }) => theme.color.white};
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-bottom: 30px;
+        margin-top: 20px;
+    }
+
     @media ${({ theme }) => theme.device.mobile} {
         background-color: ${({ theme }) => theme.color.white};
         display: flex;
@@ -252,24 +336,6 @@ const ResultContainerDiv = styled(ContainerDiv)`
         margin-bottom: 8px;
         margin-top: 15px;
     }
-`;
-
-const TextContainerDiv = styled(ContainerDiv)`
-    @media ${({ theme }) => theme.device.mobile} {
-        background-color: ${({ theme }) => theme.color.white};
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-        margin-bottom: 8px;
-        margin-top: 15px;
-    }
-
-    background-color: ${({ theme }) => theme.color.white};
-    align-items: left;
-    margin-bottom: 8px;
-    margin-top: 8px;
-    margin-left: 10px;
 `;
 
 const ButtonContainerDiv = styled.div`
@@ -278,7 +344,7 @@ const ButtonContainerDiv = styled.div`
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 100px;
     margin-top: 50px;
 
     @media ${({ theme }) => theme.device.mobile} {
@@ -296,12 +362,12 @@ const TextH1 = styled.h1`
     @media ${({ theme }) => theme.device.mobile} {
         font-size: ${({ theme }) => theme.fontSizes.smalltext};
         font-weight: bold;
-        margin: 8px;
+        margin: 20px;
     }
     font-size: ${({ theme }) => theme.fontSizes.bigtext};
     font-weight: bold;
     text-align: center;
-    margin: 8px;
+    margin: 20px;
     color: ${({ theme }) => theme.color.white};
     background-color: ${props => props.theme.color.white};
 `;
@@ -311,22 +377,9 @@ const TextH2 = styled.h2`
         font-size: ${({ theme }) => theme.fontSizes.mobiletext};
         margin-top: 20px;
     }
-    margin-top: 45px;
+    margin-top: 38px;
     font-weight: bold;
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
-`;
-
-const TextH3 = styled.h3`
-    @media ${({ theme }) => theme.device.mobile} {
-        font-size: ${({ theme }) => theme.fontSizes.smalltext};
-        margin: 25px;
-        font-weight: 550;
-    }
-
-    font-weight: 50;
     font-size: ${({ theme }) => theme.fontSizes.mediumtext};
-    margin: 25px;
     color: ${({ theme }) => theme.color.white};
     background-color: ${props => props.theme.color.white};
 `;

@@ -13,6 +13,12 @@ const BoxDiv = styled.div`
         height: 161.07px;
         background: #c4c4c4;
     }
+    background-color: ${({ theme }) => theme.color.lightgray};
+    position: relative;
+    width: 400px;
+    height: 250px;
+    background: #c4c4c4;
+    margin-top: 20px;
 
     color: ${({ theme }) => theme.color.blue};
     background-color: ${props => props.theme.color.blue};

@@ -8,26 +8,26 @@ function MatchingLoading() {
             <CircleContainerDiv>
                 <div className="wrapper">
                     <div className="current_circle">
-                        <TextH2>
+                        <TextH0>
                             퍼스널 컬러 <br /> 선택
-                        </TextH2>
+                        </TextH0>
                     </div>
                     <div className="left_circle">
-                        <TextH2>
+                        <TextH0>
                             패션 사진 <br /> 업로드
-                        </TextH2>
+                        </TextH0>
                     </div>
                     <div className="left_circle">
-                        <TextH2>
+                        <TextH0>
                             퍼스널컬러와
                             <br /> 비교 매칭
-                        </TextH2>
+                        </TextH0>
                     </div>
                     <div className="left_circle">
-                        <TextH2>
+                        <TextH0>
                             패션 매칭
                             <br /> 결과
-                        </TextH2>
+                        </TextH0>
                     </div>
                 </div>
             </CircleContainerDiv>
@@ -37,7 +37,9 @@ function MatchingLoading() {
                 <TextH1>퍼스널 컬러와 패션을 매칭하는 중입니다.</TextH1>
             </LoadingContainerDiv>
 
-            <Footer />
+            <FooterContainerDiv>
+                <Footer />
+            </FooterContainerDiv>
         </>
     );
 }
@@ -50,8 +52,8 @@ const CircleContainerDiv = styled(ContainerDiv)`
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    margin-bottom: 20px;
-    margin-top: 70px;
+    margin-bottom: 50px;
+    margin-top: 120px;
     color: white;
 
     .wrapper {
@@ -77,8 +79,8 @@ const CircleContainerDiv = styled(ContainerDiv)`
     }
 
     .current_circle {
-        width: 160px;
-        height: 160px;
+        width: 130px;
+        height: 130px;
         position: relative;
         border-radius: 50%;
         background-color: ${({ theme }) => theme.color.blue};
@@ -86,8 +88,8 @@ const CircleContainerDiv = styled(ContainerDiv)`
     }
 
     .left_circle {
-        width: 160px;
-        height: 160px;
+        width: 130px;
+        height: 130px;
         position: relative;
         border-radius: 50%;
         background-color: ${({ theme }) => theme.color.lightgray};
@@ -129,8 +131,8 @@ const CircleContainerDiv = styled(ContainerDiv)`
         .current_circle {
             all: unset;
 
-            width: 68px;
-            height: 68px;
+            width: 63px;
+            height: 63px;
             position: relative;
             border-radius: 50%;
             background-color: ${({ theme }) => theme.color.blue};
@@ -139,8 +141,8 @@ const CircleContainerDiv = styled(ContainerDiv)`
         .left_circle {
             all: unset;
 
-            width: 68px;
-            height: 68px;
+            width: 65px;
+            height: 65px;
             position: relative;
             border-radius: 50%;
             background-color: ${({ theme }) => theme.color.lightgray};
@@ -157,6 +159,22 @@ const LoadingContainerDiv = styled(ContainerDiv)`
     align-items: center;
     margin-bottom: 20px;
     margin-top: 100px;
+`;
+
+const FooterContainerDiv = styled.div`
+    position: absolute;
+    bottom: 0;
+`;
+const TextH0 = styled.h2`
+    @media ${({ theme }) => theme.device.mobile} {
+        font-size: ${({ theme }) => theme.fontSizes.mobiletext};
+        margin-top: 20px;
+    }
+    margin-top: 38px;
+    font-weight: bold;
+    font-size: ${({ theme }) => theme.fontSizes.mediumtext};
+    color: ${({ theme }) => theme.color.white};
+    background-color: ${props => props.theme.color.white};
 `;
 
 const TextH1 = styled.h1`

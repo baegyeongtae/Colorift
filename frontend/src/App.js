@@ -7,7 +7,6 @@ import {
     Loading,
     ColorResult,
     MatchingLoading,
-    Test,
     Home,
     Example,
     MyPersonalColorModal,
@@ -34,7 +33,6 @@ function App() {
                     <Route path="/personalcolorchoice" element={<PersonalColorChoice />} />
                     <Route path="/uploadfashion" element={<UploadFashion />} />
                     <Route path="/matchingloading" element={<MatchingLoading />} />
-                    <Route path="/test" element={<Test />} />
                     <Route path="/fashionresult" element={<FashionResult />} />
                 </Route>
                 <Route path="/mystylemodal" element={<MyStyleModal />} />

@@ -5,4 +5,4 @@ export { Home } from './home';
 export { Example } from './example';
 export { MyStyleModal, MyPersonalColorModal } from './mypage';
 export { UploadFace, Loading, ColorResult } from './personalcolor';
-export { PersonalColorChoice, MatchingLoading, UploadFashion, FashionResult, Test } from './fashion';
+export { PersonalColorChoice, MatchingLoading, UploadFashion, FashionResult } from './fashion';

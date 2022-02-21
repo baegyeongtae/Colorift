@@ -27,13 +27,7 @@
         "import/prefer-default-export": "off",
         "react/prop-types": "off",
         "no-unused-vars": "off",
-        "no-console": "off",
-        "jsx-a11y/label-has-associated-control": [ 2, {
-            "labelComponents": ["CustomInputLabel"],
-            "labelAttributes": ["label"],
-            "controlComponents": ["CustomInput"],
-            "depth": 3,
-          }]
+        "no-console": "off"s
     },
     "extends": [
         "plugin:react/recommended",

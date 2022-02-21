@@ -10,19 +10,19 @@ const FooterDiv = styled.div`
         color: ${({ theme }) => theme.color.lightgray};
         position: relative;
         text-align: center;
-        width: 100vw;
+        width: 100%;
         height: 3vh;
         line-height: 3vh;
-        bottom: 0;
+        bottom: 0vh;
         font-size: ${({ theme }) => theme.fontSizes.mobiletext};
     }
 
     position: relative;
     text-align: center;
-    width: 100vw;
+    width: 100%;
     height: 5vh;
     line-height: 5vh;
-    bottom: 0;
+    bottom: -20vh;
     font-size: ${({ theme }) => theme.fontSizes.mobiletext};
     color: ${({ theme }) => theme.color.lightgray};
     background-color: ${props => props.theme.color.darkgray};

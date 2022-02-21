@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Footer, ContainerDiv } from '../../components';
-import loader from '../../images/loader.png';
 
 function Loading() {
     return (
@@ -26,7 +25,7 @@ function Loading() {
                 </div>
             </CircleContainerDiv>
             <LoadingContainerDiv>
-                <img src={loader} alt="loader" width="130px" height="130px" />
+                <img src="./image/loader.png" alt="loader" width="130px" height="130px" />
                 <TextH1>피부톤을 분석하는 중입니다.</TextH1>
             </LoadingContainerDiv>
 
@@ -100,7 +99,7 @@ const CircleContainerDiv = styled(ContainerDiv)`
         justify-content: space-around;
         align-items: center;
         margin-bottom: 20px;
-        margin-top: 70px;
+        margin-top: 120px;
         color: white;
 
         .wrapper {

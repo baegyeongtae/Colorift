@@ -37,9 +37,7 @@ function PersonalColorChoice() {
                 </div>
             </CircleContainerDiv>
 
-            <TextH1>
-                매칭하고 싶은 퍼스널 컬러를 <br /> 아래 3가지 방법 중 선택해주세요.
-            </TextH1>
+            <TextH1>매칭하고 싶은 퍼스널 컬러를 아래 3가지 방법 중 선택해주세요.</TextH1>
 
             <RadioDiv>
                 <FormControl>
@@ -121,9 +119,7 @@ function PersonalColorChoice() {
                 <CustomButton2>다음으로</CustomButton2>
             </ButtonContainerDiv>
 
-            <FooterContainerDiv>
-                <Footer />
-            </FooterContainerDiv>
+            <Footer />
         </>
     );
 }
@@ -414,7 +410,6 @@ const CustomButton2 = styled('span')`
         color: ${({ theme }) => theme.color.blue};
         transition: all 150ms ease;
         cursor: pointer;
-
     }
     font-weight: bold;
     font-size: 0.875rem;
@@ -427,7 +422,6 @@ const CustomButton2 = styled('span')`
     cursor: pointer;
     width: 170px;
     text-align: center;
-}
 `;
 
 const ResultText = styled.h2`

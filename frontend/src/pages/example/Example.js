@@ -1,6 +1,6 @@
 import { useScrollToTop } from '../../utils/hooks/useScrollToTop';
 import { ExampleHeader, ExampleArticle } from '.';
-import { ScrollUpIcon } from '../../components';
+import { ScrollUpIcon, Footer } from '../../components';
 
 function Example() {
     const titleText = {
@@ -20,6 +20,7 @@ function Example() {
             <ExampleArticle text={titleText.summer} season="summer" />
             <ExampleArticle text={titleText.autumn} season="autumn" />
             <ExampleArticle text={titleText.winter} season="winter" />
+            <Footer />
         </>
     );
 }

@@ -29,9 +29,7 @@ const GlobalStyle = createGlobalStyle`
 
     ol,
     ul,
-    li {
-        list-style: none;
-    }
+    li
 
     a {
         text-decoration: none;

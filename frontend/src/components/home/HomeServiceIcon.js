@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { DescriptionP } from '.';
+import { DescriptionP } from './HomeText';
 
-export function HomeServiceIcon({ image, title, text }) {
+function HomeServiceIcon({ image, title, text }) {
     return (
         <ServiceIconDiv>
             <ServiceIconImg src={`./image/${image}.svg`} />
@@ -10,6 +10,8 @@ export function HomeServiceIcon({ image, title, text }) {
         </ServiceIconDiv>
     );
 }
+
+export { HomeServiceIcon };
 
 // styled-components
 

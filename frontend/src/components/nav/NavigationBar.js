@@ -38,8 +38,8 @@ function NavigationBar() {
                             <Link to="/personalcolor">
                                 <div className="menu personalcolor">Color Analysis</div>
                             </Link>
-                            <Link to="/fassion">
-                                <div className="menu fassion">Fasshion Matching</div>
+                            <Link to="/fashion">
+                                <div className="menu fashion">Fashion Matching</div>
                             </Link>
                         </MenuDiv>
                         <UserDiv pathname={pathname} scrollY={scrollY}>

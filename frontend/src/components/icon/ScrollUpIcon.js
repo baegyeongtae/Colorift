@@ -17,7 +17,7 @@ export function ScrollUpIcon() {
 const ScrollUpDiv = styled.div`
     position: fixed;
     right: 30px;
-    bottom: 30px;
+    bottom: 70px;
     z-index: 9999;
 
     width: 50px;

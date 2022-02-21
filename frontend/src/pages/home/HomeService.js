@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import { ContainerDiv, HomeServiceIcon, SubTitle } from '../../components';
+import { ContainerDiv, HomeServiceIcon, BigTextP, Article } from '../../components';
 
 export function HomeService() {
     return (
-        <ServiceArticle>
+        <Article>
             <ServiceContainerDiv>
-                <SubTitle>제공되는 서비스</SubTitle>
+                <BigTextP>제공되는 서비스</BigTextP>
                 <DescriptionDiv>
                     <HomeServiceIcon
                         image="paint"
@@ -41,36 +41,25 @@ export function HomeService() {
                         }
                     />
                 </DescriptionDiv>
-                <BarContainerDiv>
-                    <ColorBarDiv width="70" top="0" color="spring" />
-                    <ColorBarDiv width="60" top="30" color="summer" />
-                    <ColorBarDiv width="50" top="60" color="autumn" />
-                    <ColorBarDiv width="40" top="90" color="winter" />
-                </BarContainerDiv>
             </ServiceContainerDiv>
-        </ServiceArticle>
+        </Article>
     );
 }
 
 // styled-components
 
-const ServiceArticle = styled.article`
-    height: auto;
-
-    margin: 100px 0;
-`;
-
 const ServiceContainerDiv = styled(ContainerDiv)`
     ${({ theme }) => theme.flexStyled.flexColumn};
-    justify-content: center;
-    align-items: center;
+    ${({ theme }) => theme.flexStyled.flexCenter};
+
+    padding-top: 150px;
 `;
 
 const DescriptionDiv = styled.div`
     width: 100%;
     height: 400px;
 
-    margin: 50px 0;
+    margin-top: 50px;
 
     ${({ theme }) => theme.flexStyled.flexRow};
     justify-content: space-around;
@@ -81,26 +70,4 @@ const DescriptionDiv = styled.div`
 
         ${({ theme }) => theme.flexStyled.flexColumn};
     }
-`;
-
-const BarContainerDiv = styled.div`
-    width: 100%;
-    height: 200px;
-
-    position: relative;
-`;
-
-const ColorBarDiv = styled.div`
-    width: ${({ width }) => width}%;
-    height: 20px;
-
-    position: absolute;
-    top: ${({ top }) => top}%;
-    right: 0;
-
-    background-color: ${({ theme, color }) =>
-        (color === 'spring' && theme.color.spring) ||
-        (color === 'summer' && theme.color.summer) ||
-        (color === 'autumn' && theme.color.autumn) ||
-        (color === 'winter' && theme.color.winter)};
 `;

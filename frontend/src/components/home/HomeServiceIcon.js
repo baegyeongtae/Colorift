@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { DescriptionP } from './HomeText';
+import { DescriptionP } from '../TextStyle';
 
 function HomeServiceIcon({ image, title, text }) {
     return (

@@ -1,16 +1,16 @@
 import styled from 'styled-components';
-import { ContainerDiv, HomeButton } from '../../components';
+import { HomeContainerDiv, HomeButton, TitleP } from '../../components';
 
-export function HomeBanner() {
+export function HomeHeader() {
     return (
-        <BannerArticle>
-            <BannerContainerDiv>
+        <Header>
+            <HomeContainerDiv>
                 <TextDiv>
-                    <TitleH>
+                    <TitleP color="white">
                         퍼스널 컬러를 통해
                         <br />
                         나만의 스타일을 찾아보세요.
-                    </TitleH>
+                    </TitleP>
                     <SubTitleP>
                         AI 알고리즘으로 정확한 분석을 통해 본인의 피부톤을 이해하고
                         <br />
@@ -19,45 +19,30 @@ export function HomeBanner() {
                         또한, 퍼스널 컬러와 패션 아이템의 조화로움을 알려드립니다.
                     </SubTitleP>
                     <ButtonDiv>
-                        <HomeButton text="퍼스널 컬러 찾기" />
-                        <HomeButton text="패션 매칭하기" />
+                        <HomeButton maxWidth="200px" width="45vw">
+                            퍼스널 컬러 찾기
+                        </HomeButton>
+                        <HomeButton maxWidth="200px" width="45vw">
+                            패션 매칭하기
+                        </HomeButton>
                     </ButtonDiv>
                 </TextDiv>
                 <ExampleImgDiv>
                     <img src="./image/browser.png" alt="샘플 이미지" />
                 </ExampleImgDiv>
-            </BannerContainerDiv>
-        </BannerArticle>
+            </HomeContainerDiv>
+        </Header>
     );
 }
 
 // styled-components
 
-const BannerArticle = styled.article`
+const Header = styled.header`
     height: 600px;
 
     background-image: url('./image/color.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-
-    @media ${({ theme }) => theme.device.laptop} {
-        height: 55vh;
-    }
-`;
-
-const BannerContainerDiv = styled(ContainerDiv)`
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-
-    height: 100%;
-
-    @media ${({ theme }) => theme.device.tablet} {
-        all: unset;
-
-        height: 100%;
-
-        ${({ theme }) => theme.flexStyled.flexCenter}
-    }
 `;
 
 const TextDiv = styled.div`
@@ -67,8 +52,8 @@ const TextDiv = styled.div`
     width: 100%;
 
     @media ${({ theme }) => theme.device.tablet} {
-        display: grid;
-        grid-template-rows: auto 1fr auto;
+        align-items: center;
+
         text-align: center;
     }
 `;
@@ -76,29 +61,23 @@ const TextDiv = styled.div`
 const ExampleImgDiv = styled.div`
     ${({ theme }) => theme.flexStyled.flexCenter};
 
-    @media ${({ theme }) => theme.device.laptop} {
-        display: none;
+    @media ${({ theme }) => theme.device.tablet} {
+        width: 100%;
 
         img {
-            display: none;
+            width: 90vw;
         }
     }
-`;
-
-const TitleH = styled.h1`
-    font-size: ${({ theme }) => theme.fontSizes.title};
-    font-weight: bold;
-    color: white;
 `;
 
 const SubTitleP = styled.p`
     font-size: ${({ theme }) => theme.fontSizes.mediumtext};
     color: #a4b2b6;
 
-    margin: 1vw 0;
+    margin: 2vh 0;
 
     @media ${({ theme }) => theme.device.tablet} {
-        margin: 5vw 0;
+        margin: 3vh 0;
     }
 `;
 

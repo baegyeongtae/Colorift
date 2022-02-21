@@ -10,6 +10,8 @@ import {
     Test,
     Home,
     Example,
+    MyPersonalColorModal,
+    MyStyleModal,
 } from './pages/index';
 import { NavigationBar } from './components';
 
@@ -35,6 +37,8 @@ function App() {
                     <Route path="/test" element={<Test />} />
                     <Route path="/fashionresult" element={<FashionResult />} />
                 </Route>
+                <Route path="/mystylemodal" element={<MyStyleModal />} />
+                <Route path="/mypersonalcolormodal" element={<MyPersonalColorModal />} />
             </Routes>
         </BrowserRouter>
     );

@@ -4,6 +4,12 @@ import { Article, ContainerDiv, UserInputDiv, TitleP, UserButton, FindPasswordMo
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 
 export function Login() {
+    // 로그인 더미 데이터
+    const dummyUser = {
+        email: 'admin@naver.com',
+        password: '123456789a!',
+    };
+
     const [findModal, setFindModal] = useState(false);
 
     function handleToggleModal() {

@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Home, Example, Login, SignUp } from './pages';
+import { Home, Example, Login, SignUp, MyPage } from './pages';
 import { NavigationBar } from './components';
 
 function App() {
@@ -10,6 +10,7 @@ function App() {
                     <Route path="" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<SignUp />} />
+                    <Route path="/mypage/:id" element={<MyPage />} />
                     <Route path="/findpassword" element={<h1>FindPassword</h1>} />
                     <Route path="/example" element={<Example />} />
                     <Route path="/personalcolor" element={<h1>PersonalColor</h1>} />

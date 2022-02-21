@@ -163,15 +163,19 @@ const PersonalTableDiv = styled.div`
 
 const FassionFlexDiv = styled.div`
     ${({ theme }) => theme.flexStyled.flexRow};
+    ${({ theme }) => theme.flexStyled.flexCenter};
 
     margin-top: 30px;
 
     .arrow {
         width: 50px;
+        height: 50px;
 
         margin: 0 5px;
 
         filter: invert(88%) sepia(0%) saturate(4%) hue-rotate(149deg) brightness(94%) contrast(81%);
+
+        cursor: pointer;
     }
 
     .left {

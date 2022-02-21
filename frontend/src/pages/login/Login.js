@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
-import { Article, ContainerDiv, UserInputDiv, TitleP, UserButton, FindPasswordModal, Footer } from '../../components';
+import { Article, ContainerDiv, UserInputDiv, TitleP, UserButton, FindPasswordModal } from '../../components';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 
 export function Login() {
@@ -21,7 +21,7 @@ export function Login() {
     return (
         <>
             {findModal && <FindPasswordModal clickProps={() => handleToggleModal()} />}
-            <Article height="93vh" marginTop="7vh">
+            <Article height="88vh" marginTop="7vh">
                 <CenterContainerDiv>
                     <LoginDiv>
                         <TitleP color="#3C64B1" className="column">
@@ -61,7 +61,6 @@ export function Login() {
                         </UserButton>
                     </LoginDiv>
                 </CenterContainerDiv>
-                <Footer />
             </Article>
         </>
     );

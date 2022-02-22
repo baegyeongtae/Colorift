@@ -11,7 +11,7 @@ export function Logo() {
 const LogoDiv = styled.div`
     ${({ theme }) => theme.flexStyled.flexCenter};
 
-    margin: 0 2vw;
+    margin: 0 1vw;
 `;
 
 const LogoImg = styled.img`

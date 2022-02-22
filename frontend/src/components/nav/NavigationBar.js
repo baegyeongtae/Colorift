@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Outlet, useLocation, NavLink } from 'react-router-dom';
-import styled from 'styled-components';
-import { Menubox } from './Menubox';
-import { Logo, Footer } from '..';
+import styled, { keyframes } from 'styled-components';
+import { Logo, Footer, BackgroundDiv } from '..';
 import { ContainerDiv } from '../area/ContainerDiv';
 import { useGetScrollY } from '../../utils/hooks/useGetScrollY';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
@@ -51,43 +50,45 @@ function NavigationBar() {
     return (
         <>
             <header>
-                {isToggle && <Menubox clickProps={handleToggleClick} />}
                 <Nav className={pathname === '/' && scrollY === 0 && 'transparent'}>
                     <ContainerGridDiv>
                         <Logo />
-                        <MenuDiv>
-                            {menus.map(menu => (
+                        <MenuBoxDiv id={isToggle && 'mobile'}>
+                            <MenuDiv id={isToggle && 'mobile'}>
+                                {menus.map(menu => (
+                                    <NavLink
+                                        key={menu.name}
+                                        to={menu.path}
+                                        className={pathname === '/' && scrollY === 0 && 'transparent'}
+                                    >
+                                        {menu.name}
+                                    </NavLink>
+                                ))}
+                            </MenuDiv>
+                            <UserDiv id={isToggle && 'mobile'}>
                                 <NavLink
-                                    key={menu.name}
-                                    to={menu.path}
-                                    className={pathname === '/' && scrollY === 0 && 'transparent'}
+                                    to="/login"
+                                    className={pathname === '/' && scrollY === 0 ? 'transparent login' : 'login'}
                                 >
-                                    {menu.name}
+                                    Log In
                                 </NavLink>
-                            ))}
-                        </MenuDiv>
-                        <UserDiv>
-                            <NavLink
-                                to="/login"
-                                className={pathname === '/' && scrollY === 0 ? 'transparent login' : 'login'}
-                            >
-                                Log In
-                            </NavLink>
-                            <NavLink
-                                to="/signup"
-                                className={pathname === '/' && scrollY === 0 ? 'transparent signup' : 'signup'}
-                            >
-                                <span>Sign Up</span>
-                            </NavLink>
-                        </UserDiv>
+                                <NavLink
+                                    to="/signup"
+                                    className={pathname === '/' && scrollY === 0 ? 'transparent signup' : 'signup'}
+                                >
+                                    <span>Sign Up</span>
+                                </NavLink>
+                            </UserDiv>
+                        </MenuBoxDiv>
                         <MenuIconDiv>
                             <MenuImg
                                 onClick={handleToggleClick}
-                                className={pathname === '/' && scrollY === 0 && 'transparent'}
+                                className={isToggle ? 'show' : pathname === '/' && scrollY === 0 && 'transparent'}
                             />
                         </MenuIconDiv>
                     </ContainerGridDiv>
                 </Nav>
+                {isToggle && <BackgroundDiv onClick={handleToggleClick} />}
             </header>
             <main>
                 <Outlet />
@@ -100,6 +101,15 @@ function NavigationBar() {
 export { NavigationBar };
 
 // styled-components
+
+const boxKeyframe = keyframes`
+    0% {
+        right: -50vw;
+    }
+    100% {
+        right: 0;
+    }
+`;
 
 const Nav = styled.nav`
     position: fixed;
@@ -123,13 +133,39 @@ const ContainerGridDiv = styled(ContainerDiv)`
     height: 100%;
 
     display: grid;
-    grid-template-columns: 1fr 8fr 3fr;
+    grid-template-columns: 1fr 11fr;
     align-items: center;
 
     @media ${({ theme }) => theme.device.tablet} {
         ${({ theme }) => theme.flexStyled.flexRow};
         justify-content: space-between;
         align-items: center;
+    } ;
+`;
+
+const MenuBoxDiv = styled.div`
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+
+    &#mobile {
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 9999;
+
+        ${({ theme }) => theme.flexStyled.flexColumn};
+
+        width: 50vw;
+        height: 100%;
+
+        background-color: ${({ theme }) => theme.color.nav};
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+        animation: ${boxKeyframe} 1s ease-in-out 1;
+    }
+
+    @media ${({ theme }) => theme.device.tablet} {
+        display: none;
     } ;
 `;
 
@@ -168,9 +204,23 @@ const MenuDiv = styled.div`
         background-color: unset;
     }
 
-    @media ${({ theme }) => theme.device.tablet} {
-        display: none;
-    } ;
+    &#mobile {
+        ${({ theme }) => theme.flexStyled.flexColumn};
+        justify-content: center;
+
+        height: 80%;
+
+        a {
+            ${({ theme }) => theme.flexStyled.flexCenter};
+            color: #616161;
+
+            height: 20%;
+        }
+
+        a.active {
+            color: ${({ theme }) => theme.color.blue};
+        }
+    }
 `;
 
 const UserDiv = styled.div`
@@ -192,7 +242,7 @@ const UserDiv = styled.div`
     }
 
     .login {
-        margin-left: 40%;
+        margin-left: 20%;
     }
 
     .signup span {
@@ -204,15 +254,33 @@ const UserDiv = styled.div`
         padding: 10px;
     }
 
-    @media ${({ theme }) => theme.device.tablet} {
-        display: none;
-    } ;
+    &#mobile {
+        ${({ theme }) => theme.flexStyled.flexColumn};
+
+        height: 30%;
+
+        a {
+            ${({ theme }) => theme.flexStyled.flexCenter};
+
+            color: #616161;
+        }
+
+        .login,
+        .signup {
+            margin: 0;
+
+            width: 100%;
+            height: 30%;
+        }
+    }
 `;
 
 const MenuIconDiv = styled.div`
     display: none;
 
     @media ${({ theme }) => theme.device.tablet} {
+        z-index: 9999;
+
         display: block;
 
         ${({ theme }) => theme.flexStyled.flexCenter};
@@ -221,8 +289,8 @@ const MenuIconDiv = styled.div`
     } ;
 `;
 
-const MenuImg = styled.img.attrs(() => ({
-    src: './image/menu.svg',
+const MenuImg = styled.img.attrs(({ className }) => ({
+    src: className === 'show' ? './image/x-mark.svg' : './image/menu.svg',
     alt: '메뉴 아이콘',
 }))`
     display: none;

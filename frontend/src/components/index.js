@@ -4,7 +4,7 @@
 export { Footer } from './footer';
 export { PhotoUpload, ResultImage } from './picture';
 export { ProgressBar } from './progressbar';
-export { NavigationBar, Menubox, NavBackgroundDiv } from './nav';
+export { NavigationBar, NavBackgroundDiv } from './nav';
 export { BigTextP, DescriptionP, TitleP } from './text';
 export { HomeServiceIcon, HomeColorBar, HomeContainerDiv } from './home';
 export { Article, BackgroundDiv, ContainerDiv } from './area';

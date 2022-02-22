@@ -3,3 +3,5 @@
 export { UserButton } from './UserButton';
 export { HomeButton } from './HomeButton';
 export { GrayButton } from './GrayButton';
+export { WhiteButton } from './WhiteButton';
+export { BlueButton } from './BlueButton';

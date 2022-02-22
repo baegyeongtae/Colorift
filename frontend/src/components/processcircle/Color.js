@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ContainerDiv } from '../area/ContainerDiv';
+import { ContainerDiv, DescriptionP } from '..';
 
 export function Color() {
     return (
@@ -132,7 +132,7 @@ const CircleContainerDiv = styled(ContainerDiv)`
     }
 `;
 
-const TextH0 = styled.h2`
+const TextH0 = styled(DescriptionP)`
     @media ${({ theme }) => theme.device.mobile} {
         font-size: ${({ theme }) => theme.fontSizes.mobiletext};
         margin-top: 20px;

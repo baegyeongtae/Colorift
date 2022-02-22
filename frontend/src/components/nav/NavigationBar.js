@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Outlet, useLocation, Link } from 'react-router-dom';
+import { Outlet, useLocation, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { Menubox } from './Menubox';
 import { Logo, Footer } from '..';
@@ -52,30 +52,39 @@ function NavigationBar() {
         <>
             <header>
                 {isToggle && <Menubox clickProps={handleToggleClick} />}
-                <Nav pathname={pathname} scrollY={scrollY}>
+                <Nav className={pathname === '/' && scrollY === 0 && 'transparent'}>
                     <ContainerGridDiv>
                         <Logo />
-                        <MenuDiv pathname={pathname} scrollY={scrollY}>
+                        <MenuDiv>
                             {menus.map(menu => (
-                                <Link
+                                <NavLink
                                     key={menu.name}
                                     to={menu.path}
-                                    className={pathname === menu.path && menu.className}
+                                    className={pathname === '/' && scrollY === 0 && 'transparent'}
                                 >
                                     {menu.name}
-                                </Link>
+                                </NavLink>
                             ))}
                         </MenuDiv>
-                        <UserDiv pathname={pathname} scrollY={scrollY}>
-                            <Link to="/login" className="login">
+                        <UserDiv>
+                            <NavLink
+                                to="/login"
+                                className={pathname === '/' && scrollY === 0 ? 'transparent login' : 'login'}
+                            >
                                 Log In
-                            </Link>
-                            <Link to="/signup" className="signup">
+                            </NavLink>
+                            <NavLink
+                                to="/signup"
+                                className={pathname === '/' && scrollY === 0 ? 'transparent signup' : 'signup'}
+                            >
                                 <span>Sign Up</span>
-                            </Link>
+                            </NavLink>
                         </UserDiv>
                         <MenuIconDiv>
-                            <MenuImg onClick={handleToggleClick} pathname={pathname} scrollY={scrollY} />
+                            <MenuImg
+                                onClick={handleToggleClick}
+                                className={pathname === '/' && scrollY === 0 && 'transparent'}
+                            />
                         </MenuIconDiv>
                     </ContainerGridDiv>
                 </Nav>
@@ -98,19 +107,24 @@ const Nav = styled.nav`
     z-index: 99;
 
     width: 100vw;
-    height: 7vh;
+    height: 60px;
 
-    background-color: ${({ pathname, scrollY, theme }) =>
-        pathname === '/' && scrollY === 0 ? 'transparent' : theme.color.nav};
+    background-color: ${({ theme }) => theme.color.nav};
 
-    box-shadow: ${({ pathname }) => pathname !== '/' && '0px 4px 4px rgba(0, 0, 0, 0.25)'};
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    &.transparent {
+        background-color: transparent;
+        box-shadow: unset;
+    }
 `;
 
 const ContainerGridDiv = styled(ContainerDiv)`
+    height: 100%;
+
     display: grid;
     grid-template-columns: 1fr 8fr 3fr;
-
-    height: 100%;
+    align-items: center;
 
     @media ${({ theme }) => theme.device.tablet} {
         ${({ theme }) => theme.flexStyled.flexRow};
@@ -124,32 +138,34 @@ const MenuDiv = styled.div`
     grid-template-columns: repeat(4, 1fr);
 
     a {
-        color: ${({ pathname, scrollY }) => (pathname === '/' && scrollY === 0 ? '#A6A6A6' : '#616161')};
+        color: #616161;
         font-weight: bold;
 
-        height: 100%;
-
         text-align: center;
-        line-height: 7vh;
+        line-height: 60px;
 
         cursor: pointer;
     }
 
     a:hover {
-        color: ${({ pathname, scrollY, theme }) => (pathname === '/' && scrollY === 0 ? 'white' : theme.color.blue)};
+        color: ${({ theme }) => theme.color.blue};
 
-        background-color: ${({ pathname, scrollY }) => (pathname === '/' && scrollY === 0 ? '' : '#dde4f6')};
+        background-color: #dde4f6;
     }
 
-    .home {
-        color: ${({ pathname, scrollY, theme }) =>
-            pathname === '/' && scrollY === 0 ? 'white' : pathname === '/' && scrollY !== 0 && theme.color.blue};
+    a.active {
+        color: ${({ theme }) => theme.color.blue};
     }
 
-    .example,
-    .personalcolor,
-    .fassion {
-        color: ${({ pathname, theme }) => pathname === '/example' && theme.color.blue};
+    .transparent {
+        color: #a6a6a6;
+    }
+
+    .transparent:hover,
+    .transparent.active {
+        color: white;
+
+        background-color: unset;
     }
 
     @media ${({ theme }) => theme.device.tablet} {
@@ -162,33 +178,35 @@ const UserDiv = styled.div`
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
 
+    text-align: center;
+
     a {
-        color: ${({ pathname, scrollY }) => (pathname === '/' && scrollY === 0 ? '#A6A6A6' : '#616161')};
+        color: #616161;
         font-weight: bold;
-
-        height: 100%;
-
-        text-align: center;
-        line-height: 7vh;
 
         cursor: pointer;
     }
 
-    span {
+    a.transparent {
         color: white;
+    }
+
+    .login {
+        margin-left: 40%;
+    }
+
+    .signup span {
+        color: white;
+        font-weight: bold;
 
         background-color: ${({ theme }) => theme.color.blue};
 
         padding: 10px;
-
-        margin-right: 1vw;
     }
 
-    .login {
-        color: ${({ pathname, scrollY }) => pathname === '/' && scrollY === 0 && 'white'};
-
-        margin-left: 40%;
-    }
+    @media ${({ theme }) => theme.device.tablet} {
+        display: none;
+    } ;
 `;
 
 const MenuIconDiv = styled.div`
@@ -212,13 +230,14 @@ const MenuImg = styled.img.attrs(() => ({
     @media ${({ theme }) => theme.device.tablet} {
         display: block;
 
-        height: 4vh;
+        height: 30px;
 
-        filter: ${({ pathname, scrollY }) =>
-            pathname === '/' && scrollY === 0
-                ? 'invert(100%) sepia(0%) saturate(7493%) hue-rotate(148deg) brightness(117%) contrast(101%)'
-                : 'invert(38%) sepia(8%) saturate(4242%) hue-rotate(182deg) brightness(94%) contrast(91%)'};
+        filter: invert(38%) sepia(8%) saturate(4242%) hue-rotate(182deg) brightness(94%) contrast(91%);
 
         cursor: pointer;
+
+        &.transparent {
+            filter: invert(100%) sepia(0%) saturate(7493%) hue-rotate(148deg) brightness(117%) contrast(101%);
+        }
     }
 `;

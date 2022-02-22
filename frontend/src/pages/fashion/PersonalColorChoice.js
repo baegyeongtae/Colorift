@@ -1,119 +1,114 @@
+/* eslint-disable jsx-a11y/tabindex-no-positive */
+/* eslint-disable jsx-a11y/label-has-associated-control */
+
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import Box from '@mui/material/Box';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import Typography from '@mui/material/Typography';
 import { Footer, ContainerDiv } from '../../components';
 
 function PersonalColorChoice() {
+    const [select, setSelect] = useState('betterPriceOnly');
+    const handleSelectChange = event => {
+        const { value } = event.target;
+        setSelect(value);
+    };
+
     return (
         <>
             <CircleContainerDiv>
                 <div className="wrapper">
                     <div className="current_circle">
-                        <TextH0>
+                        <TextH1>
                             퍼스널 컬러 <br /> 선택
-                        </TextH0>
+                        </TextH1>
                     </div>
                     <div className="left_circle">
-                        <TextH0>
+                        <TextH1>
                             패션 사진 <br /> 업로드
-                        </TextH0>
+                        </TextH1>
                     </div>
                     <div className="left_circle">
-                        <TextH0>
+                        <TextH1>
                             퍼스널컬러와
                             <br /> 비교 매칭
-                        </TextH0>
+                        </TextH1>
                     </div>
                     <div className="left_circle">
-                        <TextH0>
+                        <TextH1>
                             패션 매칭
                             <br /> 결과
-                        </TextH0>
+                        </TextH1>
                     </div>
                 </div>
             </CircleContainerDiv>
 
-            <TextH1>매칭하고 싶은 퍼스널 컬러를 아래 3가지 방법 중 선택해주세요.</TextH1>
+            <TextH2>매칭하고싶은 퍼스널 컬러를 아래 3가지 방법 중 선택해주세요.</TextH2>
 
-            <RadioDiv>
-                <FormControl>
-                    <RadioGroup
-                        aria-labelledby="demo-radio-buttons-group-label"
-                        defaultValue="none"
-                        name="radio-buttons-group"
-                    >
-                        <FormControlLabel
+            <ChoiceContainerDiv>
+                <div>
+                    <Item>
+                        <RadioButton
+                            type="radio"
+                            name="radio"
                             value="basic"
-                            control={<Radio size="small" />}
-                            className="radio_label"
-                            label={
-                                <Typography variant="headline" className="component">
-                                    {' '}
-                                    <Box fontWeight="fontWeightBold" display="inline">
-                                        기본 퍼스널 컬러
-                                    </Box>{' '}
-                                </Typography>
-                            }
+                            checked={select === 'basic'}
+                            onChange={event => handleSelectChange(event)}
                         />
-                        <TextH3>
-                            기본으로 지정된 봄 웜톤 / 여름 쿨톤 / 가을 웜톤 / 겨울 쿨톤 중 선택 1 정확도가 떨어질 수
-                            있습니다.
-                        </TextH3>
-
-                        <SelectDiv>
-                            <select name="personalcolor" className="select">
-                                <option value="spring">봄 웜톤</option>
-                                <option value="summer">여름 쿨톤</option>
-                                <option value="fall">가을 웜톤</option>
-                                <option value="winter">겨울 쿨톤</option>
-                            </select>
-                        </SelectDiv>
-
-                        <FormControlLabel
+                        <RadioButtonLabel />
+                        <TextH0>기본 퍼스널 컬러</TextH0>
+                    </Item>
+                    <TextH3>
+                        기본으로 지정된 봄 웜톤 / 여름 쿨톤 / 가을 웜톤 / 겨울 쿨톤 중 선택 1 정확도가 떨어질 수
+                        있습니다.
+                    </TextH3>
+                </div>
+                <div>
+                    <SelectDiv>
+                        <select name="personalcolor" className="select">
+                            <option value="spring">봄 웜톤</option>
+                            <option value="summer">여름 쿨톤</option>
+                            <option value="fall">가을 웜톤</option>
+                            <option value="winter">겨울 쿨톤</option>
+                        </select>
+                    </SelectDiv>
+                </div>
+                <div>
+                    <Item>
+                        <RadioButton
+                            type="radio"
+                            name="radio"
                             value="previous"
-                            className="radio_label"
-                            control={<Radio size="small" />}
-                            label={
-                                <Typography variant="headline" className="component">
-                                    {' '}
-                                    <Box fontWeight="fontWeightBold" display="inline">
-                                        직전에 분석한 퍼스널 컬러
-                                    </Box>{' '}
-                                </Typography>
-                            }
+                            checked={select === 'previous'}
+                            onChange={event => handleSelectChange(event)}
                         />
-                        <TextH3>퍼스널 컬러 결과 페이지에서 ‘패션 매칭하기’ 버튼을 클릭해야 합니다.</TextH3>
-
-                        <ResultText>직전에 분석한 자료가 없습니다.</ResultText>
-
-                        <FormControlLabel
+                        <RadioButtonLabel />
+                        <TextH0>직전에 분석한 퍼스널 컬러</TextH0>
+                    </Item>
+                    <TextH3>퍼스널 컬러 결과 페이지에서 ‘패션 매칭하기’ 버튼을 클릭해야 합니다.</TextH3>
+                </div>
+                <div>
+                    <ResultText>직전에 분석한 자료가 없습니다.</ResultText>
+                </div>
+                <div>
+                    <Item>
+                        <RadioButton
+                            type="radio"
+                            name="radio"
                             value="my"
-                            control={<Radio size="small" />}
-                            className="radio_label"
-                            label={
-                                <Typography variant="headline" className="component">
-                                    {' '}
-                                    <Box fontWeight="fontWeightBold" display="inline">
-                                        마이 퍼스널 컬러
-                                    </Box>{' '}
-                                </Typography>
-                            }
+                            checked={select === 'my'}
+                            onChange={event => handleSelectChange(event)}
                         />
-                        <TextH3>로그인 유저는 기존에 저장한 퍼스널 컬러로 매칭할 수 있습니다.</TextH3>
-
-                        <MyPersonalColorDiv>
-                            <ResultText>선택안함</ResultText>
-                            <CustomButton1>불러오기</CustomButton1>
-                        </MyPersonalColorDiv>
-
-                        {/* <ChoiceContainerDiv></ChoiceContainerDiv> */}
-                    </RadioGroup>
-                </FormControl>
-            </RadioDiv>
+                        <RadioButtonLabel />
+                        <TextH0>마이 퍼스널 컬러</TextH0>
+                    </Item>
+                    <TextH3>로그인 유저는 기존에 저장한 퍼스널 컬러로 매칭할 수 있습니다.</TextH3>
+                </div>
+                <div>
+                    <MyPersonalColorDiv>
+                        <ResultText>선택안함</ResultText>
+                        <CustomButton1>불러오기</CustomButton1>
+                    </MyPersonalColorDiv>
+                </div>
+            </ChoiceContainerDiv>
 
             <ButtonContainerDiv>
                 <CustomButton2>다음으로</CustomButton2>
@@ -182,7 +177,7 @@ const CircleContainerDiv = styled(ContainerDiv)`
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
-        margin-bottom: 50px;
+        margin-bottom: 30px;
         margin-top: 100px;
         color: white;
 
@@ -229,28 +224,150 @@ const CircleContainerDiv = styled(ContainerDiv)`
     }
 `;
 
-const RadioDiv = styled.div`
+const ChoiceContainerDiv = styled(ContainerDiv)`
+    background-color: ${({ theme }) => theme.color.white};
+    width: 850px;
+    height: 450px;
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    align-items: left;
+    margin-bottom: 50px;
+    margin-top: 120px;
+
     @media ${({ theme }) => theme.device.mobile} {
+        all: unset;
+
+        width: 270px;
+        height: 400px;
+        position: relative;
+        background-color: ${({ theme }) => theme.color.white};
         display: flex;
         flex-direction: column;
+        justify-content: space-evenly;
         align-items: center;
-        margin-left: 28px;
-        margin-right: 28px;
+        margin-top: 40px;
+        margin-left: 40px;
     }
+`;
 
-    .component {
-        @media ${({ theme }) => theme.device.mobile} {
-            font-size: ${({ theme }) => theme.fontSizes.smalltext};
-        }
-        font-size: ${({ theme }) => theme.fontSizes.mediumtext};
-    }
-    margin-top: 50px;
-
+const Item = styled.div`
     display: flex;
-    flex-direction: column;
     align-items: center;
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
+    height: 48px;
+    position: relative;
+
+    @media ${({ theme }) => theme.device.mobile} {
+        all: unset;
+
+        display: flex;
+        align-items: center;
+        height: 30px;
+        position: relative;
+    }
+`;
+
+const RadioButtonLabel = styled.label`
+    position: absolute;
+    top: 25%;
+    left: 4px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: white;
+    border: 1px solid #bebebe;
+
+    @media ${({ theme }) => theme.device.mobile} {
+        all: unset;
+
+        position: absolute;
+        top: 25%;
+        left: 4px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: white;
+        border: 1px solid #bebebe;
+    }
+`;
+
+const RadioButton = styled.input`
+    opacity: 0;
+    z-index: 1;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    &:hover ~ ${RadioButtonLabel} {
+        background: #bebebe;
+        &::after {
+            content: '';
+            display: block;
+            border-radius: 50%;
+            width: 12px;
+            height: 12px;
+            margin: 6px;
+            background: white;
+        }
+    }
+    ${props =>
+        props.checked &&
+        ` 
+    &:checked + ${RadioButtonLabel} {
+      background: white;
+      border: 1px solid #3C64B1;
+      &::after {
+        content: "";
+        display: block;
+        border-radius: 50%;
+        width: 12px;
+        height: 12px;
+        margin: 5px;
+        box-shadow: 1px 3px 3px 1px rgba(0, 0, 0, 0.1);
+        background: #3C64B1;
+      }
+    }
+  `}
+    @media ${({ theme }) => theme.device.mobile} {
+        all: unset;
+
+        opacity: 0;
+        z-index: 1;
+        border-radius: 50%;
+        width: 6px;
+        height: 6px;
+        margin-right: 10px;
+        &:hover ~ ${RadioButtonLabel} {
+            background: white;
+            &::after {
+                content: '';
+                display: block;
+                border-radius: 50%;
+                width: 6px;
+                height: 6px;
+                margin: 3px;
+                background: white;
+            }
+        }
+        ${props =>
+            props.checked &&
+            ` 
+        &:checked + ${RadioButtonLabel} {
+          background: white;
+          border: 1px solid #3C64B1;
+          &::after {
+            content: "";
+            display: block;
+            border-radius: 50%;
+            width: 6px;
+            height: 6px;
+            margin: 3px;
+            box-shadow: 1px 3px 3px 1px rgba(0, 0, 0, 0.1);
+            background: #3C64B1;
+          }
+        }
+      `}
+    }
 `;
 
 const SelectDiv = styled.div`
@@ -309,6 +426,12 @@ const MyPersonalColorDiv = styled.div`
     margin-right: 28px;
     color: ${({ theme }) => theme.color.white};
     background-color: ${props => props.theme.color.white};
+
+    @media ${({ theme }) => theme.device.mobile} {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: left;
+    }
 `;
 
 const ButtonContainerDiv = styled(ContainerDiv)`
@@ -329,12 +452,20 @@ const ButtonContainerDiv = styled(ContainerDiv)`
     margin-bottom: 100px;
 `;
 
-const FooterContainerDiv = styled.div`
-    position: absolute;
-    bottom: -100;
+const TextH0 = styled.h2`
+    @media ${({ theme }) => theme.device.mobile} {
+        font-size: ${({ theme }) => theme.fontSizes.mediumtext};
+    }
+
+    margin-left: 15px;
+
+    font-weight: bold;
+    font-size: ${({ theme }) => theme.fontSizes.mediumtext};
+    color: ${({ theme }) => theme.color.white};
+    background-color: ${props => props.theme.color.white};
 `;
 
-const TextH0 = styled.h2`
+const TextH1 = styled.h2`
     @media ${({ theme }) => theme.device.mobile} {
         font-size: ${({ theme }) => theme.fontSizes.mobiletext};
         margin-top: 20px;
@@ -346,17 +477,19 @@ const TextH0 = styled.h2`
     background-color: ${props => props.theme.color.white};
 `;
 
-const TextH1 = styled.h1`
+const TextH2 = styled.h1`
     @media ${({ theme }) => theme.device.mobile} {
         font-size: ${({ theme }) => theme.fontSizes.smalltext};
         font-weight: bold;
-        margin: 30px;
     }
-    font-size: ${({ theme }) => theme.fontSizes.mediumtext};
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 30px;
+    margin-top: 30px;
     font-weight: bold;
-    text-align: center;
-    margin: 20px;
-    margin-bottom: 80px;
+    font-size: 1.5rem;
 
     color: ${({ theme }) => theme.color.white};
     background-color: ${props => props.theme.color.white};
@@ -365,13 +498,16 @@ const TextH1 = styled.h1`
 const TextH3 = styled.h3`
     @media ${({ theme }) => theme.device.mobile} {
         font-size: ${({ theme }) => theme.fontSizes.mobiletext};
-        margin-top: 1px;
         font-weight: bold;
         align-items: left;
+
+        margin-left: 30px;
         color: ${({ theme }) => theme.color.darkgray};
     }
+
+    margin-left: 50px;
+
     font-size: ${({ theme }) => theme.fontSizes.smalltext};
-    margin-top: 1px;
     align-items: left;
     color: ${({ theme }) => theme.color.darkgray};
 `;

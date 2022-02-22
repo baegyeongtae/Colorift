@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { HomeContainerDiv, HomeButton, TitleP } from '../../components';
 
 export function HomeHeader() {
@@ -19,12 +20,16 @@ export function HomeHeader() {
                         또한, 퍼스널 컬러와 패션 아이템의 조화로움을 알려드립니다.
                     </SubTitleP>
                     <ButtonDiv>
-                        <HomeButton maxWidth="200px" width="45vw">
-                            퍼스널 컬러 찾기
-                        </HomeButton>
-                        <HomeButton maxWidth="200px" width="45vw">
-                            패션 매칭하기
-                        </HomeButton>
+                        <Link to="/personalcolor">
+                            <HomeButton maxWidth="200px" width="45vw">
+                                퍼스널 컬러 찾기
+                            </HomeButton>
+                        </Link>
+                        <Link to="/fashion">
+                            <HomeButton maxWidth="200px" width="45vw">
+                                패션 매칭하기
+                            </HomeButton>
+                        </Link>
                     </ButtonDiv>
                 </TextDiv>
                 <ExampleImgDiv>

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { BigTextP, DescriptionP, HomeButton, Article, HomeContainerDiv } from '../../components';
 
 export function HomeSeason() {
@@ -21,7 +22,9 @@ export function HomeSeason() {
                         <br />
                         분석된 결과를 토대로 어울리는 색상을 추천해드립니다.
                     </DescriptionLeftP>
-                    <HomeButton>퍼스널 컬러 예시 보기</HomeButton>
+                    <Link to="/example">
+                        <HomeButton>퍼스널 컬러 예시 보기</HomeButton>
+                    </Link>
                 </TextContainerDiv>
             </SeasonContainerDiv>
         </Article>

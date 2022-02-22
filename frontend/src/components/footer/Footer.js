@@ -22,7 +22,6 @@ const FooterDiv = styled.footer`
     width: 100%;
     height: 5vh;
     line-height: 5vh;
-    bottom: -20vh;
     font-size: ${({ theme }) => theme.fontSizes.mobiletext};
     color: ${({ theme }) => theme.color.lightgray};
     background-color: ${props => props.theme.color.darkgray};

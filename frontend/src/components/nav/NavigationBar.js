@@ -18,6 +18,30 @@ function NavigationBar() {
     // 현재 스크롤 위치 받아오기
     const { scrollY } = useGetScrollY();
 
+    // 상단바 메뉴 목록
+    const menus = [
+        {
+            name: 'Home',
+            path: '/',
+            className: 'home',
+        },
+        {
+            name: 'Personal Color',
+            path: '/example',
+            className: 'example',
+        },
+        {
+            name: 'Color Analysis',
+            path: '/personalcolor',
+            className: 'personalcolor',
+        },
+        {
+            name: 'Fashion Matching',
+            path: '/fashion',
+            className: 'fashion',
+        },
+    ];
+
     const handleToggleClick = () => {
         setIsToggle(current => !current);
     };
@@ -32,27 +56,22 @@ function NavigationBar() {
                     <ContainerGridDiv>
                         <Logo />
                         <MenuDiv pathname={pathname} scrollY={scrollY}>
-                            <Link to="/">
-                                <div className="menu home">Home</div>
-                            </Link>
-                            <Link to="/example">
-                                <div className="menu example">Personal Color</div>
-                            </Link>
-                            <Link to="/personalcolor">
-                                <div className="menu personalcolor">Color Analysis</div>
-                            </Link>
-                            <Link to="/fashion">
-                                <div className="menu fashion">Fashion Matching</div>
-                            </Link>
+                            {menus.map(menu => (
+                                <Link
+                                    key={menu.name}
+                                    to={menu.path}
+                                    className={pathname === menu.path && menu.className}
+                                >
+                                    {menu.name}
+                                </Link>
+                            ))}
                         </MenuDiv>
                         <UserDiv pathname={pathname} scrollY={scrollY}>
-                            <Link to="/login">
-                                <div className="login">Log In</div>
+                            <Link to="/login" className="login">
+                                Log In
                             </Link>
-                            <Link to="/signup">
-                                <div className="signup">
-                                    <span>Sign Up</span>
-                                </div>
+                            <Link to="/signup" className="signup">
+                                <span>Sign Up</span>
                             </Link>
                         </UserDiv>
                         <MenuIconDiv>
@@ -104,7 +123,7 @@ const MenuDiv = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 
-    div {
+    a {
         color: ${({ pathname, scrollY }) => (pathname === '/' && scrollY === 0 ? '#A6A6A6' : '#616161')};
         font-weight: bold;
 
@@ -116,7 +135,7 @@ const MenuDiv = styled.div`
         cursor: pointer;
     }
 
-    .menu:hover {
+    a:hover {
         color: ${({ pathname, scrollY, theme }) => (pathname === '/' && scrollY === 0 ? 'white' : theme.color.blue)};
 
         background-color: ${({ pathname, scrollY }) => (pathname === '/' && scrollY === 0 ? '' : '#dde4f6')};
@@ -127,16 +146,10 @@ const MenuDiv = styled.div`
             pathname === '/' && scrollY === 0 ? 'white' : pathname === '/' && scrollY !== 0 && theme.color.blue};
     }
 
-    .example {
-        color: ${({ pathname, theme }) => pathname === '/example' && theme.color.blue};
-    }
-
-    .personalcolor {
-        color: ${({ pathname, theme }) => pathname === '/personalcolor' && theme.color.blue};
-    }
-
+    .example,
+    .personalcolor,
     .fassion {
-        color: ${({ pathname, theme }) => pathname === '/fassion' && theme.color.blue};
+        color: ${({ pathname, theme }) => pathname === '/example' && theme.color.blue};
     }
 
     @media ${({ theme }) => theme.device.tablet} {
@@ -144,8 +157,22 @@ const MenuDiv = styled.div`
     } ;
 `;
 
-const UserDiv = styled(MenuDiv)`
+const UserDiv = styled.div`
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+
+    a {
+        color: ${({ pathname, scrollY }) => (pathname === '/' && scrollY === 0 ? '#A6A6A6' : '#616161')};
+        font-weight: bold;
+
+        height: 100%;
+
+        text-align: center;
+        line-height: 7vh;
+
+        cursor: pointer;
+    }
 
     span {
         color: white;

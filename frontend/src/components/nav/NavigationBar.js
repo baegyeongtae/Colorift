@@ -162,6 +162,8 @@ const MenuBoxDiv = styled.div`
         width: 50vw;
         height: 100%;
 
+        font-size: 1.6rem;
+
         background-color: ${({ theme }) => theme.color.nav};
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
@@ -185,27 +187,27 @@ const MenuDiv = styled.div`
         line-height: 60px;
 
         cursor: pointer;
-    }
 
-    a:hover {
-        color: ${({ theme }) => theme.color.blue};
+        &:hover {
+            color: ${({ theme }) => theme.color.blue};
 
-        background-color: #dde4f6;
-    }
+            background-color: #dde4f6;
+        }
 
-    a.active {
-        color: ${({ theme }) => theme.color.blue};
+        &.active {
+            color: ${({ theme }) => theme.color.blue};
+        }
     }
 
     .transparent {
         color: #a6a6a6;
-    }
 
-    .transparent:hover,
-    .transparent.active {
-        color: white;
+        &:hover,
+        &.active {
+            color: white;
 
-        background-color: unset;
+            background-color: unset;
+        }
     }
 
     &.mobile {
@@ -219,10 +221,10 @@ const MenuDiv = styled.div`
             color: #616161;
 
             height: 20%;
-        }
 
-        a.active {
-            color: ${({ theme }) => theme.color.blue};
+            &.active {
+                color: ${({ theme }) => theme.color.blue};
+            }
         }
     }
 `;
@@ -231,22 +233,17 @@ const UserDiv = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
-
-    text-align: center;
+    justify-items: right;
 
     a {
         color: #616161;
         font-weight: bold;
 
         cursor: pointer;
-    }
 
-    a.transparent {
-        color: white;
-    }
-
-    .login {
-        margin-left: 20%;
+        &.transparent {
+            color: white;
+        }
     }
 
     .signup span {
@@ -266,15 +263,10 @@ const UserDiv = styled.div`
         a {
             ${({ theme }) => theme.flexStyled.flexCenter};
 
-            color: #616161;
-        }
-
-        .login,
-        .signup {
-            margin: 0;
-
             width: 100%;
-            height: 30%;
+            height: 40%;
+
+            color: #616161;
         }
     }
 `;
@@ -285,11 +277,9 @@ const MenuIconDiv = styled.div`
     @media ${({ theme }) => theme.device.tablet} {
         z-index: 9999;
 
-        display: block;
-
         ${({ theme }) => theme.flexStyled.flexCenter};
 
-        margin: 0 3vw;
+        margin-right: 3vw;
     } ;
 `;
 
@@ -297,19 +287,15 @@ const MenuImg = styled.img.attrs(({ className }) => ({
     src: className === 'show' ? './image/x-mark.svg' : './image/menu.svg',
     alt: '메뉴 아이콘',
 }))`
-    display: none;
+    display: block;
 
-    @media ${({ theme }) => theme.device.tablet} {
-        display: block;
+    height: 30px;
 
-        height: 30px;
+    filter: invert(38%) sepia(8%) saturate(4242%) hue-rotate(182deg) brightness(94%) contrast(91%);
 
-        filter: invert(38%) sepia(8%) saturate(4242%) hue-rotate(182deg) brightness(94%) contrast(91%);
+    cursor: pointer;
 
-        cursor: pointer;
-
-        &.transparent {
-            filter: invert(100%) sepia(0%) saturate(7493%) hue-rotate(148deg) brightness(117%) contrast(101%);
-        }
+    &.transparent {
+        filter: invert(100%) sepia(0%) saturate(7493%) hue-rotate(148deg) brightness(117%) contrast(101%);
     }
 `;

@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
+from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from app.models import User, Color, Fashion
@@ -155,9 +155,10 @@ class FashionTest(APIView):
         return {'total_match_rate': 50, 'color_match_rate': 50, 'brightness_match_rate': 50, 'saturation_match_rate': 50}
 
     def post(self, request, format=None):
-        file_obj = request.data['image']
-        if file_obj:
-            data = {'image': file_obj, 'color': request.data['color'], 'date': date.today()}
+        file_obj = request.data['image']  # serializer를 만들까말까
+        color = request.data['color']
+        if file_obj and (color in ('SP', 'SU', 'FA', 'WI')):
+            data = {'image': file_obj, 'color': color, 'date': date.today()}
             res = self.fashion_ai_model()  # 머신 러닝 모델과 연결 필요
             data.update(res)
             # 로그인 유저의 경우 추가로 user_id도 저장해줘야 한다.
@@ -167,10 +168,10 @@ class FashionTest(APIView):
             serializer = FashionSerializer(data=data)
             if serializer.is_valid():
                 serializer.save()
+                return Response({'fashion': res}, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-            return Response({'fashion': res}, status=status.HTTP_201_CREATED)
-
-        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class FashionTestDetail(APIView):
@@ -190,13 +191,19 @@ class FashionTestDetail(APIView):
 
     def get(self, request, pk, format=None):
         fashion = self.get_object(pk)
-        serializer = FashionSerializer(fashion)
-        return Response(serializer.data)
+        if request.user.id == fashion.user_id:
+            serializer = FashionSerializer(fashion)
+            return Response(serializer.data)
+        else:
+            return Response(status=status.HTTP_423_LOCKED)  # locked => 접근할수 없는 자원(내 자원이 아니어서)
 
     def delete(self, request, pk, format=None):
         fashion = self.get_object(pk)
-        fashion.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        if request.user.id == fashion.user_id:
+            fashion.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response(status=status.HTTP_423_LOCKED)
 
 
 class FashionTestList(APIView):

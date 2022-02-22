@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Stack from '@mui/material/Stack';
-import { Result, Footer, ContainerDiv } from '../../components';
+import { ResultImage, Footer, ContainerDiv } from '../../components';
 
 function ColorResult() {
     return (
@@ -27,7 +27,7 @@ function ColorResult() {
             </CircleContainerDiv>
 
             <ResultContainerDiv>
-                <Result />
+                <ResultImage />
             </ResultContainerDiv>
 
             <TextH1>회원님은 봄 웜톤 입니다.</TextH1>

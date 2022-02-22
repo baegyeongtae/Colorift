@@ -2,3 +2,4 @@
 
 export { Article } from './Article';
 export { BackgroundDiv } from './BackgroundDiv';
+export { ContainerDiv } from './ContainerDiv';

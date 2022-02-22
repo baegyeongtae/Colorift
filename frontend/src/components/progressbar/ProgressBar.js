@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-// eslint-disable-next-line react/prop-types
 export function ProgressBar({ percent }) {
     return (
         <ProgressbarBox>
@@ -10,10 +9,6 @@ export function ProgressBar({ percent }) {
 }
 
 // styled-components
-// const Percent = styled.div`
-//     display: flex;
-//     justify-content: space-between;
-// `;
 
 const ProgressbarBox = styled.div`
     @media ${({ theme }) => theme.device.mobile} {

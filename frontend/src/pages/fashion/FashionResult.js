@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Stack from '@mui/material/Stack';
-import { Result, ProgressBar, Footer, ContainerDiv } from '../../components';
+import { ResultImage, ProgressBar, Footer, ContainerDiv } from '../../components';
 
 function FashionResult() {
     return (
@@ -33,7 +33,7 @@ function FashionResult() {
             </CircleContainerDiv>
 
             <ContentContainerDiv>
-                <Result />
+                <ResultImage />
             </ContentContainerDiv>
 
             <TextH1>이 옷은 봄 웜톤인 회원님께</TextH1>

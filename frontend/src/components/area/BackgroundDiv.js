@@ -1,11 +1,5 @@
 import styled, { keyframes } from 'styled-components';
 
-export const Article = styled.article`
-    height: ${({ height }) => height};
-
-    background-color: ${({ color }) => color};
-`;
-
 const backgroundKeyframe = keyframes`
     0% {
         background: rgba(0, 0, 0, 0);

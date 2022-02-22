@@ -3,7 +3,7 @@
 
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Footer, ContainerDiv } from '../../components';
+import { ContainerDiv, Fashion, MediumTextP, WhiteButton, RadioTextP } from '../../components';
 
 function PersonalColorChoice() {
     const [select, setSelect] = useState('betterPriceOnly');
@@ -14,34 +14,9 @@ function PersonalColorChoice() {
 
     return (
         <>
-            <CircleContainerDiv>
-                <div className="wrapper">
-                    <div className="current_circle">
-                        <TextH1>
-                            퍼스널 컬러 <br /> 선택
-                        </TextH1>
-                    </div>
-                    <div className="left_circle">
-                        <TextH1>
-                            패션 사진 <br /> 업로드
-                        </TextH1>
-                    </div>
-                    <div className="left_circle">
-                        <TextH1>
-                            퍼스널컬러와
-                            <br /> 비교 매칭
-                        </TextH1>
-                    </div>
-                    <div className="left_circle">
-                        <TextH1>
-                            패션 매칭
-                            <br /> 결과
-                        </TextH1>
-                    </div>
-                </div>
-            </CircleContainerDiv>
+            <Fashion />
 
-            <TextH2>매칭하고싶은 퍼스널 컬러를 아래 3가지 방법 중 선택해주세요.</TextH2>
+            <MediumTextP>매칭하고싶은 퍼스널 컬러를 아래 3가지 방법 중 선택해주세요.</MediumTextP>
 
             <ChoiceContainerDiv>
                 <div>
@@ -54,7 +29,7 @@ function PersonalColorChoice() {
                             onChange={event => handleSelectChange(event)}
                         />
                         <RadioButtonLabel />
-                        <TextH0>기본 퍼스널 컬러</TextH0>
+                        <RadioTextP>기본 퍼스널 컬러</RadioTextP>
                     </Item>
                     <TextH3>
                         기본으로 지정된 봄 웜톤 / 여름 쿨톤 / 가을 웜톤 / 겨울 쿨톤 중 선택 1 정확도가 떨어질 수
@@ -81,7 +56,7 @@ function PersonalColorChoice() {
                             onChange={event => handleSelectChange(event)}
                         />
                         <RadioButtonLabel />
-                        <TextH0>직전에 분석한 퍼스널 컬러</TextH0>
+                        <RadioTextP>직전에 분석한 퍼스널 컬러</RadioTextP>
                     </Item>
                     <TextH3>퍼스널 컬러 결과 페이지에서 ‘패션 매칭하기’ 버튼을 클릭해야 합니다.</TextH3>
                 </div>
@@ -98,131 +73,26 @@ function PersonalColorChoice() {
                             onChange={event => handleSelectChange(event)}
                         />
                         <RadioButtonLabel />
-                        <TextH0>마이 퍼스널 컬러</TextH0>
+                        <RadioTextP>마이 퍼스널 컬러</RadioTextP>
                     </Item>
                     <TextH3>로그인 유저는 기존에 저장한 퍼스널 컬러로 매칭할 수 있습니다.</TextH3>
                 </div>
                 <div>
                     <MyPersonalColorDiv>
                         <ResultText>선택안함</ResultText>
-                        <CustomButton1>불러오기</CustomButton1>
+                        <CustomButton>불러오기</CustomButton>
                     </MyPersonalColorDiv>
                 </div>
             </ChoiceContainerDiv>
 
             <ButtonContainerDiv>
-                <CustomButton2>다음으로</CustomButton2>
+                <WhiteButton>다음으로</WhiteButton>
             </ButtonContainerDiv>
         </>
     );
 }
 
 export { PersonalColorChoice };
-
-const CircleContainerDiv = styled(ContainerDiv)`
-    background-color: ${({ theme }) => theme.color.white};
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    margin-bottom: 50px;
-    margin-top: 120px;
-    color: white;
-
-    .wrapper {
-        width: 100%;
-        height: auto;
-        position: relative;
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        margin-bottom: 7px;
-        padding-left: 30px;
-        padding-right: 30px;
-    }
-
-    .wrapper::before {
-        content: '';
-        width: 70%;
-        height: 5px;
-        background-color: ${({ theme }) => theme.color.lightgray};
-        position: absolute;
-        top: 50%;
-        left: 100;
-    }
-
-    .current_circle {
-        width: 130px;
-        height: 130px;
-        position: relative;
-        border-radius: 50%;
-        background-color: ${({ theme }) => theme.color.blue};
-        text-align: center;
-    }
-
-    .left_circle {
-        width: 130px;
-        height: 130px;
-        position: relative;
-        border-radius: 50%;
-        background-color: ${({ theme }) => theme.color.lightgray};
-        text-align: center;
-    }
-
-    @media ${({ theme }) => theme.device.mobile} {
-        all: unset;
-
-        background-color: ${({ theme }) => theme.color.white};
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-        margin-bottom: 30px;
-        margin-top: 100px;
-        color: white;
-
-        .wrapper {
-            width: 100%;
-            height: auto;
-            position: relative;
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-            margin-bottom: 7px;
-            padding-left: 30px;
-            padding-right: 30px;
-        }
-        .wrapper::before {
-            content: '';
-            width: 50%;
-            height: 2px;
-            background-color: ${({ theme }) => theme.color.lightgray};
-            position: absolute;
-            top: 50%;
-            left: 100;
-        }
-        .current_circle {
-            all: unset;
-
-            width: 63px;
-            height: 63px;
-            position: relative;
-            border-radius: 50%;
-            background-color: ${({ theme }) => theme.color.blue};
-            text-align: center;
-        }
-        .left_circle {
-            all: unset;
-
-            width: 65px;
-            height: 65px;
-            position: relative;
-            border-radius: 50%;
-            background-color: ${({ theme }) => theme.color.lightgray};
-            text-align: center;
-        }
-    }
-`;
 
 const ChoiceContainerDiv = styled(ContainerDiv)`
     background-color: ${({ theme }) => theme.color.white};
@@ -244,10 +114,9 @@ const ChoiceContainerDiv = styled(ContainerDiv)`
         background-color: ${({ theme }) => theme.color.white};
         display: flex;
         flex-direction: column;
-        justify-content: space-evenly;
         align-items: center;
         margin-top: 40px;
-        margin-left: 40px;
+        margin-left: 60px;
     }
 `;
 
@@ -452,49 +321,6 @@ const ButtonContainerDiv = styled(ContainerDiv)`
     margin-bottom: 100px;
 `;
 
-const TextH0 = styled.h2`
-    @media ${({ theme }) => theme.device.mobile} {
-        font-size: ${({ theme }) => theme.fontSizes.mediumtext};
-    }
-
-    margin-left: 15px;
-
-    font-weight: bold;
-    font-size: ${({ theme }) => theme.fontSizes.mediumtext};
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
-`;
-
-const TextH1 = styled.h2`
-    @media ${({ theme }) => theme.device.mobile} {
-        font-size: ${({ theme }) => theme.fontSizes.mobiletext};
-        margin-top: 20px;
-    }
-    margin-top: 38px;
-    font-weight: bold;
-    font-size: ${({ theme }) => theme.fontSizes.mediumtext};
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
-`;
-
-const TextH2 = styled.h1`
-    @media ${({ theme }) => theme.device.mobile} {
-        font-size: ${({ theme }) => theme.fontSizes.smalltext};
-        font-weight: bold;
-    }
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-bottom: 30px;
-    margin-top: 30px;
-    font-weight: bold;
-    font-size: 1.5rem;
-
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
-`;
-
 const TextH3 = styled.h3`
     @media ${({ theme }) => theme.device.mobile} {
         font-size: ${({ theme }) => theme.fontSizes.mobiletext};
@@ -512,7 +338,7 @@ const TextH3 = styled.h3`
     color: ${({ theme }) => theme.color.darkgray};
 `;
 
-const CustomButton1 = styled('span')`
+const CustomButton = styled('span')`
     @media ${({ theme }) => theme.device.mobile} {
         font-size: 0.7em;
         background-color: #2c2c2c;
@@ -531,31 +357,6 @@ const CustomButton1 = styled('span')`
     transition: all 150ms ease;
     cursor: pointer;
     border: none;
-`;
-
-const CustomButton2 = styled('span')`
-    @media ${({ theme }) => theme.device.mobile} {
-        font-weight: bold;
-        font-size: 0.875rem;
-        background-color: ${({ theme }) => theme.color.white};
-        padding: 12px 20px;
-        border-style: solid;
-        border-width: 2px;
-        color: ${({ theme }) => theme.color.blue};
-        transition: all 150ms ease;
-        cursor: pointer;
-    }
-    font-weight: bold;
-    font-size: 0.875rem;
-    background-color: ${({ theme }) => theme.color.white};
-    padding: 12px 20px;
-    border-style: solid;
-    border-width: 2px;
-    color: ${({ theme }) => theme.color.blue};
-    transition: all 150ms ease;
-    cursor: pointer;
-    width: 170px;
-    text-align: center;
 `;
 
 const ResultText = styled.h2`

@@ -1,55 +1,39 @@
 import styled from 'styled-components';
-import { Footer, ContainerDiv } from '../../components';
+import { ContainerDiv } from '../area/ContainerDiv';
 
-function MatchingLoading() {
+export function Color() {
     return (
-        <>
-            <CircleContainerDiv>
-                <div className="wrapper">
-                    <div className="current_circle">
-                        <TextH0>
-                            퍼스널 컬러 <br /> 선택
-                        </TextH0>
-                    </div>
-                    <div className="left_circle">
-                        <TextH0>
-                            패션 사진 <br /> 업로드
-                        </TextH0>
-                    </div>
-                    <div className="left_circle">
-                        <TextH0>
-                            퍼스널컬러와
-                            <br /> 비교 매칭
-                        </TextH0>
-                    </div>
-                    <div className="left_circle">
-                        <TextH0>
-                            패션 매칭
-                            <br /> 결과
-                        </TextH0>
-                    </div>
+        <CircleContainerDiv>
+            <div className="wrapper">
+                <div className="current_circle">
+                    <TextH0>
+                        얼굴 사진 <br /> 업로드
+                    </TextH0>
                 </div>
-            </CircleContainerDiv>
-
-            <LoadingContainerDiv>
-                <img src="./image/loader.png" alt="loader" width="130px" height="130px" />
-                <TextH1>퍼스널 컬러와 패션을 매칭하는 중입니다.</TextH1>
-            </LoadingContainerDiv>
-
-            <Footer />
-        </>
+                <div className="left_circle">
+                    <TextH0>
+                        피부톤 <br />
+                        정밀 분석
+                    </TextH0>
+                </div>
+                <div className="left_circle">
+                    <TextH0>
+                        퍼스널 컬러 <br /> 분석 결과
+                    </TextH0>
+                </div>
+            </div>
+        </CircleContainerDiv>
     );
 }
 
-export { MatchingLoading };
-
+// styled-components
 const CircleContainerDiv = styled(ContainerDiv)`
     background-color: ${({ theme }) => theme.color.white};
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     margin-top: 120px;
     color: white;
 
@@ -67,7 +51,7 @@ const CircleContainerDiv = styled(ContainerDiv)`
 
     .wrapper::before {
         content: '';
-        width: 70%;
+        width: 50%;
         height: 5px;
         background-color: ${({ theme }) => theme.color.lightgray};
         position: absolute;
@@ -128,8 +112,8 @@ const CircleContainerDiv = styled(ContainerDiv)`
         .current_circle {
             all: unset;
 
-            width: 63px;
-            height: 63px;
+            width: 68px;
+            height: 68px;
             position: relative;
             border-radius: 50%;
             background-color: ${({ theme }) => theme.color.blue};
@@ -138,8 +122,8 @@ const CircleContainerDiv = styled(ContainerDiv)`
         .left_circle {
             all: unset;
 
-            width: 65px;
-            height: 65px;
+            width: 68px;
+            height: 68px;
             position: relative;
             border-radius: 50%;
             background-color: ${({ theme }) => theme.color.lightgray};
@@ -148,20 +132,6 @@ const CircleContainerDiv = styled(ContainerDiv)`
     }
 `;
 
-const LoadingContainerDiv = styled(ContainerDiv)`
-    background-color: ${({ theme }) => theme.color.white};
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    margin-bottom: 20px;
-    margin-top: 100px;
-`;
-
-const FooterContainerDiv = styled.div`
-    position: absolute;
-    bottom: 0;
-`;
 const TextH0 = styled.h2`
     @media ${({ theme }) => theme.device.mobile} {
         font-size: ${({ theme }) => theme.fontSizes.mobiletext};
@@ -170,29 +140,6 @@ const TextH0 = styled.h2`
     margin-top: 38px;
     font-weight: bold;
     font-size: ${({ theme }) => theme.fontSizes.mediumtext};
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
-`;
-
-const TextH1 = styled.h1`
-    @media ${({ theme }) => theme.device.mobile} {
-        font-size: ${({ theme }) => theme.fontSizes.smalltext};
-        margin-top: 20px;
-        font-weight: bold;
-    }
-    font-weight: bold;
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
-`;
-
-const TextH2 = styled.h2`
-    @media ${({ theme }) => theme.device.mobile} {
-        font-size: ${({ theme }) => theme.fontSizes.mobiletext};
-        color: white;
-        margin-top: 20px;
-    }
-    margin-top: 45px;
-    font-weight: bold;
     color: ${({ theme }) => theme.color.white};
     background-color: ${props => props.theme.color.white};
 `;

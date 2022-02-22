@@ -37,9 +37,7 @@ function PersonalColorChoice() {
                 </div>
             </CircleContainerDiv>
 
-            <TextH1>
-                매칭하고 싶은 퍼스널 컬러를 <br /> 아래 3가지 방법 중 선택해주세요.
-            </TextH1>
+            <TextH1>매칭하고 싶은 퍼스널 컬러를 아래 3가지 방법 중 선택해주세요.</TextH1>
 
             <RadioDiv>
                 <FormControl>

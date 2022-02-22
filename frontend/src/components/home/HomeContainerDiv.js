@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ContainerDiv } from '../ContainerDiv';
+import { ContainerDiv } from '../area/ContainerDiv';
 
 export const HomeContainerDiv = styled(ContainerDiv)`
     display: grid;

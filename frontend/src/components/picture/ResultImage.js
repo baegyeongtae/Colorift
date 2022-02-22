@@ -1,7 +1,7 @@
 // import Box from '@mui/material/Box';
 import styled from 'styled-components';
 
-export function Result() {
+export function ResultImage() {
     return <BoxDiv>이미지</BoxDiv>;
 }
 

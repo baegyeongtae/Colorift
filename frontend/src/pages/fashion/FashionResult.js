@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import Stack from '@mui/material/Stack';
-import Color from '../../images/Color.png';
-import { Result, ProgressBar, Footer, ContainerDiv } from '../../components';
+import { ResultImage, ProgressBar, Footer, ContainerDiv } from '../../components';
 
 function FashionResult() {
     return (
@@ -34,7 +33,7 @@ function FashionResult() {
             </CircleContainerDiv>
 
             <ContentContainerDiv>
-                <Result />
+                <ResultImage />
             </ContentContainerDiv>
 
             <TextH1>이 옷은 봄 웜톤인 회원님께</TextH1>
@@ -67,7 +66,7 @@ function FashionResult() {
             </ContentContainerDiv>
 
             <ContentContainerDiv>
-                <img src={Color} alt="Color" width="343px" height="90px" />
+                <img src="./images/color.png" alt="Color" width="343px" height="90px" />
             </ContentContainerDiv>
 
             <ButtonContainerDiv>
@@ -76,6 +75,10 @@ function FashionResult() {
                     <CustomButton>퍼스널 컬러 찾기</CustomButton>
                 </Stack>
             </ButtonContainerDiv>
+
+            <ContentContainerDiv>
+                <div>..</div>
+            </ContentContainerDiv>
 
             <Footer />
         </>
@@ -145,7 +148,7 @@ const CircleContainerDiv = styled(ContainerDiv)`
         justify-content: space-around;
         align-items: center;
         margin-bottom: 20px;
-        margin-top: 70px;
+        margin-top: 120px;
         color: white;
 
         .wrapper {

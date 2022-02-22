@@ -3,7 +3,7 @@ import { Outlet, useLocation, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Menubox } from './Menubox';
 import { Logo, Footer } from '..';
-import { ContainerDiv } from '../ContainerDiv';
+import { ContainerDiv } from '../area/ContainerDiv';
 import { useGetScrollY } from '../../utils/hooks/useGetScrollY';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 

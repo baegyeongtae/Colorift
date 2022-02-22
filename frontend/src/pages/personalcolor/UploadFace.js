@@ -128,7 +128,7 @@ const CircleContainerDiv = styled(ContainerDiv)`
         justify-content: space-around;
         align-items: center;
         margin-bottom: 20px;
-        margin-top: 70px;
+        margin-top: 120px;
         color: white;
 
         .wrapper {

@@ -45,7 +45,11 @@ function NavigationBar() {
         setIsToggle(current => !current);
     };
 
+    // 모바일 버전 메뉴바 show 상태에서는 스크롤 막기
     useEffect(() => setScrollDisabled(isToggle), [isToggle]);
+
+    // 라우터가 변경될 때는 상단바 toggle 초기화
+    useEffect(() => setIsToggle(false), [pathname]);
 
     return (
         <>

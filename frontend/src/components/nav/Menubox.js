@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { BackgroundDiv } from '..';
 
 function Menubox({ clickProps }) {
     const handleClick = () => {
@@ -6,7 +7,8 @@ function Menubox({ clickProps }) {
     };
 
     return (
-        <BackgroundDiv onClick={handleClick}>
+        <>
+            <BackgroundDiv onClick={handleClick} />
             <BoxDiv>
                 <div className="menu">Home</div>
                 <div className="menu">Personal Color</div>
@@ -19,24 +21,13 @@ function Menubox({ clickProps }) {
                     </div>
                 </div>
             </BoxDiv>
-        </BackgroundDiv>
+        </>
     );
 }
 
 export { Menubox };
 
 // styled-components
-
-const backgroundKeyframe = keyframes`
-    0% {
-        background: rgba(0, 0, 0, 0);
-        backdrop-filter: blur(0);
-    }
-    100% {
-        background: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(1.5px);
-    }
-`;
 
 const boxKeyframe = keyframes`
     0% {
@@ -45,21 +36,6 @@ const boxKeyframe = keyframes`
     100% {
         right: 0;
     }
-`;
-
-const BackgroundDiv = styled.div`
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 999;
-
-    width: 100vw;
-    height: 100vh;
-
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(1.5px);
-
-    animation: ${backgroundKeyframe} 1s ease-in-out 1;
 `;
 
 const BoxDiv = styled.div`

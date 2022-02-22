@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export function Logo() {
     return (
         <LogoDiv>
-            <LogoImg src="./image/logo.png" />
+            <LogoImg src="../image/logo.png" />
         </LogoDiv>
     );
 }

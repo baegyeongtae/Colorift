@@ -10,16 +10,12 @@
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
-    "plugins": [
-        "react"
-    ],
+    "plugins": ["react"],
     "rules": {
         "react/jsx-filename-extension": [
-            1, 
-            { 
-                "extensions": [
-                ".js", ".jsx"
-                ] 
+            1,
+            {
+                "extensions": [".js", ".jsx"]
             }
         ],
         "react/jsx-uses-react": "off",
@@ -27,11 +23,7 @@
         "import/prefer-default-export": "off",
         "react/prop-types": "off",
         "no-unused-vars": "off",
-        "no-console": "off"s
+        "no-console": "off"
     },
-    "extends": [
-        "plugin:react/recommended",
-        "airbnb",
-        "prettier"
-    ]
+    "extends": ["plugin:react/recommended", "airbnb", "prettier"]
 }

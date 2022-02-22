@@ -1,15 +1,15 @@
 import styled from 'styled-components';
-import { ContainerDiv, SubTitle, DescriptionP } from '../../components';
+import { BigTextP, DescriptionP, HomeButton, Article, HomeContainerDiv } from '../../components';
 
 export function HomeSeason() {
     return (
-        <SeasonArticle>
+        <Article color="#f8f7f3">
             <SeasonContainerDiv>
                 <SeasonImgDiv>
-                    <img src="./image/color_circle.png" alt="계절별 퍼스널 컬러 이미지" width="400px" />
+                    <img src="./image/color_circle.png" alt="계절별 퍼스널 컬러 이미지" />
                 </SeasonImgDiv>
                 <TextContainerDiv>
-                    <SubTitle>계절과 어울리는 피부톤</SubTitle>
+                    <BigTextP>계절과 어울리는 피부톤</BigTextP>
                     <DescriptionLeftP>
                         사람의 피부톤은 계절에 비유할 수 있습니다.
                         <br />
@@ -21,41 +21,64 @@ export function HomeSeason() {
                         <br />
                         분석된 결과를 토대로 어울리는 색상을 추천해드립니다.
                     </DescriptionLeftP>
+                    <HomeButton>퍼스널 컬러 예시 보기</HomeButton>
                 </TextContainerDiv>
             </SeasonContainerDiv>
-        </SeasonArticle>
+        </Article>
     );
 }
 
 // styled-components
 
-const SeasonArticle = styled.article`
-    height: 500px;
+const SeasonContainerDiv = styled(HomeContainerDiv)`
+    div:nth-child(1) {
+        order: 1;
+    }
 
-    background-color: #f8f7f3;
+    div:nth-child(2) {
+        order: 2;
+    }
 `;
 
-const SeasonContainerDiv = styled(ContainerDiv)`
-    ${({ theme }) => theme.flexStyled.flexRow};
-`;
-
-const SeasonImgDiv = styled.div`
-    width: 50%;
+export const SeasonImgDiv = styled.div`
+    width: 400px;
 
     text-align: center;
+
+    margin: 100px auto;
+
+    img {
+        width: 400px;
+    }
+
+    @media ${({ theme }) => theme.device.tablet} {
+        width: 100vw;
+
+        margin: 0 0 30px 0;
+
+        img {
+            width: 60%;
+        }
+    }
 `;
 
-const TextContainerDiv = styled.div`
-    width: 50%;
+export const TextContainerDiv = styled.div`
+    width: 80%;
 
     text-align: left;
 
-    padding: 50px 0;
-
     ${({ theme }) => theme.flexStyled.flexColumn};
+
+    @media ${({ theme }) => theme.device.laptop} {
+        all: unset;
+
+        text-align: center;
+
+        padding: 0 50px;
+    }
 `;
 
-const DescriptionLeftP = styled(DescriptionP)`
+export const DescriptionLeftP = styled(DescriptionP)`
     text-align: left;
 
     line-height: 1.7rem;

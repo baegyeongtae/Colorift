@@ -3,8 +3,6 @@ import styled, { keyframes } from 'styled-components';
 export const Article = styled.article`
     height: ${({ height }) => height};
 
-    margin-top: ${({ marginTop }) => marginTop};
-
     background-color: ${({ color }) => color};
 `;
 

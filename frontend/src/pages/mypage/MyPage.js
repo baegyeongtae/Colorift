@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Article, ContainerDiv, UserButton, Input, GrayButton } from '../../components';
+import { Article, ContainerDiv, UserButton, Input, GrayButton, NavBackgroundDiv } from '../../components';
 
 export function MyPage() {
     const dummyData = [
@@ -15,66 +15,69 @@ export function MyPage() {
         },
     ];
     return (
-        <Article height="88vh" marginTop="7vh">
-            <MyPageContainerDiv>
-                <FlexRowDiv className="area">
-                    <UserInfoDiv>
-                        <p className="option">이메일</p>
-                        <p className="email">admin@naver.com</p>
-                        <p className="option">비밀번호 변경</p>
-                        <Input type="password" width="80%" />
-                        <UserButton height="90%" onClick={() => alert('패스워드 변경 완료')}>
-                            변경하기
-                        </UserButton>
-                        <p className="option delete">회원탈퇴는 신중히 결정해주세요.</p>
-                        <UserButton height="90%" onClick={() => alert('회원탈퇴 완료')}>
-                            회원탈퇴
-                        </UserButton>
-                    </UserInfoDiv>
-                    <PersonalDiv>
-                        <SubTitleP>My Personal Color</SubTitleP>
-                        <PersonalTableDiv>
-                            <table>
-                                {dummyData.map(item => (
-                                    <tr key={item.id}>
-                                        <td className="id">{item.id}</td>
-                                        <td className="date">{item.date}</td>
-                                        <td className="color">{item.color}</td>
-                                        <td className="button">
-                                            <GrayButton
-                                                width="90%"
-                                                onClick={() => alert(`클릭하신 피부톤은 ${item.color}입니다`)}
-                                            >
-                                                상세보기
-                                            </GrayButton>
-                                        </td>
-                                        <td className="button">
-                                            <GrayButton
-                                                width="90%"
-                                                onClick={() => alert(`${item.id}번을 삭제했습니다`)}
-                                            >
-                                                삭제하기
-                                            </GrayButton>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </table>
-                        </PersonalTableDiv>
-                    </PersonalDiv>
-                </FlexRowDiv>
-                <FassionDiv className="area">
-                    <SubTitleP>My Style</SubTitleP>
-                    <FassionFlexDiv>
-                        <img src="../image/arrow.svg" alt="왼쪽 슬라이드 화살표" className="arrow left" />
-                        <div />
-                        <div />
-                        <div className="mobile" />
-                        <div className="mobile" />
-                        <img src="../image/arrow.svg" alt="왼쪽 슬라이드 화살표" className="arrow right" />
-                    </FassionFlexDiv>
-                </FassionDiv>
-            </MyPageContainerDiv>
-        </Article>
+        <>
+            <NavBackgroundDiv />
+            <Article height="88vh">
+                <MyPageContainerDiv>
+                    <FlexRowDiv className="area">
+                        <UserInfoDiv>
+                            <p className="option">이메일</p>
+                            <p className="email">admin@naver.com</p>
+                            <p className="option">비밀번호 변경</p>
+                            <Input type="password" width="80%" />
+                            <UserButton height="90%" onClick={() => alert('패스워드 변경 완료')}>
+                                변경하기
+                            </UserButton>
+                            <p className="option delete">회원탈퇴는 신중히 결정해주세요.</p>
+                            <UserButton height="90%" onClick={() => alert('회원탈퇴 완료')}>
+                                회원탈퇴
+                            </UserButton>
+                        </UserInfoDiv>
+                        <PersonalDiv>
+                            <SubTitleP>My Personal Color</SubTitleP>
+                            <PersonalTableDiv>
+                                <table>
+                                    {dummyData.map(item => (
+                                        <tr key={item.id}>
+                                            <td className="id">{item.id}</td>
+                                            <td className="date">{item.date}</td>
+                                            <td className="color">{item.color}</td>
+                                            <td className="button">
+                                                <GrayButton
+                                                    width="90%"
+                                                    onClick={() => alert(`클릭하신 피부톤은 ${item.color}입니다`)}
+                                                >
+                                                    상세보기
+                                                </GrayButton>
+                                            </td>
+                                            <td className="button">
+                                                <GrayButton
+                                                    width="90%"
+                                                    onClick={() => alert(`${item.id}번을 삭제했습니다`)}
+                                                >
+                                                    삭제하기
+                                                </GrayButton>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </table>
+                            </PersonalTableDiv>
+                        </PersonalDiv>
+                    </FlexRowDiv>
+                    <FassionDiv className="area">
+                        <SubTitleP>My Style</SubTitleP>
+                        <FassionFlexDiv>
+                            <img src="../image/arrow.svg" alt="왼쪽 슬라이드 화살표" className="arrow left" />
+                            <div />
+                            <div />
+                            <div className="mobile" />
+                            <div className="mobile" />
+                            <img src="../image/arrow.svg" alt="왼쪽 슬라이드 화살표" className="arrow right" />
+                        </FassionFlexDiv>
+                    </FassionDiv>
+                </MyPageContainerDiv>
+            </Article>
+        </>
     );
 }
 

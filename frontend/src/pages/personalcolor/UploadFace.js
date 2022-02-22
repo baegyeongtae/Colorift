@@ -351,7 +351,6 @@ const CustomButton2 = styled('span')`
         transition: all 150ms ease;
         cursor: pointer;
         width: 120px;
-
     }
     font-weight: bold;
     font-size: 0.875rem;
@@ -364,5 +363,4 @@ const CustomButton2 = styled('span')`
     cursor: pointer;
     width: 170px;
     text-align: center;
-}
 `;

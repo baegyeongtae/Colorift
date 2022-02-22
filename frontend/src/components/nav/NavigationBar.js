@@ -57,8 +57,8 @@ function NavigationBar() {
                 <Nav className={pathname === '/' && scrollY === 0 && 'transparent'}>
                     <ContainerGridDiv>
                         <Logo />
-                        <MenuBoxDiv id={isToggle && 'mobile'}>
-                            <MenuDiv id={isToggle && 'mobile'}>
+                        <MenuBoxDiv className={isToggle && 'mobile'}>
+                            <MenuDiv className={isToggle && 'mobile'}>
                                 {menus.map(menu => (
                                     <NavLink
                                         key={menu.name}
@@ -69,7 +69,7 @@ function NavigationBar() {
                                     </NavLink>
                                 ))}
                             </MenuDiv>
-                            <UserDiv id={isToggle && 'mobile'}>
+                            <UserDiv className={isToggle && 'mobile'}>
                                 <NavLink
                                     to="/login"
                                     className={pathname === '/' && scrollY === 0 ? 'transparent login' : 'login'}
@@ -149,9 +149,9 @@ const ContainerGridDiv = styled(ContainerDiv)`
 
 const MenuBoxDiv = styled.div`
     display: grid;
-    grid-template-columns: 4fr 1fr;
+    grid-template-columns: 4fr 1.2fr;
 
-    &#mobile {
+    &.mobile {
         position: fixed;
         top: 0;
         right: 0;
@@ -208,7 +208,7 @@ const MenuDiv = styled.div`
         background-color: unset;
     }
 
-    &#mobile {
+    &.mobile {
         ${({ theme }) => theme.flexStyled.flexColumn};
         justify-content: center;
 
@@ -258,7 +258,7 @@ const UserDiv = styled.div`
         padding: 10px;
     }
 
-    &#mobile {
+    &.mobile {
         ${({ theme }) => theme.flexStyled.flexColumn};
 
         height: 30%;

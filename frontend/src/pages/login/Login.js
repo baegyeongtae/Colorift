@@ -80,7 +80,7 @@ export function Login() {
 export const CenterContainerDiv = styled(ContainerDiv)`
     ${({ theme }) => theme.flexStyled.flexCenter};
 
-    height: 88vh;
+    height: 100%;
 `;
 
 export const LoginDiv = styled.div`

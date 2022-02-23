@@ -18,7 +18,7 @@ const ScrollUpDiv = styled.div`
     position: fixed;
     right: 30px;
     bottom: 70px;
-    z-index: 9999;
+    z-index: 9;
 
     width: 50px;
     height: 50px;

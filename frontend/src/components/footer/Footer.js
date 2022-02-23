@@ -6,15 +6,8 @@ export function Footer() {
 
 const FooterDiv = styled.footer`
     @media ${({ theme }) => theme.device.mobile} {
-        background-color: ${({ theme }) => theme.color.darkgray};
-        color: ${({ theme }) => theme.color.lightgray};
-        position: relative;
-        text-align: center;
-        width: 100%;
         height: 3vh;
         line-height: 3vh;
-        bottom: 0vh;
-        font-size: ${({ theme }) => theme.fontSizes.mobiletext};
     }
 
     position: relative;

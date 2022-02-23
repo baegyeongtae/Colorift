@@ -3,7 +3,7 @@
 
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { ContainerDiv, Fashion, MediumTextP, WhiteButton, RadioTextP } from '../../components';
+import { ContainerDiv, Fashion, MediumTextH, WhiteButton, RadioTextH } from '../../components';
 
 function PersonalColorChoice() {
     const [select, setSelect] = useState('betterPriceOnly');
@@ -16,7 +16,7 @@ function PersonalColorChoice() {
         <>
             <Fashion />
 
-            <MediumTextP>매칭하고싶은 퍼스널 컬러를 아래 3가지 방법 중 선택해주세요.</MediumTextP>
+            <MediumTextH>매칭하고싶은 퍼스널 컬러를 아래 3가지 방법 중 선택해주세요.</MediumTextH>
 
             <ChoiceContainerDiv>
                 <div>
@@ -29,7 +29,7 @@ function PersonalColorChoice() {
                             onChange={event => handleSelectChange(event)}
                         />
                         <RadioButtonLabel />
-                        <RadioTextP>기본 퍼스널 컬러</RadioTextP>
+                        <RadioTextH>기본 퍼스널 컬러</RadioTextH>
                     </Item>
                     <TextH3>
                         기본으로 지정된 봄 웜톤 / 여름 쿨톤 / 가을 웜톤 / 겨울 쿨톤 중 선택 1 정확도가 떨어질 수
@@ -56,7 +56,7 @@ function PersonalColorChoice() {
                             onChange={event => handleSelectChange(event)}
                         />
                         <RadioButtonLabel />
-                        <RadioTextP>직전에 분석한 퍼스널 컬러</RadioTextP>
+                        <RadioTextH>직전에 분석한 퍼스널 컬러</RadioTextH>
                     </Item>
                     <TextH3>퍼스널 컬러 결과 페이지에서 ‘패션 매칭하기’ 버튼을 클릭해야 합니다.</TextH3>
                 </div>
@@ -73,7 +73,7 @@ function PersonalColorChoice() {
                             onChange={event => handleSelectChange(event)}
                         />
                         <RadioButtonLabel />
-                        <RadioTextP>마이 퍼스널 컬러</RadioTextP>
+                        <RadioTextH>마이 퍼스널 컬러</RadioTextH>
                     </Item>
                     <TextH3>로그인 유저는 기존에 저장한 퍼스널 컬러로 매칭할 수 있습니다.</TextH3>
                 </div>

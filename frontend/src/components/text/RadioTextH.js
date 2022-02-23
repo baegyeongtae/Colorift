@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const RadioTextP = styled.h2`
+export const RadioTextH = styled.h2`
     @media ${({ theme }) => theme.device.mobile} {
         font-size: ${({ theme }) => theme.fontSizes.mediumtext};
     }

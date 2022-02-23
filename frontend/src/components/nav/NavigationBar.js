@@ -295,3 +295,10 @@ const MenuImg = styled.img.attrs(({ className }) => ({
         filter: invert(100%) sepia(0%) saturate(7493%) hue-rotate(148deg) brightness(117%) contrast(101%);
     }
 `;
+
+const FooterContainerDiv = styled.div`
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+`;

@@ -22,22 +22,18 @@ function NavigationBar() {
         {
             name: 'Home',
             path: '/',
-            className: 'home',
         },
         {
             name: 'Personal Color',
             path: '/example',
-            className: 'example',
         },
         {
             name: 'Color Analysis',
             path: '/personalcolor',
-            className: 'personalcolor',
         },
         {
             name: 'Fashion Matching',
             path: '/fashion',
-            className: 'fashion',
         },
     ];
 

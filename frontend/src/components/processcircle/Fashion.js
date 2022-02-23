@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ContainerDiv } from '..';
+import { ContainerDiv, DescriptionP } from '..';
 
 export function Fashion() {
     return (
@@ -92,7 +92,7 @@ const CircleContainerDiv = styled(ContainerDiv)`
         justify-content: space-around;
         align-items: center;
         margin-bottom: 20px;
-        margin-top: 70px;
+        margin-top: 100px;
         color: white;
 
         .wrapper {
@@ -138,7 +138,7 @@ const CircleContainerDiv = styled(ContainerDiv)`
     }
 `;
 
-const TextH0 = styled.h2`
+const TextH0 = styled(DescriptionP)`
     @media ${({ theme }) => theme.device.mobile} {
         font-size: ${({ theme }) => theme.fontSizes.mobiletext};
         margin-top: 20px;

@@ -9,6 +9,9 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from app.models import User, Color, Fashion
 from app.serializers import *
 from datetime import date
+from ai import personal_color
+import numpy as np
+import cv2
 
 
 """ 
@@ -71,13 +74,18 @@ class ColorTest(APIView):
 
     parser_classes = [FormParser, MultiPartParser]
 
-    def color_ai_model(self):  # 머신러닝 모델과 연결 필요
-        return 'SP'
+    def color_ai_model(self, file_obj):  # 머신러닝 모델과 연결 필요
+
+        nparr = np.fromstring(file_obj.read(), dtype=np.uint8)
+        img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        color_result = personal_color.analysis(img)
+        return color_result
+        # return 'SP'
 
     def post(self, request, format=None):
         file_obj = request.data['image']
         if file_obj:
-            res = self.color_ai_model()  # 머신 러닝 모델과 연결 필요
+            res = self.color_ai_model(file_obj)  # 머신 러닝 모델과 연결 필요
 
             # 로그인 유저의 경우 추가로 user_id도 저장해줘야 한다.
             data = {'color': res, 'image': file_obj, 'date': date.today()}

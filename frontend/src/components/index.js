@@ -1,7 +1,6 @@
-/* eslint-disable import/no-cycle */
 // import 정리용 파일입니다.
 
-export { Footer } from './footer';
+export { Footer } from './footer/Footer';
 export { PhotoUpload, ResultImage } from './picture';
 export { ProgressBar } from './progressbar';
 export { NavigationBar, NavBackgroundDiv } from './nav';

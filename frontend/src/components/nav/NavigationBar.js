@@ -121,7 +121,7 @@ const Nav = styled.nav`
     z-index: 99;
 
     width: 100vw;
-    height: 60px;
+    height: 7vh;
 
     background-color: ${({ theme }) => theme.color.nav};
 

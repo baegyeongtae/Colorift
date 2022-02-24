@@ -1,8 +1,21 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 import Stack from '@mui/material/Stack';
-import { ResultImage, Color, SubTitleP, ContainerDiv, BlueButton } from '../../components';
+import { colorPageState } from '../../utils/data/atom';
+import { ResultImage, Color, SubTitleP, ContainerDiv, BlueButton, SeasonColor, MediumTextH } from '../../components';
 
 function ColorResult() {
+    const navigate = useNavigate();
+    const setColorPage = useSetRecoilState(colorPageState);
+
+    const season = {
+        spring: 'spring',
+        summer: 'summer',
+        autumn: 'autumn',
+        winter: 'winter',
+    };
+
     return (
         <>
             <Color />
@@ -14,36 +27,18 @@ function ColorResult() {
             <SubTitleP>회원님은 봄 웜톤 입니다.</SubTitleP>
 
             <ColorContainerDiv>
-                <div className="wrapper">
-                    <div className="text">회원님에게 어울리는 컬러</div>
-                    <div className="blank_circle" />
-                    <div className="blank_circle" />
-                    <div className="blank_circle" />
-                </div>
-                <div className="wrapper">
-                    <div className="circle" />
-                    <div className="circle" />
-                    <div className="circle" />
-                    <div className="circle" />
-                </div>
-                <div className="wrapper">
-                    <div className="circle" />
-                    <div className="circle" />
-                    <div className="circle" />
-                    <div className="circle" />
-                </div>
-                <div className="wrapper">
-                    <div className="circle" />
-                    <div className="circle" />
-                    <div className="circle" />
-                    <div className="circle" />
-                </div>
+                <MediumTextLeftH>회원님에게 어울리는 컬러</MediumTextLeftH>
+                <SeasonColor season={season.winter} />
             </ColorContainerDiv>
 
             <ButtonContainerDiv>
                 <Stack spacing={2} direction="row">
-                    <BlueButton>업로드 </BlueButton>
-                    <BlueButton>결과보기</BlueButton>
+                    <BlueButton type="submit" onClick={() => setColorPage(0)}>
+                        다시 분석하기
+                    </BlueButton>
+                    <BlueButton type="submit" onClick={() => navigate('/personalcolorchoice')}>
+                        패션 매칭하기
+                    </BlueButton>
                 </Stack>
             </ButtonContainerDiv>
         </>
@@ -56,129 +51,19 @@ export { ColorResult };
 
 const ColorContainerDiv = styled(ContainerDiv)`
     background-color: ${({ theme }) => theme.color.white};
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
     align-items: center;
-    margin-bottom: 20px;
-    margin-top: 80px;
-    margin-left: 200px;
-    margin-right: 200px;
 
-    .wrapper {
-        width: 100%;
-        height: auto;
-        position: relative;
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        margin-bottom: 7px;
-    }
-
-    .circle {
-        width: 100px;
-        height: 100px;
-        position: relative;
-        border-radius: 50%;
-        background-color: ${({ theme }) => theme.color.blue};
-    }
-
-    .blank_circle {
-        width: 50px;
-        height: 70px;
-        position: relative;
-        border-radius: 50%;
-        background-color: white;
-    }
-
-    .text {
-        font-size: 1.15rem;
-    }
-
-    @media ${({ theme }) => theme.device.laptop} {
-        background-color: ${({ theme }) => theme.color.white};
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-        margin-bottom: 8px;
-        margin-top: 50px;
-        margin-left: 80px;
-        margin-right: 80px;
-
-        .wrapper {
-            width: 100%;
-            height: auto;
-            position: relative;
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-            margin-bottom: 7px;
-        }
-
-        .circle {
-            width: 100px;
-            height: 100px;
-            position: relative;
-            border-radius: 50%;
-            background-color: ${({ theme }) => theme.color.blue};
-        }
-
-        .blank_circle {
-            width: 50px;
-            height: 70px;
-            position: relative;
-            border-radius: 50%;
-            background-color: white;
-        }
-
-        .text {
-            font-size: 1.15rem;
-        }
-    }
+    width: 640px;
 
     @media ${({ theme }) => theme.device.mobile} {
         all: unset;
 
+        width: 270px;
         background-color: ${({ theme }) => theme.color.white};
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
         align-items: center;
         margin-bottom: 8px;
-        margin-top: 30px;
         margin-left: 20px;
         margin-right: 20px;
-
-        .wrapper {
-            width: 100%;
-            height: auto;
-            position: relative;
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-            margin-bottom: 7px;
-        }
-
-        .circle {
-            width: 55px;
-            height: 55px;
-            position: relative;
-            border-radius: 50%;
-            background-color: ${({ theme }) => theme.color.blue};
-        }
-
-        .blank_circle {
-            width: 30px;
-            height: 30px;
-            position: relative;
-            border-radius: 50%;
-            background-color: white;
-        }
-
-        .text {
-            font-size: ${({ theme }) => theme.fontSizes.smalltext};
-        }
     }
 `;
 
@@ -229,5 +114,18 @@ const ButtonContainerDiv = styled.div`
         align-items: center;
         margin-bottom: 20px;
         margin-top: 40px;
+    }
+`;
+
+const MediumTextLeftH = styled(MediumTextH)`
+    margin-top: 80px;
+    margin-bottom: 20px;
+    align-items: center;
+    font-size: ${({ theme }) => theme.fontSizes.mediumtext};
+
+    @media ${({ theme }) => theme.device.mobile} {
+        font-size: ${({ theme }) => theme.fontSizes.mobiletext};
+        width: 260px;
+        align-items: center;
     }
 `;

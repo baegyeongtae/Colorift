@@ -10,4 +10,14 @@ export { ExampleTitle, ExampleImage, ExampleColor } from './example';
 export { ScrollUpIcon, ModalCloseIcon, Logo } from './icon';
 export { UserInputDiv, FindPasswordModal, Input } from './login';
 export { HomeButton, UserButton, GrayButton, BlueButton, WhiteButton } from './button';
-export { Color, Fashion, ProgressBar, BestWorstLi, PhotoUpload, ResultImage } from './procedure';
+export {
+    Color,
+    Fashion,
+    ProgressBar,
+    BestWorstLi,
+    PhotoUpload,
+    ResultImage,
+    SeasonColor,
+    MatchingResult,
+    PercentResult,
+} from './procedure';

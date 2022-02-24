@@ -88,7 +88,7 @@ function NavigationBar() {
                         </MenuIconDiv>
                     </ContainerGridDiv>
                 </Nav>
-                <BackgroundDiv onClick={handleToggleClick} className={isToggle && 'mobile'} />
+                <BackgroundDiv onClick={handleToggleClick} className={isToggle && 'show'} />
             </header>
             <main>
                 <Outlet />

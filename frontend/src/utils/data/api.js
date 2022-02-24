@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import axios from 'axios';
 
-// 토큰 넣은 상태의 axios 인스턴스 생성
+// axios 인스턴스 생성
 const axiosGetUserConfig = axios.create({
     baseURL: `${process.env.REACT_APP_SERVER_ADDRESS}`, // 기본 서버 주소 입력 => 아직 미정
     headers: {
@@ -10,54 +10,48 @@ const axiosGetUserConfig = axios.create({
     },
 });
 
-// 쿠키가 존재할 경우 헤더에 넣는 함수
-function setAccessToken() {
-    const accessToken = Cookies.get('accessToken');
-    if (accessToken) axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-}
-
-// refresh 토큰 발급
-export async function setRefreshToken() {
+// acces 토큰 재발급
+export async function getAccessToken() {
     try {
         const response = await axiosGetUserConfig({
             method: 'post',
             url: '/token/refresh/',
         });
-        return response;
+
+        Cookies.set('accessToken', response.data.tokens.access, {
+            path: '/',
+            expires: new Date(response.data.tokens.expired * 1000), // 테스트 기준 5분 (초 단위로 응답)
+            secure: true,
+            // httpOnly: true, // 배포하면 주석 제거 필수 (보안용)
+        });
+
+        return response.data.tokens.access;
     } catch (error) {
         return error.response;
     }
 }
 
-// export async function setRefreshToken() {
-//     const accessToken = Cookies.get("accessToken");
-//     const refreshToken = Cookies.get("refreshToken");
+// access 토큰 유효성 검증 함수
+export async function accessAvailableCheck() {
+    const accessToken = Cookies.get('accessToken');
+    const refreshToken = Cookies.get('refreshToken');
 
-//     // 로그인 된 상태라면
-//     if (refreshToken) {
-//       // 토큰이 유효한지 검증한다.
-//       let response = await userTokenVerify(accessToken);
+    // accessToken이 존재할 경우 헤더에 넣는다
+    if (accessToken) {
+        axiosGetUserConfig.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+        return;
+    }
 
-//       // access token이 토큰이 만료 되었다면
-//       if (response.status >= 300) {
-//         //refresh 를 시도한다.
-//         response = await userTokenRefresh(refreshToken, secure);
+    // accessToken이 존재하지 않고, refreshToken은 존재할 경우
+    if (refreshToken) {
+        const reAccessToken = await getAccessToken();
+        axiosGetUserConfig.defaults.headers.common.Authorization = `Bearer ${reAccessToken}`;
+        return;
+    }
 
-//         // refresh 가 안된다면
-//         if (response.status >= 300) {
-//           // refresh 토큰도 만료된 것
-//           // 로그아웃 처리
-//           Cookies.remove("accessToken");
-//           Cookies.remove("refreshToken");
-//           Cookies.remove("username");
-//           Cookies.remove("email");
-//           return false;
-//         }
-//       }
-//       return true;
-//     }
-//     return true;
-//   }
+    // accessToken이 존재하지 않고, refreshToken도 존재하지 않을 경우
+    throw new Error('refreshToken이 없습니다. 다시 로그인 해주세요.');
+}
 
 // 회원가입
 export async function setUserRegister(_email, _password) {
@@ -78,16 +72,33 @@ export async function setUserRegister(_email, _password) {
 
 // 로그인
 export async function setUserLogin(_email, _password) {
+    const userData = {
+        username: _email,
+        password: _password,
+    };
+
     try {
         const response = await axiosGetUserConfig({
             method: 'post',
             url: '/token/',
-            data: {
-                username: _email,
-                password: _password,
-            },
+            data: userData,
         });
-        return response;
+
+        sessionStorage.setItem('userProfile', JSON.stringify(userData));
+        Cookies.set('accessToken', response.data.tokens.access, {
+            path: '/',
+            expires: new Date(response.data.tokens.expired * 1000), // 테스트 기준 5분 (초 단위로 응답)
+            secure: true,
+            // httpOnly: true, // 배포하면 주석 제거 필수 (보안용)
+        });
+        Cookies.set('refreshToken', response.data.tokens.refresh, {
+            path: '/',
+            expires: new Date(Date.now() + 60 * 60 * 24 * 1000 * 90), // 테스트 기준 90일
+            secure: true,
+            // httpOnly: true, // 배포하면 주석 제거 필수 (보안용)
+        });
+
+        return true;
     } catch (error) {
         return error.response;
     }

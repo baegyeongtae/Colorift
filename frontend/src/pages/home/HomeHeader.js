@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { HomeContainerDiv, HomeButton, TitleP } from '../../components';
+import { browserImg, colorBackgroundImg } from '../../image';
 
 export function HomeHeader() {
     return (
@@ -33,7 +34,7 @@ export function HomeHeader() {
                     </ButtonDiv>
                 </TextDiv>
                 <ExampleImgDiv>
-                    <img src="./image/browser.png" alt="샘플 이미지" />
+                    <img src={browserImg} alt="샘플 이미지" />
                 </ExampleImgDiv>
             </HomeContainerDiv>
         </Header>
@@ -43,7 +44,7 @@ export function HomeHeader() {
 // styled-components
 
 const Header = styled.header`
-    background-image: url('./image/color.jpg');
+    background-image: url(${colorBackgroundImg});
     background-repeat: no-repeat;
     background-size: cover;
 

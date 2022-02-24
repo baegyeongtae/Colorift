@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { xmarkIcon } from '../../image';
 
 export function ModalCloseIcon({ clickProps }) {
     const handleClick = () => {
@@ -6,7 +7,7 @@ export function ModalCloseIcon({ clickProps }) {
     };
     return (
         <ModalCloseDiv onClick={handleClick}>
-            <img src="./image/x-mark.svg" alt="모달 닫기 아이콘" />
+            <img src={xmarkIcon} alt="모달 닫기 아이콘" />
         </ModalCloseDiv>
     );
 }

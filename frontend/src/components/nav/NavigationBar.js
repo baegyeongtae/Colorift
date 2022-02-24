@@ -5,6 +5,7 @@ import { Logo, Footer, BackgroundDiv } from '..';
 import { ContainerDiv } from '../area/ContainerDiv';
 import { useGetScrollY } from '../../utils/hooks/useGetScrollY';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
+import { xmarkIcon, menuIcon } from '../../image';
 
 function NavigationBar() {
     // true 이면 메뉴 바 나옴
@@ -288,7 +289,7 @@ const MenuIconDiv = styled.div`
 `;
 
 const MenuImg = styled.img.attrs(({ className }) => ({
-    src: className === 'show' ? './image/x-mark.svg' : './image/menu.svg',
+    src: className === 'show' ? xmarkIcon : menuIcon,
     alt: '메뉴 아이콘',
 }))`
     display: block;

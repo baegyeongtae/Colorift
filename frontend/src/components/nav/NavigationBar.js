@@ -88,7 +88,7 @@ function NavigationBar() {
                         </MenuIconDiv>
                     </ContainerGridDiv>
                 </Nav>
-                {isToggle && <BackgroundDiv onClick={handleToggleClick} />}
+                <BackgroundDiv onClick={handleToggleClick} className={isToggle && 'mobile'} />
             </header>
             <main>
                 <Outlet />
@@ -126,6 +126,14 @@ const Nav = styled.nav`
     &.transparent {
         background-color: transparent;
         box-shadow: unset;
+    }
+
+    + div {
+        display: none;
+    }
+
+    + .mobile {
+        display: initial;
     }
 `;
 

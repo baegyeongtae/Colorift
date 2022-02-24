@@ -128,14 +128,6 @@ const Nav = styled.nav`
         background-color: transparent;
         box-shadow: unset;
     }
-
-    + div {
-        display: none;
-    }
-
-    + .show {
-        display: initial;
-    }
 `;
 
 const ContainerGridDiv = styled(ContainerDiv)`

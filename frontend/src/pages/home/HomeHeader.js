@@ -68,7 +68,9 @@ const TextDiv = styled.div`
 `;
 
 const ExampleImgDiv = styled.div`
-    ${({ theme }) => theme.flexStyled.flexCenter};
+    img {
+        width: 100%;
+    }
 
     @media ${({ theme }) => theme.device.tablet} {
         padding: 0 30px;

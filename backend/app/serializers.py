@@ -49,7 +49,7 @@ class FashionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Fashion
-        fields = ['id', 'user', 'color', 'image', 'date', 'total_match_rate', 'color_match_rate', 'brightness_match_rate', 'saturation_match_rate']
+        fields = ['id', 'user', 'color', 'image', 'date', 'color_match_rate', 'brightness_match_rate', 'saturation_match_rate']
 
 
 class FashionDigestSerializer(serializers.ModelSerializer):

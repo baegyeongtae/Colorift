@@ -75,6 +75,7 @@ class ColorTest(APIView):
     parser_classes = [FormParser, MultiPartParser]
 
     def color_ai_model(self, file_obj):  # 머신러닝 모델과 연결 필요
+        return 'SP'
 
         nparr = np.fromstring(file_obj.read(), dtype=np.uint8)
         img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
@@ -95,7 +96,7 @@ class ColorTest(APIView):
             serializer = ColorSerializer(data=data)
             if serializer.is_valid():
                 serializer.save()
-                return Response({'color': res}, status=status.HTTP_201_CREATED)
+                return Response({'color': res}, status=status.HTTP_200_OK)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -120,9 +121,9 @@ class ColorTestDetail(APIView):
         color = self.get_object(pk)
         if request.user.id == color.user_id:
             serializer = ColorSerializer(color)
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         else:
-            return Response(status=status.HTTP_423_LOCKED)  # locked => 접근할수 없는 자원(내 자원이 아니어서)
+            return Response(status=status.HTTP_403_FORBIDDEN)  # locked => 접근할수 없는 자원(내 자원이 아니어서)
 
     def delete(self, request, pk, format=None):
         color = self.get_object(pk)
@@ -130,7 +131,7 @@ class ColorTestDetail(APIView):
             color.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         else:
-            return Response(status=status.HTTP_423_LOCKED)
+            return Response(status=status.HTTP_403_FORBIDDEN)
 
 
 class ColorTestList(APIView):
@@ -144,7 +145,7 @@ class ColorTestList(APIView):
         user = request.user
         colors = user.color_set.all()
         serializer = ColorDigestSerializer(colors, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 """
@@ -160,7 +161,7 @@ class FashionTest(APIView):
     parser_classes = [FormParser, MultiPartParser]
 
     def fashion_ai_model(self):  # 머신러닝 모델과 연결 필요
-        return {'total_match_rate': 50, 'color_match_rate': 50, 'brightness_match_rate': 50, 'saturation_match_rate': 50}
+        return {'color_match_rate': 50, 'brightness_match_rate': 50, 'saturation_match_rate': 50}
 
     def post(self, request, format=None):
         file_obj = request.data['image']  # serializer를 만들까말까
@@ -176,7 +177,7 @@ class FashionTest(APIView):
             serializer = FashionSerializer(data=data)
             if serializer.is_valid():
                 serializer.save()
-                return Response({'fashion': res}, status=status.HTTP_201_CREATED)
+                return Response(res, status=status.HTTP_200_OK)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -194,16 +195,16 @@ class FashionTestDetail(APIView):
     def get_object(self, pk):
         try:
             return Fashion.objects.get(pk=pk)
-        except Color.DoesNotExist:
+        except Fashion.DoesNotExist:
             raise Http404
 
     def get(self, request, pk, format=None):
         fashion = self.get_object(pk)
         if request.user.id == fashion.user_id:
             serializer = FashionSerializer(fashion)
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         else:
-            return Response(status=status.HTTP_423_LOCKED)  # locked => 접근할수 없는 자원(내 자원이 아니어서)
+            return Response(status=status.HTTP_403_FORBIDDEN)  # locked => 접근할수 없는 자원(내 자원이 아니어서)
 
     def delete(self, request, pk, format=None):
         fashion = self.get_object(pk)
@@ -211,7 +212,7 @@ class FashionTestDetail(APIView):
             fashion.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         else:
-            return Response(status=status.HTTP_423_LOCKED)
+            return Response(status=status.HTTP_403_FORBIDDEN)
 
 
 class FashionTestList(APIView):
@@ -225,4 +226,4 @@ class FashionTestList(APIView):
         user = request.user
         fashions = user.fashion_set.all()
         serializer = FashionDigestSerializer(fashions, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)

@@ -23,7 +23,6 @@ class Fashion(models.Model):
     color = models.CharField(max_length=2, choices=SEASON_CHOICES, default='SP')
     image = models.ImageField(upload_to='fashion/')
     date = models.DateField()
-    total_match_rate = models.IntegerField()
     color_match_rate = models.IntegerField()
     brightness_match_rate = models.IntegerField()
     saturation_match_rate = models.IntegerField()

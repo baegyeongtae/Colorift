@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
     Article,
     ContainerDiv,
@@ -10,13 +10,25 @@ import {
     NavBackgroundDiv,
 } from '../../components';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
+import { setUserLogin } from '../../utils/data/api';
 
 export function Login() {
+    // 비밀번호 찾기 모달
     const [findModal, setFindModal] = useState(false);
+
+    // input 값을 받아오기 위한 ref
+    const emailRef = useRef();
+    const passwordRef = useRef();
 
     function handleToggleModal() {
         setFindModal(current => !current);
     }
+
+    const handleSubmit = event => {
+        event.preventDefault();
+        console.log('emailRef', emailRef.current.value);
+        console.log('passwordRef', passwordRef.current.value);
+    };
 
     useEffect(() => setScrollDisabled(findModal), [findModal]);
 
@@ -30,16 +42,10 @@ export function Login() {
                         <TitleP color="#3C64B1" className="column">
                             Login
                         </TitleP>
-                        <UserForm className="column">
-                            <UserInputDiv text="Email" type="email" />
-                            <UserInputDiv text="Password" type="password" />
-                            <UserButton
-                                type="submit"
-                                width="80%"
-                                height="80%"
-                                className="login_button column"
-                                onClick={() => window.open('/', '_self')}
-                            >
+                        <UserForm onSubmit={handleSubmit}>
+                            <UserInputDiv text="Email" type="email" name="email" ref={emailRef} />
+                            <UserInputDiv text="Password" type="password" name="password" ref={passwordRef} />
+                            <UserButton type="submit" width="80%" height="80%" className="login_button column">
                                 로그인
                             </UserButton>
                         </UserForm>

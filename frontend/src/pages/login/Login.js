@@ -20,14 +20,17 @@ export function Login() {
     const emailRef = useRef();
     const passwordRef = useRef();
 
+    // 비밀번호 찾기 모달의 상태 변환 함수
     function handleToggleModal() {
         setFindModal(current => !current);
     }
 
+    // 이메일, 비밀번호 form submit 함수
     const handleSubmit = event => {
         event.preventDefault();
-        console.log('emailRef', emailRef.current.value);
-        console.log('passwordRef', passwordRef.current.value);
+        // const response = async () => {
+        //     const
+        // }
     };
 
     useEffect(() => setScrollDisabled(findModal), [findModal]);
@@ -43,7 +46,7 @@ export function Login() {
                             Login
                         </TitleP>
                         <UserForm onSubmit={handleSubmit}>
-                            <UserInputDiv text="Email" type="email" name="email" ref={emailRef} />
+                            <UserInputDiv text="Email" type="text" name="email" ref={emailRef} />
                             <UserInputDiv text="Password" type="password" name="password" ref={passwordRef} />
                             <UserButton type="submit" width="80%" height="80%" className="login_button column">
                                 로그인

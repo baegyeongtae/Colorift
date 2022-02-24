@@ -1,8 +1,12 @@
 import styled from 'styled-components';
+import { useSetRecoilState } from 'recoil';
 import Stack from '@mui/material/Stack';
 import { PhotoUpload, ContainerDiv, Fashion, SubTitleP, BestWorstLi, BlueButton, WhiteButton } from '../../components';
+import { fashionPageState } from '../../utils/data/atom';
 
 function UploadFashion() {
+    const setFashionPage = useSetRecoilState(fashionPageState);
+
     return (
         <>
             <Fashion />
@@ -16,7 +20,9 @@ function UploadFashion() {
                         <ButtonContainerDiv>
                             <Stack spacing={2} direction="row">
                                 <BlueButton>업로드</BlueButton>
-                                <WhiteButton>결과보기</WhiteButton>
+                                <WhiteButton type="submit" onClick={() => setFashionPage(2)}>
+                                    결과보기
+                                </WhiteButton>
                             </Stack>
                         </ButtonContainerDiv>
                     </TextContainerDiv>

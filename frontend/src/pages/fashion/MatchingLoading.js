@@ -1,7 +1,16 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 import { ContainerDiv, Fashion, MediumTextH } from '../../components';
+import { fashionPageState } from '../../utils/data/atom';
 
 function MatchingLoading() {
+    const setFashionPage = useSetRecoilState(fashionPageState);
+
+    setTimeout(() => {
+        setFashionPage(3);
+    }, 2000);
+
     return (
         <ContainerDiv>
             <Fashion />

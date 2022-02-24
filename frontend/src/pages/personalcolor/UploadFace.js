@@ -1,8 +1,12 @@
 import styled from 'styled-components';
+import { useSetRecoilState } from 'recoil';
 import Stack from '@mui/material/Stack';
+import { colorPageState } from '../../utils/data/atom';
 import { PhotoUpload, ContainerDiv, BestWorstLi, SubTitleP, Color, BlueButton, WhiteButton } from '../../components';
 
 function UploadFace() {
+    const setColorPage = useSetRecoilState(colorPageState);
+
     return (
         <>
             <Color />
@@ -16,7 +20,9 @@ function UploadFace() {
                         <ButtonContainerDiv>
                             <Stack spacing={2} direction="row">
                                 <BlueButton>업로드</BlueButton>
-                                <WhiteButton>결과보기</WhiteButton>
+                                <WhiteButton type="submit" onClick={() => setColorPage(1)}>
+                                    결과보기
+                                </WhiteButton>
                             </Stack>
                         </ButtonContainerDiv>
                     </TextContainerDiv>

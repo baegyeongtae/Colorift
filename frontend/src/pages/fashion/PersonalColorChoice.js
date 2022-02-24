@@ -2,8 +2,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
 import React, { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { ContainerDiv, Fashion, MediumTextH, WhiteButton, RadioTextH } from '../../components';
+import { fashionPageState } from '../../utils/data/atom';
 
 function PersonalColorChoice() {
     const [select, setSelect] = useState('betterPriceOnly');
@@ -11,6 +13,7 @@ function PersonalColorChoice() {
         const { value } = event.target;
         setSelect(value);
     };
+    const setFashionPage = useSetRecoilState(fashionPageState);
 
     return (
         <>
@@ -86,7 +89,9 @@ function PersonalColorChoice() {
             </ChoiceContainerDiv>
 
             <ButtonContainerDiv>
-                <WhiteButton>다음으로</WhiteButton>
+                <WhiteButton type="submit" onClick={() => setFashionPage(1)}>
+                    다음으로
+                </WhiteButton>
             </ButtonContainerDiv>
         </>
     );

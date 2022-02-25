@@ -13,6 +13,7 @@ import {
     ContainerDiv,
     PercentResult,
 } from '../../components';
+import { hue, saturation, value } from '../../image';
 
 function FashionResult() {
     const navigate = useNavigate();
@@ -34,21 +35,21 @@ function FashionResult() {
                         <DescriptionLeftTitleP>색상(Color, Hue)이란</DescriptionLeftTitleP>
                         <DescriptionLeftSubTitleP>일반적으로 부르는 빛깔 이름을 뜻합니다.</DescriptionLeftSubTitleP>
                         <ImgContainerDiv>
-                            <img src="./image/explanation/hue.jpg" alt="Hue" />
+                            <img src={hue} alt="Hue" />
                         </ImgContainerDiv>
                     </div>
                     <div>
                         <DescriptionLeftTitleP>명도(Brightness, Value)란</DescriptionLeftTitleP>
                         <DescriptionLeftSubTitleP>밝기로 색상을 표현하는 것을 말합니다.</DescriptionLeftSubTitleP>
                         <ImgContainerDiv>
-                            <img src="./image/explanation/value.jpg" alt="Brightness" />
+                            <img src={saturation} alt="Brightness" />
                         </ImgContainerDiv>
                     </div>
                     <div>
                         <DescriptionLeftTitleP>채도(Saturation)란</DescriptionLeftTitleP>
                         <DescriptionLeftSubTitleP>색의 선명함 정도를 말합니다.</DescriptionLeftSubTitleP>
                         <ImgContainerDiv>
-                            <img src="./image/explanation/saturation.jpg" alt="Saturation" />
+                            <img src={value} alt="Saturation" />
                         </ImgContainerDiv>
                     </div>
                 </div>

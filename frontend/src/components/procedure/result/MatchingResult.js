@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { BigTextP, ContainerDiv } from '../../index';
+import { happy, soso, bad } from '../../../image';
 
 export function MatchingResult() {
     const resultData = {
@@ -11,7 +12,7 @@ export function MatchingResult() {
         <>
             <ResultText>Happy Fashion</ResultText>
             <ImgContainerDiv>
-                <img src="./image/emoticon/happy.png" alt="Happy" width="90px" height="90px" />
+                <img src={happy} alt="Happy" width="90px" height="90px" />
             </ImgContainerDiv>
         </>
     );

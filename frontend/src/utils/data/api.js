@@ -64,6 +64,9 @@ export async function setUserRegister(_email, _password) {
                 password: _password,
             },
         });
+        alert('회원가입이 완료되었습니다.');
+
+        window.open('/login', '_self');
         return response;
     } catch (error) {
         return error.response;
@@ -101,7 +104,7 @@ export async function setUserLogin(_email, _password) {
         });
 
         window.open('/', '_self');
-        return true;
+        return response;
     } catch (error) {
         return error.response;
     }

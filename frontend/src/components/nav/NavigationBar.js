@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Outlet, useLocation, NavLink } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
+import Cookies from 'js-cookie';
 import { Logo, Footer, BackgroundDiv } from '..';
 import { ContainerDiv } from '../area/ContainerDiv';
 import { useGetScrollY } from '../../utils/hooks/useGetScrollY';
@@ -38,6 +39,12 @@ function NavigationBar() {
         },
     ];
 
+    function cookieReset() {
+        Cookies.remove('accessToken');
+        Cookies.remove('refreshToken');
+    }
+
+    // 메뉴바 클릭 상태 변환하는 함수
     const handleToggleClick = () => {
         setIsToggle(current => !current);
     };
@@ -47,6 +54,12 @@ function NavigationBar() {
 
     // 라우터가 변경될 때는 상단바 toggle 초기화
     useEffect(() => setIsToggle(false), [pathname]);
+
+    // 홈페이지가 꺼질 때 토큰도 정리하기
+    // useEffect(() => {
+    //     console.log('컴포넌트가 화면에 나타남');
+    //     return cookieReset();
+    // });
 
     return (
         <>

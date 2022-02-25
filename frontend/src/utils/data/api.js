@@ -84,8 +84,6 @@ export async function setUserLogin(_email, _password) {
             data: userData,
         });
 
-        console.log(response);
-
         const expire = (1 / 24 / 60) * 5; // 5분
 
         sessionStorage.setItem('userProfile', JSON.stringify(userData));
@@ -102,6 +100,7 @@ export async function setUserLogin(_email, _password) {
             // httpOnly: true, // 배포하면 주석 제거 필수 (보안용)
         });
 
+        window.open('/', '_self');
         return true;
     } catch (error) {
         return error.response;

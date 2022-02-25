@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const SubTitleP = styled.p`
     @media ${({ theme }) => theme.device.mobile} {
-        font-size: ${({ theme }) => theme.fontSizes.smalltext};
+        font-size: ${({ theme }) => theme.fontSizes.mediumtext};
         font-weight: bold;
         margin: 20px;
     }

@@ -25,12 +25,18 @@ export function Login() {
         setFindModal(current => !current);
     }
 
+    // 로그인 함수
+    async function userLogin(_email, _password) {
+        const response = await setUserLogin(_email, _password);
+        return response;
+    }
+
     // 이메일, 비밀번호 form submit 함수
     const handleSubmit = event => {
         event.preventDefault();
-        // const response = async () => {
-        //     const
-        // }
+        const response = userLogin(emailRef.current.value, passwordRef.current.value);
+
+        window.open('/', '_self');
     };
 
     useEffect(() => setScrollDisabled(findModal), [findModal]);

@@ -84,16 +84,20 @@ export async function setUserLogin(_email, _password) {
             data: userData,
         });
 
+        console.log(response);
+
+        const expire = (1 / 24 / 60) * 5; // 5분
+
         sessionStorage.setItem('userProfile', JSON.stringify(userData));
-        Cookies.set('accessToken', response.data.tokens.access, {
+        Cookies.set('accessToken', response.data.access, {
             path: '/',
-            expires: new Date(response.data.tokens.expired * 1000), // 테스트 기준 5분 (초 단위로 응답)
+            expires: expire, // 테스트 기준 5분 (초 단위로 응답)
             secure: true,
             // httpOnly: true, // 배포하면 주석 제거 필수 (보안용)
         });
-        Cookies.set('refreshToken', response.data.tokens.refresh, {
+        Cookies.set('refreshToken', response.data.refresh, {
             path: '/',
-            expires: new Date(Date.now() + 60 * 60 * 24 * 1000 * 90), // 테스트 기준 90일
+            expires: 90, // 테스트 기준 90일
             secure: true,
             // httpOnly: true, // 배포하면 주석 제거 필수 (보안용)
         });

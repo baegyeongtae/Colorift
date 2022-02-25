@@ -28,7 +28,7 @@ export function Login() {
 
     return (
         <>
-            {findModal && <FindPasswordModal clickProps={() => handleToggleModal()} />}
+            <FindPasswordModal className={findModal && 'show'} clickProps={() => handleToggleModal()} />
             <NavBackgroundDiv />
             <Article height="88vh">
                 <CenterContainerDiv>

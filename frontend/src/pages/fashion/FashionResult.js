@@ -62,7 +62,7 @@ function FashionResult() {
                     <CustomButton type="submit" onClick={() => setFashionPage(0)}>
                         다른 옷 매칭하기
                     </CustomButton>
-                    <CustomButton type="submit" onClick={() => navigate('/uploadface')}>
+                    <CustomButton type="submit" onClick={() => navigate('/personalcolor')}>
                         퍼스널 컬러 찾기
                     </CustomButton>
                 </Stack>

@@ -36,7 +36,7 @@ function ColorResult() {
                     <BlueButton type="submit" onClick={() => setColorPage(0)}>
                         다시 분석하기
                     </BlueButton>
-                    <BlueButton type="submit" onClick={() => navigate('/personalcolorchoice')}>
+                    <BlueButton type="submit" onClick={() => navigate('/fashion')}>
                         패션 매칭하기
                     </BlueButton>
                 </Stack>

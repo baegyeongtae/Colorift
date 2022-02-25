@@ -28,7 +28,7 @@ export function Login() {
 
     return (
         <>
-            {findModal && <FindPasswordModal clickProps={() => handleToggleModal()} />}
+            <FindPasswordModal className={findModal && 'show'} clickProps={() => handleToggleModal()} />
             <NavBackgroundDiv />
             <Article height="88vh">
                 <CenterContainerDiv>
@@ -80,7 +80,7 @@ export function Login() {
 export const CenterContainerDiv = styled(ContainerDiv)`
     ${({ theme }) => theme.flexStyled.flexCenter};
 
-    height: 88vh;
+    height: 100%;
 `;
 
 export const LoginDiv = styled.div`

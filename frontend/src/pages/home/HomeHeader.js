@@ -1,5 +1,7 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { HomeContainerDiv, HomeButton, TitleP } from '../../components';
+import { browserImg, colorBackgroundImg } from '../../image';
 
 export function HomeHeader() {
     return (
@@ -19,16 +21,20 @@ export function HomeHeader() {
                         또한, 퍼스널 컬러와 패션 아이템의 조화로움을 알려드립니다.
                     </SubTitleP>
                     <ButtonDiv>
-                        <HomeButton maxWidth="200px" width="45vw">
-                            퍼스널 컬러 찾기
-                        </HomeButton>
-                        <HomeButton maxWidth="200px" width="45vw">
-                            패션 매칭하기
-                        </HomeButton>
+                        <Link to="/personalcolor">
+                            <HomeButton maxWidth="200px" width="45vw">
+                                퍼스널 컬러 찾기
+                            </HomeButton>
+                        </Link>
+                        <Link to="/fashion">
+                            <HomeButton maxWidth="200px" width="45vw">
+                                패션 매칭하기
+                            </HomeButton>
+                        </Link>
                     </ButtonDiv>
                 </TextDiv>
                 <ExampleImgDiv>
-                    <img src="./image/browser.png" alt="샘플 이미지" />
+                    <img src={browserImg} alt="샘플 이미지" />
                 </ExampleImgDiv>
             </HomeContainerDiv>
         </Header>
@@ -38,11 +44,15 @@ export function HomeHeader() {
 // styled-components
 
 const Header = styled.header`
-    height: 600px;
-
-    background-image: url('./image/color.jpg');
+    background-image: url(${colorBackgroundImg});
     background-repeat: no-repeat;
     background-size: cover;
+
+    padding: 150px 0 100px 0;
+
+    @media ${({ theme }) => theme.device.tablet} {
+        padding: 100px 0;
+    }
 `;
 
 const TextDiv = styled.div`
@@ -59,14 +69,12 @@ const TextDiv = styled.div`
 `;
 
 const ExampleImgDiv = styled.div`
-    ${({ theme }) => theme.flexStyled.flexCenter};
+    img {
+        width: 100%;
+    }
 
     @media ${({ theme }) => theme.device.tablet} {
-        width: 100%;
-
-        img {
-            width: 90vw;
-        }
+        padding: 0 30px;
     }
 `;
 
@@ -86,7 +94,7 @@ const ButtonDiv = styled.div`
     grid-template-columns: 210px auto;
 
     @media ${({ theme }) => theme.device.tablet} {
-        grid-template-columns: 47vw auto;
-        justify-content: center;
+        grid-template-columns: 1.1fr 1fr;
+        justify-items: left;
     }
 `;

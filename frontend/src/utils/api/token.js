@@ -45,7 +45,6 @@ export async function accessAvailableCheck() {
         if (accessToken) {
             console.log('accessToken이 존재한다');
             axiosGetConfig.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-            // axiosPostConfig.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
             return;
         }
 
@@ -54,7 +53,6 @@ export async function accessAvailableCheck() {
             console.log('accessToken이 존재하지 않으니 재발급한다');
             const reAccessToken = await getAccessToken();
             axiosGetConfig.defaults.headers.common.Authorization = `Bearer ${reAccessToken}`;
-            // axiosPostConfig.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
             console.log('Bearer에 새로운 토큰을 넣었다');
             return;
         }

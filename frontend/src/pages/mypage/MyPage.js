@@ -21,10 +21,10 @@ export function MyPage() {
     ];
 
     // access 토큰 재발급 테스트
-    useEffect(() => getAccessToken());
+    // useEffect(() => getAccessToken());
 
     // 퍼스널 컬러 목록 조회
-    // useEffect(() => getPersonalList(), []);
+    useEffect(() => getPersonalList(), []);
 
     return (
         <>

@@ -10,7 +10,7 @@ import {
     NavBackgroundDiv,
 } from '../../components';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
-import { setUserLogin } from '../../utils/data/api';
+import { setUserLogin } from '../../utils/api/user';
 
 export function Login() {
     // 비밀번호 찾기 모달

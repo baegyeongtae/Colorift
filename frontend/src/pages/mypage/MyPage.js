@@ -1,8 +1,11 @@
 import styled from 'styled-components';
+import { useEffect } from 'react';
+import { getPersonalList } from '../../utils/api/service';
 import { Article, ContainerDiv, UserButton, Input, GrayButton, NavBackgroundDiv } from '../../components';
 import { arrowIcon } from '../../image';
 
 export function MyPage() {
+    // 퍼스널 컬러 더미 데이터
     const dummyData = [
         {
             id: 1,
@@ -15,6 +18,13 @@ export function MyPage() {
             color: '여름 쿨톤',
         },
     ];
+
+    // access 토큰 재발급 테스트
+    // useEffect(() => getAccessToken());
+
+    // 퍼스널 컬러 목록 조회
+    useEffect(() => getPersonalList(), []);
+
     return (
         <>
             <NavBackgroundDiv />
@@ -38,29 +48,31 @@ export function MyPage() {
                             <SubTitleP>My Personal Color</SubTitleP>
                             <PersonalTableDiv>
                                 <table>
-                                    {dummyData.map(item => (
-                                        <tr key={item.id}>
-                                            <td className="id">{item.id}</td>
-                                            <td className="date">{item.date}</td>
-                                            <td className="color">{item.color}</td>
-                                            <td className="button">
-                                                <GrayButton
-                                                    width="90%"
-                                                    onClick={() => alert(`클릭하신 피부톤은 ${item.color}입니다`)}
-                                                >
-                                                    상세보기
-                                                </GrayButton>
-                                            </td>
-                                            <td className="button">
-                                                <GrayButton
-                                                    width="90%"
-                                                    onClick={() => alert(`${item.id}번을 삭제했습니다`)}
-                                                >
-                                                    삭제하기
-                                                </GrayButton>
-                                            </td>
-                                        </tr>
-                                    ))}
+                                    <tbody>
+                                        {dummyData.map(item => (
+                                            <tr key={item.id}>
+                                                <td className="id">{item.id}</td>
+                                                <td className="date">{item.date}</td>
+                                                <td className="color">{item.color}</td>
+                                                <td className="button">
+                                                    <GrayButton
+                                                        width="90%"
+                                                        onClick={() => alert(`클릭하신 피부톤은 ${item.color}입니다`)}
+                                                    >
+                                                        상세보기
+                                                    </GrayButton>
+                                                </td>
+                                                <td className="button">
+                                                    <GrayButton
+                                                        width="90%"
+                                                        onClick={() => alert(`${item.id}번을 삭제했습니다`)}
+                                                    >
+                                                        삭제하기
+                                                    </GrayButton>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
                                 </table>
                             </PersonalTableDiv>
                         </PersonalDiv>

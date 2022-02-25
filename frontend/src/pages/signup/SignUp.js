@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useRef } from 'react';
-import { setUserRegister } from '../../utils/data/api';
+import { setUserRegister } from '../../utils/api/user';
 import { Article, UserInputDiv, TitleP, UserButton, NavBackgroundDiv } from '../../components';
 import { CenterContainerDiv } from '../login/Login';
 

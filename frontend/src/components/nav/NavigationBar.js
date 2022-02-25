@@ -94,7 +94,7 @@ function NavigationBar() {
                                     {userEmail ? 'Logout' : 'Log In'}
                                 </NavLink>
                                 <NavLink
-                                    to={userEmail ? `/mypage/${userEmail}` : '/login'}
+                                    to={userEmail ? `/mypage/${userEmail}` : '/signup'}
                                     className={pathname === '/' && scrollY === 0 ? 'transparent signup' : 'signup'}
                                 >
                                     {userEmail ? (

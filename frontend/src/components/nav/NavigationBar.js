@@ -39,7 +39,7 @@ function NavigationBar() {
         },
     ];
 
-    // 세션 스토리지에 정보가 있으면 받아오기
+    // 세션 스토리지에 정보가 있으면 받아오기 (로그인 상태 확인)
     const [userEmail, setUserEmail] = useState(sessionStorage.getItem('userEmail') || '');
 
     // 메뉴바 클릭 상태 변환하는 함수
@@ -94,7 +94,7 @@ function NavigationBar() {
                                     {userEmail ? 'Logout' : 'Log In'}
                                 </NavLink>
                                 <NavLink
-                                    to="/signup"
+                                    to={userEmail ? '/mypage/1' : '/login'}
                                     className={pathname === '/' && scrollY === 0 ? 'transparent signup' : 'signup'}
                                 >
                                     {userEmail ? (

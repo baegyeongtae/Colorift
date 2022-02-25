@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 import { DescriptionP } from '..';
+import { paintIcon, clothingIcon, saveIcon } from '../../image';
 
 function HomeServiceIcon({ image, title, text }) {
+    const iconSrc =
+        (image === 'paint' && paintIcon) || (image === 'clothing' && clothingIcon) || (image === 'save' && saveIcon);
+
     return (
         <ServiceIconDiv>
-            <ServiceIconImg src={`./image/${image}.svg`} />
+            <ServiceIconImg src={iconSrc} />
             <ServiceIconTitleP>{title}</ServiceIconTitleP>
             <DescriptionP>{text}</DescriptionP>
         </ServiceIconDiv>

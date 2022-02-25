@@ -5,6 +5,7 @@ import { Logo, Footer, BackgroundDiv } from '..';
 import { ContainerDiv } from '../area/ContainerDiv';
 import { useGetScrollY } from '../../utils/hooks/useGetScrollY';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
+import { xmarkIcon, menuIcon } from '../../image';
 
 function NavigationBar() {
     // true 이면 메뉴 바 나옴
@@ -53,8 +54,8 @@ function NavigationBar() {
                 <Nav className={pathname === '/' && scrollY === 0 && 'transparent'}>
                     <ContainerGridDiv>
                         <Logo />
-                        <MenuBoxDiv className={isToggle && 'mobile'}>
-                            <MenuDiv className={isToggle && 'mobile'}>
+                        <MenuBoxDiv className={isToggle && 'show'}>
+                            <MenuDiv className={isToggle && 'show'}>
                                 {menus.map(menu => (
                                     <NavLink
                                         key={menu.name}
@@ -65,7 +66,7 @@ function NavigationBar() {
                                     </NavLink>
                                 ))}
                             </MenuDiv>
-                            <UserDiv className={isToggle && 'mobile'}>
+                            <UserDiv className={isToggle && 'show'}>
                                 <NavLink
                                     to="/login"
                                     className={pathname === '/' && scrollY === 0 ? 'transparent login' : 'login'}
@@ -88,7 +89,7 @@ function NavigationBar() {
                         </MenuIconDiv>
                     </ContainerGridDiv>
                 </Nav>
-                {isToggle && <BackgroundDiv onClick={handleToggleClick} />}
+                <BackgroundDiv onClick={handleToggleClick} className={isToggle && 'show'} />
             </header>
             <main>
                 <Outlet />
@@ -147,7 +148,7 @@ const MenuBoxDiv = styled.div`
     display: grid;
     grid-template-columns: 4fr 1.2fr;
 
-    &.mobile {
+    &.show {
         position: fixed;
         top: 0;
         right: 0;
@@ -206,7 +207,7 @@ const MenuDiv = styled.div`
         }
     }
 
-    &.mobile {
+    &.show {
         ${({ theme }) => theme.flexStyled.flexColumn};
         justify-content: center;
 
@@ -251,7 +252,7 @@ const UserDiv = styled.div`
         padding: 10px;
     }
 
-    &.mobile {
+    &.show {
         ${({ theme }) => theme.flexStyled.flexColumn};
 
         height: 30%;
@@ -280,7 +281,7 @@ const MenuIconDiv = styled.div`
 `;
 
 const MenuImg = styled.img.attrs(({ className }) => ({
-    src: className === 'show' ? './image/x-mark.svg' : './image/menu.svg',
+    src: className === 'show' ? xmarkIcon : menuIcon,
     alt: '메뉴 아이콘',
 }))`
     display: block;

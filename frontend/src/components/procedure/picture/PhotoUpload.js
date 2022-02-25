@@ -1,15 +1,25 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import Button from '@mui/material/Button';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
-export function PhotoUpload() {
+export function PhotoUpload({ photoProps }) {
+    if (photoProps === '') {
+        return (
+            <ButtonContainerDiv>
+                <Button>
+                    <div className="ButtonContainer">
+                        <AddPhotoAlternateIcon />
+                    </div>
+                </Button>
+            </ButtonContainerDiv>
+        );
+    }
     return (
         <ButtonContainerDiv>
-            <Button>
-                <div className="ButtonContainer">
-                    <AddPhotoAlternateIcon />
-                </div>
-            </Button>
+            <div className="faceImg" key={photoProps}>
+                <img className="photoImg" alt="face" src={photoProps} />
+            </div>
         </ButtonContainerDiv>
     );
 }
@@ -49,5 +59,29 @@ const ButtonContainerDiv = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+
+    .faceImg {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @media ${({ theme }) => theme.device.mobile} {
+            width: 220px;
+            height: 220px;
+        }
+        width: 300px;
+        height: 300px;
+    }
+
+    .photoImg {
+        @media ${({ theme }) => theme.device.mobile} {
+            all: unset;
+
+            width: auto;
+            height: 220px;
+        }
+        width: auto;
+        height: 300px;
     }
 `;

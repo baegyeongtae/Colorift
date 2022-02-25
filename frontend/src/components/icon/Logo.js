@@ -1,5 +1,5 @@
-import { useLinkClickHandler } from 'react-router-dom';
 import styled from 'styled-components';
+import { logoIcon } from '../../image';
 
 export function Logo() {
     const handleLogoClick = () => {
@@ -8,7 +8,7 @@ export function Logo() {
 
     return (
         <LogoDiv onClick={handleLogoClick}>
-            <LogoImg src="../image/logo.png" />
+            <LogoImg src={logoIcon} />
         </LogoDiv>
     );
 }

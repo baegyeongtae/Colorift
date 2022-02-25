@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { arrowIcon } from '../../image';
 
 export function ScrollUpIcon() {
     const handleUpScroll = () => {
@@ -7,7 +8,7 @@ export function ScrollUpIcon() {
 
     return (
         <ScrollUpDiv onClick={handleUpScroll}>
-            <img src="./image/arrow.svg" alt="스크롤 업 화살표" />
+            <img src={arrowIcon} alt="스크롤 업 화살표" />
         </ScrollUpDiv>
     );
 }

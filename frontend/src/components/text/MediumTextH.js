@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
-export const MediumTextP = styled.h1`
+export const MediumTextH = styled.h1`
     @media ${({ theme }) => theme.device.mobile} {
         font-size: ${({ theme }) => theme.fontSizes.smalltext};
-        margin-top: 20px;
         font-weight: bold;
         text-align: center;
         align-items: center;

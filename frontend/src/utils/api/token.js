@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie';
-import { axiosPostConfig } from './config';
+import { axiosPostConfig, axiosGetConfig } from './config';
 
 // access 토큰 유효기간 변수
 export const expire = (1 / 24 / 60) * 5; // 5분
@@ -17,14 +17,14 @@ export async function getAccessToken() {
         Cookies.set('accessToken', response.data.access, {
             path: '/',
             expires: expire, // 테스트 기준 5분 (하루 단위로 응답)
-            secure: true,
+            // secure: true,
             // httpOnly: true, // 배포하면 주석 제거 필수 (보안용)
         });
 
         Cookies.set('refreshToken', response.data.refresh, {
             path: '/',
             expires: 90, // 테스트 기준 90일
-            secure: true,
+            // secure: true,
             // httpOnly: true, // 배포하면 주석 제거 필수 (보안용)
         });
 
@@ -44,7 +44,7 @@ export async function accessAvailableCheck() {
         // accessToken이 존재할 경우 헤더에 넣는다
         if (accessToken) {
             console.log('accessToken이 존재한다');
-            // axiosGetConfig.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+            axiosGetConfig.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
             // axiosPostConfig.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
             return;
         }
@@ -53,7 +53,7 @@ export async function accessAvailableCheck() {
         if (refreshToken) {
             console.log('accessToken이 존재하지 않으니 재발급한다');
             const reAccessToken = await getAccessToken();
-            // axiosGetConfig.defaults.headers.common.Authorization = `Bearer ${reAccessToken}`;
+            axiosGetConfig.defaults.headers.common.Authorization = `Bearer ${reAccessToken}`;
             // axiosPostConfig.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
             console.log('Bearer에 새로운 토큰을 넣었다');
             return;

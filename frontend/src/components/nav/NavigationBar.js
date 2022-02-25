@@ -39,15 +39,16 @@ function NavigationBar() {
         },
     ];
 
-    function cookieReset() {
-        Cookies.remove('accessToken');
-        Cookies.remove('refreshToken');
-    }
-
     // 메뉴바 클릭 상태 변환하는 함수
     const handleToggleClick = () => {
         setIsToggle(current => !current);
     };
+
+    // 쿠키 리셋하는 함수
+    // function cookieReset() {
+    //     Cookies.remove('accessToken');
+    //     Cookies.remove('refreshToken');
+    // }
 
     // 모바일 버전 메뉴바 show 상태에서는 스크롤 막기
     useEffect(() => setScrollDisabled(isToggle), [isToggle]);

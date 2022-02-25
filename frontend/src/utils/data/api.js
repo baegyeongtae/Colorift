@@ -86,7 +86,7 @@ export async function setUserLogin(_email, _password) {
 
         const expire = (1 / 24 / 60) * 5; // 5분
 
-        sessionStorage.setItem('userProfile', JSON.stringify(userData));
+        sessionStorage.setItem('userEmail', _email);
         Cookies.set('accessToken', response.data.access, {
             path: '/',
             expires: expire, // 테스트 기준 5분 (초 단위로 응답)

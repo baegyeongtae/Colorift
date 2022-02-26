@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ContainerDiv, DescriptionP } from '..';
+import { ContainerDiv, DescriptionP } from '../..';
 
 export function Color() {
     return (

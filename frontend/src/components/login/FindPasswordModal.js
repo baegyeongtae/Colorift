@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 import { BackgroundDiv, ModalCloseIcon, TitleP, UserInputDiv, UserButton } from '..';
 
-export function FindPasswordModal({ clickProps }) {
+export function FindPasswordModal({ clickProps, className }) {
     const handleClick = () => {
         clickProps();
     };
     return (
         <>
-            <BackgroundDiv onClick={handleClick} />
-            <ModalDiv>
+            <BackgroundDiv className={className} onClick={handleClick} />
+            <ModalDiv className={className}>
                 <TitleP color="#3C64B1">
                     Find
                     <br />
@@ -25,29 +25,35 @@ export function FindPasswordModal({ clickProps }) {
 // styled-components
 
 const ModalDiv = styled.div`
-    position: fixed;
-    z-index: 9999;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    display: none;
 
-    padding: 50px 30px;
+    &.show {
+        display: initial;
 
-    display: grid;
-    grid-template-rows: auto;
-    justify-items: center;
+        position: fixed;
+        z-index: 9999;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
 
-    width: 330px;
-    height: 350px;
+        padding: 50px 30px;
 
-    background-color: white;
+        display: grid;
+        grid-template-rows: auto;
+        justify-items: center;
 
-    .title {
-        justify-self: start;
-    }
+        width: 330px;
+        height: 350px;
 
-    @media ${({ theme }) => theme.device.mobile} {
-        width: 80%;
-        height: 300px;
+        background-color: white;
+
+        .title {
+            justify-self: start;
+        }
+
+        @media ${({ theme }) => theme.device.mobile} {
+            width: 80%;
+            height: 300px;
+        }
     }
 `;

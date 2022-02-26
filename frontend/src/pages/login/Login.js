@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
     Article,
     ContainerDiv,
@@ -10,25 +10,40 @@ import {
     NavBackgroundDiv,
 } from '../../components';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
+import { setUserLogin } from '../../utils/data/api';
 
 export function Login() {
-    // 로그인 더미 데이터
-    const dummyUser = {
-        email: 'admin@naver.com',
-        password: '123456789a!',
-    };
-
+    // 비밀번호 찾기 모달
     const [findModal, setFindModal] = useState(false);
 
+    // input 값을 받아오기 위한 ref
+    const emailRef = useRef();
+    const passwordRef = useRef();
+
+    // 비밀번호 찾기 모달의 상태 변환 함수
     function handleToggleModal() {
         setFindModal(current => !current);
     }
+
+    // 로그인 함수
+    async function userLogin(_email, _password) {
+        const response = await setUserLogin(_email, _password);
+        return response;
+    }
+
+    // 이메일, 비밀번호 form submit 함수
+    const handleSubmit = event => {
+        event.preventDefault();
+        const response = userLogin(emailRef.current.value, passwordRef.current.value);
+
+        window.open('/', '_self');
+    };
 
     useEffect(() => setScrollDisabled(findModal), [findModal]);
 
     return (
         <>
-            {findModal && <FindPasswordModal clickProps={() => handleToggleModal()} />}
+            <FindPasswordModal className={findModal && 'show'} clickProps={() => handleToggleModal()} />
             <NavBackgroundDiv />
             <Article height="88vh">
                 <CenterContainerDiv>
@@ -36,18 +51,13 @@ export function Login() {
                         <TitleP color="#3C64B1" className="column">
                             Login
                         </TitleP>
-                        <UserInputDiv text="Email" type="email" />
-                        <UserInputDiv text="Password" type="password" />
-                        <UserButton
-                            type="submit"
-                            width="80%"
-                            height="80%"
-                            className="login_button column"
-                            onClick={() => window.open('/', '_self')}
-                        >
-                            로그인
-                        </UserButton>
-
+                        <UserForm onSubmit={handleSubmit}>
+                            <UserInputDiv text="Email" type="text" name="email" ref={emailRef} />
+                            <UserInputDiv text="Password" type="password" name="password" ref={passwordRef} />
+                            <UserButton type="submit" width="80%" height="80%" className="login_button column">
+                                로그인
+                            </UserButton>
+                        </UserForm>
                         <p>비밀번호를 잊어버리셨나요?</p>
                         <UserButton
                             type="button"
@@ -85,7 +95,7 @@ export const CenterContainerDiv = styled(ContainerDiv)`
 
 export const LoginDiv = styled.div`
     display: grid;
-    grid-template-rows: 1.5fr repeat(4, 1fr);
+    grid-template-rows: 1.5fr 2fr repeat(2, 1fr);
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
     justify-items: center;
@@ -99,18 +109,11 @@ export const LoginDiv = styled.div`
         margin: 0 0 50px 10px;
     }
 
-    .login_button {
-        grid-column-start: 2;
-        grid-column-end: 3;
-        grid-row-start: 2;
-        grid-row-end: 4;
-    }
-
     @media screen and (max-width: 420px) {
         all: unset;
 
         display: grid;
-        grid-template-rows: repeat(3, 1fr) 2fr repeat(4, 0.5fr);
+        grid-template-rows: 1fr 4fr repeat(4, 0.5fr);
         align-items: center;
         justify-items: start;
 
@@ -128,21 +131,55 @@ export const LoginDiv = styled.div`
             grid-column-end: 2;
         }
 
+        .button {
+            width: 100%;
+            height: 100%;
+
+            margin-bottom: 20px;
+        }
+    }
+`;
+
+const UserForm = styled.form`
+    grid-column-start: 1;
+    grid-column-end: 3;
+
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    justify-items: center;
+
+    .login_button {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 3;
+    }
+
+    @media screen and (max-width: 420px) {
+        all: unset;
+
+        display: grid;
+        grid-template-rows: repeat(2, 1fr) 2fr;
+        align-items: center;
+        justify-items: start;
+
+        font-size: 1.6rem;
+
+        .column {
+            grid-column-start: 1;
+            grid-column-end: 2;
+        }
+
         .login_button {
-            grid-row-start: 4;
+            grid-row-start: 3;
             grid-row-end: 5;
 
             width: 100%;
             height: 60%;
 
             margin-bottom: 30px;
-        }
-
-        .button {
-            width: 100%;
-            height: 100%;
-
-            margin-bottom: 20px;
         }
     }
 `;

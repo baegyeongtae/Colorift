@@ -1,8 +1,38 @@
+import { useRef, useState } from 'react';
 import styled from 'styled-components';
+import { useRecoilState } from 'recoil';
 import Stack from '@mui/material/Stack';
+import { colorPageState } from '../../utils/data/atom';
 import { PhotoUpload, ContainerDiv, BestWorstLi, SubTitleP, Color, BlueButton, WhiteButton } from '../../components';
 
 function UploadFace() {
+    const [colorPage, setColorPage] = useRecoilState(colorPageState);
+
+    const photoInput = useRef();
+    const handleClick = () => {
+        photoInput.current.click();
+    };
+
+    const [photoUpload, setPhotoUpload] = useState('');
+
+    const handlePhoto = e => {
+        const photoToAdd = e.target.files;
+        console.log(photoToAdd);
+        const fileImg = URL.createObjectURL(photoToAdd[0]);
+        console.log(fileImg);
+
+        setPhotoUpload(fileImg);
+    };
+
+    const fileCheck = () => {
+        if (photoUpload === '') {
+            alert('사진을 올려주세요.');
+        } else if (photoUpload !== '') {
+            setColorPage(1);
+            console.log(colorPage);
+        }
+    };
+
     return (
         <>
             <Color />
@@ -10,13 +40,22 @@ function UploadFace() {
 
             <ContentContainerDiv>
                 <PhotoContainerDiv>
-                    <PhotoUpload />
+                    <PhotoUpload photoProps={photoUpload} />
                     <TextContainerDiv>
                         <BestWorstLi />
                         <ButtonContainerDiv>
                             <Stack spacing={2} direction="row">
-                                <BlueButton>업로드</BlueButton>
-                                <WhiteButton>결과보기</WhiteButton>
+                                <BlueButton onClick={handleClick}>
+                                    <input
+                                        type="file"
+                                        accept="image/jpg, image/jpeg, image/png"
+                                        ref={photoInput}
+                                        onChange={e => handlePhoto(e)}
+                                        style={{ display: 'none' }}
+                                    />
+                                    업로드
+                                </BlueButton>
+                                <WhiteButton onClick={() => fileCheck()}>결과보기</WhiteButton>
                             </Stack>
                         </ButtonContainerDiv>
                     </TextContainerDiv>

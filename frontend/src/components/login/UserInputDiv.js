@@ -1,13 +1,12 @@
+import React from 'react';
 import styled from 'styled-components';
 
-export function UserInputDiv({ text, type }) {
-    return (
-        <FlexColumnDiv className="input_div">
-            <p>{text}</p>
-            <Input type={type || 'text'} />
-        </FlexColumnDiv>
-    );
-}
+export const UserInputDiv = React.forwardRef(({ text, type, name }, ref) => (
+    <FlexColumnDiv className="input_div">
+        <p>{text}</p>
+        <Input type={type || 'text'} name={name} ref={ref} />
+    </FlexColumnDiv>
+));
 
 // styled-components
 

@@ -14,8 +14,6 @@ export const HomeContainerDiv = styled(ContainerDiv)`
         display: grid;
         grid-template-row: 1fr 1fr;
 
-        padding: 10vh 0;
-
         div:nth-child(1) {
             order: 2;
         }

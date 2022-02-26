@@ -5,13 +5,13 @@ export const BlueButton = styled('span')`
         font-weight: bold;
         font-size: 0.875rem;
         background-color: ${({ theme }) => theme.color.blue};
-        padding: 12px 20px;
+        padding: 12px 10px;
         border-radius: 0px;
         color: white;
         transition: all 150ms ease;
         cursor: pointer;
         border: none;
-        width: 120px;
+        width: 100px;
     }
     font-weight: bold;
     font-size: 0.875rem;

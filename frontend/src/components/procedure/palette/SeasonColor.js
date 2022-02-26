@@ -127,7 +127,7 @@ const ColorDiv = styled.div`
     width: 100px;
     height: 100px;
     margin: 10px;
-    margin-left: 20px;
+    margin-left: 17px;
     margin-right: 0px;
 
     border-radius: 50%;

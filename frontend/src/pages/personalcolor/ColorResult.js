@@ -118,12 +118,14 @@ const ButtonContainerDiv = styled.div`
 `;
 
 const MediumTextLeftH = styled(MediumTextH)`
-    margin-top: 80px;
+    margin-top: 120px;
     margin-bottom: 20px;
-    align-items: center;
+    margin-left: 30px;
+    text-align: left;
     font-size: ${({ theme }) => theme.fontSizes.mediumtext};
 
     @media ${({ theme }) => theme.device.mobile} {
+        margin-top: 30px;
         font-size: ${({ theme }) => theme.fontSizes.mobiletext};
         width: 260px;
         align-items: center;

@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import Stack from '@mui/material/Stack';
@@ -28,6 +29,9 @@ function UploadFace() {
         if (photoUpload === '') {
             alert('사진을 올려주세요.');
         } else if (photoUpload !== '') {
+            const response = axios.post('http://127.0.0.1:8000/app/color/test/', photoUpload);
+            console.log(response);
+
             setColorPage(1);
             console.log(colorPage);
         }
@@ -47,6 +51,7 @@ function UploadFace() {
                             <Stack spacing={2} direction="row">
                                 <BlueButton onClick={handleClick}>
                                     <input
+                                        name="image"
                                         type="file"
                                         accept="image/jpg, image/jpeg, image/png"
                                         ref={photoInput}

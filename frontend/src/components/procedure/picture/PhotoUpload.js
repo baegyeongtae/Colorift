@@ -78,10 +78,10 @@ const ButtonContainerDiv = styled.div`
         @media ${({ theme }) => theme.device.mobile} {
             all: unset;
 
-            width: auto;
+            width: 100%;
             height: 220px;
         }
-        width: auto;
+        width: 100%;
         height: 300px;
     }
 `;

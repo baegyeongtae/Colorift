@@ -135,7 +135,7 @@ const CircleContainerDiv = styled(ContainerDiv)`
 const TextH0 = styled(DescriptionP)`
     @media ${({ theme }) => theme.device.mobile} {
         font-size: ${({ theme }) => theme.fontSizes.mobiletext};
-        margin-top: 20px;
+        margin-top: 15px;
     }
     margin-top: 38px;
     font-weight: bold;

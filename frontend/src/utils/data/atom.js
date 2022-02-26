@@ -10,3 +10,8 @@ export const fashionPageState = atom({
     key: 'fashionPageState',
     default: 0,
 });
+
+export const seasonState = atom({
+    key: 'seasonState',
+    default: '',
+});

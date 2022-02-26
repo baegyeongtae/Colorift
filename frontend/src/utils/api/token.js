@@ -1,13 +1,21 @@
 import Cookies from 'js-cookie';
-import { axiosPostConfig, axiosGetConfig } from './config';
+import axios from 'axios';
+import { axiosUserConfig, expire } from './user';
 
-// access 토큰 유효기간 변수
-export const expire = (1 / 24 / 60) * 5; // 5분
+// axios 기본 인스턴스 생성 (토큰 검증 포함)
+const axiosConfig = axios.create({
+    baseURL: `${process.env.REACT_APP_SERVER_ADDRESS}`, // 기본 서버 주소 입력 => 아직 미정
+    headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${Cookies.get('accessToken')}`,
+    },
+});
 
 // acces 토큰 재발급
 export async function getAccessToken() {
     try {
-        const response = await axiosPostConfig({
+        const response = await axiosUserConfig({
             url: '/token/refresh/',
             data: {
                 refresh: Cookies.get('refreshToken'),
@@ -28,7 +36,6 @@ export async function getAccessToken() {
             // httpOnly: true, // 배포하면 주석 제거 필수 (보안용)
         });
 
-        console.log('access 토큰 재발급 완료');
         return response.data.access;
     } catch (error) {
         return error.response;
@@ -41,27 +48,39 @@ export async function accessAvailableCheck() {
     const refreshToken = Cookies.get('refreshToken');
 
     try {
-        // accessToken이 존재할 경우 헤더에 넣는다
+        // accessToken이 존재할 경우 그대로 반환
         if (accessToken) {
-            console.log('accessToken이 존재한다');
-            axiosGetConfig.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-            return;
+            return accessToken;
         }
 
         // accessToken이 존재하지 않고, refreshToken은 존재할 경우
         if (refreshToken) {
-            console.log('accessToken이 존재하지 않으니 재발급한다');
             const reAccessToken = await getAccessToken();
-            axiosGetConfig.defaults.headers.common.Authorization = `Bearer ${reAccessToken}`;
-            console.log('Bearer에 새로운 토큰을 넣었다');
-            return;
+            return reAccessToken;
         }
 
         // accessToken이 존재하지 않고, refreshToken도 존재하지 않을 경우
-        console.log('refreshToken도 존재하지 않는다');
         sessionStorage.clear();
         window.open('/', '_self');
     } catch (error) {
         console.log(error);
     }
+
+    return accessToken;
 }
+
+// axios 인터셉터 생성
+axiosConfig.interceptors.request.use(
+    async config => {
+        const axiosInstance = config;
+        const accessToken = await accessAvailableCheck();
+
+        axiosInstance.headers.Authorization = `Bearer ${accessToken}`;
+        return axiosInstance;
+    },
+    error => {
+        console.log(error);
+    },
+);
+
+export default axiosConfig;

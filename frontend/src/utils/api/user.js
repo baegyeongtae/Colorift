@@ -1,11 +1,23 @@
 import Cookies from 'js-cookie';
-import { axiosPostConfig } from './config';
-import { expire } from './token';
+import axios from 'axios';
+
+// access 토큰 유효기간 변수
+export const expire = (1 / 24 / 60) * 5; // 5분
+
+// axios 기본 인스턴스 생성
+export const axiosUserConfig = axios.create({
+    method: 'post',
+    baseURL: `${process.env.REACT_APP_SERVER_ADDRESS}`, // 기본 서버 주소 입력 => 아직 미정
+    headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+    },
+});
 
 // 회원가입
 export async function setUserRegister(_email, _password) {
     try {
-        const response = await axiosPostConfig({
+        const response = await axiosUserConfig({
             url: '/register/',
             data: {
                 username: _email,
@@ -29,7 +41,7 @@ export async function setUserLogin(_email, _password) {
     };
 
     try {
-        const response = await axiosPostConfig({
+        const response = await axiosUserConfig({
             url: '/token/',
             data: userData,
         });

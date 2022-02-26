@@ -13,7 +13,7 @@ function Loading() {
 
     return (
         <>
-            <Color />
+            <Color number={1} />
             <LoadingContainerDiv>
                 <img src={loader} alt="loader" width="130px" height="130px" />
                 <SubTitleP>피부톤을 분석하는 중입니다.</SubTitleP>

@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-export function ProgressBar({ percent }) {
+export function ProgressBar({ percent, resultColor }) {
     return (
         <ProgressbarBox>
-            <ProgressbarGauge percent={percent} />
+            <ProgressbarGauge percent={percent} resultColor={resultColor} />
         </ProgressbarBox>
     );
 }
@@ -31,7 +31,6 @@ const ProgressbarBox = styled.div`
 
 const ProgressbarGauge = styled.div`
     width: ${props => `${props.percent}%`};
+    background-color: ${props => `${props.resultColor}`};
     height: 100%;
-
-    background-color: ${({ theme }) => theme.color.spring};
 `;

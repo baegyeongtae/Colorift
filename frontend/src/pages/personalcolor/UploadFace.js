@@ -8,6 +8,7 @@ import { PhotoUpload, ContainerDiv, BestWorstLi, SubTitleP, Color, BlueButton, W
 
 function UploadFace() {
     const [colorPage, setColorPage] = useRecoilState(colorPageState);
+    const [imgData, setImgData] = useState('');
 
     const photoInput = useRef();
     const handleClick = () => {
@@ -20,7 +21,12 @@ function UploadFace() {
         const photoToAdd = e.target.files;
         console.log(photoToAdd);
         const fileImg = URL.createObjectURL(photoToAdd[0]);
+        const uploadFile = photoToAdd[0];
+        const formData = new FormData();
+        setImgData(formData);
+        formData.append('image', uploadFile);
         console.log(fileImg);
+        console.log(imgData);
 
         setPhotoUpload(fileImg);
     };
@@ -29,9 +35,17 @@ function UploadFace() {
         if (photoUpload === '') {
             alert('사진을 올려주세요.');
         } else if (photoUpload !== '') {
-            const response = axios.post('http://127.0.0.1:8000/app/color/test/', photoUpload);
-            console.log(response);
-
+            axios({
+                method: 'POST',
+                url: 'http://127.0.0.1:8000/app/color/test/',
+                data: imgData,
+            })
+                .then(response => {
+                    console.log(response);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
             setColorPage(1);
             console.log(colorPage);
         }

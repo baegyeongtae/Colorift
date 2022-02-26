@@ -1,13 +1,26 @@
+/* eslint-disable react/style-prop-object */
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 import Stack from '@mui/material/Stack';
-import { colorPageState } from '../../utils/data/atom';
-import { ResultImage, Color, SubTitleP, ContainerDiv, BlueButton, SeasonColor, MediumTextH } from '../../components';
+import { colorPageState, seasonState } from '../../utils/data/atom';
+import {
+    ResultImage,
+    Color,
+    SubTitleP,
+    ContainerDiv,
+    BlueButton,
+    SeasonColor,
+    MediumTextH,
+    SeasonTone,
+} from '../../components';
 
 function ColorResult() {
     const navigate = useNavigate();
     const setColorPage = useSetRecoilState(colorPageState);
+    const resultSeason = useRecoilValue(seasonState);
+
+    console.log(resultSeason);
 
     const season = {
         spring: 'spring',
@@ -16,19 +29,23 @@ function ColorResult() {
         winter: 'winter',
     };
 
+    const resultColor = SeasonTone(season.spring);
+
     return (
         <>
-            <Color />
+            <Color number={2} />
 
             <ResultContainerDiv>
                 <ResultImage />
             </ResultContainerDiv>
 
-            <SubTitleP>회원님은 봄 웜톤 입니다.</SubTitleP>
+            <SubTitleP>
+                회원님은 <ResultTextS color={resultColor}>봄 웜톤</ResultTextS> 입니다.
+            </SubTitleP>
 
             <ColorContainerDiv>
                 <MediumTextLeftH>회원님에게 어울리는 컬러</MediumTextLeftH>
-                <SeasonColor season={season.winter} />
+                <SeasonColor season={season.spring} />
             </ColorContainerDiv>
 
             <ButtonContainerDiv>
@@ -130,4 +147,9 @@ const MediumTextLeftH = styled(MediumTextH)`
         width: 260px;
         align-items: center;
     }
+`;
+
+const ResultTextS = styled.span`
+    font-weight: bold;
+    color: ${props => `${props.color}`};
 `;

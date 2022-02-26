@@ -12,12 +12,23 @@ import {
     MatchingResult,
     ContainerDiv,
     PercentResult,
+    SeasonTone,
 } from '../../components';
 import { hue, saturation, value } from '../../image';
 
 function FashionResult() {
     const navigate = useNavigate();
     const setFashionPage = useSetRecoilState(fashionPageState);
+
+    const season = {
+        spring: 'spring',
+        summer: 'summer',
+        autumn: 'autumn',
+        winter: 'winter',
+    };
+    const resultColor = SeasonTone(season.spring);
+
+    console.log(resultColor);
 
     return (
         <>
@@ -26,9 +37,13 @@ function FashionResult() {
                 <ResultImage />
             </ContentContainerDiv>
 
-            <SubTitleP>이 옷은 봄 웜톤인 회원님께</SubTitleP>
-            <PercentResult />
-            <SubTitleP>종합 67%만큼 매칭됩니다.</SubTitleP>
+            <SubTitleP>
+                이 옷은 <ResultTextS color={resultColor}>봄 웜톤</ResultTextS>인 회원님께
+            </SubTitleP>
+            <PercentResult resultColor={resultColor} />
+            <SubTitleP>
+                종합 <ResultTextS color={resultColor}>67%</ResultTextS>만큼 매칭됩니다.
+            </SubTitleP>
             <ColorContainerDiv>
                 <div className="wrapper">
                     <div>
@@ -186,4 +201,9 @@ const DescriptionLeftSubTitleP = styled.p`
     margin-left: 25px;
     margin-top: 5px;
     text-align: left;
+`;
+
+const ResultTextS = styled.span`
+    font-weight: bold;
+    color: ${props => `${props.color}`};
 `;

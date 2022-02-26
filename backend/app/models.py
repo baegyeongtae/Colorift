@@ -4,12 +4,6 @@ from django.contrib.auth.models import User
 
 SEASON_CHOICES = [('SP', 'spring'), ('SU', 'summer'), ('FA', 'fall'), ('WI', 'winter')]
 
-'''
-class User(models.Model):
-    email = models.CharField(max_length=50, primary_key=True)
-    password = models.CharField(max_length=255)
-'''
-
 
 class Color(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)

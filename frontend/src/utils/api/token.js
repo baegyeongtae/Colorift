@@ -13,7 +13,7 @@ const axiosConfig = axios.create({
 });
 
 // acces 토큰 재발급
-export async function getAccessToken() {
+async function getAccessToken() {
     try {
         const response = await axiosUserConfig({
             url: '/token/refresh/',
@@ -43,7 +43,7 @@ export async function getAccessToken() {
 }
 
 // access 토큰 유효성 검증 함수
-export async function accessAvailableCheck() {
+async function accessAvailableCheck() {
     const accessToken = Cookies.get('accessToken');
     const refreshToken = Cookies.get('refreshToken');
 

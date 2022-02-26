@@ -1,5 +1,19 @@
-import Cookies from 'js-cookie';
 import axiosConfig from './token';
+
+// 회원탈퇴
+export async function setUserOut() {
+    try {
+        const response = await axiosConfig({
+            method: 'delete',
+            url: '/quit/',
+        });
+        alert('회원탈퇴가 완료되었습니다');
+        window.open('/', '_self');
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}
 
 // 퍼스널 컬러 목록 조회
 export async function getPersonalList() {
@@ -7,13 +21,7 @@ export async function getPersonalList() {
         const response = await axiosConfig({
             method: 'get',
             url: '/color/list/',
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-                Authorization: `Bearer ${Cookies.get('accessToken')}`,
-            },
         });
-        console.log(response);
         return response;
     } catch (error) {
         return error.response;

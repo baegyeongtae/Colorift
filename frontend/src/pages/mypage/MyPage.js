@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { useEffect } from 'react';
-import { getPersonalList } from '../../utils/api/service';
-import { getAccessToken } from '../../utils/api/token';
+import { getPersonalList, setUserOut } from '../../utils/api/service';
 import { Article, ContainerDiv, UserButton, Input, GrayButton, NavBackgroundDiv } from '../../components';
 import { arrowIcon } from '../../image';
 
@@ -20,8 +19,10 @@ export function MyPage() {
         },
     ];
 
-    // access 토큰 재발급 테스트
-    // useEffect(() => getAccessToken());
+    // 회원탈퇴 함수
+    const handleUserOut = () => {
+        setUserOut();
+    };
 
     // 퍼스널 컬러 목록 조회
     useEffect(() => getPersonalList(), []);
@@ -41,7 +42,7 @@ export function MyPage() {
                                 변경하기
                             </UserButton>
                             <p className="option delete">회원탈퇴는 신중히 결정해주세요.</p>
-                            <UserButton height="90%" onClick={() => alert('회원탈퇴 완료')}>
+                            <UserButton height="90%" onClick={handleUserOut}>
                                 회원탈퇴
                             </UserButton>
                         </UserInfoDiv>

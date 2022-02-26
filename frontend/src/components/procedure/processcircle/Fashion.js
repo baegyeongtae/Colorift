@@ -1,27 +1,31 @@
 import styled from 'styled-components';
+import { useRecoilValue } from 'recoil';
 import { ContainerDiv, DescriptionP } from '../..';
+import { fashionPageState } from '../../../utils/data/atom';
 
 export function Fashion() {
+    const currentPage = useRecoilValue(fashionPageState);
+
     return (
         <CircleContainerDiv>
             <div className="wrapper">
-                <div className="current_circle">
+                <div className={` ${currentPage === 0 ? 'current_circle' : 'left_circle'}`}>
                     <TextH0>
                         퍼스널 컬러 <br /> 선택
                     </TextH0>
                 </div>
-                <div className="left_circle">
+                <div className={` ${currentPage === 1 ? 'current_circle' : 'left_circle'}`}>
                     <TextH0>
                         패션 사진 <br /> 업로드
                     </TextH0>
                 </div>
-                <div className="left_circle">
+                <div className={` ${currentPage === 2 ? 'current_circle' : 'left_circle'}`}>
                     <TextH0>
                         퍼스널컬러와
                         <br /> 비교 매칭
                     </TextH0>
                 </div>
-                <div className="left_circle">
+                <div className={` ${currentPage === 3 ? 'current_circle' : 'left_circle'}`}>
                     <TextH0>
                         패션 매칭
                         <br /> 결과
@@ -142,6 +146,7 @@ const TextH0 = styled(DescriptionP)`
     @media ${({ theme }) => theme.device.mobile} {
         font-size: ${({ theme }) => theme.fontSizes.mobiletext};
         margin-top: 20px;
+        line-height: 15px;
     }
     margin-top: 38px;
     font-weight: bold;

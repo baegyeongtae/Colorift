@@ -2,7 +2,7 @@
 
 export { Footer } from './footer/Footer';
 export { NavigationBar, NavBackgroundDiv } from './nav';
-export { BigTextP, DescriptionP, TitleP, SubTitleP, MediumTextH, RadioTextH } from './text';
+export { BigTextP, DescriptionP, TitleP, SubTitleP, MediumTextH, RadioTextH, SeasonTone } from './text';
 export { HomeServiceIcon, HomeColorBar, HomeContainerDiv } from './home';
 export { Article, BackgroundDiv, ContainerDiv } from './area';
 export { ExampleTitle, ExampleImage, ExampleColor } from './example';

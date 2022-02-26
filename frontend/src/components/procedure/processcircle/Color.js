@@ -1,22 +1,26 @@
 import styled from 'styled-components';
+import { useRecoilValue } from 'recoil';
 import { ContainerDiv, DescriptionP } from '../..';
+import { colorPageState } from '../../../utils/data/atom';
 
 export function Color() {
+    const currentPage = useRecoilValue(colorPageState);
+
     return (
         <CircleContainerDiv>
             <div className="wrapper">
-                <div className="current_circle">
+                <div className={` ${currentPage === 0 ? 'current_circle' : 'left_circle'}`}>
                     <TextH0>
                         얼굴 사진 <br /> 업로드
                     </TextH0>
                 </div>
-                <div className="left_circle">
+                <div className={` ${currentPage === 1 ? 'current_circle' : 'left_circle'}`}>
                     <TextH0>
                         피부톤 <br />
                         정밀 분석
                     </TextH0>
                 </div>
-                <div className="left_circle">
+                <div className={` ${currentPage === 2 ? 'current_circle' : 'left_circle'}`}>
                     <TextH0>
                         퍼스널 컬러 <br /> 분석 결과
                     </TextH0>
@@ -135,7 +139,8 @@ const CircleContainerDiv = styled(ContainerDiv)`
 const TextH0 = styled(DescriptionP)`
     @media ${({ theme }) => theme.device.mobile} {
         font-size: ${({ theme }) => theme.fontSizes.mobiletext};
-        margin-top: 15px;
+        margin-top: 20px;
+        line-height: 15px;
     }
     margin-top: 38px;
     font-weight: bold;

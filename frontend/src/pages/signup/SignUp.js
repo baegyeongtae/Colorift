@@ -1,18 +1,41 @@
 import styled from 'styled-components';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { setUserRegister } from '../../utils/api/user';
 import { Article, UserInputDiv, TitleP, UserButton, NavBackgroundDiv } from '../../components';
 import { CenterContainerDiv } from '../login/Login';
 
 export function SignUp() {
+    // 입력 값 가져오는 ref
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordCheckRef = useRef();
 
+    // 정규표현식
+    const emailRegex = /^([\w._-])*[a-zA-Z0-9]+([\w._-])*([a-zA-Z0-9])+([\w._-])+@([a-zA-Z0-9]+.)+[a-zA-Z0-9]{2,8}$/;
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+
+    // 정규표현식에 맞는지, 패스워드는 일치하는지 체크
+    const [regexCheck, setRegexCheck] = useState({
+        email: true,
+        password: true,
+        passwordCheck: true,
+    });
+
     // 이메일, 비밀번호 form submit 함수
     const handleSubmit = event => {
         event.preventDefault();
-        setUserRegister(emailRef.current.value, passwordRef.current.value);
+        const emailTest = emailRegex.test(emailRef.current.value);
+        const passwordTest = passwordRegex.test(passwordRef.current.value);
+        const passwordDoubleTest = passwordRef.current.value === passwordCheckRef.current.value;
+        setRegexCheck(current => ({
+            ...current,
+            email: emailTest,
+            password: passwordTest,
+            passwordCheck: passwordDoubleTest,
+        }));
+        if (emailTest && passwordTest && passwordDoubleTest) {
+            setUserRegister(emailRef.current.value, passwordRef.current.value);
+        }
     };
 
     return (
@@ -25,11 +48,14 @@ export function SignUp() {
                             <TitleP color="#3C64B1">Sign Up</TitleP>
                             <p>가입하면 분석 결과를 저장할 수 있습니다.</p>
                         </div>
-                        <UserInputDiv text="Email" ref={emailRef} />
+                        <div>
+                            <UserInputDiv text="Email" ref={emailRef} />
+                            {!regexCheck.email && <p className="error">이메일 주소를 입력해주세요.</p>}
+                        </div>
                         <UserButton
                             type="submit"
-                            width="80%"
-                            height="50%"
+                            width="50%"
+                            height="40%"
                             className="check_button"
                             onClick={() => alert('중복 확인 완료')}
                         >
@@ -38,11 +64,11 @@ export function SignUp() {
                         <div className="column">
                             <UserInputDiv text="Password" type="password" ref={passwordRef} />
                             <p className="password_rule">비밀번호는 영문/숫자/특수문자 포함 8자 이상 입력해주세요.</p>
-                            <p className="password_rule password_error">비밀번호가 유효하지 않습니다.</p>
+                            {!regexCheck.password && <p className="error">비밀번호가 유효하지 않습니다.</p>}
                         </div>
                         <div className="column">
                             <UserInputDiv text="Password Check" type="password" ref={passwordCheckRef} />
-                            <p className="password_rule password_error">비밀번호가 일치하지 않습니다.</p>
+                            {!regexCheck.passwordCheck && <p className="error">비밀번호가 일치하지 않습니다.</p>}
                         </div>
                         <UserButton type="submit" width="40%" height="50%" className="column button">
                             회원가입
@@ -85,7 +111,7 @@ const SignUpForm = styled.form`
         font-size: 0.8rem;
     }
 
-    .password_error {
+    .error {
         font-size: 0.7rem;
         color: red;
     }

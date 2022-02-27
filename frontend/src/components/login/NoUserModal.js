@@ -10,7 +10,7 @@ export function NoUserModal({ clickProps, className }) {
         <>
             <BackgroundDiv className={className} onClick={handleClick} />
             <ModalDiv className={className}>
-                <SubTitleP>존재하지 않는 아이디입니다.</SubTitleP>
+                <SubTitleP className="text">존재하지 않는 아이디입니다.</SubTitleP>
                 <ModalCloseIcon clickProps={handleClick} />
             </ModalDiv>
         </>
@@ -20,6 +20,8 @@ export function NoUserModal({ clickProps, className }) {
 // styled-components
 
 const ModalDiv = styled.div`
+    display: none;
+
     &.show {
         position: fixed;
         z-index: 9999;
@@ -31,14 +33,21 @@ const ModalDiv = styled.div`
 
         ${({ theme }) => theme.flexStyled.flexCenter};
 
-        width: 330px;
-        height: 350px;
+        width: 550px;
+        height: 300px;
 
         background-color: white;
 
-        @media ${({ theme }) => theme.device.mobile} {
+        .text {
+            margin: 0;
+        }
+
+        @media ${({ theme }) => theme.device.tablet} {
+            .text {
+                font-size: 1.5rem;
+            }
+
             width: 80%;
-            height: 300px;
         }
     }
 `;

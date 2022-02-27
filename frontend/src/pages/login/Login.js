@@ -8,6 +8,7 @@ import {
     UserButton,
     FindPasswordModal,
     NavBackgroundDiv,
+    NoUserModal,
 } from '../../components';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 import { setUserLogin } from '../../utils/api/user';
@@ -45,8 +46,9 @@ export function Login() {
 
     return (
         <>
+            <NoUserModal className={noUserModal && 'show'} clickProps={() => handleNoUserToggleModal()} />
             <FindPasswordModal className={findModal && 'show'} clickProps={() => handlePasswordToggleModal()} />
-            <NavBackgroundDiv className={noUserModal && 'show'} clickProps={() => handleNoUserToggleModal()} />
+            <NavBackgroundDiv />
             <Article height="88vh">
                 <CenterContainerDiv>
                     <LoginDiv>

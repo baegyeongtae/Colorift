@@ -13,7 +13,7 @@ export async function setUserOut() {
         window.open('/', '_self');
         return response;
     } catch (error) {
-        return error.response;
+        return error;
     }
 }
 

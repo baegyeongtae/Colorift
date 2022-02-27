@@ -61,8 +61,8 @@ export async function setUserLogin(_email, _password) {
         });
 
         window.open('/', '_self');
-        return response;
     } catch (error) {
         return error.response;
     }
+    return null;
 }

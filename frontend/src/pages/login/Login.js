@@ -10,7 +10,7 @@ import {
     NavBackgroundDiv,
 } from '../../components';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
-import { setUserLogin } from '../../utils/data/api';
+import { setUserLogin } from '../../utils/api/user';
 
 export function Login() {
     // 비밀번호 찾기 모달
@@ -25,18 +25,10 @@ export function Login() {
         setFindModal(current => !current);
     }
 
-    // 로그인 함수
-    async function userLogin(_email, _password) {
-        const response = await setUserLogin(_email, _password);
-        return response;
-    }
-
     // 이메일, 비밀번호 form submit 함수
     const handleSubmit = event => {
         event.preventDefault();
-        const response = userLogin(emailRef.current.value, passwordRef.current.value);
-
-        window.open('/', '_self');
+        setUserLogin(emailRef.current.value, passwordRef.current.value);
     };
 
     useEffect(() => setScrollDisabled(findModal), [findModal]);

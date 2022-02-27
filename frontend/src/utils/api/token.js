@@ -16,7 +16,7 @@ const axiosConfig = axios.create({
 async function getAccessToken() {
     try {
         const response = await axiosUserConfig({
-            url: '/token/refresh/',
+            url: 'token/refresh/',
             data: {
                 refresh: Cookies.get('refreshToken'),
             },

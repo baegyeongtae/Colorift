@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Outlet, useLocation, NavLink } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
+import Cookies from 'js-cookie';
 import { Logo, Footer, BackgroundDiv } from '..';
 import { ContainerDiv } from '../area/ContainerDiv';
 import { useGetScrollY } from '../../utils/hooks/useGetScrollY';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
-import { xmarkIcon, menuIcon } from '../../image';
+import { xmarkIcon, menuIcon, profileIcon } from '../../image';
 
 function NavigationBar() {
     // true 이면 메뉴 바 나옴
@@ -38,15 +39,33 @@ function NavigationBar() {
         },
     ];
 
+    // 세션 스토리지에 정보가 있으면 받아오기 (로그인 상태 확인)
+    const [userEmail, setUserEmail] = useState(sessionStorage.getItem('userEmail') || '');
+
+    // 메뉴바 클릭 상태 변환하는 함수
     const handleToggleClick = () => {
         setIsToggle(current => !current);
     };
+
+    // 쿠키, 세션 모두 리셋하는 함수
+    function userSessionReset() {
+        Cookies.remove('accessToken');
+        Cookies.remove('refreshToken');
+        sessionStorage.clear();
+        setUserEmail('');
+    }
 
     // 모바일 버전 메뉴바 show 상태에서는 스크롤 막기
     useEffect(() => setScrollDisabled(isToggle), [isToggle]);
 
     // 라우터가 변경될 때는 상단바 toggle 초기화
     useEffect(() => setIsToggle(false), [pathname]);
+
+    // 홈페이지가 꺼질 때 토큰도 정리하기
+    // useEffect(() => {
+    //     console.log('컴포넌트가 화면에 나타남');
+    //     return userSessionReset();
+    // });
 
     return (
         <>
@@ -68,16 +87,21 @@ function NavigationBar() {
                             </MenuDiv>
                             <UserDiv className={isToggle && 'show'}>
                                 <NavLink
-                                    to="/login"
+                                    to={userEmail ? '/' : '/login'}
                                     className={pathname === '/' && scrollY === 0 ? 'transparent login' : 'login'}
+                                    onClick={() => userEmail && userSessionReset()}
                                 >
-                                    Log In
+                                    {userEmail ? 'Logout' : 'Log In'}
                                 </NavLink>
                                 <NavLink
-                                    to="/signup"
+                                    to={userEmail ? `/mypage/${userEmail}` : '/signup'}
                                     className={pathname === '/' && scrollY === 0 ? 'transparent signup' : 'signup'}
                                 >
-                                    <span>Sign Up</span>
+                                    {userEmail ? (
+                                        <img src={profileIcon} alt="마이페이지 아이콘" height="40px" />
+                                    ) : (
+                                        <span>Sign Up</span>
+                                    )}
                                 </NavLink>
                             </UserDiv>
                         </MenuBoxDiv>
@@ -243,13 +267,19 @@ const UserDiv = styled.div`
         }
     }
 
-    .signup span {
-        color: white;
-        font-weight: bold;
+    .signup {
+        span {
+            color: white;
+            font-weight: bold;
 
-        background-color: ${({ theme }) => theme.color.blue};
+            background-color: ${({ theme }) => theme.color.blue};
 
-        padding: 10px;
+            padding: 10px;
+        }
+
+        img {
+            filter: invert(37%) sepia(15%) saturate(2388%) hue-rotate(181deg) brightness(96%) contrast(89%);
+        }
     }
 
     &.show {

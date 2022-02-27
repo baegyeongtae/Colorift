@@ -1,6 +1,7 @@
+
 import loader from './loader.png';
 
-export { xmarkIcon, menuIcon, arrowIcon, logoIcon } from './icon';
+export { xmarkIcon, menuIcon, arrowIcon, logoIcon, profileIcon } from './icon';
 export { browserImg, colorCircleImg, colorBackgroundImg, paintIcon, clothingIcon, saveIcon, chartImg } from './home';
 export { hue, saturation, value } from './explanation';
 export { happy, soso, bad } from './emoticon';

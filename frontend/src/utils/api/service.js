@@ -7,13 +7,13 @@ export async function setUserOut() {
     try {
         const response = await axiosConfig({
             method: 'delete',
-            url: '/quit/',
+            url: 'quit/',
         });
         alert('회원탈퇴가 완료되었습니다');
         window.open('/', '_self');
         return response;
     } catch (error) {
-        return error.response;
+        return error;
     }
 }
 
@@ -22,7 +22,7 @@ export async function getPersonalList() {
     try {
         const response = await axiosConfig({
             method: 'get',
-            url: '/color/list/',
+            url: 'color/list/',
         });
         return response;
     } catch (error) {
@@ -39,7 +39,7 @@ export async function postFacePhoto({ imgData }) {
         setColorPage(1);
         const response = await axiosConfig({
             method: 'post',
-            url: '/app/color/test/',
+            url: 'color/test/',
             data: imgData,
         });
 

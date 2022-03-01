@@ -8,6 +8,7 @@ import {
     UserButton,
     FindPasswordModal,
     NavBackgroundDiv,
+    NoUserModal,
 } from '../../components';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 import { setUserLogin } from '../../utils/api/user';
@@ -16,26 +17,37 @@ export function Login() {
     // 비밀번호 찾기 모달
     const [findModal, setFindModal] = useState(false);
 
+    // 존재하지 않는 아이디 모달
+    const [noUserModal, setNoUserModal] = useState(false);
+
     // input 값을 받아오기 위한 ref
     const emailRef = useRef();
     const passwordRef = useRef();
 
     // 비밀번호 찾기 모달의 상태 변환 함수
-    function handleToggleModal() {
+    function handlePasswordToggleModal() {
         setFindModal(current => !current);
     }
 
+    // 존재하지 않는 아이디 모달의 상태 변환 함수
+    function handleNoUserToggleModal() {
+        setNoUserModal(current => !current);
+    }
+
     // 이메일, 비밀번호 form submit 함수
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
         event.preventDefault();
-        setUserLogin(emailRef.current.value, passwordRef.current.value);
+        await setUserLogin(emailRef.current.value, passwordRef.current.value);
+        // 로그인 성공 시 홈으로 이동, 실패 시 아래 코드 실행
+        setNoUserModal(true);
     };
 
     useEffect(() => setScrollDisabled(findModal), [findModal]);
 
     return (
         <>
-            <FindPasswordModal className={findModal && 'show'} clickProps={() => handleToggleModal()} />
+            <NoUserModal className={noUserModal && 'show'} clickProps={() => handleNoUserToggleModal()} />
+            <FindPasswordModal className={findModal && 'show'} clickProps={() => handlePasswordToggleModal()} />
             <NavBackgroundDiv />
             <Article height="88vh">
                 <CenterContainerDiv>
@@ -56,7 +68,7 @@ export function Login() {
                             width="80%"
                             height="50%"
                             className="button"
-                            onClick={() => handleToggleModal()}
+                            onClick={() => handlePasswordToggleModal()}
                         >
                             비밀번호 찾기
                         </UserButton>

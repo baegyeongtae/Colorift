@@ -85,7 +85,7 @@ function NavigationBar() {
                                     </NavLink>
                                 ))}
                             </MenuDiv>
-                            <UserDiv className={isToggle && 'show'}>
+                            <UserDiv className={isToggle && 'show'} login={userEmail}>
                                 <NavLink
                                     to={userEmail ? '/' : '/login'}
                                     className={pathname === '/' && scrollY === 0 ? 'transparent login' : 'login'}
@@ -98,7 +98,12 @@ function NavigationBar() {
                                     className={pathname === '/' && scrollY === 0 ? 'transparent signup' : 'signup'}
                                 >
                                     {userEmail ? (
-                                        <img src={profileIcon} alt="마이페이지 아이콘" height="40px" />
+                                        <img
+                                            src={profileIcon}
+                                            alt="마이페이지 아이콘"
+                                            height="40px"
+                                            className={pathname === '/' && scrollY === 0 ? 'transparent' : 'signup'}
+                                        />
                                     ) : (
                                         <span>Sign Up</span>
                                     )}
@@ -205,7 +210,7 @@ const MenuDiv = styled.div`
         font-weight: bold;
 
         text-align: center;
-        line-height: 60px;
+        line-height: 7vh;
 
         cursor: pointer;
 
@@ -268,6 +273,8 @@ const UserDiv = styled.div`
     }
 
     .signup {
+        justify-self: ${({ login }) => login && 'center'};
+
         span {
             color: white;
             font-weight: bold;
@@ -279,6 +286,10 @@ const UserDiv = styled.div`
 
         img {
             filter: invert(37%) sepia(15%) saturate(2388%) hue-rotate(181deg) brightness(96%) contrast(89%);
+
+            &.transparent {
+                filter: invert(100%) sepia(1%) saturate(2506%) hue-rotate(213deg) brightness(112%) contrast(101%);
+            }
         }
     }
 
@@ -294,6 +305,10 @@ const UserDiv = styled.div`
             height: 40%;
 
             color: #616161;
+        }
+
+        img {
+            filter: invert(37%) sepia(15%) saturate(2388%) hue-rotate(181deg) brightness(96%) contrast(89%) !important;
         }
     }
 `;
@@ -325,11 +340,4 @@ const MenuImg = styled.img.attrs(({ className }) => ({
     &.transparent {
         filter: invert(100%) sepia(0%) saturate(7493%) hue-rotate(148deg) brightness(117%) contrast(101%);
     }
-`;
-
-const FooterContainerDiv = styled.div`
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
 `;

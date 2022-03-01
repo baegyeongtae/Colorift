@@ -2,3 +2,4 @@
 
 export { UserInputDiv, Input } from './UserInputDiv';
 export { FindPasswordModal } from './FindPasswordModal';
+export { NoUserModal } from './NoUserModal';

@@ -18,7 +18,7 @@ export const axiosUserConfig = axios.create({
 export async function setUserRegister(_email, _password) {
     try {
         const response = await axiosUserConfig({
-            url: '/register/',
+            url: 'register/',
             data: {
                 username: _email,
                 password: _password,
@@ -42,7 +42,7 @@ export async function setUserLogin(_email, _password) {
 
     try {
         const response = await axiosUserConfig({
-            url: '/token/',
+            url: 'token/',
             data: userData,
         });
 
@@ -61,8 +61,8 @@ export async function setUserLogin(_email, _password) {
         });
 
         window.open('/', '_self');
-        return response;
     } catch (error) {
         return error.response;
     }
+    return null;
 }

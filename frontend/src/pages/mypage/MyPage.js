@@ -4,24 +4,22 @@ import { MyPageInfo, MyPagePersonal, MyPageFashion } from '.';
 
 export function MyPage() {
     return (
-        <>
+        <Article height="100vh">
             <NavBackgroundDiv />
-            <Article>
-                <MyPageContainerDiv>
-                    <FlexRowDiv className="area">
-                        <MyPageInfo />
-                        <PersonalDiv>
-                            <SubTitleP>My Personal Color</SubTitleP>
-                            <MyPagePersonal />
-                        </PersonalDiv>
-                    </FlexRowDiv>
-                    <FassionDiv className="area fashion">
-                        <SubTitleP>My Style</SubTitleP>
-                        <MyPageFashion />
-                    </FassionDiv>
-                </MyPageContainerDiv>
-            </Article>
-        </>
+            <MyPageContainerDiv>
+                <FlexRowDiv className="area">
+                    <MyPageInfo />
+                    <PersonalDiv>
+                        <SubTitleP>My Personal Color</SubTitleP>
+                        <MyPagePersonal />
+                    </PersonalDiv>
+                </FlexRowDiv>
+                <FassionDiv className="area fashion">
+                    <SubTitleP>My Style</SubTitleP>
+                    <MyPageFashion />
+                </FassionDiv>
+            </MyPageContainerDiv>
+        </Article>
     );
 }
 
@@ -31,16 +29,12 @@ const MyPageContainerDiv = styled(ContainerDiv)`
     ${({ theme }) => theme.flexStyled.flexColumn};
     ${({ theme }) => theme.flexStyled.flexCenter};
 
-    height: 88vh;
-
-    padding: 30px 0;
-
     .area {
         width: 100%;
-        height: 45%;
+        height: 50%;
 
         &.fashion {
-            height: 55%;
+            height: 50%;
         }
     }
 `;

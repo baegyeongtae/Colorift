@@ -24,19 +24,37 @@ export function MyPageFashion() {
             date: '2022-02-26',
             image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
         },
+        {
+            id: 5,
+            date: '2022-02-27',
+            image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
+        },
+        {
+            id: 6,
+            date: '2022-02-28',
+            image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
+        },
     ];
 
-    // 마이 패션에 보이는 사진의 갯수
-    const [imageMaxLength, setImageMaxLength] = useState(4);
+    // 버튼 클릭 횟수
+    const [buttonClick, setButtonClick] = useState(0);
+
+    // 마이 패션에 보이는 사진의 최대 갯수
+    const imageMaxIndex = 4 * (buttonClick + 1) < fashionData.length ? 4 * (buttonClick + 1) : fashionData.length;
+
+    // 더보기 버튼 클릭 함수
+    const handleMoreClick = () => {
+        setButtonClick(current => current + 1);
+    };
 
     return (
         <FashionDiv>
             <FasionImageDiv>
-                {fashionData.map(item => (
+                {fashionData.slice(0, imageMaxIndex).map(item => (
                     <img key={item.id} src={item.image} alt={`패션 이미지 ${item.id}`} />
                 ))}
             </FasionImageDiv>
-            <PlusButton>더보기</PlusButton>
+            <PlusButton onClick={handleMoreClick}>더보기</PlusButton>
         </FashionDiv>
     );
 }
@@ -81,7 +99,7 @@ const PlusButton = styled.button`
     width: 150px;
     height: 50px;
 
-    margin-top: 30px;
+    margin: 30px 0 50px 0;
 
     color: white;
     text-align: center;

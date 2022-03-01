@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import { useRef, useState } from 'react';
 import { setUserRegister } from '../../utils/api/user';
-import { Article, UserInputDiv, TitleP, UserButton, NavBackgroundDiv, TextModal } from '../../components';
-import { CenterContainerDiv } from '../login/Login';
+import { UserInputDiv, TitleP, UserButton, NavBackgroundDiv, TextModal, ContainerDiv, Article } from '../../components';
 
 export function SignUp() {
     // 가입 완료 모달
@@ -54,9 +53,9 @@ export function SignUp() {
                 toggleClickProps={() => handleToggleModal()}
                 text="가입을 환영합니다."
             />
-            <NavBackgroundDiv />
-            <Article height="88vh">
-                <CenterContainerDiv>
+            <Article>
+                <NavBackgroundDiv />
+                <ContainerDiv>
                     <SignUpForm onSubmit={handleSubmit}>
                         <div className="column title_div">
                             <TitleP color="#3C64B1">Sign Up</TitleP>
@@ -88,7 +87,7 @@ export function SignUp() {
                             회원가입
                         </UserButton>
                     </SignUpForm>
-                </CenterContainerDiv>
+                </ContainerDiv>
             </Article>
         </>
     );

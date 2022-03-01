@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { useState, useEffect, useRef } from 'react';
 import {
-    Article,
     ContainerDiv,
     UserInputDiv,
     TitleP,
@@ -9,6 +8,7 @@ import {
     FindPasswordModal,
     NavBackgroundDiv,
     TextModal,
+    Article,
 } from '../../components';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 import { setUserLogin } from '../../utils/api/user';
@@ -51,9 +51,9 @@ export function Login() {
                 text="존재하지 않는 아이디입니다."
             />
             <FindPasswordModal className={findModal && 'show'} clickProps={() => handlePasswordToggleModal()} />
-            <NavBackgroundDiv />
-            <Article height="88vh">
-                <CenterContainerDiv>
+            <Article>
+                <NavBackgroundDiv />
+                <ContainerDiv>
                     <LoginDiv>
                         <TitleP color="#3C64B1" className="column">
                             Login
@@ -86,19 +86,13 @@ export function Login() {
                             회원가입
                         </UserButton>
                     </LoginDiv>
-                </CenterContainerDiv>
+                </ContainerDiv>
             </Article>
         </>
     );
 }
 
 // styled-components
-
-export const CenterContainerDiv = styled(ContainerDiv)`
-    ${({ theme }) => theme.flexStyled.flexCenter};
-
-    height: 100%;
-`;
 
 export const LoginDiv = styled.div`
     display: grid;

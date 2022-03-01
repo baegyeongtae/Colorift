@@ -20,6 +20,31 @@ export function MyPage() {
             date: '2022.02.12',
             color: '여름 쿨톤',
         },
+        {
+            id: 3,
+            date: '2022.02.15',
+            color: '겨울 쿨톤',
+        },
+        {
+            id: 4,
+            date: '2022.02.18',
+            color: '가을 웜톤',
+        },
+        {
+            id: 5,
+            date: '2022.02.20',
+            color: '봄 웜톤',
+        },
+        {
+            id: 6,
+            date: '2022.02.21',
+            color: '가을 웜톤',
+        },
+        {
+            id: 7,
+            date: '2022.02.25',
+            color: '겨울 쿨톤',
+        },
     ];
 
     // 회원탈퇴 함수
@@ -182,7 +207,9 @@ const PersonalDiv = styled.div`
 
 const PersonalTableDiv = styled.div`
     width: 100%;
-    height: 100%;
+    height: 250px;
+
+    overflow: auto;
 
     margin-top: 5px;
     padding: 20px;

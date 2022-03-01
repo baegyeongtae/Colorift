@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { Article, ContainerDiv, BigTextP, DescriptionP, HomeButton } from '../../components';
+import { BackgroundArticle, ContainerDiv, BigTextP, DescriptionP, HomeButton } from '../../components';
 
 export function HomeFooter() {
     return (
-        <Article height="500px" color="#f8f7f3">
+        <BackgroundArticle height="500px" color="#f8f7f3">
             <FlexContainerDiv>
                 <BigTextP>시작할 준비 되셨나요?</BigTextP>
                 <DescriptionCenterP>
@@ -30,7 +30,7 @@ export function HomeFooter() {
                     </Link>
                 </ButtonDiv>
             </FlexContainerDiv>
-        </Article>
+        </BackgroundArticle>
     );
 }
 

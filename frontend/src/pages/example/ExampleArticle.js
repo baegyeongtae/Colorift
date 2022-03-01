@@ -1,11 +1,11 @@
-import { ExampleTitle, ExampleImage, Article, ExampleColor } from '../../components';
+import { ExampleTitle, ExampleImage, BackgroundArticle, ExampleColor } from '../../components';
 
 export function ExampleArticle({ text, season }) {
     return (
-        <Article>
+        <BackgroundArticle>
             <ExampleTitle text={text} />
             <ExampleImage season={season} />
             <ExampleColor season={season} />
-        </Article>
+        </BackgroundArticle>
     );
 }

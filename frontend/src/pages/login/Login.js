@@ -37,9 +37,8 @@ export function Login() {
     // 이메일, 비밀번호 form submit 함수
     const handleSubmit = async event => {
         event.preventDefault();
-        await setUserLogin(emailRef.current.value, passwordRef.current.value);
-        // 로그인 성공 시 홈으로 이동, 실패 시 아래 코드 실행
-        setNoUserModal(true);
+        const response = await setUserLogin(emailRef.current.value, passwordRef.current.value);
+        if (response.status !== 200) setNoUserModal(true);
     };
 
     useEffect(() => setScrollDisabled(findModal), [findModal]);

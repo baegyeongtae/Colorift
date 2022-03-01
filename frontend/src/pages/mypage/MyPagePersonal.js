@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { useEffect } from 'react';
+import { getPersonalList } from '../../utils/api/service';
 import { GrayButton } from '../../components';
 
 export function MyPagePersonal() {
@@ -40,6 +42,9 @@ export function MyPagePersonal() {
             color: '겨울 쿨톤',
         },
     ];
+
+    // 퍼스널 컬러 목록 조회
+    useEffect(() => getPersonalList(), []);
 
     return (
         <PersonalTableDiv className="personal">

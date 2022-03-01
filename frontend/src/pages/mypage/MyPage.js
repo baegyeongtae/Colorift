@@ -1,13 +1,8 @@
 import styled from 'styled-components';
-import { useEffect } from 'react';
-import { getPersonalList } from '../../utils/api/service';
 import { Article, ContainerDiv, NavBackgroundDiv } from '../../components';
 import { MyPageInfo, MyPagePersonal, MyPageFashion } from '.';
 
 export function MyPage() {
-    // 퍼스널 컬러 목록 조회
-    useEffect(() => getPersonalList(), []);
-
     return (
         <>
             <NavBackgroundDiv />
@@ -20,7 +15,7 @@ export function MyPage() {
                             <MyPagePersonal />
                         </PersonalDiv>
                     </FlexRowDiv>
-                    <FassionDiv className="area">
+                    <FassionDiv className="area fashion">
                         <SubTitleP>My Style</SubTitleP>
                         <MyPageFashion />
                     </FassionDiv>
@@ -38,11 +33,15 @@ const MyPageContainerDiv = styled(ContainerDiv)`
 
     height: 88vh;
 
-    padding: 50px 0;
+    padding: 30px 0;
 
     .area {
         width: 100%;
-        height: 50%;
+        height: 45%;
+
+        &.fashion {
+            height: 55%;
+        }
     }
 `;
 

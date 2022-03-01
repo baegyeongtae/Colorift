@@ -35,7 +35,7 @@ export function MyPage() {
                     <FlexRowDiv className="area">
                         <UserInfoDiv>
                             <p className="option">이메일</p>
-                            <p className="email">admin@naver.com</p>
+                            <p className="email">{sessionStorage.getItem('userEmail')}</p>
                             <p className="option">비밀번호 변경</p>
                             <Input type="password" width="80%" />
                             <UserButton height="90%" onClick={() => alert('패스워드 변경 완료')}>

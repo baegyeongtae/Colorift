@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Result, ProgressBar, ContainerDiv } from '../../components';
+import { ProgressBar } from '..';
 
 function MyStyleModal() {
     return (
@@ -24,9 +24,7 @@ function MyStyleModal() {
             </TableContainerDiv>
             <TextH2>회원님은 기본 퍼스널 컬러 - 봄 웜톤을 선택했습니다.</TextH2>
 
-            <ContentContainerDiv>
-                <Result />
-            </ContentContainerDiv>
+            <ContentContainerDiv />
 
             <TextH1>이 옷은 봄 웜톤인 회원님께</TextH1>
 

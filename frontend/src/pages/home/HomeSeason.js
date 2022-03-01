@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { BigTextP, DescriptionP, HomeButton, Article, HomeContainerDiv } from '../../components';
+import { BigTextP, DescriptionP, HomeButton, BackgroundArticle, HomeContainerDiv } from '../../components';
 import { colorCircleImg } from '../../image';
 
 export function HomeSeason() {
     return (
-        <Article color="#f8f7f3">
+        <BackgroundArticle color="#f8f7f3">
             <SeasonContainerDiv>
                 <SeasonImgDiv>
                     <img src={colorCircleImg} alt="계절별 퍼스널 컬러 이미지" />
@@ -28,7 +28,7 @@ export function HomeSeason() {
                     </Link>
                 </TextContainerDiv>
             </SeasonContainerDiv>
-        </Article>
+        </BackgroundArticle>
     );
 }
 

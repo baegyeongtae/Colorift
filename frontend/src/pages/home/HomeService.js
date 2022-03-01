@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { ContainerDiv, HomeServiceIcon, BigTextP, Article } from '../../components';
+import { ContainerDiv, HomeServiceIcon, BigTextP, BackgroundArticle } from '../../components';
 
 export function HomeService() {
     return (
-        <Article>
+        <BackgroundArticle>
             <ServiceContainerDiv>
                 <BigTextP>제공되는 서비스</BigTextP>
                 <DescriptionDiv>
@@ -42,7 +42,7 @@ export function HomeService() {
                     />
                 </DescriptionDiv>
             </ServiceContainerDiv>
-        </Article>
+        </BackgroundArticle>
     );
 }
 

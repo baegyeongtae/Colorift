@@ -8,7 +8,7 @@ import {
     UserButton,
     FindPasswordModal,
     NavBackgroundDiv,
-    NoUserModal,
+    TextModal,
 } from '../../components';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 import { setUserLogin } from '../../utils/api/user';
@@ -45,7 +45,11 @@ export function Login() {
 
     return (
         <>
-            <NoUserModal className={noUserModal && 'show'} clickProps={() => handleNoUserToggleModal()} />
+            <TextModal
+                className={noUserModal && 'show'}
+                toggleClickProps={() => handleNoUserToggleModal()}
+                text="존재하지 않는 아이디입니다."
+            />
             <FindPasswordModal className={findModal && 'show'} clickProps={() => handlePasswordToggleModal()} />
             <NavBackgroundDiv />
             <Article height="88vh">

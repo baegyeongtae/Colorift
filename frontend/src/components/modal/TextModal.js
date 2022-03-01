@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 import { BackgroundDiv, ModalCloseIcon, SubTitleP } from '..';
 
-export function NoUserModal({ clickProps, className }) {
-    const handleClick = () => {
-        clickProps();
+export function TextModal({ toggleClickProps, className, text }) {
+    const handleToggleClick = () => {
+        toggleClickProps();
     };
 
     return (
         <>
-            <BackgroundDiv className={className} onClick={handleClick} />
+            <BackgroundDiv className={className} onClick={handleToggleClick} />
             <ModalDiv className={className}>
-                <SubTitleP className="text">존재하지 않는 아이디입니다.</SubTitleP>
-                <ModalCloseIcon clickProps={handleClick} />
+                <SubTitleP className="text">{text}</SubTitleP>
+                <ModalCloseIcon clickProps={handleToggleClick} />
             </ModalDiv>
         </>
     );

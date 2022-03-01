@@ -19,10 +19,15 @@ export function MyPageFashion() {
             date: '2022-02-24',
             image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/moncler_i0f6Fwi.jpg',
         },
+        {
+            id: 4,
+            date: '2022-02-26',
+            image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
+        },
     ];
 
-    // 마이 패션에 보이는 사진의 행 갯수
-    const [imageRow, setImageRow] = useState(1);
+    // 마이 패션에 보이는 사진의 갯수
+    const [imageMaxLength, setImageMaxLength] = useState(4);
 
     return (
         <FashionDiv>
@@ -46,9 +51,11 @@ const FashionDiv = styled.div`
 const FasionImageDiv = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
     justify-items: center;
     align-items: center;
     column-gap: 10px;
+    row-gap: 10px;
 
     margin-top: 10px;
 

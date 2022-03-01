@@ -8,6 +8,7 @@
 💡 명령어를 어떤 디렉토리에서 실행해야 하는지에 주의해주세요!
 ```
 <br></br>
+
 ### 1. gitlab repository에서 project boilerplate(기본 뼈대) clone하기
 
 ```bash
@@ -27,6 +28,7 @@ $ git clone https://kdt-gitlab.elice.io/ai_track/class_03/ai_project/team13/colo
 ```
 
 <br></br>
+
 ### 2. frontend 설정 1단계 - node 설치하기
 
 이 문서의 기준 `node` 버전은 `v16.13.1` 입니다.
@@ -50,6 +52,7 @@ CRA(create-react-app)를 통해서 boilerplate를 만들었지만 몇가지 수�
 2. [https://git-scm.com/docs/gitignore](https://git-scm.com/docs/gitignore)
 
 <br></br>
+
 ### 4. backend 설정 1단계 - `python` 설치
 
 이 문서의 기준버전은 `v3.8.10` 입니다.
@@ -112,3 +115,35 @@ colorfit/backend$ python manage.py runserver
 ```
 💡 `ai/.gitkeep`은? ⇒ 빈 폴더를 깃허브에 업로드하기 위해서 넣어두는 더미파일입니다.
 ```
+
+<br></br>
+
+# 서버 세팅 추가 (2022 02 24)
+
+### 1. backend 폴더 하위에 db.sqlite3이라는 빈 파일 생성
+만약 있다면 생성할 필요 없다
+
+### 2. backend/app/migrations 안에 0001_initial.py 가 있다면 삭제
+없다면 python manage.py makemigrations
+
+### 3. python 가상환경을 만들고 (무조건 이름을 env로 만들어야 함)
+
+### 4. 가상환경을 활성화 하고 (os별 명령어 차이 확인 필요)
+의존성 패키지들을 설치
+- boto3==1.21.2
+- django-cors-headers==3.11.0
+- django-storages==1.12.3
+- djangorestframework==3.13.1
+- djangorestframework-simplejwt==5.0.0
+- Django==4.0.2
+- Pillow==9.0.1
+
+만 일단 설치해도 서버 구동 가능
+
+
+### 5. aws 관련파일인 conf.py는 backend/config안에 생성
+
+### 6. python manage.py runserver하면 서버 구동
+
+### 모든 과정은 backend 폴더 위치에서 진행. (가상환경은 colorfit 하단 (backend의 위쪽)에서 해도되지만 backend에서 하길 권장)
+

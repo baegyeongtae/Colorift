@@ -8,7 +8,7 @@ import {
     UserButton,
     FindPasswordModal,
     NavBackgroundDiv,
-    NoUserModal,
+    TextModal,
 } from '../../components';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 import { setUserLogin } from '../../utils/api/user';
@@ -37,16 +37,19 @@ export function Login() {
     // 이메일, 비밀번호 form submit 함수
     const handleSubmit = async event => {
         event.preventDefault();
-        await setUserLogin(emailRef.current.value, passwordRef.current.value);
-        // 로그인 성공 시 홈으로 이동, 실패 시 아래 코드 실행
-        setNoUserModal(true);
+        const response = await setUserLogin(emailRef.current.value, passwordRef.current.value);
+        if (response.status !== 200) setNoUserModal(true);
     };
 
     useEffect(() => setScrollDisabled(findModal), [findModal]);
 
     return (
         <>
-            <NoUserModal className={noUserModal && 'show'} clickProps={() => handleNoUserToggleModal()} />
+            <TextModal
+                className={noUserModal && 'show'}
+                toggleClickProps={() => handleNoUserToggleModal()}
+                text="존재하지 않는 아이디입니다."
+            />
             <FindPasswordModal className={findModal && 'show'} clickProps={() => handlePasswordToggleModal()} />
             <NavBackgroundDiv />
             <Article height="88vh">

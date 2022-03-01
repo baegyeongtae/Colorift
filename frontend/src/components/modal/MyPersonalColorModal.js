@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Result, ContainerDiv } from '../../components';
+import { ContainerDiv } from '..';
 
 function MyPersonalColorModal() {
     return (
@@ -23,9 +23,7 @@ function MyPersonalColorModal() {
                 </table>
             </TableContainerDiv>
 
-            <ResultContainerDiv>
-                <Result />
-            </ResultContainerDiv>
+            <ResultContainerDiv />
 
             <TextH1>회원님은 봄 웜톤 입니다.</TextH1>
 

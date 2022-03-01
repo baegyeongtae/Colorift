@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BackgroundDiv, ModalCloseIcon, SubTitleP } from '..';
+import { BackgroundDiv, ModalCloseIcon, SubTitleP, HomeButton } from '..';
 
 export function UserOutModal({ toggleClickProps, className, text }) {
     const handleToggleClick = () => {
@@ -11,6 +11,10 @@ export function UserOutModal({ toggleClickProps, className, text }) {
             <BackgroundDiv className={className} onClick={handleToggleClick} />
             <ModalDiv className={className}>
                 <SubTitleP className="text">{text}</SubTitleP>
+                <ButtonDiv>
+                    <HomeButton>탈퇴</HomeButton>
+                    <HomeButton>취소</HomeButton>
+                </ButtonDiv>
                 <ModalCloseIcon clickProps={handleToggleClick} />
             </ModalDiv>
         </>
@@ -31,6 +35,7 @@ const ModalDiv = styled.div`
 
         padding: 50px 30px;
 
+        ${({ theme }) => theme.flexStyled.flexColumn};
         ${({ theme }) => theme.flexStyled.flexCenter};
 
         width: 550px;
@@ -47,7 +52,29 @@ const ModalDiv = styled.div`
                 font-size: 1.5rem;
             }
 
-            width: 80%;
+            width: 70%;
         }
+    }
+`;
+
+const ButtonDiv = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 20px;
+
+    width: 80%;
+
+    margin-top: 20px;
+
+    @media ${({ theme }) => theme.device.mobile} {
+        all: unset;
+
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        grid-row-gap: 10px;
+
+        width: 80%;
+
+        margin-top: 20px;
     }
 `;

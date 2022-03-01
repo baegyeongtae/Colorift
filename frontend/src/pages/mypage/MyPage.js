@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { getPersonalList, setUserOut } from '../../utils/api/service';
-import { Article, ContainerDiv, UserButton, Input, GrayButton, NavBackgroundDiv } from '../../components';
+import { Article, ContainerDiv, UserButton, Input, GrayButton, NavBackgroundDiv, UserOutModal } from '../../components';
 import { arrowIcon } from '../../image';
 
 export function MyPage() {
@@ -33,6 +33,11 @@ export function MyPage() {
 
     return (
         <>
+            <UserOutModal
+                className={userOutModal && 'show'}
+                toggleClickProps={() => handleUserOut()}
+                text="정말 탈퇴하시겠습니까?"
+            />
             <NavBackgroundDiv />
             <Article height="88vh">
                 <MyPageContainerDiv>

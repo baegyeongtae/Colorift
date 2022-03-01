@@ -11,7 +11,7 @@ export function MyPage() {
     return (
         <>
             <NavBackgroundDiv />
-            <Article height="88vh">
+            <Article>
                 <MyPageContainerDiv>
                     <FlexRowDiv className="area">
                         <MyPageInfo />
@@ -36,6 +36,10 @@ const MyPageContainerDiv = styled(ContainerDiv)`
     ${({ theme }) => theme.flexStyled.flexColumn};
     ${({ theme }) => theme.flexStyled.flexCenter};
 
+    height: 88vh;
+
+    padding: 50px 0;
+
     .area {
         width: 100%;
         height: 50%;
@@ -44,7 +48,7 @@ const MyPageContainerDiv = styled(ContainerDiv)`
 
 const FlexRowDiv = styled.div`
     ${({ theme }) => theme.flexStyled.flexRow};
-    padding: 50px 0;
+    align-items: center;
 
     > div {
         width: 50%;
@@ -54,7 +58,7 @@ const FlexRowDiv = styled.div`
         ${({ theme }) => theme.flexStyled.flexColumn};
         ${({ theme }) => theme.flexStyled.flexCenter};
 
-        padding: 0;
+        margin: 50px 0;
 
         > div {
             width: 100%;

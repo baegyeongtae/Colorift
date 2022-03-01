@@ -81,7 +81,7 @@ export function MyPage() {
                         </UserInfoDiv>
                         <PersonalDiv>
                             <SubTitleP>My Personal Color</SubTitleP>
-                            <PersonalTableDiv>
+                            <PersonalTableDiv className="personal">
                                 <table>
                                     <tbody>
                                         {dummyData.map(item => (
@@ -209,7 +209,7 @@ const PersonalTableDiv = styled.div`
     width: 100%;
     height: 250px;
 
-    overflow: auto;
+    overflow-y: auto;
 
     margin-top: 5px;
     padding: 20px;
@@ -218,6 +218,23 @@ const PersonalTableDiv = styled.div`
     border-radius: 15px;
 
     text-align: center;
+
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background-color: transparent;
+        border-radius: 100px;
+
+        margin: 20px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: 100px;
+        background-color: #e9e9e9;
+        box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+    }
 
     tr {
         height: 40px;

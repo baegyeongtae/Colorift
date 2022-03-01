@@ -34,7 +34,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
 
 
 """
-회원가입, 탈퇴
+유저 관련 api
 """
 
 

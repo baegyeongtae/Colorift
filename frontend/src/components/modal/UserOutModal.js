@@ -1,9 +1,14 @@
 import styled from 'styled-components';
+import { setUserOut } from '../../utils/api/service';
 import { BackgroundDiv, ModalCloseIcon, SubTitleP, HomeButton } from '..';
 
 export function UserOutModal({ toggleClickProps, className, text }) {
     const handleToggleClick = () => {
         toggleClickProps();
+    };
+
+    const handleUserOut = () => {
+        setUserOut();
     };
 
     return (
@@ -12,8 +17,8 @@ export function UserOutModal({ toggleClickProps, className, text }) {
             <ModalDiv className={className}>
                 <SubTitleP className="text">{text}</SubTitleP>
                 <ButtonDiv>
-                    <HomeButton>탈퇴</HomeButton>
-                    <HomeButton>취소</HomeButton>
+                    <HomeButton onClick={handleUserOut}>탈퇴</HomeButton>
+                    <HomeButton onClick={handleToggleClick}>취소</HomeButton>
                 </ButtonDiv>
                 <ModalCloseIcon clickProps={handleToggleClick} />
             </ModalDiv>

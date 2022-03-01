@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import { useSetRecoilState } from 'recoil';
 import axiosConfig from './token';
 import { colorPageState, seasonState } from '../data/atom';
@@ -5,16 +6,18 @@ import { colorPageState, seasonState } from '../data/atom';
 // 회원탈퇴
 export async function setUserOut() {
     try {
-        const response = await axiosConfig({
+        await axiosConfig({
             method: 'delete',
             url: 'quit/',
         });
-        alert('회원탈퇴가 완료되었습니다');
+        sessionStorage.clear();
+        Cookies.remove('accessToken');
+        Cookies.remove('refreshToken');
         window.open('/', '_self');
-        return response;
     } catch (error) {
-        return error;
+        return error.response;
     }
+    return null;
 }
 
 // 퍼스널 컬러 목록 조회

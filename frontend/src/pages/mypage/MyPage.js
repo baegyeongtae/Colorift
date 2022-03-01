@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import { getPersonalList, setUserOut } from '../../utils/api/service';
+import { getPersonalList } from '../../utils/api/service';
 import { Article, ContainerDiv, UserButton, Input, GrayButton, NavBackgroundDiv, UserOutModal } from '../../components';
 import { arrowIcon } from '../../image';
 
@@ -24,7 +24,6 @@ export function MyPage() {
 
     // 회원탈퇴 함수
     const handleUserOut = () => {
-        // setUserOut();
         setUserOutModal(current => !current);
     };
 

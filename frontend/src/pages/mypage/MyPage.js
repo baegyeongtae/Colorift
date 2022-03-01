@@ -1,10 +1,13 @@
 import styled from 'styled-components';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getPersonalList, setUserOut } from '../../utils/api/service';
 import { Article, ContainerDiv, UserButton, Input, GrayButton, NavBackgroundDiv } from '../../components';
 import { arrowIcon } from '../../image';
 
 export function MyPage() {
+    // 회원탈퇴 모달
+    const [userOutModal, setUserOutModal] = useState(false);
+
     // 퍼스널 컬러 더미 데이터
     const dummyData = [
         {
@@ -21,7 +24,8 @@ export function MyPage() {
 
     // 회원탈퇴 함수
     const handleUserOut = () => {
-        setUserOut();
+        // setUserOut();
+        setUserOutModal(current => !current);
     };
 
     // 퍼스널 컬러 목록 조회

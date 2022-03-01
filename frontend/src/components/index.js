@@ -7,7 +7,7 @@ export { HomeServiceIcon, HomeColorBar, HomeContainerDiv } from './home';
 export { Article, BackgroundDiv, ContainerDiv } from './area';
 export { ExampleTitle, ExampleImage, ExampleColor } from './example';
 export { ScrollUpIcon, ModalCloseIcon, Logo } from './icon';
-export { UserInputDiv, FindPasswordModal, Input, NoUserModal } from './login';
+export { UserInputDiv, Input } from './login/UserInputDiv';
 export { HomeButton, UserButton, GrayButton, BlueButton, WhiteButton } from './button';
 export {
     Color,
@@ -20,3 +20,4 @@ export {
     MatchingResult,
     PercentResult,
 } from './procedure';
+export { FindPasswordModal, NoUserModal } from './modal';

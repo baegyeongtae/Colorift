@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { BigTextP, DescriptionP, HomeButton, Article, HomeContainerDiv } from '../../components';
+import { colorCircleImg } from '../../image';
 
 export function HomeSeason() {
     return (
         <Article color="#f8f7f3">
             <SeasonContainerDiv>
                 <SeasonImgDiv>
-                    <img src="./image/color_circle.png" alt="계절별 퍼스널 컬러 이미지" />
+                    <img src={colorCircleImg} alt="계절별 퍼스널 컬러 이미지" />
                 </SeasonImgDiv>
                 <TextContainerDiv>
                     <BigTextP>계절과 어울리는 피부톤</BigTextP>

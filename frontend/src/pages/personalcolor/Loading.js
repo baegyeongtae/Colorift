@@ -1,7 +1,15 @@
 import styled from 'styled-components';
+import { useSetRecoilState } from 'recoil';
+import { colorPageState } from '../../utils/data/atom';
 import { Color, ContainerDiv, SubTitleP } from '../../components';
 
 function Loading() {
+    const setColorPage = useSetRecoilState(colorPageState);
+
+    setTimeout(() => {
+        setColorPage(2);
+    }, 2000);
+
     return (
         <>
             <Color />

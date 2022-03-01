@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { TextContainerDiv, DescriptionLeftP, SeasonImgDiv } from './HomeSeason';
 import { BigTextP, Article, HomeContainerDiv } from '../../components';
+import { chartImg } from '../../image';
 
 export function HomeAI() {
     return (
@@ -17,7 +18,7 @@ export function HomeAI() {
                     </DescriptionLeftP>
                 </TextContainerDiv>
                 <SeasonImgDiv>
-                    <img src="./image/chart.jpg" alt="AI 분석 이미지" />
+                    <img src={chartImg} alt="AI 분석 이미지" />
                 </SeasonImgDiv>
             </HomeContainerDiv>
         </Article>

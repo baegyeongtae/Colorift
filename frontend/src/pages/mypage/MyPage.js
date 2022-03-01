@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Article, ContainerDiv, UserButton, Input, GrayButton, NavBackgroundDiv } from '../../components';
+import { arrowIcon } from '../../image';
 
 export function MyPage() {
     const dummyData = [
@@ -67,12 +68,12 @@ export function MyPage() {
                     <FassionDiv className="area">
                         <SubTitleP>My Style</SubTitleP>
                         <FassionFlexDiv>
-                            <img src="../image/arrow.svg" alt="왼쪽 슬라이드 화살표" className="arrow left" />
+                            <img src={arrowIcon} alt="왼쪽 슬라이드 화살표" className="arrow left" />
                             <div />
                             <div />
                             <div className="mobile" />
                             <div className="mobile" />
-                            <img src="../image/arrow.svg" alt="왼쪽 슬라이드 화살표" className="arrow right" />
+                            <img src={arrowIcon} alt="왼쪽 슬라이드 화살표" className="arrow right" />
                         </FassionFlexDiv>
                     </FassionDiv>
                 </MyPageContainerDiv>

@@ -1,13 +1,22 @@
 import styled from 'styled-components';
-import { ContainerDiv, Fashion, MediumTextP } from '../../components';
+import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { ContainerDiv, Fashion, MediumTextH } from '../../components';
+import { fashionPageState } from '../../utils/data/atom';
 
 function MatchingLoading() {
+    const setFashionPage = useSetRecoilState(fashionPageState);
+
+    setTimeout(() => {
+        setFashionPage(3);
+    }, 2000);
+
     return (
         <ContainerDiv>
             <Fashion />
             <LoadingContainerDiv>
                 <img src="./image/loader.png" alt="loader" width="130px" height="130px" />
-                <MediumTextP>퍼스널 컬러와 패션을 매칭하는 중입니다.</MediumTextP>
+                <MediumTextH>퍼스널 컬러와 패션을 매칭하는 중입니다.</MediumTextH>
             </LoadingContainerDiv>
         </ContainerDiv>
     );

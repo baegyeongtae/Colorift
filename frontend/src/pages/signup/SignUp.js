@@ -1,10 +1,13 @@
 import styled from 'styled-components';
 import { useRef, useState } from 'react';
 import { setUserRegister } from '../../utils/api/user';
-import { Article, UserInputDiv, TitleP, UserButton, NavBackgroundDiv } from '../../components';
+import { Article, UserInputDiv, TitleP, UserButton, NavBackgroundDiv, TextModal } from '../../components';
 import { CenterContainerDiv } from '../login/Login';
 
 export function SignUp() {
+    // 가입 완료 모달
+    const [regiseterModal, setRegisterModal] = useState(false);
+
     // 입력 값 가져오는 ref
     const emailRef = useRef();
     const passwordRef = useRef();
@@ -22,7 +25,7 @@ export function SignUp() {
     });
 
     // 이메일, 비밀번호 form submit 함수
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
         event.preventDefault();
         const emailTest = emailRegex.test(emailRef.current.value);
         const passwordTest = passwordRegex.test(passwordRef.current.value);
@@ -34,12 +37,23 @@ export function SignUp() {
             passwordCheck: passwordDoubleTest,
         }));
         if (emailTest && passwordTest && passwordDoubleTest) {
-            setUserRegister(emailRef.current.value, passwordRef.current.value);
+            const response = await setUserRegister(emailRef.current.value, passwordRef.current.value);
+            if (response.status === 201) setRegisterModal(current => !current);
         }
+    };
+
+    const handleToggleModal = () => {
+        setRegisterModal(current => !current);
+        window.open('/login', '_self');
     };
 
     return (
         <>
+            <TextModal
+                className={regiseterModal && 'show'}
+                toggleClickProps={() => handleToggleModal()}
+                text="가입을 환영합니다."
+            />
             <NavBackgroundDiv />
             <Article height="88vh">
                 <CenterContainerDiv>

@@ -20,3 +20,4 @@ export {
     MatchingResult,
     PercentResult,
 } from './procedure';
+export { TextModal } from './modal';

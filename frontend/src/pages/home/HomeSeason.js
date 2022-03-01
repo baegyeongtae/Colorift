@@ -1,12 +1,14 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { BigTextP, DescriptionP, HomeButton, Article, HomeContainerDiv } from '../../components';
+import { colorCircleImg } from '../../image';
 
 export function HomeSeason() {
     return (
         <Article color="#f8f7f3">
             <SeasonContainerDiv>
                 <SeasonImgDiv>
-                    <img src="./image/color_circle.png" alt="계절별 퍼스널 컬러 이미지" />
+                    <img src={colorCircleImg} alt="계절별 퍼스널 컬러 이미지" />
                 </SeasonImgDiv>
                 <TextContainerDiv>
                     <BigTextP>계절과 어울리는 피부톤</BigTextP>
@@ -21,7 +23,9 @@ export function HomeSeason() {
                         <br />
                         분석된 결과를 토대로 어울리는 색상을 추천해드립니다.
                     </DescriptionLeftP>
-                    <HomeButton>퍼스널 컬러 예시 보기</HomeButton>
+                    <Link to="/example">
+                        <HomeButton>퍼스널 컬러 예시 보기</HomeButton>
+                    </Link>
                 </TextContainerDiv>
             </SeasonContainerDiv>
         </Article>

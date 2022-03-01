@@ -1,6 +1,9 @@
-from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 from .models import User, Color, Fashion
+from datetime import date
+from ai import personal_color
+import numpy as np
+import cv2
 
 
 class RegisterUserSerializer(serializers.ModelSerializer):
@@ -9,20 +12,35 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         fields = ['username', 'password']
 
     def create(self, validated_data):
-        user = User.objects.create_user(validated_data['username'], None, validated_data['password'])
+        user = User.objects.create_user(**validated_data)
         return user
 
 
 """
-ColorSerializer : personal color test 상세 데이터 (하나에 대한)
-ColorInputSerializer : personal color test시 POST 요청으로 전달된 image 유효성 검사
-ColorDigestSerializer : personal color test 요약 데이터 (전체 리스트)
+ColorTestSerializer : personal color test input 검증 및 db 저장
+ColorDetailSerializer : personal color test 상세 데이터
+ColorListSerializer : personal color test 요약 데이터 (전체 리스트)
 """
 
 
-class ColorSerializer(serializers.ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), required=False)
-    # 이렇게 쿼리셋을 넣으면 성능저하가 있을 것 같은데 그냥 user로그인 된 경우 아닌경우 serializer를 분리하는게 나을까 하는의문
+class ColorTestSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(use_url=True)
+
+    class Meta:
+        model = Color
+        fields = ['user', 'image']
+
+    def ai_model(self, file):
+        nparr = np.fromstring(file.read(), np.uint8)  # read 하는건 이전과 동일한데 지금은 문제가 안생기는 이유는 validated_data에 복사+저장되기 때문인가..?
+        img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        return personal_color.analysis(img)
+
+    def create(self, validated_data):
+        color = self.ai_model(validated_data['image'])
+        return Color.objects.create(color=color, date=date.today(), **validated_data)
+
+
+class ColorDetailSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(use_url=True)
 
     class Meta:
@@ -30,29 +48,43 @@ class ColorSerializer(serializers.ModelSerializer):
         fields = ['id', 'user', 'color', 'image', 'date']
 
 
-class ColorDigestSerializer(serializers.ModelSerializer):
+class ColorListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Color
         fields = ['id', 'color', 'date']
 
 
 """
-FashionSerializer : personal color test 상세 데이터 (하나에 대한)
-FashionInputSerializer : personal color test시 POST 요청으로 전달된 image 유효성 검사
-FashionDigestSerializer : personal color test 요약 데이터 (전체 리스트)
+FashionTestSerializer : personal color test input 검증 및 db 저장
+FashionDetailSerializer : personal color test 상세 데이터
+FashionListSerializer : personal color test 요약 데이터 (전체 리스트)
 """
 
 
-class FashionSerializer(serializers.ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), required=False)
+class FashionTestSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(use_url=True)
 
     class Meta:
         model = Fashion
-        fields = ['id', 'user', 'color', 'image', 'date', 'total_match_rate', 'color_match_rate', 'brightness_match_rate', 'saturation_match_rate']
+        fields = ['user', 'color', 'image']
+
+    def ai_model(self, color, file):  # 아직 ai model 연결되지 않음
+        return {'color_match_rate': 50, 'brightness_match_rate': 50, 'saturation_match_rate': 50}
+
+    def create(self, validated_data):
+        fashion = self.ai_model(validated_data['color'], validated_data['image'])
+        return Fashion.objects.create(**validated_data, date=date.today(), **fashion)
 
 
-class FashionDigestSerializer(serializers.ModelSerializer):
+class FashionDetailSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(use_url=True)
+
+    class Meta:
+        model = Fashion
+        fields = ['id', 'user', 'color', 'image', 'date', 'color_match_rate', 'brightness_match_rate', 'saturation_match_rate']
+
+
+class FashionListSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(use_url=True)
 
     class Meta:

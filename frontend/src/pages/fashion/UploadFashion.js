@@ -1,71 +1,66 @@
+import { useRef, useState } from 'react';
 import styled from 'styled-components';
+import { useRecoilState } from 'recoil';
 import Stack from '@mui/material/Stack';
-import { Footer, PhotoUpload, ContainerDiv } from '../../components';
+import { PhotoUpload, ContainerDiv, Fashion, SubTitleP, BestWorstLi, BlueButton, WhiteButton } from '../../components';
+import { fashionPageState } from '../../utils/data/atom';
 
 function UploadFashion() {
+    const [fashionPage, setFashionPage] = useRecoilState(fashionPageState);
+
+    const photoInput = useRef();
+    const handleClick = () => {
+        photoInput.current.click();
+    };
+
+    const [photoUpload, setPhotoUpload] = useState('');
+
+    const handlePhoto = e => {
+        const photoToAdd = e.target.files;
+        console.log(photoToAdd);
+        const fileImg = URL.createObjectURL(photoToAdd[0]);
+        console.log(fileImg);
+
+        setPhotoUpload(fileImg);
+    };
+
+    const fileCheck = () => {
+        if (photoUpload === '') {
+            alert('사진을 올려주세요.');
+        } else if (photoUpload !== '') {
+            setFashionPage(2);
+            console.log(fashionPage);
+        }
+    };
+
     return (
         <>
-            <CircleContainerDiv>
-                <div className="wrapper">
-                    <div className="left_circle">
-                        <TextH0>
-                            퍼스널 컬러 <br /> 선택
-                        </TextH0>
-                    </div>
-                    <div className="current_circle">
-                        <TextH0>
-                            패션 사진 <br /> 업로드
-                        </TextH0>
-                    </div>
-                    <div className="left_circle">
-                        <TextH0>
-                            퍼스널컬러와
-                            <br /> 비교 매칭
-                        </TextH0>
-                    </div>
-                    <div className="left_circle">
-                        <TextH0>
-                            패션 매칭
-                            <br /> 결과
-                        </TextH0>
-                    </div>
-                </div>
-            </CircleContainerDiv>
-            <TextH1>가지고 계신 옷을 올려주세요.</TextH1>
+            <Fashion />
+            <SubTitleP>가지고 계신 옷을 올려주세요.</SubTitleP>
 
             <ContentContainerDiv>
                 <PhotoContainerDiv>
-                    <PhotoUpload />
+                    <PhotoUpload photoProps={photoUpload} />
                     <TextContainerDiv>
-                        <TextH3>BEST</TextH3>
-                        <TextH2>
-                            <ul>
-                                <li>· 크고 뚜렷한 사진</li>
-                                <li>· 적절한 밝기에서 촬영한 사진</li>
-                                <li>· 배경이 없는 깔끔한 사진</li>
-                            </ul>
-                        </TextH2>
-                        <TextH3>WORST</TextH3>
-                        <TextH2>
-                            <ul>
-                                <li>· 그림자 지거나 흐릿한 사진</li>
-                                <li>· 너무 밝거나 너무 어두운 곳에서 촬영한 사진</li>
-                                <li>· 너무 작은 사진</li>
-                            </ul>
-                        </TextH2>
+                        <BestWorstLi />
                         <ButtonContainerDiv>
                             <Stack spacing={2} direction="row">
-                                <CustomButton1>업로드</CustomButton1>
-                                <CustomButton2>결과보기</CustomButton2>
+                                <BlueButton onClick={handleClick}>
+                                    <input
+                                        type="file"
+                                        accept="image/jpg, image/jpeg, image/png"
+                                        ref={photoInput}
+                                        onChange={e => handlePhoto(e)}
+                                        style={{ display: 'none' }}
+                                    />
+                                    업로드
+                                </BlueButton>
+                                <WhiteButton onClick={() => fileCheck()}>결과보기</WhiteButton>
                             </Stack>
                         </ButtonContainerDiv>
                     </TextContainerDiv>
                 </PhotoContainerDiv>
             </ContentContainerDiv>
-
-            <FooterContainerDiv>
-                <Footer />
-            </FooterContainerDiv>
         </>
     );
 }
@@ -73,111 +68,6 @@ function UploadFashion() {
 export { UploadFashion };
 
 // styled-components
-
-const CircleContainerDiv = styled(ContainerDiv)`
-    background-color: ${({ theme }) => theme.color.white};
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    margin-bottom: 50px;
-    margin-top: 120px;
-    color: white;
-
-    .wrapper {
-        width: 100%;
-        height: auto;
-        position: relative;
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        margin-bottom: 7px;
-        padding-left: 30px;
-        padding-right: 30px;
-    }
-
-    .wrapper::before {
-        content: '';
-        width: 70%;
-        height: 5px;
-        background-color: ${({ theme }) => theme.color.lightgray};
-        position: absolute;
-        top: 50%;
-        left: 100;
-    }
-
-    .current_circle {
-        width: 130px;
-        height: 130px;
-        position: relative;
-        border-radius: 50%;
-        background-color: ${({ theme }) => theme.color.blue};
-        text-align: center;
-    }
-
-    .left_circle {
-        width: 130px;
-        height: 130px;
-        position: relative;
-        border-radius: 50%;
-        background-color: ${({ theme }) => theme.color.lightgray};
-        text-align: center;
-    }
-
-    @media ${({ theme }) => theme.device.mobile} {
-        all: unset;
-
-        background-color: ${({ theme }) => theme.color.white};
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-        margin-bottom: 20px;
-        margin-top: 70px;
-        color: white;
-
-        .wrapper {
-            width: 100%;
-            height: auto;
-            position: relative;
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-            margin-bottom: 7px;
-            padding-left: 30px;
-            padding-right: 30px;
-        }
-        .wrapper::before {
-            content: '';
-            width: 50%;
-            height: 2px;
-            background-color: ${({ theme }) => theme.color.lightgray};
-            position: absolute;
-            top: 50%;
-            left: 100;
-        }
-        .current_circle {
-            all: unset;
-
-            width: 63px;
-            height: 63px;
-            position: relative;
-            border-radius: 50%;
-            background-color: ${({ theme }) => theme.color.blue};
-            text-align: center;
-        }
-        .left_circle {
-            all: unset;
-
-            width: 65px;
-            height: 65px;
-            position: relative;
-            border-radius: 50%;
-            background-color: ${({ theme }) => theme.color.lightgray};
-            text-align: center;
-        }
-    }
-`;
 
 const TextContainerDiv = styled(ContainerDiv)`
     @media ${({ theme }) => theme.device.mobile} {
@@ -188,7 +78,6 @@ const TextContainerDiv = styled(ContainerDiv)`
         flex-direction: column;
         align-items: left;
         margin-bottom: 30px;
-        padding
     }
     all: unset;
 
@@ -248,126 +137,4 @@ const ButtonContainerDiv = styled(ContainerDiv)`
     margin-top: 40px;
     color: ${({ theme }) => theme.color.white};
     background-color: ${props => props.theme.color.white};
-`;
-
-const FooterContainerDiv = styled.div`
-    position: absolute;
-    bottom: 0;
-`;
-
-const TextH0 = styled.h2`
-    @media ${({ theme }) => theme.device.mobile} {
-        font-size: ${({ theme }) => theme.fontSizes.mobiletext};
-        margin-top: 20px;
-    }
-    margin-top: 38px;
-    font-weight: bold;
-    font-size: ${({ theme }) => theme.fontSizes.mediumtext};
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
-`;
-
-const TextH1 = styled.h1`
-    @media ${({ theme }) => theme.device.mobile} {
-        font-size: ${({ theme }) => theme.fontSizes.smalltext};
-        font-weight: bold;
-        margin: 20px;
-    }
-    font-size: ${({ theme }) => theme.fontSizes.bigtext};
-    font-weight: bold;
-    text-align: center;
-    margin: 20px;
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
-`;
-
-const TextH2 = styled.h2`
-    @media ${({ theme }) => theme.device.mobile} {
-        font-size: ${({ theme }) => theme.fontSizes.mobiletext};
-        margin-top: 5px;
-        align-items: left;
-        color: ${({ theme }) => theme.color.darkgray};
-
-        li {
-            list-style: none;
-        }
-    }
-    li {
-        list-style: none;
-    }
-
-    align-items: left;
-    font-weight: bold;
-    font-size: 1rem;
-    color: ${({ theme }) => theme.color.darkgray};
-    background-color: ${props => props.theme.color.white};
-`;
-
-const TextH3 = styled.h3`
-    @media ${({ theme }) => theme.device.mobile} {
-        font-size: ${({ theme }) => theme.fontSizes.smalltext};
-        margin-top: 10px;
-        font-weight: bold;
-        align-items: left;
-        color: ${({ theme }) => theme.color.darkgray};
-    }
-
-    align-items: left;
-    margin-top: 20px;
-    font-weight: bold;
-    color: ${({ theme }) => theme.color.darkgray};
-    background-color: ${props => props.theme.color.white};
-`;
-
-const CustomButton1 = styled('span')`
-    @media ${({ theme }) => theme.device.mobile} {
-        font-weight: bold;
-        font-size: 0.875rem;
-        background-color: ${({ theme }) => theme.color.blue};
-        padding: 12px 24px;
-        border-radius: 0px;
-        color: white;
-        transition: all 150ms ease;
-        cursor: pointer;
-        border: none;
-        width: 100px;
-    }
-    font-weight: bold;
-    font-size: 0.875rem;
-    background-color: ${({ theme }) => theme.color.blue};
-    padding: 12px 24px;
-    border-radius: 0px;
-    color: white;
-    transition: all 150ms ease;
-    cursor: pointer;
-    border: none;
-    width: 120px;
-    text-align: center;
-`;
-
-const CustomButton2 = styled('span')`
-    @media ${({ theme }) => theme.device.mobile} {
-        font-weight: bold;
-        font-size: 0.875rem;
-        background-color: ${({ theme }) => theme.color.white};
-        padding: 12px 20px;
-        border-style: solid;
-        border-width: 2px;
-        color: ${({ theme }) => theme.color.blue};
-        transition: all 150ms ease;
-        cursor: pointer;
-        width: 120px;
-    }
-    font-weight: bold;
-    font-size: 0.875rem;
-    background-color: ${({ theme }) => theme.color.white};
-    padding: 12px 20px;
-    border-style: solid;
-    border-width: 2px;
-    color: ${({ theme }) => theme.color.blue};
-    transition: all 150ms ease;
-    cursor: pointer;
-    width: 170px;
-    text-align: center;
-}
 `;

@@ -5,7 +5,11 @@ db.sqlite3
 __pycache__/
 env/
 
+# ai
+shape_predictor_68_face_landmarks.dat
+
 # frontend
+.env
 
 # dependencies
 node_modules/

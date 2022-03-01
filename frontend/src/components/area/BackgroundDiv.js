@@ -12,16 +12,22 @@ const backgroundKeyframe = keyframes`
 `;
 
 export const BackgroundDiv = styled.div`
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 999;
+    display: none;
 
-    width: 100vw;
-    height: 100vh;
+    &.show {
+        display: initial;
 
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(1.5px);
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9;
 
-    animation: ${backgroundKeyframe} 1s ease-in-out 1;
+        width: 100vw;
+        height: 100vh;
+
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(1.5px);
+
+        animation: ${backgroundKeyframe} 1s ease-in-out 1;
+    }
 `;

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { Article, ContainerDiv, BigTextP, DescriptionP, HomeButton } from '../../components';
 
 export function HomeFooter() {
@@ -12,15 +13,21 @@ export function HomeFooter() {
                     알맞는 패션으로 패피가 되어보세요!
                 </DescriptionCenterP>
                 <ButtonDiv>
-                    <HomeButton maxWidth="200px" width="40vw">
-                        퍼스널 컬러 찾기
-                    </HomeButton>
-                    <HomeButton maxWidth="200px" width="40vw">
-                        패션 매칭하기
-                    </HomeButton>
-                    <HomeButton maxWidth="200px" width="40vw">
-                        회원가입
-                    </HomeButton>
+                    <Link to="/personalcolor">
+                        <HomeButton maxWidth="200px" width="40vw">
+                            퍼스널 컬러 찾기
+                        </HomeButton>
+                    </Link>
+                    <Link to="/fashion">
+                        <HomeButton maxWidth="200px" width="40vw">
+                            패션 매칭하기
+                        </HomeButton>
+                    </Link>
+                    <Link to="/signup">
+                        <HomeButton maxWidth="200px" width="40vw">
+                            회원가입
+                        </HomeButton>
+                    </Link>
                 </ButtonDiv>
             </FlexContainerDiv>
         </Article>

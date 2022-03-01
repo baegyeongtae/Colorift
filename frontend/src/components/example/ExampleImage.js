@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { ContainerDiv } from '..';
+import images from '../../image/season';
 
 export function ExampleImage({ season }) {
     return (
@@ -7,7 +8,7 @@ export function ExampleImage({ season }) {
             {[1, 2, 3, 4].map(item => (
                 <ExampleImg
                     key={item}
-                    src={`./image/season/${season}${item}.jpg`}
+                    src={images[`${season}${item}`]}
                     alt={`계절별 퍼스널 컬러 연예인 이미지 ${item}`}
                 />
             ))}

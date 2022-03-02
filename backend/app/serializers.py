@@ -1,9 +1,6 @@
 from rest_framework import serializers
 from .models import User, Color, Fashion
 from datetime import date
-from ai import personal_color
-import numpy as np
-import cv2
 
 
 class RegisterUserSerializer(serializers.ModelSerializer):
@@ -31,9 +28,7 @@ class ColorTestSerializer(serializers.ModelSerializer):
         fields = ['user', 'image']
 
     def ai_model(self, file):
-        nparr = np.fromstring(file.read(), np.uint8)  # read 하는건 이전과 동일한데 지금은 문제가 안생기는 이유는 validated_data에 복사+저장되기 때문인가..?
-        img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-        return personal_color.analysis(img)
+        return "SP"
 
     def create(self, validated_data):
         color = self.ai_model(validated_data['image'])
@@ -72,7 +67,8 @@ class FashionTestSerializer(serializers.ModelSerializer):
         return {'color_match_rate': 50, 'brightness_match_rate': 50, 'saturation_match_rate': 50}
 
     def create(self, validated_data):
-        fashion = self.ai_model(validated_data['color'], validated_data['image'])
+        fashion = self.ai_model(
+            validated_data['color'], validated_data['image'])
         return Fashion.objects.create(**validated_data, date=date.today(), **fashion)
 
 
@@ -81,7 +77,8 @@ class FashionDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Fashion
-        fields = ['id', 'user', 'color', 'image', 'date', 'color_match_rate', 'brightness_match_rate', 'saturation_match_rate']
+        fields = ['id', 'user', 'color', 'image', 'date', 'color_match_rate',
+                  'brightness_match_rate', 'saturation_match_rate']
 
 
 class FashionListSerializer(serializers.ModelSerializer):

@@ -2,10 +2,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
 import React, { useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { ContainerDiv, Fashion, MediumTextH, WhiteButton, RadioTextH } from '../../components';
-import { fashionPageState } from '../../utils/data/atom';
+import { fashionPageState, toneChoiceState, seasonState, myPersonalColorState } from '../../utils/data/atom';
 
 function PersonalColorChoice() {
     const [select, setSelect] = useState('betterPriceOnly');
@@ -14,6 +14,11 @@ function PersonalColorChoice() {
         setSelect(value);
     };
     const setFashionPage = useSetRecoilState(fashionPageState);
+
+    const [toneValue, setToneValue] = useRecoilState(toneChoiceState);
+    const onChangeSelect = e => {
+        setToneValue(e.target.value);
+    };
 
     return (
         <>
@@ -41,7 +46,7 @@ function PersonalColorChoice() {
                 </div>
                 <div>
                     <SelectDiv>
-                        <select name="personalcolor" className="select">
+                        <select name="personalcolor" className="select" value={toneValue} onChange={onChangeSelect}>
                             <option value="spring">봄 웜톤</option>
                             <option value="summer">여름 쿨톤</option>
                             <option value="fall">가을 웜톤</option>
@@ -65,6 +70,7 @@ function PersonalColorChoice() {
                 </div>
                 <div>
                     <ResultText>직전에 분석한 자료가 없습니다.</ResultText>
+                    {/* {seasonState} */}
                 </div>
                 <div>
                     <Item>
@@ -83,6 +89,7 @@ function PersonalColorChoice() {
                 <div>
                     <MyPersonalColorDiv>
                         <ResultText>선택안함</ResultText>
+                        {/* {myPersonalColorState} */}
                         <CustomButton>불러오기</CustomButton>
                     </MyPersonalColorDiv>
                 </div>

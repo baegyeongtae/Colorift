@@ -1,8 +1,12 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 import { ModalDiv } from './ModalDiv';
-import { BackgroundDiv, ModalCloseIcon } from '..';
+import { BackgroundDiv, ModalCloseIcon, GrayButton, BlueButton, MyPersonalColorModal } from '..';
 
 export function MyPersonalListModal({ toggleClickProps, className }) {
+    // 상세보기 모달
+    const [personalListModal, setPersonalListModal] = useState(false);
+
     // 퍼스널 컬러 더미 데이터
     const dummyData = [
         {
@@ -42,21 +46,76 @@ export function MyPersonalListModal({ toggleClickProps, className }) {
         },
     ];
 
-    const handleToggleClick = () => {
+    // 마이퍼스널 목록 모달 토글 함수
+    const handlePropsClick = () => {
         toggleClickProps();
+    };
+
+    // 상세보기 모달 토글 함수
+    const handleToggleClick = () => {
+        setPersonalListModal(current => !current);
     };
 
     return (
         <>
-            <BackgroundDiv className={className} onClick={handleToggleClick} />
-            <ModalDiv className={className}>
-                <ModalCloseIcon clickProps={handleToggleClick} />
-            </ModalDiv>
+            <BackgroundDiv className={className} onClick={handlePropsClick} />
+            <ModalTableDiv className={className}>
+                <TextP>회원님이 저장한 퍼스널 컬러 목록입니다.</TextP>
+                <PersonalTableDiv>
+                    <table>
+                        <tbody>
+                            {dummyData.map(item => (
+                                <tr key={item.id}>
+                                    <td className="checkbox">
+                                        <CheckboxInput type="radio" name="checkbox" value={item.id} />
+                                    </td>
+                                    <td className="id">{item.id}</td>
+                                    <td className="date">{item.date}</td>
+                                    <td className="color">{item.color}</td>
+                                    <td className="button">
+                                        <GrayButton
+                                            width="90%"
+                                            onClick={() => setPersonalListModal(current => !current)}
+                                        >
+                                            상세보기
+                                        </GrayButton>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                    <ModalCloseIcon clickProps={handlePropsClick} />
+                </PersonalTableDiv>
+                <BlueButton>확인</BlueButton>
+            </ModalTableDiv>
+            <MyPersonalColorModal className={personalListModal && 'show'} toggleClickProps={handleToggleClick} />
         </>
     );
 }
 
 // styled-components
+
+const ModalTableDiv = styled(ModalDiv)`
+    &.show {
+        ${({ theme }) => theme.flexStyled.flexColumn};
+
+        width: 700px;
+        height: auto;
+
+        padding: 30px;
+
+        @media ${({ theme }) => theme.device.tablet} {
+            width: 90%;
+        }
+    }
+`;
+
+const TextP = styled.p`
+    font-size: 1.2rem;
+    font-weight: bold;
+
+    align-self: start;
+`;
 
 const PersonalTableDiv = styled.div`
     width: 100%;
@@ -64,7 +123,7 @@ const PersonalTableDiv = styled.div`
 
     overflow-y: auto;
 
-    margin-top: 5px;
+    margin: 20px;
     padding: 20px;
 
     border: 1px solid #dbdbdb;
@@ -89,8 +148,16 @@ const PersonalTableDiv = styled.div`
         box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
     }
 
+    table {
+        width: 100%;
+    }
+
     tr {
         height: 40px;
+    }
+
+    .checkbox {
+        width: 40px;
     }
 
     .id {
@@ -98,11 +165,11 @@ const PersonalTableDiv = styled.div`
     }
 
     .date {
-        width: 150px;
+        width: 100px;
     }
 
     .color {
-        width: 200px;
+        width: 150px;
     }
 
     .button {
@@ -111,5 +178,35 @@ const PersonalTableDiv = styled.div`
 
     @media ${({ theme }) => theme.device.tablet} {
         padding: 10px;
+    }
+`;
+
+const CheckboxInput = styled.input`
+    appearance: none;
+    -webkit-appearance: none;
+
+    width: 15px;
+    height: 15px;
+
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 3px;
+
+    background-color: white;
+
+    :checked::before {
+        content: '';
+
+        display: block;
+
+        width: 9px;
+        height: 9px;
+
+        margin: 17%;
+
+        border-radius: 2px;
+
+        background-color: ${({ theme }) => theme.color.blue};
     }
 `;

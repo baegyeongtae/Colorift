@@ -8,13 +8,10 @@ export function MyPersonalColorModal({ toggleClickProps, className }) {
     };
 
     return (
-        <>
-            <BackgroundDiv className={className} onClick={handleToggleClick} />
-            <ModalDiv className={className}>
-                <MyModalTable />
-                <ModalCloseIcon clickProps={handleToggleClick} />
-            </ModalDiv>
-        </>
+        <ModalDiv className={className}>
+            <MyModalTable />
+            <ModalCloseIcon clickProps={handleToggleClick} />
+        </ModalDiv>
     );
 }
 

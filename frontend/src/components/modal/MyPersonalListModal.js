@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import { ModalDiv } from './ModalDiv';
-import { BackgroundDiv, ModalCloseIcon, GrayButton, BlueButton } from '..';
+import { BackgroundDiv, ModalCloseIcon, GrayButton, BlueButton, MyPersonalColorModal } from '..';
 
 export function MyPersonalListModal({ toggleClickProps, className }) {
     // 상세보기 모달
-    const [personalModal, setPersonalModal] = useState(false);
+    const [personalListModal, setPersonalListModal] = useState(false);
 
     // 퍼스널 컬러 더미 데이터
     const dummyData = [
@@ -46,13 +46,19 @@ export function MyPersonalListModal({ toggleClickProps, className }) {
         },
     ];
 
-    const handleToggleClick = () => {
+    // 마이퍼스널 목록 모달 토글 함수
+    const handlePropsClick = () => {
         toggleClickProps();
+    };
+
+    // 상세보기 모달 토글 함수
+    const handleToggleClick = () => {
+        setPersonalListModal(current => !current);
     };
 
     return (
         <>
-            <BackgroundDiv className={className} onClick={handleToggleClick} />
+            <BackgroundDiv className={className} onClick={handlePropsClick} />
             <ModalTableDiv className={className}>
                 <TextP>회원님이 저장한 퍼스널 컬러 목록입니다.</TextP>
                 <PersonalTableDiv>
@@ -61,13 +67,16 @@ export function MyPersonalListModal({ toggleClickProps, className }) {
                             {dummyData.map(item => (
                                 <tr key={item.id}>
                                     <td className="checkbox">
-                                        <CheckboxInput type="checkbox" />
+                                        <CheckboxInput type="radio" name="checkbox" value={item.id} />
                                     </td>
                                     <td className="id">{item.id}</td>
                                     <td className="date">{item.date}</td>
                                     <td className="color">{item.color}</td>
                                     <td className="button">
-                                        <GrayButton width="90%" onClick={() => setPersonalModal(current => !current)}>
+                                        <GrayButton
+                                            width="90%"
+                                            onClick={() => setPersonalListModal(current => !current)}
+                                        >
                                             상세보기
                                         </GrayButton>
                                     </td>
@@ -75,10 +84,11 @@ export function MyPersonalListModal({ toggleClickProps, className }) {
                             ))}
                         </tbody>
                     </table>
-                    <ModalCloseIcon clickProps={handleToggleClick} />
+                    <ModalCloseIcon clickProps={handlePropsClick} />
                 </PersonalTableDiv>
                 <BlueButton>확인</BlueButton>
             </ModalTableDiv>
+            <MyPersonalColorModal className={personalListModal && 'show'} toggleClickProps={handleToggleClick} />
         </>
     );
 }

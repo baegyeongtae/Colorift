@@ -8,6 +8,10 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from app.models import User, Color, Fashion
 from app.serializers import *
+from datetime import date
+from ai import personal_color
+import numpy as np
+import cv2
 
 
 """ 

@@ -1,25 +1,25 @@
 import styled from 'styled-components';
-import { Article, ContainerDiv, NavBackgroundDiv } from '../../components';
+import { BackgroundArticle, ContainerDiv, NavBackgroundDiv } from '../../components';
 import { MyPageInfo, MyPagePersonal, MyPageFashion } from '.';
 
 export function MyPage() {
     return (
-        <Article height="100vh">
+        <BackgroundArticle>
             <NavBackgroundDiv />
             <MyPageContainerDiv>
-                <FlexRowDiv className="area">
+                <FlexRowDiv>
                     <MyPageInfo />
                     <PersonalDiv>
                         <SubTitleP>My Personal Color</SubTitleP>
                         <MyPagePersonal />
                     </PersonalDiv>
                 </FlexRowDiv>
-                <FassionDiv className="area fashion">
+                <FassionDiv>
                     <SubTitleP>My Style</SubTitleP>
                     <MyPageFashion />
                 </FassionDiv>
             </MyPageContainerDiv>
-        </Article>
+        </BackgroundArticle>
     );
 }
 
@@ -28,41 +28,26 @@ export function MyPage() {
 const MyPageContainerDiv = styled(ContainerDiv)`
     ${({ theme }) => theme.flexStyled.flexColumn};
     ${({ theme }) => theme.flexStyled.flexCenter};
-
-    .area {
-        width: 100%;
-        height: 50%;
-
-        &.fashion {
-            height: 50%;
-        }
-    }
 `;
 
 const FlexRowDiv = styled.div`
     ${({ theme }) => theme.flexStyled.flexRow};
     align-items: center;
 
-    > div {
-        width: 50%;
-    }
+    margin: 40px 0;
 
     @media ${({ theme }) => theme.device.tablet} {
         ${({ theme }) => theme.flexStyled.flexColumn};
         ${({ theme }) => theme.flexStyled.flexCenter};
 
-        margin: 50px 0;
+        height: auto;
 
-        > div {
-            width: 100%;
-        }
+        margin: 0;
     }
 `;
 
 const PersonalDiv = styled.div`
-    @media ${({ theme }) => theme.device.tablet} {
-        padding: 0 20px;
-    }
+    padding: 0 20px;
 `;
 
 const SubTitleP = styled.p`
@@ -71,7 +56,7 @@ const SubTitleP = styled.p`
 `;
 
 const FassionDiv = styled.div`
-    @media ${({ theme }) => theme.device.tablet} {
-        padding: 40px 20px;
-    }
+    width: 100%;
+
+    margin: 20px 20px;
 `;

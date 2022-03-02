@@ -34,6 +34,26 @@ export function MyPageFashion() {
             date: '2022-02-28',
             image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
         },
+        {
+            id: 7,
+            date: '2022-02-28',
+            image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
+        },
+        {
+            id: 8,
+            date: '2022-03-01',
+            image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
+        },
+        {
+            id: 9,
+            date: '2022-03-02',
+            image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
+        },
+        {
+            id: 10,
+            date: '2022-03-02',
+            image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
+        },
     ];
 
     // 버튼 클릭 횟수
@@ -64,6 +84,8 @@ export function MyPageFashion() {
 const FashionDiv = styled.div`
     ${({ theme }) => theme.flexStyled.flexColumn};
     ${({ theme }) => theme.flexStyled.flexCenter};
+
+    width: 100%;
 `;
 
 const FasionImageDiv = styled.div`
@@ -74,6 +96,8 @@ const FasionImageDiv = styled.div`
     align-items: center;
     column-gap: 10px;
     row-gap: 10px;
+
+    width: 100%;
 
     margin-top: 10px;
 
@@ -88,10 +112,6 @@ const FasionImageDiv = styled.div`
         grid: unset;
         grid-template-rows: 1fr 1fr 1fr 1fr;
         row-gap: 10px;
-
-        img {
-            height: 200px;
-        }
     }
 `;
 

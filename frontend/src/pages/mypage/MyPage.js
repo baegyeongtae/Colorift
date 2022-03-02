@@ -41,8 +41,6 @@ const FlexRowDiv = styled.div`
         ${({ theme }) => theme.flexStyled.flexCenter};
 
         height: auto;
-
-        margin: 0;
     }
 `;
 
@@ -58,5 +56,5 @@ const SubTitleP = styled.p`
 const FassionDiv = styled.div`
     width: 100%;
 
-    margin: 20px 20px;
+    padding: 0 20px;
 `;

@@ -20,4 +20,11 @@ export {
     MatchingResult,
     PercentResult,
 } from './procedure';
-export { FindPasswordModal, UserOutModal, TextModal, MyPersonalColorModal, MyStyleModal } from './modal';
+export {
+    FindPasswordModal,
+    UserOutModal,
+    TextModal,
+    MyPersonalColorModal,
+    MyStyleModal,
+    MyPersonalListModal,
+} from './modal';

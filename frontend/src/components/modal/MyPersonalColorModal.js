@@ -10,55 +10,24 @@ export function MyPersonalColorModal({ toggleClickProps, className }) {
         <>
             <BackgroundDiv className={className} onClick={handleToggleClick} />
             <ModalDiv className={className}>
-                <TableContainerDiv>
-                    <table className="type11">
+                <TableDiv>
+                    <table>
                         <thead>
-                            <tr width="20px">
+                            <tr>
                                 <th>번호</th>
                                 <th>분석 날짜</th>
                                 <th>제목</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr width="20px">
+                            <tr>
                                 <td>1</td>
                                 <td>2022.02.11</td>
                                 <td>사용자 지정 제목</td>
                             </tr>
                         </tbody>
                     </table>
-                </TableContainerDiv>
-
-                <ResultContainerDiv />
-
-                <TextH1>회원님은 봄 웜톤 입니다.</TextH1>
-
-                <ColorContainerDiv>
-                    <div className="wrapper">
-                        <div className="text">회원님에게 어울리는 컬러</div>
-                        <div className="blank_circle" />
-                        <div className="blank_circle" />
-                        <div className="blank_circle" />
-                    </div>
-                    <div className="wrapper">
-                        <div className="circle" />
-                        <div className="circle" />
-                        <div className="circle" />
-                        <div className="circle" />
-                    </div>
-                    <div className="wrapper">
-                        <div className="circle" />
-                        <div className="circle" />
-                        <div className="circle" />
-                        <div className="circle" />
-                    </div>
-                    <div className="wrapper">
-                        <div className="circle" />
-                        <div className="circle" />
-                        <div className="circle" />
-                        <div className="circle" />
-                    </div>
-                </ColorContainerDiv>
+                </TableDiv>
             </ModalDiv>
         </>
     );
@@ -66,7 +35,7 @@ export function MyPersonalColorModal({ toggleClickProps, className }) {
 
 // styled-components
 
-const ModalDiv = styled.div`
+const ModalDiv = styled(ContainerDiv)`
     display: none;
 
     &.show {
@@ -76,12 +45,10 @@ const ModalDiv = styled.div`
         left: 50%;
         transform: translate(-50%, -50%);
 
+        width: 100%;
         padding: 50px 30px;
 
-        ${({ theme }) => theme.flexStyled.flexCenter};
-
-        width: 1200px;
-        height: 600px;
+        ${({ theme }) => theme.flexStyled.flexColumn};
 
         background-color: white;
 
@@ -102,64 +69,37 @@ const ModalDiv = styled.div`
             box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
         }
 
-        .text {
-            margin: 0;
-        }
-
         @media ${({ theme }) => theme.device.tablet} {
-            .text {
-                font-size: 1.5rem;
-            }
-
             width: 80%;
         }
     }
 `;
 
-const TableContainerDiv = styled.div`
-    @media ${({ theme }) => theme.device.mobile} {
-        background-color: ${({ theme }) => theme.color.white};
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 8px;
-        margin-top: 8px;
-    }
+const TableDiv = styled.div`
+    ${({ theme }) => theme.flexStyled.flexCenter};
 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-bottom: 8px;
-    margin-top: 8px;
+    width: 100%;
 
-    table.type11 {
-        border-collapse: separate;
-        text-align: center;
-        line-height: 1.5;
+    table {
+        width: 80%;
+
         margin: 20px 10px;
-        width: 600px;
-        border-spacing: 0px;
-        border-right: 1px solid black;
-        border-bottom: 1px solid black;
-    }
-    table.type11 th {
-        padding: 10px;
-        font-weight: bold;
-        vertical-align: top;
 
-        border-bottom: 1px solid black;
-        border-top: 1px solid black;
-        border-left: 1px solid black;
+        text-align: center;
+        line-height: 3rem;
+
+        border-collapse: collapse;
+
+        th {
+            font-weight: bold;
+        }
     }
 
-    table.type11 td {
-        padding: 10px;
-        vertical-align: top;
-
-        border-left: 1px solid black;
+    table,
+    th,
+    td {
+        border: 1px solid black;
     }
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;
 
 const ColorContainerDiv = styled(ContainerDiv)`
@@ -288,48 +228,4 @@ const ColorContainerDiv = styled(ContainerDiv)`
             font-size: ${({ theme }) => theme.fontSizes.smalltext};
         }
     }
-`;
-
-const ResultContainerDiv = styled(ContainerDiv)`
-    background-color: ${({ theme }) => theme.color.white};
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-bottom: 8px;
-    margin-top: 8px;
-
-    @media ${({ theme }) => theme.device.tablet} {
-        background-color: ${({ theme }) => theme.color.white};
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-        margin-bottom: 30px;
-        margin-top: 20px;
-    }
-
-    @media ${({ theme }) => theme.device.mobile} {
-        background-color: ${({ theme }) => theme.color.white};
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-        margin-bottom: 8px;
-        margin-top: 15px;
-    }
-`;
-
-const TextH1 = styled.h1`
-    @media ${({ theme }) => theme.device.mobile} {
-        font-size: ${({ theme }) => theme.fontSizes.smalltext};
-        font-weight: bold;
-        margin: 20px;
-    }
-    font-size: ${({ theme }) => theme.fontSizes.bigtext};
-    font-weight: bold;
-    text-align: center;
-    margin: 20px;
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;

@@ -13,6 +13,19 @@ const GlobalStyle = createGlobalStyle`
     }
 
     html {
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: transparent;
+            border-radius: 100px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 100px;
+            background-color: ${({ theme }) => theme.color.blue};
+        }
         @media screen and (min-width: 391px) and (max-width: 1200px) {
             font-size: 12px;
         }

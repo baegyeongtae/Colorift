@@ -30,9 +30,9 @@ function UploadFashion() {
         const formData = new FormData();
         formData.append('image', uploadFile);
         formData.append('color', seasonTone);
+
         console.log(formData);
         setFashionData(formData);
-
         setPhotoUpload(fileImg);
     };
 

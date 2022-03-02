@@ -26,6 +26,7 @@ const GlobalStyle = createGlobalStyle`
             border-radius: 100px;
             background-color: ${({ theme }) => theme.color.blue};
         }
+        
         @media screen and (min-width: 391px) and (max-width: 1200px) {
             font-size: 12px;
         }

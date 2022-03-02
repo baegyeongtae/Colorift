@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 import { useState } from 'react';
+import { MyStyleModal } from '../../components';
 
 export function MyPageFashion() {
+    // 상세보기 모달
+    const [fashionModal, setFashionModal] = useState(false);
+
     // 패션 사진 더미 데이터
     const fashionData = [
         {
@@ -67,15 +71,29 @@ export function MyPageFashion() {
         setButtonClick(current => current + 1);
     };
 
+    // 상세보기 모달 토클 함수
+    const handleToggleClick = () => {
+        if (fashionModal) setFashionModal(current => !current);
+    };
+
     return (
-        <FashionDiv>
-            <FasionImageDiv>
-                {fashionData.slice(0, imageMaxIndex).map(item => (
-                    <img key={item.id} src={item.image} alt={`패션 이미지 ${item.id}`} />
-                ))}
-            </FasionImageDiv>
-            <PlusButton onClick={handleMoreClick}>더보기</PlusButton>
-        </FashionDiv>
+        <>
+            <MyStyleModal className={fashionModal && 'show'} toggleClickProps={handleToggleClick} />
+            <FashionDiv>
+                <FasionImageDiv>
+                    {fashionData.slice(0, imageMaxIndex).map(item => (
+                        <input
+                            key={item.id}
+                            type="image"
+                            src={item.image}
+                            alt={`패션 이미지 ${item.id}`}
+                            onClick={() => setFashionModal(current => !current)}
+                        />
+                    ))}
+                </FasionImageDiv>
+                <PlusButton onClick={handleMoreClick}>더보기</PlusButton>
+            </FashionDiv>
+        </>
     );
 }
 
@@ -101,11 +119,13 @@ const FasionImageDiv = styled.div`
 
     margin-top: 10px;
 
-    img {
+    input {
         width: 100%;
         height: 300px;
 
         background-color: ${({ theme }) => theme.color.lightgray};
+
+        cursor: pointer;
     }
 
     @media ${({ theme }) => theme.device.tablet} {

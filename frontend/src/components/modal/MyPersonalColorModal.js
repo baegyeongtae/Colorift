@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ContainerDiv, BackgroundDiv } from '..';
+import { ContainerDiv, BackgroundDiv, ModalCloseIcon } from '..';
 import { MyModalTable } from './MyModalTable';
 
 export function MyPersonalColorModal({ toggleClickProps, className }) {
@@ -12,6 +12,7 @@ export function MyPersonalColorModal({ toggleClickProps, className }) {
             <BackgroundDiv className={className} onClick={handleToggleClick} />
             <ModalDiv className={className}>
                 <MyModalTable />
+                <ModalCloseIcon clickProps={handleToggleClick} />
             </ModalDiv>
         </>
     );

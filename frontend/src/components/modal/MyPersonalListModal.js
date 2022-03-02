@@ -172,18 +172,31 @@ const PersonalTableDiv = styled.div`
 `;
 
 const CheckboxInput = styled.input`
-    width: 20px;
-    height: 20px;
+    appearance: none;
+    -webkit-appearance: none;
 
-    border-radius: 1px;
+    width: 15px;
+    height: 15px;
+
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 3px;
+
+    background-color: white;
 
     :checked::before {
-        all: unset;
         content: '';
 
-        width: 10px;
-        height: 10px;
+        display: block;
 
-        background-color: black;
+        width: 9px;
+        height: 9px;
+
+        margin: 17%;
+
+        border-radius: 2px;
+
+        background-color: ${({ theme }) => theme.color.blue};
     }
 `;

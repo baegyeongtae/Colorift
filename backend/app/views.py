@@ -8,7 +8,6 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from app.models import User, Color, Fashion
 from app.serializers import *
-from datetime import date
 
 
 """ 
@@ -52,8 +51,8 @@ class DeleteUser(APIView):
 
     def delete(self, request, format=None):
         try:
-            _user = User.objects.get(pk=request.user.id)
-            _user.delete()
+            user = User.objects.get(pk=request.user.id)
+            user.delete()
             return Response(status=status.HTTP_200_OK)
         except:
             return Response(status=status.HTTP_400_BAD_REQUEST)

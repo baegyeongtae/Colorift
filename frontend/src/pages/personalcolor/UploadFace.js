@@ -21,25 +21,27 @@ function UploadFace() {
 
     const handlePhoto = e => {
         const photoToAdd = e.target.files;
-        console.log(photoToAdd);
+        console.log(photoToAdd[0]);
         const fileImg = URL.createObjectURL(photoToAdd[0]);
-        const uploadFile = photoToAdd[0];
-        const formData = new FormData();
-        setImgData(formData);
-        formData.append('image', uploadFile);
         console.log(fileImg);
-        console.log(imgData);
+        const uploadFile = photoToAdd[0];
+
+        const formData = new FormData();
+        formData.append('image', uploadFile);
+        setImgData(formData);
 
         setPhotoUpload(fileImg);
     };
 
-    const fileCheck = () => {
+    const fileCheck = async () => {
         if (photoUpload === '') {
             alert('사진을 올려주세요.');
         } else if (photoUpload !== '') {
             setIsLoading(true);
-            const resultTone = postFacePhoto(imgData);
+            const resultTone = await postFacePhoto(imgData);
             console.log(resultTone);
+            setIsLoading(false);
+            setColorPage(1);
         }
     };
     return (

@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/tabindex-no-positive */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
@@ -5,19 +6,59 @@ import React, { useState } from 'react';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { ContainerDiv, Fashion, MediumTextH, WhiteButton, RadioTextH } from '../../components';
-import { fashionPageState, toneChoiceState, seasonState, myPersonalColorState } from '../../utils/data/atom';
+import { fashionPageState, toneChoiceState } from '../../utils/data/atom';
 
 function PersonalColorChoice() {
-    const [select, setSelect] = useState('betterPriceOnly');
+    const [select, setSelect] = useState('');
     const handleSelectChange = event => {
         const { value } = event.target;
+        console.log(value);
         setSelect(value);
     };
     const setFashionPage = useSetRecoilState(fashionPageState);
+    const seasonTone = sessionStorage.getItem('season');
 
     const [toneValue, setToneValue] = useRecoilState(toneChoiceState);
     const onChangeSelect = e => {
         setToneValue(e.target.value);
+        sessionStorage.setItem('color', toneValue);
+    };
+
+    const season = {
+        SP: '봄 웜톤',
+        SU: '여름 쿨톤',
+        AU: '가을 웜톤',
+        WI: '겨울 쿨톤',
+    };
+
+    const checkedColor = () => {
+        if (seasonTone === 'SP') {
+            sessionStorage.setItem('color', seasonTone);
+            return season.SP;
+        }
+        if (seasonTone === 'SU') {
+            sessionStorage.setItem('color', seasonTone);
+            return season.SU;
+        }
+        if (seasonTone === 'AU') {
+            sessionStorage.setItem('color', seasonTone);
+            return season.AU;
+        }
+        if (seasonTone === 'WI') {
+            sessionStorage.setItem('color', seasonTone);
+            return season.WI;
+        }
+        return `직전에 분석한 자료가 없습니다.`;
+    };
+
+    const handleNextClick = () => {
+        const color = sessionStorage.getItem('color');
+        if (color) {
+            setFashionPage(1);
+            return null;
+        }
+        alert('퍼스널 컬러를 선택하여 주세요.');
+        return null;
     };
 
     return (
@@ -46,11 +87,17 @@ function PersonalColorChoice() {
                 </div>
                 <div>
                     <SelectDiv>
-                        <select name="personalcolor" className="select" value={toneValue} onChange={onChangeSelect}>
-                            <option value="spring">봄 웜톤</option>
-                            <option value="summer">여름 쿨톤</option>
-                            <option value="fall">가을 웜톤</option>
-                            <option value="winter">겨울 쿨톤</option>
+                        <select
+                            name="personalcolor"
+                            className="select"
+                            value={toneValue}
+                            disabled={select !== 'basic'}
+                            onChange={onChangeSelect}
+                        >
+                            <option value="SP">봄 웜톤</option>
+                            <option value="SU">여름 쿨톤</option>
+                            <option value="AU">가을 웜톤</option>
+                            <option value="WI">겨울 쿨톤</option>
                         </select>
                     </SelectDiv>
                 </div>
@@ -69,7 +116,7 @@ function PersonalColorChoice() {
                     <TextH3>퍼스널 컬러 결과 페이지에서 ‘패션 매칭하기’ 버튼을 클릭해야 합니다.</TextH3>
                 </div>
                 <div>
-                    <ResultText>직전에 분석한 자료가 없습니다.</ResultText>
+                    <ResultText>{checkedColor}</ResultText>
                     {/* {seasonState} */}
                 </div>
                 <div>
@@ -89,14 +136,20 @@ function PersonalColorChoice() {
                 <div>
                     <MyPersonalColorDiv>
                         <ResultText>선택안함</ResultText>
-                        {/* {myPersonalColorState} */}
-                        <CustomButton>불러오기</CustomButton>
+                        <CustomButton
+                            disabled={select !== 'my'}
+                            onClick={() => {
+                                console.log(1);
+                            }}
+                        >
+                            불러오기
+                        </CustomButton>
                     </MyPersonalColorDiv>
                 </div>
             </ChoiceContainerDiv>
 
             <ButtonContainerDiv>
-                <WhiteButton type="submit" onClick={() => setFashionPage(1)}>
+                <WhiteButton type="submit" onClick={() => handleNextClick()}>
                     다음으로
                 </WhiteButton>
             </ButtonContainerDiv>
@@ -350,7 +403,7 @@ const TextH3 = styled.h3`
     color: ${({ theme }) => theme.color.darkgray};
 `;
 
-const CustomButton = styled('span')`
+const CustomButton = styled.button`
     @media ${({ theme }) => theme.device.mobile} {
         font-size: 0.7em;
         background-color: #2c2c2c;

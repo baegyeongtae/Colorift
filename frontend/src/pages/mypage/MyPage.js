@@ -1,27 +1,25 @@
 import styled from 'styled-components';
-import { Article, ContainerDiv, NavBackgroundDiv } from '../../components';
+import { BackgroundArticle, ContainerDiv, NavBackgroundDiv } from '../../components';
 import { MyPageInfo, MyPagePersonal, MyPageFashion } from '.';
 
 export function MyPage() {
     return (
-        <>
+        <BackgroundArticle>
             <NavBackgroundDiv />
-            <Article>
-                <MyPageContainerDiv>
-                    <FlexRowDiv className="area">
-                        <MyPageInfo />
-                        <PersonalDiv>
-                            <SubTitleP>My Personal Color</SubTitleP>
-                            <MyPagePersonal />
-                        </PersonalDiv>
-                    </FlexRowDiv>
-                    <FassionDiv className="area fashion">
-                        <SubTitleP>My Style</SubTitleP>
-                        <MyPageFashion />
-                    </FassionDiv>
-                </MyPageContainerDiv>
-            </Article>
-        </>
+            <MyPageContainerDiv>
+                <FlexRowDiv>
+                    <MyPageInfo />
+                    <PersonalDiv>
+                        <SubTitleP>My Personal Color</SubTitleP>
+                        <MyPagePersonal />
+                    </PersonalDiv>
+                </FlexRowDiv>
+                <FassionDiv>
+                    <SubTitleP>My Style</SubTitleP>
+                    <MyPageFashion />
+                </FassionDiv>
+            </MyPageContainerDiv>
+        </BackgroundArticle>
     );
 }
 
@@ -30,45 +28,24 @@ export function MyPage() {
 const MyPageContainerDiv = styled(ContainerDiv)`
     ${({ theme }) => theme.flexStyled.flexColumn};
     ${({ theme }) => theme.flexStyled.flexCenter};
-
-    height: 88vh;
-
-    padding: 30px 0;
-
-    .area {
-        width: 100%;
-        height: 45%;
-
-        &.fashion {
-            height: 55%;
-        }
-    }
 `;
 
 const FlexRowDiv = styled.div`
     ${({ theme }) => theme.flexStyled.flexRow};
     align-items: center;
 
-    > div {
-        width: 50%;
-    }
+    margin: 40px 0;
 
     @media ${({ theme }) => theme.device.tablet} {
         ${({ theme }) => theme.flexStyled.flexColumn};
         ${({ theme }) => theme.flexStyled.flexCenter};
 
-        margin: 50px 0;
-
-        > div {
-            width: 100%;
-        }
+        height: auto;
     }
 `;
 
 const PersonalDiv = styled.div`
-    @media ${({ theme }) => theme.device.tablet} {
-        padding: 0 20px;
-    }
+    padding: 0 20px;
 `;
 
 const SubTitleP = styled.p`
@@ -77,7 +54,7 @@ const SubTitleP = styled.p`
 `;
 
 const FassionDiv = styled.div`
-    @media ${({ theme }) => theme.device.tablet} {
-        padding: 40px 20px;
-    }
+    width: 100%;
+
+    padding: 0 20px;
 `;

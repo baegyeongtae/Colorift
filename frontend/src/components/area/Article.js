@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 
 export const Article = styled.article`
-    height: ${({ height }) => height};
+    ${({ theme }) => theme.flexStyled.flexCenter};
 
-    background-color: ${({ color }) => color};
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    left: 0;
+    top: 0;
 `;

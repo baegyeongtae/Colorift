@@ -120,7 +120,7 @@ function NavigationBar() {
                 </Nav>
                 <BackgroundDiv onClick={handleToggleClick} className={isToggle && 'show'} />
             </header>
-            <main>
+            <main style={{ minHeight: '100%' }}>
                 <Outlet />
             </main>
             <Footer />

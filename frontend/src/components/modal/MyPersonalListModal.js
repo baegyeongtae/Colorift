@@ -1,12 +1,8 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
-import { getPersonalList } from '../../utils/api/service';
-import { GrayButton, MyPersonalColorModal } from '../../components';
+import { ModalDiv } from './ModalDiv';
+import { BackgroundDiv, ModalCloseIcon } from '..';
 
-export function MyPagePersonal() {
-    // 상세보기 모달
-    const [personalModal, setPersonalModal] = useState(false);
-
+export function MyPersonalListModal({ toggleClickProps, className }) {
     // 퍼스널 컬러 더미 데이터
     const dummyData = [
         {
@@ -46,40 +42,16 @@ export function MyPagePersonal() {
         },
     ];
 
-    // 상세보기 또는 삭제하기 클릭 시 모달 토클 함수
     const handleToggleClick = () => {
-        if (personalModal) setPersonalModal(current => !current);
+        toggleClickProps();
     };
-
-    // 퍼스널 컬러 목록 조회
-    useEffect(() => getPersonalList(), []);
 
     return (
         <>
-            <MyPersonalColorModal className={personalModal && 'show'} toggleClickProps={handleToggleClick} />
-            <PersonalTableDiv className="personal">
-                <table>
-                    <tbody>
-                        {dummyData.map(item => (
-                            <tr key={item.id}>
-                                <td className="id">{item.id}</td>
-                                <td className="date">{item.date}</td>
-                                <td className="color">{item.color}</td>
-                                <td className="button">
-                                    <GrayButton width="90%" onClick={() => setPersonalModal(current => !current)}>
-                                        상세보기
-                                    </GrayButton>
-                                </td>
-                                <td className="button">
-                                    <GrayButton width="90%" onClick={() => alert(`${item.id}번을 삭제했습니다`)}>
-                                        삭제하기
-                                    </GrayButton>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </PersonalTableDiv>
+            <BackgroundDiv className={className} onClick={handleToggleClick} />
+            <ModalDiv className={className}>
+                <ModalCloseIcon clickProps={handleToggleClick} />
+            </ModalDiv>
         </>
     );
 }

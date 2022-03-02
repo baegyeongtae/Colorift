@@ -1,9 +1,12 @@
 import styled from 'styled-components';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getPersonalList } from '../../utils/api/service';
-import { GrayButton } from '../../components';
+import { GrayButton, MyPersonalColorModal } from '../../components';
 
 export function MyPagePersonal() {
+    // 상세보기 모달
+    const [personalModal, setPersonalModal] = useState(false);
+
     // 퍼스널 컬러 더미 데이터
     const dummyData = [
         {
@@ -43,33 +46,41 @@ export function MyPagePersonal() {
         },
     ];
 
+    // 상세보기 또는 삭제하기 클릭 시 모달 토클 함수
+    const handleToggleClick = () => {
+        if (personalModal) setPersonalModal(current => !current);
+    };
+
     // 퍼스널 컬러 목록 조회
     useEffect(() => getPersonalList(), []);
 
     return (
-        <PersonalTableDiv className="personal">
-            <table>
-                <tbody>
-                    {dummyData.map(item => (
-                        <tr key={item.id}>
-                            <td className="id">{item.id}</td>
-                            <td className="date">{item.date}</td>
-                            <td className="color">{item.color}</td>
-                            <td className="button">
-                                <GrayButton width="90%" onClick={() => alert(`클릭하신 피부톤은 ${item.color}입니다`)}>
-                                    상세보기
-                                </GrayButton>
-                            </td>
-                            <td className="button">
-                                <GrayButton width="90%" onClick={() => alert(`${item.id}번을 삭제했습니다`)}>
-                                    삭제하기
-                                </GrayButton>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </PersonalTableDiv>
+        <>
+            <MyPersonalColorModal className={personalModal && 'show'} toggleClickProps={handleToggleClick} />
+            <PersonalTableDiv className="personal">
+                <table>
+                    <tbody>
+                        {dummyData.map(item => (
+                            <tr key={item.id}>
+                                <td className="id">{item.id}</td>
+                                <td className="date">{item.date}</td>
+                                <td className="color">{item.color}</td>
+                                <td className="button">
+                                    <GrayButton width="90%" onClick={() => setPersonalModal(current => !current)}>
+                                        상세보기
+                                    </GrayButton>
+                                </td>
+                                <td className="button">
+                                    <GrayButton width="90%" onClick={() => alert(`${item.id}번을 삭제했습니다`)}>
+                                        삭제하기
+                                    </GrayButton>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </PersonalTableDiv>
+        </>
     );
 }
 

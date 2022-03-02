@@ -1,65 +1,121 @@
 import styled from 'styled-components';
-import { ContainerDiv } from '..';
+import { ContainerDiv, BackgroundDiv } from '..';
 
-function MyPersonalColorModal() {
+export function MyPersonalColorModal({ toggleClickProps, className }) {
+    const handleToggleClick = () => {
+        toggleClickProps();
+    };
+
     return (
         <>
-            <TableContainerDiv>
-                <table className="type11">
-                    <thead>
-                        <tr width="20px">
-                            <th>번호</th>
-                            <th>분석 날짜</th>
-                            <th>제목</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr width="20px">
-                            <td>1</td>
-                            <td>2022.02.11</td>
-                            <td>사용자 지정 제목</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </TableContainerDiv>
+            <BackgroundDiv className={className} onClick={handleToggleClick} />
+            <ModalDiv className={className}>
+                <TableContainerDiv>
+                    <table className="type11">
+                        <thead>
+                            <tr width="20px">
+                                <th>번호</th>
+                                <th>분석 날짜</th>
+                                <th>제목</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr width="20px">
+                                <td>1</td>
+                                <td>2022.02.11</td>
+                                <td>사용자 지정 제목</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </TableContainerDiv>
 
-            <ResultContainerDiv />
+                <ResultContainerDiv />
 
-            <TextH1>회원님은 봄 웜톤 입니다.</TextH1>
+                <TextH1>회원님은 봄 웜톤 입니다.</TextH1>
 
-            <ColorContainerDiv>
-                <div className="wrapper">
-                    <div className="text">회원님에게 어울리는 컬러</div>
-                    <div className="blank_circle" />
-                    <div className="blank_circle" />
-                    <div className="blank_circle" />
-                </div>
-                <div className="wrapper">
-                    <div className="circle" />
-                    <div className="circle" />
-                    <div className="circle" />
-                    <div className="circle" />
-                </div>
-                <div className="wrapper">
-                    <div className="circle" />
-                    <div className="circle" />
-                    <div className="circle" />
-                    <div className="circle" />
-                </div>
-                <div className="wrapper">
-                    <div className="circle" />
-                    <div className="circle" />
-                    <div className="circle" />
-                    <div className="circle" />
-                </div>
-            </ColorContainerDiv>
+                <ColorContainerDiv>
+                    <div className="wrapper">
+                        <div className="text">회원님에게 어울리는 컬러</div>
+                        <div className="blank_circle" />
+                        <div className="blank_circle" />
+                        <div className="blank_circle" />
+                    </div>
+                    <div className="wrapper">
+                        <div className="circle" />
+                        <div className="circle" />
+                        <div className="circle" />
+                        <div className="circle" />
+                    </div>
+                    <div className="wrapper">
+                        <div className="circle" />
+                        <div className="circle" />
+                        <div className="circle" />
+                        <div className="circle" />
+                    </div>
+                    <div className="wrapper">
+                        <div className="circle" />
+                        <div className="circle" />
+                        <div className="circle" />
+                        <div className="circle" />
+                    </div>
+                </ColorContainerDiv>
+            </ModalDiv>
         </>
     );
 }
 
-export { MyPersonalColorModal };
-
 // styled-components
+
+const ModalDiv = styled.div`
+    display: none;
+
+    &.show {
+        position: fixed;
+        z-index: 9999;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        padding: 50px 30px;
+
+        ${({ theme }) => theme.flexStyled.flexCenter};
+
+        width: 1200px;
+        height: 600px;
+
+        background-color: white;
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: transparent;
+            border-radius: 100px;
+
+            margin: 20px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 100px;
+            background-color: #e9e9e9;
+            box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+        }
+
+        .text {
+            margin: 0;
+        }
+
+        @media ${({ theme }) => theme.device.tablet} {
+            .text {
+                font-size: 1.5rem;
+            }
+
+            width: 80%;
+        }
+    }
+`;
+
 const TableContainerDiv = styled.div`
     @media ${({ theme }) => theme.device.mobile} {
         background-color: ${({ theme }) => theme.color.white};

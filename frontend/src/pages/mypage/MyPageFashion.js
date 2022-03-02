@@ -119,7 +119,7 @@ const PlusButton = styled.button`
     width: 150px;
     height: 50px;
 
-    margin: 30px 0 50px 0;
+    margin: 30px 0 100px 0;
 
     color: white;
     text-align: center;

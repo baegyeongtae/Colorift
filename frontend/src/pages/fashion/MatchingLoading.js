@@ -6,11 +6,6 @@ import { loader } from '../../image';
 
 function MatchingLoading() {
     const setFashionPage = useSetRecoilState(fashionPageState);
-
-    setTimeout(() => {
-        setFashionPage(3);
-    }, 2000);
-
     return (
         <ContainerDiv>
             <Fashion />

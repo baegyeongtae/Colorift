@@ -1,31 +1,67 @@
+/* eslint-disable import/named */
+/* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/tabindex-no-positive */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
 import React, { useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { ContainerDiv, Fashion, MediumTextH, WhiteButton, RadioTextH, MyPersonalListModal } from '../../components';
-import { fashionPageState } from '../../utils/data/atom';
+import { ContainerDiv, Fashion, MediumTextH, WhiteButton, RadioTextH } from '../../components';
+import { fashionPageState, toneChoiceState } from '../../utils/data/atom';
 
 function PersonalColorChoice() {
-    // 마이퍼스널 컬러 선택 모달
-    const [personalModal, setPersonalModal] = useState(false);
-
-    const [select, setSelect] = useState('betterPriceOnly');
+    // Radio Button Select
+    const [select, setSelect] = useState('');
     const handleSelectChange = event => {
         const { value } = event.target;
+        console.log(value);
         setSelect(value);
     };
+
+    // Next Page로 넘기기
     const setFashionPage = useSetRecoilState(fashionPageState);
 
-    // 마이퍼스널 컬러 선택 모달 토클 함수
-    const handleToggleClick = () => {
-        setPersonalModal(current => !current);
+    // 기본 퍼스널 컬러 선택시 값 저장
+    const [toneValue, setToneValue] = useRecoilState(toneChoiceState);
+    const onChangeSelect = e => {
+        const tone = e.target.value;
+        setToneValue(tone);
+        sessionStorage.setItem('color', tone);
     };
+
+    // 컬러 페이지 검사 결과 받아오기 & 세션 스토리지에 넣기
+    const seasonTone = sessionStorage.getItem('season');
+    const season = {
+        SP: '봄 웜톤',
+        SU: '여름 쿨톤',
+        AU: '가을 웜톤',
+        WI: '겨울 쿨톤',
+    };
+
+    const checkedColor = () => {
+        if (seasonTone) {
+            sessionStorage.setItem('color', seasonTone);
+
+            if (seasonTone === 'SP') {
+                return season.SP;
+            }
+            if (seasonTone === 'SU') {
+                return season.SU;
+            }
+            if (seasonTone === 'AU') {
+                return season.AU;
+            }
+            if (seasonTone === 'WI') {
+                return season.WI;
+            }
+        }
+        return `직전에 분석한 자료가 없습니다.`;
+    };
+
+    const checkedColorText = checkedColor();
 
     return (
         <>
-            <MyPersonalListModal className={personalModal && 'show'} toggleClickProps={handleToggleClick} />
             <Fashion />
 
             <MediumTextH>매칭하고싶은 퍼스널 컬러를 아래 3가지 방법 중 선택해주세요.</MediumTextH>
@@ -50,11 +86,17 @@ function PersonalColorChoice() {
                 </div>
                 <div>
                     <SelectDiv>
-                        <select name="personalcolor" className="select">
-                            <option value="spring">봄 웜톤</option>
-                            <option value="summer">여름 쿨톤</option>
-                            <option value="fall">가을 웜톤</option>
-                            <option value="winter">겨울 쿨톤</option>
+                        <select
+                            name="personalcolor"
+                            className="select"
+                            value={toneValue}
+                            disabled={select !== 'basic'}
+                            onChange={onChangeSelect}
+                        >
+                            <option value="SP">봄 웜톤</option>
+                            <option value="SU">여름 쿨톤</option>
+                            <option value="AU">가을 웜톤</option>
+                            <option value="WI">겨울 쿨톤</option>
                         </select>
                     </SelectDiv>
                 </div>
@@ -73,7 +115,7 @@ function PersonalColorChoice() {
                     <TextH3>퍼스널 컬러 결과 페이지에서 ‘패션 매칭하기’ 버튼을 클릭해야 합니다.</TextH3>
                 </div>
                 <div>
-                    <ResultText>직전에 분석한 자료가 없습니다.</ResultText>
+                    <ResultText>{checkedColorText}</ResultText>
                 </div>
                 <div>
                     <Item>
@@ -92,7 +134,14 @@ function PersonalColorChoice() {
                 <div>
                     <MyPersonalColorDiv>
                         <ResultText>선택안함</ResultText>
-                        <CustomButton onClick={handleToggleClick}>불러오기</CustomButton>
+                        <CustomButton
+                            disabled={select !== 'my'}
+                            onClick={() => {
+                                console.log(1);
+                            }}
+                        >
+                            불러오기
+                        </CustomButton>
                     </MyPersonalColorDiv>
                 </div>
             </ChoiceContainerDiv>
@@ -352,7 +401,7 @@ const TextH3 = styled.h3`
     color: ${({ theme }) => theme.color.darkgray};
 `;
 
-const CustomButton = styled('span')`
+const CustomButton = styled.button`
     @media ${({ theme }) => theme.device.mobile} {
         font-size: 0.7em;
         background-color: #2c2c2c;

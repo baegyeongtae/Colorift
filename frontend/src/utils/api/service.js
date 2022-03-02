@@ -34,22 +34,43 @@ export async function getPersonalList() {
 }
 
 // 얼굴 사진 업로드
-export async function postFacePhoto({ imgData }) {
+export async function postFacePhoto(imgData) {
     try {
-        const setColorPage = useSetRecoilState(colorPageState);
-        const setSeasonState = useSetRecoilState(seasonState);
-
-        setColorPage(1);
         const response = await axiosConfig({
             method: 'post',
             url: 'color/test/',
             data: imgData,
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
         });
 
-        console.log(response.data.color);
+        console.log(response);
         const season = response.data.color;
-        setSeasonState(season);
-        return response.data.color;
+        sessionStorage.setItem('season', season);
+
+        return season;
+    } catch (error) {
+        return error.response;
+    }
+}
+
+// 패션 사진 및 컬러 조합 결과
+export async function postFashionPhoto(fashionData) {
+    try {
+        const response = await axiosConfig({
+            method: 'post',
+            url: 'fashion/test/',
+            data: fashionData,
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+
+        console.log(response);
+        const season = response.data.color;
+
+        return season;
     } catch (error) {
         return error.response;
     }

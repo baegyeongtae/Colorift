@@ -1,85 +1,83 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import { useRef, useState } from 'react';
-import axios from 'axios';
+import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { useRecoilState } from 'recoil';
 import Stack from '@mui/material/Stack';
-import { colorPageState } from '../../utils/data/atom';
+import { postFacePhoto } from '../../utils/api/service';
 import { PhotoUpload, ContainerDiv, BestWorstLi, SubTitleP, Color, BlueButton, WhiteButton } from '../../components';
+import { colorPageState } from '../../utils/data/atom';
+import { Loading } from '.';
 
 function UploadFace() {
-    const [colorPage, setColorPage] = useRecoilState(colorPageState);
     const [imgData, setImgData] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [photoUpload, setPhotoUpload] = useState('');
+    const setColorPage = useSetRecoilState(colorPageState);
 
     const photoInput = useRef();
     const handleClick = () => {
         photoInput.current.click();
     };
 
-    const [photoUpload, setPhotoUpload] = useState('');
-
     const handlePhoto = e => {
         const photoToAdd = e.target.files;
-        console.log(photoToAdd);
+        console.log(photoToAdd[0]);
         const fileImg = URL.createObjectURL(photoToAdd[0]);
-        const uploadFile = photoToAdd[0];
-        const formData = new FormData();
-        setImgData(formData);
-        formData.append('image', uploadFile);
         console.log(fileImg);
-        console.log(imgData);
+        const uploadFile = photoToAdd[0];
+
+        const formData = new FormData();
+        formData.append('image', uploadFile);
+        setImgData(formData);
 
         setPhotoUpload(fileImg);
     };
 
-    const fileCheck = () => {
+    const fileCheck = async () => {
         if (photoUpload === '') {
             alert('사진을 올려주세요.');
         } else if (photoUpload !== '') {
-            axios({
-                method: 'POST',
-                url: 'http://127.0.0.1:8000/app/color/test/',
-                data: imgData,
-            })
-                .then(response => {
-                    console.log(response);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
+            setIsLoading(true);
+            const resultTone = await postFacePhoto(imgData);
+            console.log(resultTone);
+            setIsLoading(false);
             setColorPage(1);
-            console.log(colorPage);
         }
     };
-
     return (
         <>
-            <Color />
-            <SubTitleP>얼굴 사진을 올려주세요.</SubTitleP>
-
-            <ContentContainerDiv>
-                <PhotoContainerDiv>
-                    <PhotoUpload photoProps={photoUpload} />
-                    <TextContainerDiv>
-                        <BestWorstLi />
-                        <ButtonContainerDiv>
-                            <Stack spacing={2} direction="row">
-                                <BlueButton onClick={handleClick}>
-                                    <input
-                                        name="image"
-                                        type="file"
-                                        accept="image/jpg, image/jpeg, image/png"
-                                        ref={photoInput}
-                                        onChange={e => handlePhoto(e)}
-                                        style={{ display: 'none' }}
-                                    />
-                                    업로드
-                                </BlueButton>
-                                <WhiteButton onClick={() => fileCheck()}>결과보기</WhiteButton>
-                            </Stack>
-                        </ButtonContainerDiv>
-                    </TextContainerDiv>
-                </PhotoContainerDiv>
-            </ContentContainerDiv>
+            {isLoading ? (
+                <Loading />
+            ) : (
+                <>
+                    <Color />
+                    <SubTitleP>얼굴 사진을 올려주세요.</SubTitleP>
+                    <ContentContainerDiv>
+                        <PhotoContainerDiv>
+                            <PhotoUpload photoProps={photoUpload} />
+                            <TextContainerDiv>
+                                <BestWorstLi />
+                                <ButtonContainerDiv>
+                                    <Stack spacing={2} direction="row">
+                                        <BlueButton onClick={handleClick}>
+                                            <input
+                                                name="image"
+                                                type="file"
+                                                accept="image/jpg, image/jpeg, image/png"
+                                                ref={photoInput}
+                                                onChange={e => handlePhoto(e)}
+                                                style={{ display: 'none' }}
+                                            />
+                                            업로드
+                                        </BlueButton>
+                                        <WhiteButton onClick={() => fileCheck()}>결과보기</WhiteButton>
+                                    </Stack>
+                                </ButtonContainerDiv>
+                            </TextContainerDiv>
+                        </PhotoContainerDiv>
+                    </ContentContainerDiv>
+                </>
+            )}
         </>
     );
 }

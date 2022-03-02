@@ -1,3 +1,4 @@
+/* eslint-disable import/named */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/tabindex-no-positive */
 /* eslint-disable jsx-a11y/label-has-associated-control */
@@ -61,7 +62,6 @@ function PersonalColorChoice() {
 
     return (
         <>
-            <MyPersonalListModal className={personalModal && 'show'} toggleClickProps={handleToggleClick} />
             <Fashion />
 
             <MediumTextH>매칭하고싶은 퍼스널 컬러를 아래 3가지 방법 중 선택해주세요.</MediumTextH>

@@ -109,8 +109,7 @@ class ColorTestDetail(APIView):
             serializer = ColorDetailSerializer(color)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
-            # locked => 접근할수 없는 자원(내 자원이 아니어서)
-            return Response(status=status.HTTP_403_FORBIDDEN)
+            return Response(status=status.HTTP_403_FORBIDDEN)  # locked => 접근할수 없는 자원(내 자원이 아니어서)
 
     def delete(self, request, pk, format=None):
         color = self.get_object(pk)
@@ -184,8 +183,7 @@ class FashionTestDetail(APIView):
             serializer = FashionDetailSerializer(fashion)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
-            # locked => 접근할수 없는 자원(내 자원이 아니어서)
-            return Response(status=status.HTTP_403_FORBIDDEN)
+            return Response(status=status.HTTP_403_FORBIDDEN)  # locked => 접근할수 없는 자원(내 자원이 아니어서)
 
     def delete(self, request, pk, format=None):
         fashion = self.get_object(pk)

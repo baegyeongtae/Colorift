@@ -9,21 +9,27 @@ import { ContainerDiv, Fashion, MediumTextH, WhiteButton, RadioTextH } from '../
 import { fashionPageState, toneChoiceState } from '../../utils/data/atom';
 
 function PersonalColorChoice() {
+    // Radio Button Select
     const [select, setSelect] = useState('');
     const handleSelectChange = event => {
         const { value } = event.target;
         console.log(value);
         setSelect(value);
     };
-    const setFashionPage = useSetRecoilState(fashionPageState);
-    const seasonTone = sessionStorage.getItem('season');
 
+    // Next Page로 넘기기
+    const setFashionPage = useSetRecoilState(fashionPageState);
+
+    // 기본 퍼스널 컬러 선택시 값 저장
     const [toneValue, setToneValue] = useRecoilState(toneChoiceState);
     const onChangeSelect = e => {
-        setToneValue(e.target.value);
-        sessionStorage.setItem('color', toneValue);
+        const tone = e.target.value;
+        setToneValue(tone);
+        sessionStorage.setItem('color', tone);
     };
 
+    // 컬러 페이지 검사 결과 받아오기 & 세션 스토리지에 넣기
+    const seasonTone = sessionStorage.getItem('season');
     const season = {
         SP: '봄 웜톤',
         SU: '여름 쿨톤',
@@ -32,34 +38,26 @@ function PersonalColorChoice() {
     };
 
     const checkedColor = () => {
-        if (seasonTone === 'SP') {
+        if (seasonTone) {
             sessionStorage.setItem('color', seasonTone);
-            return season.SP;
-        }
-        if (seasonTone === 'SU') {
-            sessionStorage.setItem('color', seasonTone);
-            return season.SU;
-        }
-        if (seasonTone === 'AU') {
-            sessionStorage.setItem('color', seasonTone);
-            return season.AU;
-        }
-        if (seasonTone === 'WI') {
-            sessionStorage.setItem('color', seasonTone);
-            return season.WI;
+
+            if (seasonTone === 'SP') {
+                return season.SP;
+            }
+            if (seasonTone === 'SU') {
+                return season.SU;
+            }
+            if (seasonTone === 'AU') {
+                return season.AU;
+            }
+            if (seasonTone === 'WI') {
+                return season.WI;
+            }
         }
         return `직전에 분석한 자료가 없습니다.`;
     };
 
-    const handleNextClick = () => {
-        const color = sessionStorage.getItem('color');
-        if (color) {
-            setFashionPage(1);
-            return null;
-        }
-        alert('퍼스널 컬러를 선택하여 주세요.');
-        return null;
-    };
+    const checkedColorText = checkedColor();
 
     return (
         <>
@@ -116,8 +114,7 @@ function PersonalColorChoice() {
                     <TextH3>퍼스널 컬러 결과 페이지에서 ‘패션 매칭하기’ 버튼을 클릭해야 합니다.</TextH3>
                 </div>
                 <div>
-                    <ResultText>{checkedColor}</ResultText>
-                    {/* {seasonState} */}
+                    <ResultText>{checkedColorText}</ResultText>
                 </div>
                 <div>
                     <Item>
@@ -149,7 +146,7 @@ function PersonalColorChoice() {
             </ChoiceContainerDiv>
 
             <ButtonContainerDiv>
-                <WhiteButton type="submit" onClick={() => handleNextClick()}>
+                <WhiteButton type="submit" onClick={() => setFashionPage(1)}>
                     다음으로
                 </WhiteButton>
             </ButtonContainerDiv>

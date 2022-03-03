@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export function MyModalTable() {
+export function MyModalTable({ id }) {
     return (
         <TableDiv>
             <table>
@@ -13,7 +13,7 @@ export function MyModalTable() {
                 </thead>
                 <tbody>
                     <tr>
-                        <td>1</td>
+                        <td>{id}</td>
                         <td>2022.02.11</td>
                         <td>사용자 지정 제목</td>
                     </tr>

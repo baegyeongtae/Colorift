@@ -45,6 +45,28 @@ class CreateUser(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class FindPassword(APIView):
+
+    def post(self, request, format=None):
+        serializer = FindPasswordSerializer(data=request.data)
+        if serializer.is_valid():
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class ChangePassword(APIView):  # is_authenticated class를 넣으면 비로그인상태에서 비밀번호 찾는 로직이 이상해진다.. 따로만들어야 하나
+
+    def patch(self, request, format=None):
+        serializer = ChangeUserSerializer(data=request.data)
+        if serializer.is_valid():
+            user = User.objects.get(serializer.validated_data['username'])
+            user.set_password(serializer.validated_data['password'])
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
 class DeleteUser(APIView):
 
     permission_classes = [IsAuthenticated]
@@ -77,7 +99,7 @@ class ColorTest(APIView):
             data['user'] = request.user.id
 
         serializer = ColorTestSerializer(data=data)
-        if serializer.is_valid(raise_exception=True):
+        if serializer.is_valid():
             instance = serializer.save()
             return Response({'color': instance.color}, status=status.HTTP_200_OK)
         else:
@@ -105,7 +127,7 @@ class ColorTestDetail(APIView):
             serializer = ColorDetailSerializer(color)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
-            return Response(status=status.HTTP_403_FORBIDDEN)  # locked => 접근할수 없는 자원(내 자원이 아니어서)
+            return Response(status=status.HTTP_403_FORBIDDEN)
 
     def delete(self, request, pk, format=None):
         color = self.get_object(pk)
@@ -179,7 +201,7 @@ class FashionTestDetail(APIView):
             serializer = FashionDetailSerializer(fashion)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
-            return Response(status=status.HTTP_403_FORBIDDEN)  # locked => 접근할수 없는 자원(내 자원이 아니어서)
+            return Response(status=status.HTTP_403_FORBIDDEN)
 
     def delete(self, request, pk, format=None):
         fashion = self.get_object(pk)

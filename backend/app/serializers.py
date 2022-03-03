@@ -9,11 +9,41 @@ import cv2
 class RegisterUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'password']
+        fields = ['username', 'nickname', 'password']
+
+    def validate(self, data):
+        print(data)
+        if User.objects.filter(username=data['username']).exists():
+            raise serializers.ValidationError('existing username')
+        return data
 
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         return user
+
+
+class NicknameSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['nickname']
+
+
+class FindPasswordSerializer(serializers.ModelSerializer):
+    username = serializers.CharField()
+
+    def validate(self, attrs):
+        try:
+            user = User.objects.get(username=attrs['username'])
+            if user.nickname == attrs['nickname']:
+                return attrs
+        except User.DoesNotExist:
+            raise serializers.ValidationError('user does not exist', code=400)
+
+
+class ChangeUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username', 'password']
 
 
 """

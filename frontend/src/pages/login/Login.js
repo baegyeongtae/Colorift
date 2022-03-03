@@ -29,16 +29,16 @@ export function Login() {
         setFindModal(current => !current);
     }
 
-    // 존재하지 않는 아이디 모달의 상태 변환 함수
-    function handleNoUserToggleModal() {
+    // 아이디 비밀번호 오류 모달의 상태 변환 함수
+    const handleNoUserToggleModal = () => {
         setNoUserModal(current => !current);
-    }
+    };
 
     // 이메일, 비밀번호 form submit 함수
     const handleSubmit = async event => {
         event.preventDefault();
         const response = await setUserLogin(emailRef.current.value, passwordRef.current.value);
-        if (response.status !== 200) setNoUserModal(true);
+        if (response.status === 401) setNoUserModal(true);
     };
 
     useEffect(() => setScrollDisabled(findModal), [findModal]);
@@ -47,8 +47,8 @@ export function Login() {
         <>
             <TextModal
                 className={noUserModal && 'show'}
-                toggleClickProps={() => handleNoUserToggleModal()}
-                text="존재하지 않는 아이디입니다."
+                toggleClickProps={handleNoUserToggleModal}
+                text="아이디 또는 비밀번호를 잘못 입력했습니다"
             />
             <FindPasswordModal className={findModal && 'show'} clickProps={() => handlePasswordToggleModal()} />
             <Article>

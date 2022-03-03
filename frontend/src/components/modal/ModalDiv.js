@@ -10,12 +10,12 @@ export const ModalDiv = styled.div`
         left: 50%;
         transform: translate(-50%, -50%);
 
-        padding: 50px 30px;
-
         ${({ theme }) => theme.flexStyled.flexCenter};
 
-        width: 550px;
-        height: 300px;
+        width: auto;
+        height: auto;
+
+        padding: 100px 50px;
 
         background-color: white;
 
@@ -30,8 +30,6 @@ export const ModalDiv = styled.div`
             .text {
                 font-size: 1.5rem;
             }
-
-            width: 80%;
         }
     }
 `;

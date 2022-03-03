@@ -1,10 +1,13 @@
 import styled from 'styled-components';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { setUserRegister } from '../../utils/api/user';
 import { UserInputDiv, TitleP, UserButton, NavBackgroundDiv, TextModal, ContainerDiv, Article } from '../../components';
 
 export function SignUp() {
-    // 가입 완료 모달
+    // 가입 완료 or 존재하는 아이디 모달에 들어갈 텍스트
+    const [signUpSuccess, setSignUpSuccess] = useState(false);
+
+    // 가입 완료 or 존재하는 아이디 모달
     const [regiseterModal, setRegisterModal] = useState(false);
 
     // 입력 값 가져오는 ref
@@ -69,13 +72,19 @@ export function SignUp() {
         }));
         if (idTest && nicknameTest && passwordTest && passwordDoubleTest) {
             const response = await setUserRegister(idRef.current.value, passwordRef.current.value);
-            if (response.status === 201) setRegisterModal(current => !current);
+            if (response.status === 201) {
+                setSignUpSuccess(true);
+            }
+            if (response.status === 400) {
+                setSignUpSuccess(false);
+            }
+            setRegisterModal(current => !current);
         }
     };
 
     const handleToggleModal = () => {
         setRegisterModal(current => !current);
-        window.open('/login', '_self');
+        if (signUpSuccess) window.open('/login', '_self');
     };
 
     return (
@@ -83,7 +92,7 @@ export function SignUp() {
             <TextModal
                 className={regiseterModal && 'show'}
                 toggleClickProps={() => handleToggleModal()}
-                text="가입을 환영합니다."
+                text={signUpSuccess ? '가입을 환영합니다.' : '존재하는 아이디입니다.'}
             />
             <Article>
                 <NavBackgroundDiv />

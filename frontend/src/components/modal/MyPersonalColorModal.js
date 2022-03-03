@@ -1,15 +1,15 @@
 import styled from 'styled-components';
-import { ContainerDiv, BackgroundDiv, ModalCloseIcon } from '..';
+import { ContainerDiv, ModalCloseIcon } from '..';
 import { MyModalTable } from './MyModalTable';
 
-export function MyPersonalColorModal({ toggleClickProps, className }) {
+export function MyPersonalColorModal({ toggleClickProps, className, colorId }) {
     const handleToggleClick = () => {
         toggleClickProps();
     };
 
     return (
         <ModalDiv className={className}>
-            <MyModalTable />
+            <MyModalTable id={colorId} />
             <ModalCloseIcon clickProps={handleToggleClick} />
         </ModalDiv>
     );
@@ -33,6 +33,9 @@ const ModalDiv = styled(ContainerDiv)`
         ${({ theme }) => theme.flexStyled.flexColumn};
 
         background-color: white;
+
+        border: 1px solid #f3f3f3;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
         ::-webkit-scrollbar {
             width: 10px;

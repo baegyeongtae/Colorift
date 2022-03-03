@@ -4,8 +4,11 @@ import { ModalDiv } from './ModalDiv';
 import { BackgroundDiv, ModalCloseIcon, GrayButton, BlueButton, MyPersonalColorModal } from '..';
 
 export function MyPersonalListModal({ toggleClickProps, className }) {
-    // 상세보기 모달
+    // 상세보기 모달 상태
     const [personalListModal, setPersonalListModal] = useState(false);
+
+    // 상세보기 모달에서 선택한 컬러 ID 값
+    const [colorId, setColorId] = useState(0);
 
     // 퍼스널 컬러 더미 데이터
     const dummyData = [
@@ -51,9 +54,12 @@ export function MyPersonalListModal({ toggleClickProps, className }) {
         toggleClickProps();
     };
 
-    // 상세보기 모달 토글 함수
-    const handleToggleClick = () => {
-        setPersonalListModal(current => !current);
+    const handleToggleClick = (id = colorId) => {
+        if (personalListModal) setPersonalListModal(false);
+        if (!personalListModal) {
+            setColorId(id);
+            setPersonalListModal(true);
+        }
     };
 
     return (
@@ -73,10 +79,7 @@ export function MyPersonalListModal({ toggleClickProps, className }) {
                                     <td className="date">{item.date}</td>
                                     <td className="color">{item.color}</td>
                                     <td className="button">
-                                        <GrayButton
-                                            width="90%"
-                                            onClick={() => setPersonalListModal(current => !current)}
-                                        >
+                                        <GrayButton width="90%" onClick={() => handleToggleClick(item.id)}>
                                             상세보기
                                         </GrayButton>
                                     </td>
@@ -88,7 +91,11 @@ export function MyPersonalListModal({ toggleClickProps, className }) {
                 </PersonalTableDiv>
                 <BlueButton>확인</BlueButton>
             </ModalTableDiv>
-            <MyPersonalColorModal className={personalListModal && 'show'} toggleClickProps={handleToggleClick} />
+            <MyPersonalColorModal
+                className={personalListModal && 'show'}
+                toggleClickProps={handleToggleClick}
+                colorId={colorId}
+            />
         </>
     );
 }

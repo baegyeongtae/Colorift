@@ -1,45 +1,44 @@
+import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { HomeContainerDiv, HomeButton, TitleP } from '../../components';
 import { browserImg, colorBackgroundImg } from '../../image';
 
-export function HomeHeader() {
-    return (
-        <Header>
-            <HomeContainerDiv>
-                <TextDiv>
-                    <TitleP color="white">
-                        퍼스널 컬러를 통해
-                        <br />
-                        나만의 스타일을 찾아보세요.
-                    </TitleP>
-                    <SubTitleP>
-                        AI 알고리즘으로 정확한 분석을 통해 본인의 피부톤을 이해하고
-                        <br />
-                        가장 잘 맞는 퍼스널 컬러를 추천해드립니다.
-                        <br />
-                        또한, 퍼스널 컬러와 패션 아이템의 조화로움을 알려드립니다.
-                    </SubTitleP>
-                    <ButtonDiv>
-                        <Link to="/personalcolor">
-                            <HomeButton maxWidth="200px" width="45vw">
-                                퍼스널 컬러 찾기
-                            </HomeButton>
-                        </Link>
-                        <Link to="/fashion">
-                            <HomeButton maxWidth="200px" width="45vw">
-                                패션 매칭하기
-                            </HomeButton>
-                        </Link>
-                    </ButtonDiv>
-                </TextDiv>
-                <ExampleImgDiv>
-                    <img src={browserImg} alt="샘플 이미지" />
-                </ExampleImgDiv>
-            </HomeContainerDiv>
-        </Header>
-    );
-}
+export const HomeHeader = React.forwardRef((props, ref) => (
+    <Header>
+        <HomeContainerDiv ref={ref}>
+            <TextDiv>
+                <TitleP color="white">
+                    퍼스널 컬러를 통해
+                    <br />
+                    나만의 스타일을 찾아보세요.
+                </TitleP>
+                <SubTitleP>
+                    AI 알고리즘으로 정확한 분석을 통해 본인의 피부톤을 이해하고
+                    <br />
+                    가장 잘 맞는 퍼스널 컬러를 추천해드립니다.
+                    <br />
+                    또한, 퍼스널 컬러와 패션 아이템의 조화로움을 알려드립니다.
+                </SubTitleP>
+                <ButtonDiv>
+                    <Link to="/personalcolor">
+                        <HomeButton maxWidth="200px" width="45vw">
+                            퍼스널 컬러 찾기
+                        </HomeButton>
+                    </Link>
+                    <Link to="/fashion">
+                        <HomeButton maxWidth="200px" width="45vw">
+                            패션 매칭하기
+                        </HomeButton>
+                    </Link>
+                </ButtonDiv>
+            </TextDiv>
+            <ExampleImgDiv>
+                <img src={browserImg} alt="샘플 이미지" />
+            </ExampleImgDiv>
+        </HomeContainerDiv>
+    </Header>
+));
 
 // styled-components
 

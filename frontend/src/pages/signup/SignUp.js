@@ -8,17 +8,47 @@ export function SignUp() {
     const [regiseterModal, setRegisterModal] = useState(false);
 
     // 입력 값 가져오는 ref
-    const emailRef = useRef();
+    const idRef = useRef();
+    const nicknameRef = useRef();
     const passwordRef = useRef();
     const passwordCheckRef = useRef();
 
     // 정규표현식
-    const emailRegex = /^([\w._-])*[a-zA-Z0-9]+([\w._-])*([a-zA-Z0-9])+([\w._-])+@([a-zA-Z0-9]+.)+[a-zA-Z0-9]{2,8}$/;
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+    const pattern3 = /[ㄱ-ㅎㅏ-ㅣ가-힣]/; // 한글
+    const pattern4 = /[~!@#$%<>^&*]/; // 특수문자
+    const pattern5 = /\s/; // 공백
+
+    // id 정규식 체크
+    function checkRegexId(id) {
+        if (id.length >= 4 && !pattern3.test(id) && !pattern4.test(id) && !pattern5.test(id)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    // 닉네임 체크
+    function checkRegexNickname(nickname) {
+        if (nickname.length >= 4 && !pattern4.test(nickname) && !pattern5.test(nickname)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    // 비밀번호 체크
+    function checkRegexPassword(password) {
+        if (password.length >= 8 && !pattern3.test(password) && !pattern5.test(password)) {
+            return true;
+        }
+
+        return false;
+    }
 
     // 정규표현식에 맞는지, 패스워드는 일치하는지 체크
     const [regexCheck, setRegexCheck] = useState({
-        email: true,
+        id: true,
+        nickname: true,
         password: true,
         passwordCheck: true,
     });
@@ -26,17 +56,19 @@ export function SignUp() {
     // 이메일, 비밀번호 form submit 함수
     const handleSubmit = async event => {
         event.preventDefault();
-        const emailTest = emailRegex.test(emailRef.current.value);
-        const passwordTest = passwordRegex.test(passwordRef.current.value);
+        const idTest = checkRegexId(idRef.current.value);
+        const nicknameTest = checkRegexNickname(nicknameRef.current.value);
+        const passwordTest = checkRegexPassword(passwordRef.current.value);
         const passwordDoubleTest = passwordRef.current.value === passwordCheckRef.current.value;
         setRegexCheck(current => ({
             ...current,
-            email: emailTest,
+            id: idTest,
+            nickname: nicknameTest,
             password: passwordTest,
             passwordCheck: passwordDoubleTest,
         }));
-        if (emailTest && passwordTest && passwordDoubleTest) {
-            const response = await setUserRegister(emailRef.current.value, passwordRef.current.value);
+        if (idTest && nicknameTest && passwordTest && passwordDoubleTest) {
+            const response = await setUserRegister(idRef.current.value, passwordRef.current.value);
             if (response.status === 201) setRegisterModal(current => !current);
         }
     };
@@ -57,24 +89,30 @@ export function SignUp() {
                 <NavBackgroundDiv />
                 <ContainerDiv>
                     <SignUpForm onSubmit={handleSubmit}>
-                        <div className="column title_div">
+                        <div className="title_div">
                             <TitleP color="#3C64B1">Sign Up</TitleP>
                             <p>가입하면 분석 결과를 저장할 수 있습니다.</p>
                         </div>
                         <div>
-                            <UserInputDiv text="Email" ref={emailRef} />
-                            {!regexCheck.email && <p className="error">이메일 주소를 입력해주세요.</p>}
+                            <UserInputDiv text="Id" ref={idRef} />
+                            <p className="rule">영문/숫자 4글자 이상 입력해주세요.</p>
+                            {!regexCheck.id && <p className="error">아이디가 옳지 않습니다.</p>}
                         </div>
-                        <div className="column">
+                        <div>
+                            <UserInputDiv text="Nickname" ref={nicknameRef} />
+                            <p className="rule">영문/숫자/한글 4글자 이상 입력해주세요.</p>
+                            {!regexCheck.nickname && <p className="error">닉네임이 옳지 않습니다.</p>}
+                        </div>
+                        <div>
                             <UserInputDiv text="Password" type="password" ref={passwordRef} />
-                            <p className="password_rule">영문/숫자 포함 8자 이상 입력해주세요.</p>
-                            {!regexCheck.password && <p className="error">비밀번호가 유효하지 않습니다.</p>}
+                            <p className="rule">영문/숫자 8자 이상 입력해주세요.</p>
+                            {!regexCheck.password && <p className="error">비밀번호가 옳지 않습니다.</p>}
                         </div>
-                        <div className="column">
+                        <div>
                             <UserInputDiv text="Password Check" type="password" ref={passwordCheckRef} />
                             {!regexCheck.passwordCheck && <p className="error">비밀번호가 일치하지 않습니다.</p>}
                         </div>
-                        <UserButton type="submit" width="40%" height="50%" className="column button">
+                        <UserButton type="submit" width="60%" height="50%" className="button">
                             회원가입
                         </UserButton>
                     </SignUpForm>
@@ -88,12 +126,13 @@ export function SignUp() {
 
 const SignUpForm = styled.form`
     display: grid;
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-rows: 1fr repeat(4, 0.9fr) 1fr;
     align-items: center;
     justify-items: center;
 
     .input_div {
-        width: 250px;
+        width: 300px;
+        margin: 0;
     }
 
     .title {
@@ -104,7 +143,7 @@ const SignUpForm = styled.form`
         margin-bottom: 50px;
     }
 
-    .password_rule {
+    .rule {
         font-size: 0.8rem;
     }
 
@@ -113,44 +152,18 @@ const SignUpForm = styled.form`
         color: red;
     }
 
-    .button {
-        justify-self: center;
-    }
-
     @media screen and (max-width: 420px) {
-        all: unset;
-
-        display: grid;
-        grid-template-rows: 1fr 0.8fr 0.5fr repeat(3, 1fr);
-        align-items: center;
-        justify-items: center;
+        grid-template-rows: 1fr repeat(4, 1.2fr) 1fr;
 
         font-size: 1.6rem;
 
-        .input_div {
-            width: 300px;
-        }
-
         .title_div {
-            margin: 0 0 20px 0;
-        }
-
-        .column {
-            grid-column-start: 1;
-            grid-column-end: 2;
-            justify-self: center;
-        }
-
-        .check_button {
-            width: 30%;
-            height: 100%;
-
-            justify-self: end;
+            margin-bottom: 20px;
         }
 
         .button {
             width: 50%;
-            height: 50%;
+            height: 70%;
         }
     }
 `;

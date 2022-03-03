@@ -65,18 +65,9 @@ export function SignUp() {
                             <UserInputDiv text="Email" ref={emailRef} />
                             {!regexCheck.email && <p className="error">이메일 주소를 입력해주세요.</p>}
                         </div>
-                        <UserButton
-                            type="submit"
-                            width="50%"
-                            height="40%"
-                            className="check_button"
-                            onClick={() => alert('중복 확인 완료')}
-                        >
-                            중복 확인
-                        </UserButton>
                         <div className="column">
                             <UserInputDiv text="Password" type="password" ref={passwordRef} />
-                            <p className="password_rule">비밀번호는 영문/숫자/특수문자 포함 8자 이상 입력해주세요.</p>
+                            <p className="password_rule">영문/숫자 포함 8자 이상 입력해주세요.</p>
                             {!regexCheck.password && <p className="error">비밀번호가 유효하지 않습니다.</p>}
                         </div>
                         <div className="column">
@@ -97,19 +88,12 @@ export function SignUp() {
 
 const SignUpForm = styled.form`
     display: grid;
-    grid-template-rows: 1fr repeat(4, 1fr);
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, 1fr);
     align-items: center;
     justify-items: center;
 
     .input_div {
         width: 250px;
-    }
-
-    .column {
-        grid-column-start: 1;
-        grid-column-end: 3;
-        justify-self: start;
     }
 
     .title {

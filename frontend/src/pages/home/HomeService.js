@@ -1,12 +1,36 @@
 import styled from 'styled-components';
+import { useEffect, useRef } from 'react';
 import { ContainerDiv, HomeServiceIcon, BigTextP, BackgroundArticle } from '../../components';
 
 export function HomeService() {
+    const target = useRef(null);
+
+    const onIntersect = async ([entry], observer) => {
+        if (entry.isIntersecting) {
+            console.log(entry.target.classList);
+            entry.target.classList.add('event');
+            console.log(entry.target.classList);
+            observer.unobserve(entry.target);
+        }
+    };
+
+    const options = {
+        root: null, // 관찰 대상의 부모 요소를 지정 (기본값 null)
+        rootMargin: '0px', // 관찰하는 뷰포트의 마진 지정 (기본값 0 0 0 0)
+        threshold: 0.8, // 관찰 요소와 어느정도 겹쳤을 때 콜백을 수행할지 지정
+    };
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(onIntersect, options);
+        if (target.current) observer.observe(target.current);
+        return () => observer.disconnect();
+    }, [onIntersect]);
+
     return (
         <BackgroundArticle>
             <ServiceContainerDiv>
                 <BigTextP>제공되는 서비스</BigTextP>
-                <DescriptionDiv>
+                <DescriptionDiv ref={target}>
                     <HomeServiceIcon
                         image="paint"
                         title="Personal Color"
@@ -56,10 +80,17 @@ const ServiceContainerDiv = styled(ContainerDiv)`
 `;
 
 const DescriptionDiv = styled.div`
+    opacity: 0;
+
     width: 100%;
     height: 400px;
 
     margin-top: 50px;
+
+    &.event {
+        opacity: 1;
+        transition: opacity 1.5s ease-in-out;
+    }
 
     ${({ theme }) => theme.flexStyled.flexRow};
     justify-content: space-around;

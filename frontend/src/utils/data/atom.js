@@ -15,3 +15,8 @@ export const seasonState = atom({
     key: 'seasonState',
     default: '',
 });
+
+export const toneChoiceState = atom({
+    key: 'toneChoiceState',
+    default: '',
+});

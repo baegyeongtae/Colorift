@@ -19,14 +19,23 @@ import { hue, saturation, value } from '../../image';
 function FashionResult() {
     const navigate = useNavigate();
     const setFashionPage = useSetRecoilState(fashionPageState);
+    const seasonTone = sessionStorage.getItem('color');
+    const percentList = sessionStorage.getItem('percent');
+    const list = percentList.split(',');
+    const huePercent = list[0];
+    const saturationPercent = list[1];
+    const valuePercent = list[2];
+    const average = list[3];
 
     const season = {
-        spring: 'spring',
-        summer: 'summer',
-        autumn: 'autumn',
-        winter: 'winter',
+        SP: 'spring',
+        SU: 'summer',
+        AU: 'autumn',
+        WI: 'winter',
     };
-    const resultColor = SeasonTone(season.spring);
+    console.log(season[seasonTone]);
+
+    const resultColor = SeasonTone(season.SP);
 
     console.log(resultColor);
 
@@ -40,9 +49,14 @@ function FashionResult() {
             <SubTitleP>
                 이 옷은 <ResultTextS color={resultColor}>봄 웜톤</ResultTextS>인 회원님께
             </SubTitleP>
-            <PercentResult resultColor={resultColor} />
+            <PercentResult
+                resultColor={resultColor}
+                hue={huePercent}
+                saturation={saturationPercent}
+                value={valuePercent}
+            />
             <SubTitleP>
-                종합 <ResultTextS color={resultColor}>67%</ResultTextS>만큼 매칭됩니다.
+                종합 <ResultTextS color={resultColor}>{average}%</ResultTextS>만큼 매칭됩니다.
             </SubTitleP>
             <ColorContainerDiv>
                 <div className="wrapper">

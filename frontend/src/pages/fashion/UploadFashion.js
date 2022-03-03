@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useSetRecoilState } from 'recoil';
 import Stack from '@mui/material/Stack';
 import { postFashionPhoto } from '../../utils/api/service';
+import { postNotLoggedInFashionPhoto } from '../../utils/api/user';
 import { PhotoUpload, ContainerDiv, Fashion, SubTitleP, BestWorstLi, BlueButton, WhiteButton } from '../../components';
 import { fashionPageState } from '../../utils/data/atom';
 import { MatchingLoading } from '.';
@@ -13,7 +14,7 @@ function UploadFashion() {
     const [fashionData, setFashionData] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [photoUpload, setPhotoUpload] = useState('');
-    const seasonTone = sessionStorage.getItem('season');
+    const seasonTone = sessionStorage.getItem('color');
 
     const photoInput = useRef();
     const handleClick = () => {
@@ -25,13 +26,13 @@ function UploadFashion() {
         console.log(photoToAdd[0]);
         const fileImg = URL.createObjectURL(photoToAdd[0]);
         console.log(fileImg);
+        console.log(seasonTone);
         const uploadFile = photoToAdd[0];
 
         const formData = new FormData();
         formData.append('image', uploadFile);
         formData.append('color', seasonTone);
 
-        console.log(formData);
         setFashionData(formData);
         setPhotoUpload(fileImg);
     };
@@ -41,8 +42,16 @@ function UploadFashion() {
             alert('사진을 올려주세요.');
         } else if (photoUpload !== '') {
             setIsLoading(true);
-            const matchingResult = await postFashionPhoto(fashionData);
-            console.log(matchingResult);
+            const checkedUser = sessionStorage.getItem('userEmail');
+            if (checkedUser) {
+                const matchingResult = await postFashionPhoto(fashionData);
+                console.log(matchingResult);
+            }
+            if (!checkedUser) {
+                const matchingResult = await postNotLoggedInFashionPhoto(fashionData);
+                console.log(matchingResult);
+                sessionStorage.setItem('percent', matchingResult);
+            }
             setIsLoading(false);
             setFashionPage(3);
         }

@@ -28,7 +28,8 @@ function ColorResult() {
         WI: 'winter',
     };
 
-    const resultColor = SeasonTone(season.SP);
+    const resultColor = SeasonTone(season[seasonTone]);
+    console.log(resultColor);
 
     return (
         <>

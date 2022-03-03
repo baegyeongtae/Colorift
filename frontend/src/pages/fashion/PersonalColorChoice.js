@@ -26,7 +26,9 @@ function PersonalColorChoice() {
     const onChangeSelect = e => {
         const tone = e.target.value;
         setToneValue(tone);
-        sessionStorage.setItem('color', tone);
+        if (select === 'basic') {
+            sessionStorage.setItem('color', tone);
+        }
     };
 
     // 컬러 페이지 검사 결과 받아오기 & 세션 스토리지에 넣기
@@ -40,8 +42,9 @@ function PersonalColorChoice() {
 
     const checkedColor = () => {
         if (seasonTone) {
-            sessionStorage.setItem('color', seasonTone);
-
+            if (select === 'previous') {
+                sessionStorage.setItem('color', seasonTone);
+            }
             if (seasonTone === 'SP') {
                 return season.SP;
             }

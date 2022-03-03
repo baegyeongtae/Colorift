@@ -4,6 +4,7 @@ import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import Stack from '@mui/material/Stack';
 import { postFacePhoto } from '../../utils/api/service';
+import { postNotLoggedInFacePhoto } from '../../utils/api/user';
 import { PhotoUpload, ContainerDiv, BestWorstLi, SubTitleP, Color, BlueButton, WhiteButton } from '../../components';
 import { colorPageState } from '../../utils/data/atom';
 import { Loading } from '.';
@@ -38,8 +39,15 @@ function UploadFace() {
             alert('사진을 올려주세요.');
         } else if (photoUpload !== '') {
             setIsLoading(true);
-            const resultTone = await postFacePhoto(imgData);
-            console.log(resultTone);
+            const checkedUser = sessionStorage.getItem('userEmail');
+            if (checkedUser) {
+                const resultPercent = await postFacePhoto(imgData);
+                console.log(resultPercent);
+            }
+            if (!checkedUser) {
+                const resultPercent = await postNotLoggedInFacePhoto(imgData);
+                console.log(resultPercent);
+            }
             setIsLoading(false);
             setColorPage(1);
         }

@@ -68,9 +68,13 @@ export async function postFashionPhoto(fashionData) {
         });
 
         console.log(response);
-        const season = response.data.color;
+        const hue = response.data.color_match_rate;
+        const value = response.data.brightness_match_rate;
+        const saturation = response.data.saturation_match_rate;
 
-        return season;
+        const average = (hue + saturation + value) / 3;
+
+        return [hue, value, saturation, average];
     } catch (error) {
         return error.response;
     }

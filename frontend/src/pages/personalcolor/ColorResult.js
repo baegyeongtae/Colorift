@@ -45,7 +45,7 @@ function ColorResult() {
 
             <ColorContainerDiv>
                 <MediumTextLeftH>회원님에게 어울리는 컬러</MediumTextLeftH>
-                <SeasonColor season={season.SP} />
+                <SeasonColor season={season[seasonTone]} />
             </ColorContainerDiv>
 
             <ButtonContainerDiv>

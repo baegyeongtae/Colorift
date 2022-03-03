@@ -22,10 +22,6 @@ function FashionResult() {
     const seasonTone = sessionStorage.getItem('color');
     const percentList = sessionStorage.getItem('percent');
     const list = percentList.split(',');
-    const huePercent = list[0];
-    const saturationPercent = list[1];
-    const valuePercent = list[2];
-    const average = list[3];
 
     const season = {
         SP: 'spring',
@@ -33,9 +29,8 @@ function FashionResult() {
         AU: 'autumn',
         WI: 'winter',
     };
-    console.log(season[seasonTone]);
 
-    const resultColor = SeasonTone(season.SP);
+    const resultColor = SeasonTone(season[seasonTone]);
 
     console.log(resultColor);
 
@@ -49,14 +44,9 @@ function FashionResult() {
             <SubTitleP>
                 이 옷은 <ResultTextS color={resultColor}>봄 웜톤</ResultTextS>인 회원님께
             </SubTitleP>
-            <PercentResult
-                resultColor={resultColor}
-                hue={huePercent}
-                saturation={saturationPercent}
-                value={valuePercent}
-            />
+            <PercentResult resultColor={resultColor} hue={list[0]} saturation={list[1]} value={list[2]} />
             <SubTitleP>
-                종합 <ResultTextS color={resultColor}>{average}%</ResultTextS>만큼 매칭됩니다.
+                종합 <ResultTextS color={resultColor}>{list[3]}%</ResultTextS>만큼 매칭됩니다.
             </SubTitleP>
             <ColorContainerDiv>
                 <div className="wrapper">
@@ -85,7 +75,7 @@ function FashionResult() {
             </ColorContainerDiv>
 
             <ContentContainerDiv>
-                <MatchingResult />
+                <MatchingResult average={list[3]} />
             </ContentContainerDiv>
             <ButtonContainerDiv>
                 <Stack spacing={2} direction="row">

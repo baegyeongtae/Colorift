@@ -1,7 +1,5 @@
 import Cookies from 'js-cookie';
-import { useSetRecoilState } from 'recoil';
 import axiosConfig from './token';
-import { colorPageState, seasonState } from '../data/atom';
 
 // 회원탈퇴
 export async function setUserOut() {

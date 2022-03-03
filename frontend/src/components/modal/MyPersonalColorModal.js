@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ContainerDiv, BackgroundDiv, ModalCloseIcon } from '..';
+import { ContainerDiv, BackgroundDiv, ModalCloseIcon, SeasonColor } from '..';
 import { MyModalTable } from './MyModalTable';
 
 export function MyPersonalColorModal({ toggleClickProps, className }) {
@@ -13,6 +13,7 @@ export function MyPersonalColorModal({ toggleClickProps, className }) {
             <ModalDiv className={className}>
                 <MyModalTable />
                 <ModalCloseIcon clickProps={handleToggleClick} />
+                <SeasonColor />
             </ModalDiv>
         </>
     );

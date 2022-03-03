@@ -1,36 +1,38 @@
 import styled from 'styled-components';
-import { useEffect, useRef } from 'react';
+import { forwardRef, useEffect, useRef } from 'react';
 import { ContainerDiv, HomeServiceIcon, BigTextP, BackgroundArticle } from '../../components';
 
-export function HomeService() {
-    const target = useRef(null);
+export const HomeService = React.forwardRef((props, ref) => {
+    // // intersection observer가 관찰할 요소
+    // const target = useRef(null);
 
-    const onIntersect = async ([entry], observer) => {
-        if (entry.isIntersecting) {
-            console.log(entry.target.classList);
-            entry.target.classList.add('event');
-            console.log(entry.target.classList);
-            observer.unobserve(entry.target);
-        }
-    };
+    // // intersection observer 객체 콜백 함수
+    // // entry는 관찰하는 요소를 배열로 반환한다
+    // const onIntersect = async ([entry], observer) => {
+    //     if (entry.isIntersecting) {
+    //         entry.target.classList.add('event');
+    //         observer.unobserve(entry.target);
+    //     }
+    // };
 
-    const options = {
-        root: null, // 관찰 대상의 부모 요소를 지정 (기본값 null)
-        rootMargin: '0px', // 관찰하는 뷰포트의 마진 지정 (기본값 0 0 0 0)
-        threshold: 0.8, // 관찰 요소와 어느정도 겹쳤을 때 콜백을 수행할지 지정
-    };
+    // // intersection observer 옵션
+    // const options = {
+    //     root: null, // 관찰 대상의 부모 요소를 지정 (기본값 null)
+    //     rootMargin: '0px', // 관찰하는 뷰포트의 마진 지정 (기본값 0 0 0 0)
+    //     threshold: 0.8, // 관찰 요소와 어느정도 겹쳤을 때 콜백을 수행할지 지정
+    // };
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(onIntersect, options);
-        if (target.current) observer.observe(target.current);
-        return () => observer.disconnect();
-    }, [onIntersect]);
+    // useEffect(() => {
+    //     const observer = new IntersectionObserver(onIntersect, options);
+    //     if (target.current) observer.observe(target.current);
+    //     return () => observer.disconnect();
+    // }, [target]);
 
     return (
         <BackgroundArticle>
             <ServiceContainerDiv>
                 <BigTextP>제공되는 서비스</BigTextP>
-                <DescriptionDiv ref={target}>
+                <DescriptionDiv ref={ref}>
                     <HomeServiceIcon
                         image="paint"
                         title="Personal Color"
@@ -68,7 +70,7 @@ export function HomeService() {
             </ServiceContainerDiv>
         </BackgroundArticle>
     );
-}
+});
 
 // styled-components
 

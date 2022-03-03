@@ -6,7 +6,7 @@
 import React, { useState } from 'react';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { ContainerDiv, Fashion, MediumTextH, WhiteButton, RadioTextH } from '../../components';
+import { ContainerDiv, Fashion, MediumTextH, WhiteButton, RadioTextH, MyPersonalListModal } from '../../components';
 import { fashionPageState, toneChoiceState } from '../../utils/data/atom';
 
 function PersonalColorChoice() {
@@ -38,6 +38,9 @@ function PersonalColorChoice() {
         WI: '겨울 쿨톤',
     };
 
+    // 마이퍼스널 컬러 선택 모달
+    const [personalModal, setPersonalModal] = useState(false);
+
     const checkedColor = () => {
         if (seasonTone) {
             sessionStorage.setItem('color', seasonTone);
@@ -60,8 +63,14 @@ function PersonalColorChoice() {
 
     const checkedColorText = checkedColor();
 
+    // 마이퍼스널 컬러 선택 모달 토클 함수
+    const handleToggleClick = () => {
+        setPersonalModal(current => !current);
+    };
+
     return (
         <>
+            <MyPersonalListModal className={personalModal && 'show'} toggleClickProps={handleToggleClick} />
             <Fashion />
 
             <MediumTextH>매칭하고싶은 퍼스널 컬러를 아래 3가지 방법 중 선택해주세요.</MediumTextH>
@@ -134,12 +143,7 @@ function PersonalColorChoice() {
                 <div>
                     <MyPersonalColorDiv>
                         <ResultText>선택안함</ResultText>
-                        <CustomButton
-                            disabled={select !== 'my'}
-                            onClick={() => {
-                                console.log(1);
-                            }}
-                        >
+                        <CustomButton disabled={select !== 'my'} onClick={handleToggleClick}>
                             불러오기
                         </CustomButton>
                     </MyPersonalColorDiv>

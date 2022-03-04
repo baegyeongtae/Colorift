@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { UserButton, Input, UserOutModal } from '../../components';
+import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 
 export function MyPageInfo() {
     // 회원탈퇴 모달
@@ -10,6 +11,9 @@ export function MyPageInfo() {
     const handleUserOut = () => {
         setUserOutModal(current => !current);
     };
+
+    // 모달 뜬 상태에서는 스크롤 막기
+    useEffect(() => setScrollDisabled(userOutModal), [userOutModal]);
 
     return (
         <>

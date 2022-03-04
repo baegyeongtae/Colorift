@@ -6,7 +6,7 @@ import { chartImg } from '../../image';
 
 export const HomeAI = React.forwardRef((props, ref) => (
     <BackgroundArticle>
-        <HomeContainerDiv ref={ref}>
+        <AIContainerDiv ref={ref}>
             <TextContainerDiv>
                 <BigTextP>AI 분석</BigTextP>
                 <DescriptionLeftP>
@@ -20,8 +20,16 @@ export const HomeAI = React.forwardRef((props, ref) => (
             <SeasonImgDiv>
                 <img src={chartImg} alt="AI 분석 이미지" />
             </SeasonImgDiv>
-        </HomeContainerDiv>
+        </AIContainerDiv>
     </BackgroundArticle>
 ));
 
 // styled-components
+
+const AIContainerDiv = styled(HomeContainerDiv)`
+    padding: 50px 0;
+
+    @media ${({ theme }) => theme.device.tablet} {
+        padding: 100px 0;
+    }
+`;

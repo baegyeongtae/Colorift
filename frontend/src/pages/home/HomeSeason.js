@@ -34,12 +34,10 @@ export const HomeSeason = React.forwardRef((props, ref) => (
 // styled-components
 
 const SeasonContainerDiv = styled(HomeContainerDiv)`
-    div:nth-child(1) {
-        order: 1;
-    }
+    padding: 50px 0;
 
-    div:nth-child(2) {
-        order: 2;
+    @media ${({ theme }) => theme.device.tablet} {
+        padding: 100px 0;
     }
 `;
 

@@ -6,7 +6,7 @@ import { browserImg, colorBackgroundImg } from '../../image';
 
 export const HomeHeader = React.forwardRef((props, ref) => (
     <Header>
-        <HomeContainerDiv ref={ref}>
+        <HeaderContainerDiv ref={ref}>
             <TextDiv>
                 <TitleP color="white">
                     퍼스널 컬러를 통해
@@ -36,22 +36,28 @@ export const HomeHeader = React.forwardRef((props, ref) => (
             <ExampleImgDiv>
                 <img src={browserImg} alt="샘플 이미지" />
             </ExampleImgDiv>
-        </HomeContainerDiv>
+        </HeaderContainerDiv>
     </Header>
 ));
 
 // styled-components
 
+const HeaderContainerDiv = styled(HomeContainerDiv)`
+    @media ${({ theme }) => theme.device.tablet} {
+        div:nth-child(1) {
+            order: 2;
+        }
+
+        div:nth-child(2) {
+            order: 1;
+        }
+    }
+`;
+
 const Header = styled.header`
     background-image: url(${colorBackgroundImg});
     background-repeat: no-repeat;
     background-size: cover;
-
-    padding: 150px 0 100px 0;
-
-    @media ${({ theme }) => theme.device.tablet} {
-        padding: 100px 0;
-    }
 `;
 
 const TextDiv = styled.div`

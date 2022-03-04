@@ -21,7 +21,7 @@ export function Login() {
     const [noUserModal, setNoUserModal] = useState(false);
 
     // input 값을 받아오기 위한 ref
-    const emailRef = useRef();
+    const idRef = useRef();
     const passwordRef = useRef();
 
     // 비밀번호 찾기 모달의 상태 변환 함수
@@ -37,7 +37,7 @@ export function Login() {
     // 이메일, 비밀번호 form submit 함수
     const handleSubmit = async event => {
         event.preventDefault();
-        const response = await setUserLogin(emailRef.current.value, passwordRef.current.value);
+        const response = await setUserLogin(idRef.current.value, passwordRef.current.value);
         if (response.status === 401) setNoUserModal(true);
     };
 
@@ -59,8 +59,8 @@ export function Login() {
                             Login
                         </TitleP>
                         <UserForm onSubmit={handleSubmit}>
-                            <UserInputDiv text="Email" type="text" name="email" ref={emailRef} />
-                            <UserInputDiv text="Password" type="password" name="password" ref={passwordRef} />
+                            <UserInputDiv text="Id" type="text" ref={idRef} />
+                            <UserInputDiv text="Password" type="password" ref={passwordRef} />
                             <UserButton type="submit" width="80%" height="80%" className="login_button column">
                                 로그인
                             </UserButton>
@@ -73,7 +73,7 @@ export function Login() {
                             className="button"
                             onClick={() => handlePasswordToggleModal()}
                         >
-                            비밀번호 찾기
+                            비밀번호 변경
                         </UserButton>
                         <p>회원이 아니신가요?</p>
                         <UserButton

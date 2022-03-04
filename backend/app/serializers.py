@@ -1,3 +1,4 @@
+from django.http import Http404
 from rest_framework import serializers
 from .models import User, Color, Fashion
 from datetime import date
@@ -11,39 +12,30 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['username', 'nickname', 'password']
 
-    def validate(self, data):
-        print(data)
-        if User.objects.filter(username=data['username']).exists():
-            raise serializers.ValidationError('existing username')
-        return data
-
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         return user
 
 
-class NicknameSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['nickname']
-
-
-class FindPasswordSerializer(serializers.ModelSerializer):
-    username = serializers.CharField()
+class ChangePasswordSerializer(serializers.Serializer):
+    username = serializers.CharField(max_length=100, allow_blank=False)
+    nickname = serializers.CharField(max_length=100, allow_blank=False)
+    password = serializers.CharField(max_length=100, allow_blank=False)
 
     def validate(self, attrs):
         try:
             user = User.objects.get(username=attrs['username'])
             if user.nickname == attrs['nickname']:
                 return attrs
-        except User.DoesNotExist:
-            raise serializers.ValidationError('user does not exist', code=400)
+            else:
+                raise serializers.ValidationError('incorrect user information')
+        except:
+            raise serializers.ValidationError('incorrect user information')
 
-
-class ChangeUserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['username', 'password']
+    def save(self):
+        user = User.objects.get(username=self.validated_data['username'])
+        user.set_password(self.validated_data['password'])
+        user.save()
 
 
 """

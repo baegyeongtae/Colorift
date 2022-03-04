@@ -3,11 +3,12 @@
 /* eslint-disable jsx-a11y/tabindex-no-positive */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { ContainerDiv, Fashion, MediumTextH, WhiteButton, RadioTextH, MyPersonalListModal } from '../../components';
 import { fashionPageState, toneChoiceState } from '../../utils/data/atom';
+import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 
 function PersonalColorChoice() {
     // Radio Button Select
@@ -67,6 +68,9 @@ function PersonalColorChoice() {
     const handleToggleClick = () => {
         setPersonalModal(current => !current);
     };
+
+    // 모달 뜬 상태에서는 스크롤 막기
+    useEffect(() => setScrollDisabled(personalModal), [personalModal]);
 
     return (
         <>

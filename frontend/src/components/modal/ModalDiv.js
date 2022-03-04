@@ -15,7 +15,7 @@ export const ModalDiv = styled.div`
         width: auto;
         height: auto;
 
-        padding: 100px 50px;
+        padding: 50px 50px;
 
         background-color: white;
 

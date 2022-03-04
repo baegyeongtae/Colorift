@@ -15,7 +15,7 @@ export function MyPageInfo() {
         <>
             <UserOutModal
                 className={userOutModal && 'show'}
-                toggleClickProps={() => handleUserOut()}
+                toggleClickProps={handleUserOut}
                 text="정말 탈퇴하시겠습니까?"
             />
             <UserInfoDiv>

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { getPersonalList } from '../../utils/api/service';
-import { GrayButton, MyPersonalColorModal } from '../../components';
+import { GrayButton, MyPersonalColorModal, BackgroundDiv } from '../../components';
 
 export function MyPagePersonal() {
     // 상세보기 모달
@@ -56,6 +56,7 @@ export function MyPagePersonal() {
 
     return (
         <>
+            <BackgroundDiv className={personalModal && 'show'} onClick={handleToggleClick} />
             <MyPersonalColorModal className={personalModal && 'show'} toggleClickProps={handleToggleClick} />
             <PersonalTableDiv className="personal">
                 <table>

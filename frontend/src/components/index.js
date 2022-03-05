@@ -21,10 +21,11 @@ export {
     PercentResult,
 } from './procedure';
 export {
-    FindPasswordModal,
+    ChangePWModal,
     UserOutModal,
     TextModal,
     MyPersonalColorModal,
     MyStyleModal,
     MyPersonalListModal,
+    MyChangePWModal,
 } from './modal';

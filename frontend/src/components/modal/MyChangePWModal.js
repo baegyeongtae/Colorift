@@ -1,18 +1,19 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import { BackgroundDiv, ModalCloseIcon, UserInputDiv, UserButton, TitleP } from '..';
+import { BackgroundDiv, ModalCloseIcon, UserInputDiv, UserButton } from '..';
 import { ModalDiv } from './ModalDiv';
 import { TextModal } from './TextModal';
 import { setUserPassword } from '../../utils/api/user';
 import { useUser } from '../../utils/hooks/useUser';
 import { checkRegexPassword } from '../../utils/data/checkRegexUser';
 
-export function FindPasswordModal({ clickProps, className }) {
-    // 입력 값 가져오는 ref
-    const { idRef, nicknameRef, passwordRef, passwordCheckRef } = useUser();
+export function MyChangePWModal({ toggleClickProps, className }) {
+    // 비밀번호 변경 시 필요한 유저 정보
+    const userId = sessionStorage.getItem('userId');
+    const userNickname = sessionStorage.getItem('userNickname');
 
-    // 비밀번호 변경 성공 및 실패 여부
-    const [changeSuccess, setChangeSuccess] = useState(false);
+    // 입력 값 가져오는 ref
+    const { passwordRef, passwordCheckRef } = useUser();
 
     // 비밀번호 변경 성공 및 실패 모달 띄우기
     const [changeModal, setChangeModal] = useState(false);
@@ -25,7 +26,7 @@ export function FindPasswordModal({ clickProps, className }) {
 
     // 모달 ON/OFF 함수
     const handleClick = () => {
-        clickProps();
+        toggleClickProps();
     };
 
     // 변경하기 버튼 클릭 시 API 요청
@@ -39,25 +40,13 @@ export function FindPasswordModal({ clickProps, className }) {
             passwordCheck: passwordDoubleTest,
         }));
         if (passwordTest && passwordDoubleTest) {
-            const response = await setUserPassword(
-                idRef.current.value,
-                nicknameRef.current.value,
-                passwordRef.current.value,
-            );
-
-            if (response.status === 200) {
-                setChangeSuccess(true);
-            }
-            if (response.status === 400) {
-                setChangeSuccess(false);
-            }
+            await setUserPassword(userId, userNickname, passwordRef.current.value);
             setChangeModal(true);
         }
     };
 
     const handleToggleModal = () => {
         setChangeModal(current => !current);
-        if (changeSuccess) window.open('/login', '_self');
     };
 
     return (
@@ -65,13 +54,6 @@ export function FindPasswordModal({ clickProps, className }) {
             <BackgroundDiv className={className} onClick={handleClick} />
             <ModalGridDiv className={className}>
                 <form onSubmit={handleSubmit}>
-                    <TitleP color="#3C64B1">
-                        Change
-                        <br />
-                        Password
-                    </TitleP>
-                    <UserInputDiv text="가입한 ID를 입력해주세요." type="text" ref={idRef} />
-                    <UserInputDiv text="가입한 닉네임을 입력해주세요." type="text" ref={nicknameRef} />
                     <div>
                         <UserInputDiv text="변경할 비밀번호를 입력해주세요." type="password" ref={passwordRef} />
                         {!regexCheck.password && <p className="error">비밀번호는 공백 없이 8자 이상입니다.</p>}
@@ -89,21 +71,7 @@ export function FindPasswordModal({ clickProps, className }) {
             <TextModal
                 className={changeModal && 'show'}
                 toggleClickProps={handleToggleModal}
-                text={
-                    changeSuccess ? (
-                        <>
-                            비밀번호가 변경되었습니다.
-                            <br />
-                            변경된 비밀번호로 접속해주세요.
-                        </>
-                    ) : (
-                        <>
-                            존재하지 않는 유저입니다.
-                            <br />
-                            입력하신 정보를 다시 확인해주세요.
-                        </>
-                    )
-                }
+                text="비밀번호가 변경되었습니다."
             />
         </>
     );
@@ -113,18 +81,10 @@ export function FindPasswordModal({ clickProps, className }) {
 
 const ModalGridDiv = styled(ModalDiv)`
     &.show {
-        ${({ theme }) => theme.flexStyled.flexColumn};
-
         form {
             display: grid;
-            grid-template-rows: 1fr repeat(4, 0.6fr) 0.8fr;
+            grid-template-rows: repeat(2, 0.8fr) 1fr;
             justify-items: center;
-
-            .title {
-                justify-self: start;
-
-                margin-bottom: 20px;
-            }
 
             div .error {
                 font-size: 0.7rem;

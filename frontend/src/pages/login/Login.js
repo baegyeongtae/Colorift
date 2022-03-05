@@ -5,7 +5,7 @@ import {
     UserInputDiv,
     TitleP,
     UserButton,
-    FindPasswordModal,
+    ChangePWModal,
     NavBackgroundDiv,
     TextModal,
     Article,
@@ -50,7 +50,7 @@ export function Login() {
                 toggleClickProps={handleNoUserToggleModal}
                 text="아이디 또는 비밀번호를 잘못 입력했습니다"
             />
-            <FindPasswordModal className={findModal && 'show'} clickProps={handlePasswordToggleModal} />
+            <ChangePWModal className={findModal && 'show'} clickProps={handlePasswordToggleModal} />
             <Article>
                 <NavBackgroundDiv />
                 <ContainerDiv>

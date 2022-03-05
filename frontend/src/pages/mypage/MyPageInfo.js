@@ -1,15 +1,23 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
-import { UserButton, Input, UserOutModal } from '../../components';
+import { UserButton, UserOutModal, MyChangePWModal } from '../../components';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 
 export function MyPageInfo() {
     // 회원탈퇴 모달
     const [userOutModal, setUserOutModal] = useState(false);
 
-    // 회원탈퇴 함수
+    // 비밀번호 변경 모달
+    const [changePasswordModal, setChangePasswordModal] = useState(false);
+
+    // 회원탈퇴 모달 토글 함수
     const handleUserOut = () => {
         setUserOutModal(current => !current);
+    };
+
+    // 비밀번호 변경 모달 토글 함수
+    const handleChangePassword = () => {
+        setChangePasswordModal(current => !current);
     };
 
     // 모달 뜬 상태에서는 스크롤 막기
@@ -22,13 +30,14 @@ export function MyPageInfo() {
                 toggleClickProps={handleUserOut}
                 text="정말 탈퇴하시겠습니까?"
             />
+            <MyChangePWModal className={changePasswordModal && 'show'} toggleClickProps={handleChangePassword} />
             <UserInfoDiv>
                 <p className="option">아이디</p>
                 <p className="id">{sessionStorage.getItem('userId')}</p>
                 <p className="option">닉네임</p>
                 <p className="nickname">{sessionStorage.getItem('userNickname')}</p>
                 <p className="option">비밀번호 변경</p>
-                <UserButton height="100%" onClick={() => alert('패스워드 변경 완료')}>
+                <UserButton height="100%" onClick={handleChangePassword}>
                     변경하기
                 </UserButton>
                 <p className="option">회원탈퇴는 신중히 결정해주세요.</p>

@@ -150,3 +150,15 @@ export async function getPercentDetailModal(id) {
         return error.response;
     }
 }
+
+export async function setDeleteFashion(id) {
+    try {
+        const response = await axiosConfig({
+            method: 'delete',
+            url: `fashion/detail/${id}/`,
+        });
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}

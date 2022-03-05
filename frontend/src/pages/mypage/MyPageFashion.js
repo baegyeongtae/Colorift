@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { MyStyleModal, GrayButton } from '../../components';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
-import { getFashionList } from '../../utils/api/service';
+import { getFashionList, setDeleteFashion } from '../../utils/api/service';
 
 export function MyPageFashion() {
     // 상세보기 모달
@@ -13,6 +13,7 @@ export function MyPageFashion() {
 
     // API로 받아온 패션 데이터 목록
     const [fashionList, setFashionList] = useState([]);
+    console.log('fashionList', fashionList);
 
     // 버튼 클릭 횟수
     const [buttonClick, setButtonClick] = useState(0);
@@ -29,12 +30,24 @@ export function MyPageFashion() {
         setColorId(id);
         setFashionModal(current => !current);
     };
-    console.log(colorId);
 
     // 상세보기 모달 토클 함수
     const handleToggleClick = () => {
         if (fashionModal) setFashionModal(current => !current);
     };
+
+    // 삭제하기 버튼 클릭 시 함수
+    async function handleDeleteClick(id) {
+        const result = window.confirm('정말 삭제하시겠습니까?');
+        if (result) {
+            const response = await setDeleteFashion(id);
+            if (response.status === 204) {
+                window.open('/mypage', '_self');
+            } else {
+                console.log(response);
+            }
+        }
+    }
 
     // 모달 뜬 상태에서는 스크롤 막기
     useEffect(() => setScrollDisabled(fashionModal), [fashionModal]);
@@ -52,7 +65,9 @@ export function MyPageFashion() {
                 <FasionImageDiv>
                     {fashionList?.slice(0, imageMaxIndex)?.map(item => (
                         <div>
-                            <GrayButton width="70px">삭제하기</GrayButton>
+                            <GrayButton width="70px" onClick={() => handleDeleteClick(item.id)}>
+                                삭제하기
+                            </GrayButton>
                             <input
                                 key={item.id}
                                 type="image"

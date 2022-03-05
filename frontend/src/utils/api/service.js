@@ -34,12 +34,12 @@ export async function setUserOut() {
     return null;
 }
 
-// 퍼스널 컬러 목록 조회
-export async function getPersonalList() {
+// 패션 목록 조회
+export async function getFashionList() {
     try {
         const response = await axiosConfig({
             method: 'get',
-            url: 'color/list/',
+            url: 'fashion/list/',
         });
         return response;
     } catch (error) {
@@ -48,11 +48,11 @@ export async function getPersonalList() {
 }
 
 // 패션 목록 조회
-export async function getFashionList() {
+export async function getColorList() {
     try {
         const response = await axiosConfig({
             method: 'get',
-            url: 'fashion/list/',
+            url: 'color/list/',
         });
         return response;
     } catch (error) {
@@ -72,7 +72,6 @@ export async function postFacePhoto(imgData) {
             },
         });
 
-        console.log(response);
         const season = response.data.color;
         sessionStorage.setItem('season', season);
 
@@ -94,7 +93,6 @@ export async function postFashionPhoto(fashionData) {
             },
         });
 
-        console.log(response);
         const hue = response.data.color_match_rate;
         const value = response.data.brightness_match_rate;
         const saturation = response.data.saturation_match_rate;
@@ -117,10 +115,7 @@ export async function getColorDetailModal(id) {
             },
         });
 
-        console.log(response);
-
         const resultColor = response.data.color;
-        console.log(resultColor);
         return resultColor;
     } catch (error) {
         return error.response;
@@ -137,7 +132,6 @@ export async function getPercentDetailModal(id) {
             },
         });
 
-        console.log(response);
         const season = response.data.color;
         const hue = response.data.color_match_rate;
         const value = response.data.brightness_match_rate;

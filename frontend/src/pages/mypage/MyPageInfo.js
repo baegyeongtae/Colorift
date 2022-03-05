@@ -23,14 +23,16 @@ export function MyPageInfo() {
                 text="정말 탈퇴하시겠습니까?"
             />
             <UserInfoDiv>
-                <p className="option">이메일</p>
+                <p className="option">아이디</p>
                 <p className="id">{sessionStorage.getItem('userId')}</p>
+                <p className="option">닉네임</p>
+                <p className="nickname">{sessionStorage.getItem('userNickname')}</p>
                 <p className="option">비밀번호 변경</p>
-                <UserButton height="90%" onClick={() => alert('패스워드 변경 완료')}>
+                <UserButton height="100%" onClick={() => alert('패스워드 변경 완료')}>
                     변경하기
                 </UserButton>
                 <p className="option">회원탈퇴는 신중히 결정해주세요.</p>
-                <UserButton height="90%" onClick={handleUserOut}>
+                <UserButton height="100%" onClick={handleUserOut}>
                     회원탈퇴
                 </UserButton>
             </UserInfoDiv>
@@ -44,8 +46,8 @@ const UserInfoDiv = styled.div`
     width: 50%;
 
     display: grid;
-    grid-template-rows: repeat(3, 40px);
-    grid-template-columns: 4fr 1fr;
+    grid-template-rows: repeat(4, 30px);
+    grid-template-columns: 3fr 1fr;
     grid-row-gap: 20px;
     align-items: center;
 

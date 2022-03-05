@@ -44,7 +44,9 @@ export async function setUserLogin(_userId, _password) {
             data: userData,
         });
 
-        sessionStorage.setItem('userEmail', _userId);
+        sessionStorage.setItem('userId', _userId);
+        sessionStorage.setItem('userNickname', response.data.nickname);
+
         Cookies.set('accessToken', response.data.access, {
             path: '/',
             expires: expire, // 테스트 기준 5분 (하루 단위로 응답)

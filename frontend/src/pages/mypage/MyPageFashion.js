@@ -13,7 +13,6 @@ export function MyPageFashion() {
 
     // API로 받아온 패션 데이터 목록
     const [fashionList, setFashionList] = useState([]);
-    console.log('fashionList', fashionList);
 
     // 버튼 클릭 횟수
     const [buttonClick, setButtonClick] = useState(0);
@@ -48,8 +47,6 @@ export function MyPageFashion() {
                 //     newCurrent.splice(index, 1);
                 //     return newCurrent;
                 // });
-            } else {
-                console.log(response);
             }
         }
     }

@@ -123,29 +123,20 @@ export async function getColorDetailModal(id) {
     }
 }
 
-export async function getPercentDetailModal(id) {
+// 패션 상세보기
+export async function getFashionDetailModal(id) {
     try {
         const response = await axiosConfig({
             method: 'get',
             url: `fashion/detail/${id}/`,
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
         });
-
-        const season = response.data.color;
-        const hue = response.data.color_match_rate;
-        const value = response.data.brightness_match_rate;
-        const saturation = response.data.saturation_match_rate;
-
-        const average = (hue + saturation + value) / 3;
-
-        return [hue, value, saturation, average, season];
+        return response;
     } catch (error) {
         return error.response;
     }
 }
 
+// 패션 삭제하기
 export async function setDeleteFashion(id) {
     try {
         const response = await axiosConfig({

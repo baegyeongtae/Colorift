@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export function MyModalTable({ id }) {
+export function MyModalTable({ id, date }) {
+    const dateReplace = date?.replace(/-/gi, '. ');
+
     return (
         <TableDiv>
             <table>
@@ -14,7 +16,7 @@ export function MyModalTable({ id }) {
                 <tbody>
                     <tr>
                         <td>{id}</td>
-                        <td>2022.02.11</td>
+                        <td>{dateReplace}</td>
                         <td>사용자 지정 제목</td>
                     </tr>
                 </tbody>

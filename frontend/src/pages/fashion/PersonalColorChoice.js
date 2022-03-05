@@ -21,6 +21,9 @@ function PersonalColorChoice() {
     // 리스트 보기 모달
     const [listModal, setListModal] = useState(false);
 
+    // 선택한 색상이 없을 때 다음으로 버튼 막는 모달
+    const [nextDisabledModal, setNextDisabledModal] = useState(false);
+
     // 리스트에서 받아온 컬러 선택값
     const [myPersonalColor, setMyPersonalColor] = useState('선택안함');
 
@@ -29,6 +32,7 @@ function PersonalColorChoice() {
     const handleSelectChange = event => {
         const { value } = event.target;
         setSelect(value);
+        sessionStorage?.removeItem('color');
     };
 
     // Next Page로 넘기기
@@ -81,10 +85,15 @@ function PersonalColorChoice() {
         setMyPersonalColor(chosenColor.chosen);
     };
 
+    // 다음으로 클릭 시 선택한 색상이 없을 때 모달 토글 함수
+    const handleNextDisabled = () => {
+        setNextDisabledModal(current => !current);
+    };
+
     // 다음으로 버튼 클릭 함수
     const handleNextButton = () => {
-        if (select === 'basic' && !selectColor) {
-            alert('색상을 선택해주세요');
+        if (!sessionStorage.getItem('color')) {
+            setNextDisabledModal(true);
         } else {
             setFashionPage(1);
         }
@@ -102,6 +111,13 @@ function PersonalColorChoice() {
                     text="로그인 이후 이용해주세요."
                     toggleClickProps={handleToggleClick}
                     className={listModal && 'show'}
+                />
+            )}
+            {nextDisabledModal && (
+                <TextModal
+                    text="색상을 선택해주세요."
+                    toggleClickProps={handleNextDisabled}
+                    className={nextDisabledModal && 'show'}
                 />
             )}
 

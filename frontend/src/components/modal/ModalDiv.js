@@ -10,25 +10,27 @@ export const ModalDiv = styled.div`
         left: 50%;
         transform: translate(-50%, -50%);
 
-        padding: 50px 30px;
-
         ${({ theme }) => theme.flexStyled.flexCenter};
 
-        width: 550px;
-        height: 300px;
+        width: auto;
+        height: auto;
+
+        padding: 100px 50px;
 
         background-color: white;
+
+        border: 1px solid #f3f3f3;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
         .text {
             margin: 0;
         }
 
         @media ${({ theme }) => theme.device.tablet} {
+            width: 90%;
             .text {
                 font-size: 1.5rem;
             }
-
-            width: 80%;
         }
     }
 `;

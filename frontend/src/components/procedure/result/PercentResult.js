@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import { SubTitleP } from '../../index';
 import { ProgressBar } from '../progressbar/ProgressBar';
 
-export function PercentResult({ resultColor }) {
+export function PercentResult({ resultColor, hue, saturation, value }) {
     return (
         <ContentContainerDiv>
             <ProgressDiv>
@@ -13,19 +12,19 @@ export function PercentResult({ resultColor }) {
                 </dl>
                 <dl>
                     <dt className="progress">
-                        <ProgressBar percent={82} resultColor={resultColor} />
+                        <ProgressBar percent={hue} resultColor={resultColor} />
                     </dt>
                     <dt className="progress">
-                        <ProgressBar percent={65} resultColor={resultColor} />
+                        <ProgressBar percent={saturation} resultColor={resultColor} />
                     </dt>
                     <dt className="progress">
-                        <ProgressBar percent={70} resultColor={resultColor} />
+                        <ProgressBar percent={value} resultColor={resultColor} />
                     </dt>
                 </dl>
                 <dl>
-                    <dt className="progress">82%</dt>
-                    <dt className="progress">65%</dt>
-                    <dt className="progress">70%</dt>
+                    <dt className="progress">{hue}%</dt>
+                    <dt className="progress">{saturation}%</dt>
+                    <dt className="progress">{value}%</dt>
                 </dl>
             </ProgressDiv>
         </ContentContainerDiv>

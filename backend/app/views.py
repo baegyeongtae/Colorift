@@ -10,6 +10,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from app.models import User, Color, Fashion
 from app.serializers import *
+from datetime import date
 
 
 """ 
@@ -141,6 +142,7 @@ class ColorTestDetail(APIView):
             serializer = ColorDetailSerializer(color)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
+            # locked => 접근할수 없는 자원(내 자원이 아니어서)
             return Response(status=status.HTTP_403_FORBIDDEN)
 
     def delete(self, request, pk, format=None):
@@ -215,6 +217,7 @@ class FashionTestDetail(APIView):
             serializer = FashionDetailSerializer(fashion)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
+            # locked => 접근할수 없는 자원(내 자원이 아니어서)
             return Response(status=status.HTTP_403_FORBIDDEN)
 
     def delete(self, request, pk, format=None):

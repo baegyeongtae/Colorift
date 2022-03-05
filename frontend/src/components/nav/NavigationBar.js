@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import { Outlet, useLocation, NavLink } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 import Cookies from 'js-cookie';
@@ -7,10 +8,15 @@ import { ContainerDiv } from '../area/ContainerDiv';
 import { useGetScrollY } from '../../utils/hooks/useGetScrollY';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 import { xmarkIcon, menuIcon, profileIcon } from '../../image';
+import { colorPageState, fashionPageState } from '../../utils/data/atom';
 
 function NavigationBar() {
     // true 이면 메뉴 바 나옴
     const [isToggle, setIsToggle] = useState(false);
+
+    // true 이면 메뉴 바 나옴
+    const setColorPage = useSetRecoilState(colorPageState);
+    const setFashionPage = useSetRecoilState(fashionPageState);
 
     // 현재 url 받아오기
     const location = useLocation();
@@ -40,11 +46,17 @@ function NavigationBar() {
     ];
 
     // 세션 스토리지에 정보가 있으면 받아오기 (로그인 상태 확인)
-    const [userEmail, setUserEmail] = useState(sessionStorage.getItem('userEmail') || '');
+    const [userId, setUserId] = useState(sessionStorage.getItem('userId') || '');
 
     // 메뉴바 클릭 상태 변환하는 함수
     const handleToggleClick = () => {
         setIsToggle(current => !current);
+    };
+
+    // ColorAnalysis, FashionMatching 누르면 UploadFace, PersonalColorChoice페이지 나오게
+    const resetPages = () => {
+        setColorPage(0);
+        setFashionPage(0);
     };
 
     // 쿠키, 세션 모두 리셋하는 함수
@@ -52,7 +64,7 @@ function NavigationBar() {
         Cookies.remove('accessToken');
         Cookies.remove('refreshToken');
         sessionStorage.clear();
-        setUserEmail('');
+        setUserId('');
     }
 
     // 모바일 버전 메뉴바 show 상태에서는 스크롤 막기
@@ -80,24 +92,25 @@ function NavigationBar() {
                                         key={menu.name}
                                         to={menu.path}
                                         className={pathname === '/' && scrollY === 0 && 'transparent'}
+                                        onClick={() => resetPages()}
                                     >
                                         {menu.name}
                                     </NavLink>
                                 ))}
                             </MenuDiv>
-                            <UserDiv className={isToggle && 'show'} login={userEmail}>
+                            <UserDiv className={isToggle && 'show'} login={userId}>
                                 <NavLink
-                                    to={userEmail ? '/' : '/login'}
+                                    to={userId ? '/' : '/login'}
                                     className={pathname === '/' && scrollY === 0 ? 'transparent login' : 'login'}
-                                    onClick={() => userEmail && userSessionReset()}
+                                    onClick={() => userId && userSessionReset()}
                                 >
-                                    {userEmail ? 'Logout' : 'Log In'}
+                                    {userId ? 'Logout' : 'Log In'}
                                 </NavLink>
                                 <NavLink
-                                    to={userEmail ? `/mypage/${userEmail}` : '/signup'}
+                                    to={userId ? `/mypage` : '/signup'}
                                     className={pathname === '/' && scrollY === 0 ? 'transparent signup' : 'signup'}
                                 >
-                                    {userEmail ? (
+                                    {userId ? (
                                         <img
                                             src={profileIcon}
                                             alt="마이페이지 아이콘"

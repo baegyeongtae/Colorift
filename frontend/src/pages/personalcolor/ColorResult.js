@@ -1,11 +1,14 @@
 /* eslint-disable react/style-prop-object */
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import Stack from '@mui/material/Stack';
-import { colorPageState, seasonState } from '../../utils/data/atom';
+import { colorPageState } from '../../utils/data/atom';
+import { season } from '../../utils/data/season';
+
 import {
     ResultImage,
+    NavBackgroundDiv,
     Color,
     SubTitleP,
     ContainerDiv,
@@ -18,21 +21,14 @@ import {
 function ColorResult() {
     const navigate = useNavigate();
     const setColorPage = useSetRecoilState(colorPageState);
-    const resultSeason = useRecoilValue(seasonState);
-
-    console.log(resultSeason);
-
-    const season = {
-        spring: 'spring',
-        summer: 'summer',
-        autumn: 'autumn',
-        winter: 'winter',
-    };
-
-    const resultColor = SeasonTone(season.spring);
+    const seasonTone = sessionStorage.getItem('season');
+    console.log(seasonTone);
+    const resultColor = SeasonTone(season[seasonTone]);
+    console.log(resultColor);
 
     return (
         <>
+            <NavBackgroundDiv />
             <Color number={2} />
 
             <ResultContainerDiv>
@@ -45,7 +41,7 @@ function ColorResult() {
 
             <ColorContainerDiv>
                 <MediumTextLeftH>회원님에게 어울리는 컬러</MediumTextLeftH>
-                <SeasonColor season={season.spring} />
+                <SeasonColor season={season[seasonTone]} />
             </ColorContainerDiv>
 
             <ButtonContainerDiv>
@@ -122,6 +118,7 @@ const ButtonContainerDiv = styled.div`
     align-items: center;
     margin-bottom: 100px;
     margin-top: 50px;
+    padding-bottom: 100px;
 
     @media ${({ theme }) => theme.device.mobile} {
         background-color: ${({ theme }) => theme.color.white};

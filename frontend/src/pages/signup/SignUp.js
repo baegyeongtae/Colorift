@@ -1,24 +1,24 @@
 import styled from 'styled-components';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { setUserRegister } from '../../utils/api/user';
+import { useUser } from '../../utils/hooks/useUser';
 import { UserInputDiv, TitleP, UserButton, NavBackgroundDiv, TextModal, ContainerDiv, Article } from '../../components';
+import { checkRegexId, checkRegexNickname, checkRegexPassword } from '../../utils/data/checkRegexUser';
 
 export function SignUp() {
-    // 가입 완료 모달
+    // 가입 완료 or 존재하는 아이디 모달에 들어갈 텍스트
+    const [signUpSuccess, setSignUpSuccess] = useState(false);
+
+    // 가입 완료 or 존재하는 아이디 모달
     const [regiseterModal, setRegisterModal] = useState(false);
 
     // 입력 값 가져오는 ref
-    const emailRef = useRef();
-    const passwordRef = useRef();
-    const passwordCheckRef = useRef();
-
-    // 정규표현식
-    const emailRegex = /^([\w._-])*[a-zA-Z0-9]+([\w._-])*([a-zA-Z0-9])+([\w._-])+@([a-zA-Z0-9]+.)+[a-zA-Z0-9]{2,8}$/;
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+    const { idRef, nicknameRef, passwordRef, passwordCheckRef } = useUser();
 
     // 정규표현식에 맞는지, 패스워드는 일치하는지 체크
     const [regexCheck, setRegexCheck] = useState({
-        email: true,
+        id: true,
+        nickname: true,
         password: true,
         passwordCheck: true,
     });
@@ -26,24 +26,36 @@ export function SignUp() {
     // 이메일, 비밀번호 form submit 함수
     const handleSubmit = async event => {
         event.preventDefault();
-        const emailTest = emailRegex.test(emailRef.current.value);
-        const passwordTest = passwordRegex.test(passwordRef.current.value);
+        const idTest = checkRegexId(idRef.current.value);
+        const nicknameTest = checkRegexNickname(nicknameRef.current.value);
+        const passwordTest = checkRegexPassword(passwordRef.current.value);
         const passwordDoubleTest = passwordRef.current.value === passwordCheckRef.current.value;
         setRegexCheck(current => ({
             ...current,
-            email: emailTest,
+            id: idTest,
+            nickname: nicknameTest,
             password: passwordTest,
             passwordCheck: passwordDoubleTest,
         }));
-        if (emailTest && passwordTest && passwordDoubleTest) {
-            const response = await setUserRegister(emailRef.current.value, passwordRef.current.value);
-            if (response.status === 201) setRegisterModal(current => !current);
+        if (idTest && nicknameTest && passwordTest && passwordDoubleTest) {
+            const response = await setUserRegister(
+                idRef.current.value,
+                nicknameRef.current.value,
+                passwordRef.current.value,
+            );
+            if (response.status === 201) {
+                setSignUpSuccess(true);
+            }
+            if (response.status === 400) {
+                setSignUpSuccess(false);
+            }
+            setRegisterModal(current => !current);
         }
     };
 
     const handleToggleModal = () => {
         setRegisterModal(current => !current);
-        window.open('/login', '_self');
+        if (signUpSuccess) window.open('/login', '_self');
     };
 
     return (
@@ -51,39 +63,36 @@ export function SignUp() {
             <TextModal
                 className={regiseterModal && 'show'}
                 toggleClickProps={() => handleToggleModal()}
-                text="가입을 환영합니다."
+                text={signUpSuccess ? '가입을 환영합니다.' : '존재하는 아이디입니다.'}
             />
             <Article>
                 <NavBackgroundDiv />
                 <ContainerDiv>
                     <SignUpForm onSubmit={handleSubmit}>
-                        <div className="column title_div">
+                        <div className="title_div">
                             <TitleP color="#3C64B1">Sign Up</TitleP>
                             <p>가입하면 분석 결과를 저장할 수 있습니다.</p>
                         </div>
                         <div>
-                            <UserInputDiv text="Email" ref={emailRef} />
-                            {!regexCheck.email && <p className="error">이메일 주소를 입력해주세요.</p>}
+                            <UserInputDiv text="Id" ref={idRef} />
+                            <p className="rule">영문/숫자 4글자 이상 입력해주세요.</p>
+                            {!regexCheck.id && <p className="error">아이디가 옳지 않습니다.</p>}
                         </div>
-                        <UserButton
-                            type="submit"
-                            width="50%"
-                            height="40%"
-                            className="check_button"
-                            onClick={() => alert('중복 확인 완료')}
-                        >
-                            중복 확인
-                        </UserButton>
-                        <div className="column">
+                        <div>
+                            <UserInputDiv text="Nickname" ref={nicknameRef} />
+                            <p className="rule">영문/숫자/한글 4글자 이상 입력해주세요.</p>
+                            {!regexCheck.nickname && <p className="error">닉네임이 옳지 않습니다.</p>}
+                        </div>
+                        <div>
                             <UserInputDiv text="Password" type="password" ref={passwordRef} />
-                            <p className="password_rule">비밀번호는 영문/숫자/특수문자 포함 8자 이상 입력해주세요.</p>
-                            {!regexCheck.password && <p className="error">비밀번호가 유효하지 않습니다.</p>}
+                            <p className="rule">영문/숫자 8자 이상 입력해주세요.</p>
+                            {!regexCheck.password && <p className="error">비밀번호가 옳지 않습니다.</p>}
                         </div>
-                        <div className="column">
+                        <div>
                             <UserInputDiv text="Password Check" type="password" ref={passwordCheckRef} />
                             {!regexCheck.passwordCheck && <p className="error">비밀번호가 일치하지 않습니다.</p>}
                         </div>
-                        <UserButton type="submit" width="40%" height="50%" className="column button">
+                        <UserButton type="submit" width="60%" height="50%" className="button">
                             회원가입
                         </UserButton>
                     </SignUpForm>
@@ -97,19 +106,13 @@ export function SignUp() {
 
 const SignUpForm = styled.form`
     display: grid;
-    grid-template-rows: 1fr repeat(4, 1fr);
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr repeat(4, 0.9fr) 1fr;
     align-items: center;
     justify-items: center;
 
     .input_div {
-        width: 250px;
-    }
-
-    .column {
-        grid-column-start: 1;
-        grid-column-end: 3;
-        justify-self: start;
+        width: 300px;
+        margin: 0;
     }
 
     .title {
@@ -120,7 +123,7 @@ const SignUpForm = styled.form`
         margin-bottom: 50px;
     }
 
-    .password_rule {
+    .rule {
         font-size: 0.8rem;
     }
 
@@ -129,44 +132,18 @@ const SignUpForm = styled.form`
         color: red;
     }
 
-    .button {
-        justify-self: center;
-    }
-
     @media screen and (max-width: 420px) {
-        all: unset;
-
-        display: grid;
-        grid-template-rows: 1fr 0.8fr 0.5fr repeat(3, 1fr);
-        align-items: center;
-        justify-items: center;
+        grid-template-rows: 1fr repeat(4, 1.2fr) 1fr;
 
         font-size: 1.6rem;
 
-        .input_div {
-            width: 300px;
-        }
-
         .title_div {
-            margin: 0 0 20px 0;
-        }
-
-        .column {
-            grid-column-start: 1;
-            grid-column-end: 2;
-            justify-self: center;
-        }
-
-        .check_button {
-            width: 30%;
-            height: 100%;
-
-            justify-self: end;
+            margin-bottom: 20px;
         }
 
         .button {
             width: 50%;
-            height: 50%;
+            height: 70%;
         }
     }
 `;

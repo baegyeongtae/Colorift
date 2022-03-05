@@ -1,18 +1,22 @@
+/* eslint-disable no-nested-ternary */
 import styled from 'styled-components';
 import { BigTextP, ContainerDiv } from '../../index';
 import { happy, soso, bad } from '../../../image';
 
-export function MatchingResult() {
+export function MatchingResult({ average }) {
     const resultData = {
-        Good: ['Happy Fashion', 'happy'],
-        SoSo: ['So So', 'soso'],
-        Bad: ['Bad', 'bad'],
+        Good: ['Happy Fashion', happy],
+        SoSo: ['So So', soso],
+        Bad: ['Bad', bad],
     };
+
+    const state = average < 34 ? 'Bad' : average < 67 ? 'SoSo' : 'Good';
+
     return (
         <>
-            <ResultText>Happy Fashion</ResultText>
+            <ResultText>{resultData[state][0]}</ResultText>
             <ImgContainerDiv>
-                <img src={happy} alt="Happy" width="90px" height="90px" />
+                <img src={resultData[state][1]} alt="state" width="90px" height="90px" />
             </ImgContainerDiv>
         </>
     );

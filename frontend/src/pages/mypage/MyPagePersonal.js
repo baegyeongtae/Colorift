@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { getPersonalList } from '../../utils/api/service';
-import { GrayButton, MyPersonalColorModal } from '../../components';
+import { GrayButton, MyPersonalColorModal, BackgroundDiv } from '../../components';
+import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 
 export function MyPagePersonal() {
     // 상세보기 모달
     const [personalModal, setPersonalModal] = useState(false);
+
+    // 상세보기 모달에서 선택한 컬러 ID 값
+    const [colorId, setColorId] = useState(0);
 
     // 퍼스널 컬러 더미 데이터
     const dummyData = [
@@ -51,12 +55,26 @@ export function MyPagePersonal() {
         if (personalModal) setPersonalModal(current => !current);
     };
 
+    // 상세보기 버튼 클릭했을 때
+    const handleToggleDetailClick = (id = colorId) => {
+        setColorId(id);
+        setPersonalModal(current => !current);
+    };
+    console.log(colorId);
+
     // 퍼스널 컬러 목록 조회
     useEffect(() => getPersonalList(), []);
 
+    // 모달 뜬 상태에서는 스크롤 막기
+    useEffect(() => setScrollDisabled(personalModal), [personalModal]);
+
     return (
         <>
-            <MyPersonalColorModal className={personalModal && 'show'} toggleClickProps={handleToggleClick} />
+            <MyPersonalColorModal
+                className={personalModal && 'show'}
+                toggleClickProps={handleToggleClick}
+                colorId={colorId}
+            />
             <PersonalTableDiv className="personal">
                 <table>
                     <tbody>
@@ -66,7 +84,7 @@ export function MyPagePersonal() {
                                 <td className="date">{item.date}</td>
                                 <td className="color">{item.color}</td>
                                 <td className="button">
-                                    <GrayButton width="90%" onClick={() => setPersonalModal(current => !current)}>
+                                    <GrayButton width="90%" onClick={() => handleToggleDetailClick(item.id)}>
                                         상세보기
                                     </GrayButton>
                                 </td>

@@ -101,6 +101,7 @@ export async function postFashionPhoto(fashionData) {
 
         return [hue, value, saturation, average];
     } catch (error) {
+        console.log(error.response);
         return error.response;
     }
 }
@@ -140,6 +141,18 @@ export async function getPercentDetailModal(id) {
         const average = (hue + saturation + value) / 3;
 
         return [hue, value, saturation, average, season];
+    } catch (error) {
+        return error.response;
+    }
+}
+
+export async function setDeleteFashion(id) {
+    try {
+        const response = await axiosConfig({
+            method: 'delete',
+            url: `fashion/detail/${id}/`,
+        });
+        return response;
     } catch (error) {
         return error.response;
     }

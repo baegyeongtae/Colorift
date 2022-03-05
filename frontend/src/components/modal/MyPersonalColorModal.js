@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { season } from '../../utils/data/season';
-import { ContainerDiv, ModalCloseIcon, ResultImage, SubTitleP, MediumTextH, SeasonColor } from '..';
+import { ContainerDiv, ModalCloseIcon, ResultImage, SubTitleP, MediumTextH, SeasonColor, BackgroundDiv } from '..';
 import { MyModalTable } from './MyModalTable';
 import { getColorDetailModal } from '../../utils/api/service';
 
@@ -23,22 +23,25 @@ export function MyPersonalColorModal({ toggleClickProps, className, colorId }) {
     const seasonTone = season[resultColor];
 
     return (
-        <ModalDiv className={className}>
-            <MyModalTable id={colorId} />
-            <ModalCloseIcon clickProps={handleToggleClick} />
-            <ResultContainerDiv>
-                <ResultImage />
-            </ResultContainerDiv>
+        <>
+            <BackgroundDiv className={className} onClick={handleToggleClick} />
+            <ModalDiv className={className}>
+                <MyModalTable id={colorId} />
+                <ModalCloseIcon clickProps={handleToggleClick} />
+                <ResultContainerDiv>
+                    <ResultImage />
+                </ResultContainerDiv>
 
-            <SubTitleP>
-                회원님은 <ResultTextS color={resultColor}>봄 웜톤</ResultTextS> 입니다.
-            </SubTitleP>
+                <SubTitleP>
+                    회원님은 <ResultTextS color={resultColor}>봄 웜톤</ResultTextS> 입니다.
+                </SubTitleP>
 
-            <ColorContainerDiv>
-                <MediumTextLeftH>회원님에게 어울리는 컬러</MediumTextLeftH>
-                <SeasonColor season={seasonTone} />
-            </ColorContainerDiv>
-        </ModalDiv>
+                <ColorContainerDiv>
+                    <MediumTextLeftH>회원님에게 어울리는 컬러</MediumTextLeftH>
+                    <SeasonColor season={seasonTone} />
+                </ColorContainerDiv>
+            </ModalDiv>
+        </>
     );
 }
 

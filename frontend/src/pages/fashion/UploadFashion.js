@@ -33,8 +33,8 @@ function UploadFashion() {
 
     const handlePhoto = e => {
         const photoToAdd = e.target.files;
-        const fileImg = URL.createObjectURL(photoToAdd[0]);
-        const uploadFile = photoToAdd[0];
+        const fileImg = URL.createObjectURL(photoToAdd?.[0]);
+        const uploadFile = photoToAdd?.[0];
 
         const formData = new FormData();
         formData.append('image', uploadFile);
@@ -54,19 +54,19 @@ function UploadFashion() {
         }
     };
 
-    const fileCheck = async () => {
-        if (photoUpload === '') {
+    const handleFileCheck = async () => {
+        if (!photoUpload) {
             setTextModal(true);
-        } else if (photoUpload !== '') {
+        } else {
             setIsLoading(true);
             const checkedUser = sessionStorage.getItem('userId');
             if (checkedUser) {
                 const matchingResult = await postFashionPhoto(fashionData);
-                sessionStorage.setItem('percent', matchingResult);
+                sessionStorage.setItem('percent', JSON.stringify(matchingResult));
             }
             if (!checkedUser) {
                 const matchingResult = await postNotLoggedInFashionPhoto(fashionData);
-                sessionStorage.setItem('percent', matchingResult);
+                sessionStorage.setItem('percent', JSON.stringify(matchingResult));
             }
             setIsLoading(false);
             setFashionPage(3);
@@ -75,7 +75,6 @@ function UploadFashion() {
 
     return (
         <>
-            {' '}
             <TextModal className={textModal && 'show'} toggleClickProps={handleToggleClick} text="사진을 올려주세요." />
             <NavBackgroundDiv />
             {isLoading ? (
@@ -104,7 +103,7 @@ function UploadFashion() {
                                             />
                                             업로드
                                         </BlueButton>
-                                        <WhiteButton onClick={() => fileCheck()}>결과보기</WhiteButton>
+                                        <WhiteButton onClick={handleFileCheck}>결과보기</WhiteButton>
                                     </Stack>
                                 </ButtonContainerDiv>
                             </TextContainerDiv>
@@ -123,11 +122,6 @@ export { UploadFashion };
 const TextContainerDiv = styled(ContainerDiv)`
     @media ${({ theme }) => theme.device.mobile} {
         all: unset;
-
-        display: flex;
-        flex-direction: column;
-        align-items: left;
-        margin-bottom: 30px;
     }
     all: unset;
 

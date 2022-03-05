@@ -1,9 +1,11 @@
 from django.http import Http404
+from django.contrib.auth.models import update_last_login
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework_simplejwt.settings import api_settings
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from app.models import User, Color, Fashion
@@ -28,13 +30,27 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         return token
 
+    def validate(self, attrs):
+        data = super().validate(attrs)
+
+        refresh = self.get_token(self.user)
+
+        data['refresh'] = str(refresh)
+        data['access'] = str(refresh.access_token)
+        data['nickname'] = self.user.nickname
+
+        if api_settings.UPDATE_LAST_LOGIN:
+            update_last_login(None, self.user)
+
+        return data
+
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 
 """
-유저 관련 api
+[user related api] CreateUser, ChangePassword, DeleteUser
 """
 
 
@@ -43,10 +59,31 @@ class CreateUser(APIView):
     def post(self, request, format=None):
         serializer = RegisterUserSerializer(data=request.data)
         if serializer.is_valid():
-            new_user = serializer.save()
-            if new_user:
-                return Response(status=status.HTTP_201_CREATED)
+            serializer.save()
+            return Response(status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ChangePassword(APIView):
+
+    def patch(self, request, format=None):
+        serializer = ChangePasswordSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ChangeNickname(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def patch(self, request, format=None):
+        user = request.user
+        user.nickname = request.data['nickname']
+        user.save()
+        return Response(status=status.HTTP_200_OK)
 
 
 class DeleteUser(APIView):
@@ -55,10 +92,9 @@ class DeleteUser(APIView):
 
     def delete(self, request, format=None):
         try:
-            user = User.objects.get(pk=request.user.id)
-            user.delete()
+            request.user.delete()
             return Response(status=status.HTTP_200_OK)
-        except:
+        except:  # 적어두긴했지만 예외가 나올 순 없음
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -81,7 +117,7 @@ class ColorTest(APIView):
             data['user'] = request.user.id
 
         serializer = ColorTestSerializer(data=data)
-        if serializer.is_valid(raise_exception=True):
+        if serializer.is_valid():
             instance = serializer.save()
             return Response({'color': instance.color}, status=status.HTTP_200_OK)
         else:
@@ -109,7 +145,7 @@ class ColorTestDetail(APIView):
             serializer = ColorDetailSerializer(color)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
-            return Response(status=status.HTTP_403_FORBIDDEN)  # locked => 접근할수 없는 자원(내 자원이 아니어서)
+            return Response(status=status.HTTP_403_FORBIDDEN)
 
     def delete(self, request, pk, format=None):
         color = self.get_object(pk)
@@ -183,7 +219,7 @@ class FashionTestDetail(APIView):
             serializer = FashionDetailSerializer(fashion)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
-            return Response(status=status.HTTP_403_FORBIDDEN)  # locked => 접근할수 없는 자원(내 자원이 아니어서)
+            return Response(status=status.HTTP_403_FORBIDDEN)
 
     def delete(self, request, pk, format=None):
         fashion = self.get_object(pk)

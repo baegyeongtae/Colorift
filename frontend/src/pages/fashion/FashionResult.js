@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import { useSetRecoilState } from 'recoil';
-import { season } from '../../utils/data/season';
+import { season, SeasonTone } from '../../utils/data/season';
 import { fashionPageState } from '../../utils/data/atom';
 import {
     ResultImage,
@@ -14,7 +14,6 @@ import {
     MatchingResult,
     ContainerDiv,
     PercentResult,
-    SeasonTone,
 } from '../../components';
 import { hue, saturation, value } from '../../image';
 

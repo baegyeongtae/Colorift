@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import { season } from '../../utils/data/season';
+import { season, SeasonTone } from '../../utils/data/season';
 import { getFashionDetailModal } from '../../utils/api/service';
-import { ContainerDiv, BackgroundDiv, ModalCloseIcon, SubTitleP, SeasonTone, ResultImage, PercentResult } from '..';
+import { ContainerDiv, BackgroundDiv, ModalCloseIcon, SubTitleP, ResultImage, PercentResult } from '..';
 import { MyModalTable } from './MyModalTable';
 
 export function MyStyleModal({ theme, toggleClickProps, className, colorId }) {

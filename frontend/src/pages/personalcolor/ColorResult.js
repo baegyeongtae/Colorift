@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import Stack from '@mui/material/Stack';
 import { colorPageState } from '../../utils/data/atom';
-import { season } from '../../utils/data/season';
+import { season, SeasonTone } from '../../utils/data/season';
 
 import {
     ResultImage,
@@ -15,7 +15,6 @@ import {
     BlueButton,
     SeasonColor,
     MediumTextH,
-    SeasonTone,
 } from '../../components';
 
 function ColorResult() {

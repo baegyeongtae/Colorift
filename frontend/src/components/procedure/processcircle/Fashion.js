@@ -3,7 +3,7 @@ import { useRecoilValue } from 'recoil';
 import { ContainerDiv, DescriptionP } from '../..';
 import { fashionPageState } from '../../../utils/data/atom';
 
-export function Fashion() {
+export function Fashion({ number }) {
     const currentPage = useRecoilValue(fashionPageState);
 
     return (
@@ -14,12 +14,12 @@ export function Fashion() {
                         퍼스널 컬러 <br /> 선택
                     </TextH0>
                 </div>
-                <div className={` ${currentPage === 1 ? 'current_circle' : 'left_circle'}`}>
+                <div className={` ${currentPage === 1 && number === 1 ? 'current_circle' : 'left_circle'}`}>
                     <TextH0>
                         패션 사진 <br /> 업로드
                     </TextH0>
                 </div>
-                <div className={` ${currentPage === 2 ? 'current_circle' : 'left_circle'}`}>
+                <div className={` ${currentPage === 1 && number === 2 ? 'current_circle' : 'left_circle'}`}>
                     <TextH0>
                         퍼스널컬러와
                         <br /> 비교 매칭

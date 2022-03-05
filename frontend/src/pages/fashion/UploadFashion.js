@@ -4,7 +4,18 @@ import styled from 'styled-components';
 import { useSetRecoilState } from 'recoil';
 import Stack from '@mui/material/Stack';
 import { postFashionPhoto } from '../../utils/api/service';
-import { PhotoUpload, ContainerDiv, Fashion, SubTitleP, BestWorstLi, BlueButton, WhiteButton } from '../../components';
+import { postNotLoggedInFashionPhoto } from '../../utils/api/user';
+import {
+    PhotoUpload,
+    NavBackgroundDiv,
+    ContainerDiv,
+    Fashion,
+    SubTitleP,
+    BestWorstLi,
+    BlueButton,
+    WhiteButton,
+    TextModal,
+} from '../../components';
 import { fashionPageState } from '../../utils/data/atom';
 import { MatchingLoading } from '.';
 
@@ -13,7 +24,7 @@ function UploadFashion() {
     const [fashionData, setFashionData] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [photoUpload, setPhotoUpload] = useState('');
-    const seasonTone = sessionStorage.getItem('season');
+    const seasonTone = sessionStorage.getItem('color');
 
     const photoInput = useRef();
     const handleClick = () => {
@@ -25,24 +36,43 @@ function UploadFashion() {
         console.log(photoToAdd[0]);
         const fileImg = URL.createObjectURL(photoToAdd[0]);
         console.log(fileImg);
+        console.log(seasonTone);
         const uploadFile = photoToAdd[0];
 
         const formData = new FormData();
         formData.append('image', uploadFile);
         formData.append('color', seasonTone);
 
-        console.log(formData);
         setFashionData(formData);
         setPhotoUpload(fileImg);
     };
 
+    // 사진 올려주세요 모달
+    const [textModal, setTextModal] = useState(false);
+
+    const handleToggleClick = () => {
+        if (textModal) setTextModal(false);
+        if (!textModal) {
+            setTextModal(true);
+        }
+    };
+
     const fileCheck = async () => {
         if (photoUpload === '') {
-            alert('사진을 올려주세요.');
+            setTextModal(true);
         } else if (photoUpload !== '') {
             setIsLoading(true);
-            const matchingResult = await postFashionPhoto(fashionData);
-            console.log(matchingResult);
+            const checkedUser = sessionStorage.getItem('userEmail');
+            if (checkedUser) {
+                const matchingResult = await postFashionPhoto(fashionData);
+                console.log(matchingResult);
+                sessionStorage.setItem('percent', matchingResult);
+            }
+            if (!checkedUser) {
+                const matchingResult = await postNotLoggedInFashionPhoto(fashionData);
+                console.log(matchingResult);
+                sessionStorage.setItem('percent', matchingResult);
+            }
             setIsLoading(false);
             setFashionPage(3);
         }
@@ -50,12 +80,18 @@ function UploadFashion() {
 
     return (
         <>
+            {' '}
+            <TextModal className={textModal && 'show'} toggleClickProps={handleToggleClick} text="사진을 올려주세요." />
+            <NavBackgroundDiv />
             {isLoading ? (
-                <MatchingLoading />
+                <>
+                    <Fashion number={2} />
+                    <MatchingLoading />
+                </>
             ) : (
                 <>
-                    <Fashion />
-                    <SubTitleP>가지고 계신 옷을 올려주세요.</SubTitleP>
+                    <Fashion number={1} />
+                    <SubTitleP>매칭하고 싶은 옷을 올려주세요.</SubTitleP>
                     <ContentContainerDiv>
                         <PhotoContainerDiv>
                             <PhotoUpload photoProps={photoUpload} />

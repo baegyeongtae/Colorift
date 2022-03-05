@@ -5,7 +5,17 @@ import { useSetRecoilState } from 'recoil';
 import Stack from '@mui/material/Stack';
 import { postFashionPhoto } from '../../utils/api/service';
 import { postNotLoggedInFashionPhoto } from '../../utils/api/user';
-import { PhotoUpload, ContainerDiv, Fashion, SubTitleP, BestWorstLi, BlueButton, WhiteButton } from '../../components';
+import {
+    PhotoUpload,
+    NavBackgroundDiv,
+    ContainerDiv,
+    Fashion,
+    SubTitleP,
+    BestWorstLi,
+    BlueButton,
+    WhiteButton,
+    TextModal,
+} from '../../components';
 import { fashionPageState } from '../../utils/data/atom';
 import { MatchingLoading } from '.';
 
@@ -37,15 +47,26 @@ function UploadFashion() {
         setPhotoUpload(fileImg);
     };
 
+    // 사진 올려주세요 모달
+    const [textModal, setTextModal] = useState(false);
+
+    const handleToggleClick = () => {
+        if (textModal) setTextModal(false);
+        if (!textModal) {
+            setTextModal(true);
+        }
+    };
+
     const fileCheck = async () => {
         if (photoUpload === '') {
-            alert('사진을 올려주세요.');
+            setTextModal(true);
         } else if (photoUpload !== '') {
             setIsLoading(true);
             const checkedUser = sessionStorage.getItem('userEmail');
             if (checkedUser) {
                 const matchingResult = await postFashionPhoto(fashionData);
                 console.log(matchingResult);
+                sessionStorage.setItem('percent', matchingResult);
             }
             if (!checkedUser) {
                 const matchingResult = await postNotLoggedInFashionPhoto(fashionData);
@@ -59,12 +80,18 @@ function UploadFashion() {
 
     return (
         <>
+            {' '}
+            <TextModal className={textModal && 'show'} toggleClickProps={handleToggleClick} text="사진을 올려주세요." />
+            <NavBackgroundDiv />
             {isLoading ? (
-                <MatchingLoading />
+                <>
+                    <Fashion number={2} />
+                    <MatchingLoading />
+                </>
             ) : (
                 <>
-                    <Fashion />
-                    <SubTitleP>가지고 계신 옷을 올려주세요.</SubTitleP>
+                    <Fashion number={1} />
+                    <SubTitleP>매칭하고 싶은 옷을 올려주세요.</SubTitleP>
                     <ContentContainerDiv>
                         <PhotoContainerDiv>
                             <PhotoUpload photoProps={photoUpload} />

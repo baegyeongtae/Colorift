@@ -5,7 +5,17 @@ import styled from 'styled-components';
 import Stack from '@mui/material/Stack';
 import { postFacePhoto } from '../../utils/api/service';
 import { postNotLoggedInFacePhoto } from '../../utils/api/user';
-import { PhotoUpload, ContainerDiv, BestWorstLi, SubTitleP, Color, BlueButton, WhiteButton } from '../../components';
+import {
+    PhotoUpload,
+    NavBackgroundDiv,
+    ContainerDiv,
+    BestWorstLi,
+    SubTitleP,
+    Color,
+    BlueButton,
+    WhiteButton,
+    TextModal,
+} from '../../components';
 import { colorPageState } from '../../utils/data/atom';
 import { Loading } from '.';
 
@@ -34,9 +44,19 @@ function UploadFace() {
         setPhotoUpload(fileImg);
     };
 
+    // 사진 올려주세요 모달
+    const [textModal, setTextModal] = useState(false);
+
+    const handleToggleClick = () => {
+        if (textModal) setTextModal(false);
+        if (!textModal) {
+            setTextModal(true);
+        }
+    };
+
     const fileCheck = async () => {
         if (photoUpload === '') {
-            alert('사진을 올려주세요.');
+            setTextModal(true);
         } else if (photoUpload !== '') {
             setIsLoading(true);
             const checkedUser = sessionStorage.getItem('userEmail');
@@ -49,16 +69,22 @@ function UploadFace() {
                 console.log(resultPercent);
             }
             setIsLoading(false);
-            setColorPage(1);
+            setColorPage(2);
         }
     };
     return (
         <>
+            {' '}
+            <TextModal className={textModal && 'show'} toggleClickProps={handleToggleClick} text="사진을 올려주세요." />
+            <NavBackgroundDiv />
             {isLoading ? (
-                <Loading />
+                <>
+                    <Color number={1} />
+                    <Loading />
+                </>
             ) : (
                 <>
-                    <Color />
+                    <Color number={0} />
                     <SubTitleP>얼굴 사진을 올려주세요.</SubTitleP>
                     <ContentContainerDiv>
                         <PhotoContainerDiv>

@@ -9,11 +9,15 @@ import {
     RadioTextH,
     MyPersonalListModal,
     NavBackgroundDiv,
+    TextModal,
 } from '../../components';
-import { fashionPageState, toneChoiceState } from '../../utils/data/atom';
+import { fashionPageState } from '../../utils/data/atom';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 
 function PersonalColorChoice() {
+    // 로그인 여부 확인
+    const loggedUser = sessionStorage.getItem('userId');
+
     // 리스트 보기 모달
     const [listModal, setListModal] = useState(false);
 
@@ -30,14 +34,13 @@ function PersonalColorChoice() {
     // Next Page로 넘기기
     const setFashionPage = useSetRecoilState(fashionPageState);
 
-    // 기본 퍼스널 컬러 선택시 값 저장
-    const [toneValue, setToneValue] = useRecoilState(toneChoiceState);
+    // 기본 퍼스널 컬러에서 유저가 선택한 색상
+    const [selectColor, setSelectColor] = useState('');
+
+    // 기본 퍼스널 컬러 select 선택 시 컬러 저장
     const onChangeSelect = e => {
-        const tone = e.target.value;
-        setToneValue(tone);
-        if (select === 'basic') {
-            sessionStorage.setItem('color', tone);
-        }
+        sessionStorage.setItem('color', e.target.value);
+        setSelectColor(e.target.value);
     };
 
     // 컬러 페이지 검사 결과 받아오기 & 세션 스토리지에 넣기
@@ -48,9 +51,6 @@ function PersonalColorChoice() {
         AU: '가을 웜톤',
         WI: '겨울 쿨톤',
     };
-
-    // 마이퍼스널 컬러 선택 모달
-    const [personalModal, setPersonalModal] = useState(false);
 
     const checkedColor = () => {
         if (seasonTone) {
@@ -81,9 +81,27 @@ function PersonalColorChoice() {
         setMyPersonalColor(chosenColor.chosen);
     };
 
+    // 다음으로 버튼 클릭 함수
+    const handleNextButton = () => {
+        if (select === 'basic' && !selectColor) {
+            alert('색상을 선택해주세요');
+        } else {
+            setFashionPage(1);
+        }
+    };
+
     return (
         <>
-            <MyPersonalListModal className={listModal && 'show'} toggleClickProps={handleToggleClick} />
+            {loggedUser ? (
+                <MyPersonalListModal className={listModal && 'show'} toggleClickProps={handleToggleClick} />
+            ) : (
+                <TextModal
+                    text="로그인 이후 이용해주세요."
+                    toggleClickProps={handleToggleClick}
+                    className={listModal && 'show'}
+                />
+            )}
+
             <NavBackgroundDiv />
             <Fashion />
 
@@ -112,10 +130,11 @@ function PersonalColorChoice() {
                         <select
                             name="personalcolor"
                             className="select"
-                            value={toneValue}
+                            value={selectColor}
                             disabled={select !== 'basic'}
                             onChange={onChangeSelect}
                         >
+                            <option value="">선택안함</option>
                             <option value="SP">봄 웜톤</option>
                             <option value="SU">여름 쿨톤</option>
                             <option value="AU">가을 웜톤</option>
@@ -157,12 +176,7 @@ function PersonalColorChoice() {
                 <div>
                     <MyPersonalColorDiv>
                         <ResultText>{myPersonalColor}</ResultText>
-                        <CustomButton
-                            disabled={select !== 'my'}
-                            onClick={() => {
-                                handleToggleClick();
-                            }}
-                        >
+                        <CustomButton disabled={select !== 'my'} onClick={handleToggleClick}>
                             불러오기
                         </CustomButton>
                     </MyPersonalColorDiv>
@@ -170,7 +184,7 @@ function PersonalColorChoice() {
             </ChoiceContainerDiv>
 
             <ButtonContainerDiv>
-                <WhiteButton type="submit" onClick={() => setFashionPage(1)}>
+                <WhiteButton type="submit" onClick={handleNextButton}>
                     다음으로
                 </WhiteButton>
             </ButtonContainerDiv>
@@ -337,8 +351,6 @@ const ButtonContainerDiv = styled(ContainerDiv)`
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    /* margin-top: 50px;
-    padding-bottom: 100px; */
 `;
 
 const TextH3 = styled.h3`

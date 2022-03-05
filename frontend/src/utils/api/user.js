@@ -126,7 +126,6 @@ export async function postNotLoggedInFashionPhoto(fashionData) {
         const average = (hue + saturation + value) / 3;
 
         return [hue, value, saturation, average];
->>>>>>> sprint-02
     } catch (error) {
         return error.response;
     }

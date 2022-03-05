@@ -1,7 +1,7 @@
-from django.http import Http404
 from rest_framework import serializers
 from .models import User, Color, Fashion
 from datetime import date
+from ai import personal_color
 import numpy as np
 import cv2
 
@@ -52,8 +52,9 @@ class ColorTestSerializer(serializers.ModelSerializer):
         fields = ['user', 'image']
 
     def ai_model(self, file):
-        # read 하는건 이전과 동일한데 지금은 문제가 안생기는 이유는 validated_data에 복사+저장되기 때문인가..?
-        return "SP"
+        nparr = np.fromstring(file.read(), np.uint8)
+        img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        return personal_color.analysis(img)
 
     def create(self, validated_data):
         color = self.ai_model(validated_data['image'])

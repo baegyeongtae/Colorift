@@ -56,27 +56,31 @@ export function MyPagePersonal() {
                 />
             )}
             <PersonalTableDiv className="personal">
-                <table>
-                    <tbody>
-                        {colorList?.map((item, index) => (
-                            <tr key={item.id}>
-                                <td className="id">{index + 1}</td>
-                                <td className="date">{item.date}</td>
-                                <td className="color">{seasonPersonal[item.color]}</td>
-                                <td className="button">
-                                    <GrayButton width="90%" onClick={() => handleToggleDetailClick(item.id)}>
-                                        상세보기
-                                    </GrayButton>
-                                </td>
-                                <td className="button">
-                                    <GrayButton width="90%" onClick={() => handleDeleteClick(item.id)}>
-                                        삭제하기
-                                    </GrayButton>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                {colorList.length !== 0 ? (
+                    <table>
+                        <tbody>
+                            {colorList?.map((item, index) => (
+                                <tr key={item.id}>
+                                    <td className="id">{index + 1}</td>
+                                    <td className="date">{item.date}</td>
+                                    <td className="color">{seasonPersonal[item.color]}</td>
+                                    <td className="button">
+                                        <GrayButton width="90%" onClick={() => handleToggleDetailClick(item.id)}>
+                                            상세보기
+                                        </GrayButton>
+                                    </td>
+                                    <td className="button">
+                                        <GrayButton width="90%" onClick={() => handleDeleteClick(item.id)}>
+                                            삭제하기
+                                        </GrayButton>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                ) : (
+                    <p>분석한 퍼스널컬러가 없습니다.</p>
+                )}
             </PersonalTableDiv>
         </>
     );
@@ -113,6 +117,10 @@ const PersonalTableDiv = styled.div`
         border-radius: 100px;
         background-color: #e9e9e9;
         box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+    }
+
+    p {
+        line-height: 200px;
     }
 
     tr {

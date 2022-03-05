@@ -2,9 +2,11 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import { useSetRecoilState } from 'recoil';
+import { season } from '../../utils/data/season';
 import { fashionPageState } from '../../utils/data/atom';
 import {
     ResultImage,
+    NavBackgroundDiv,
     Fashion,
     SubTitleP,
     DescriptionP,
@@ -23,19 +25,13 @@ function FashionResult() {
     const percentList = sessionStorage.getItem('percent');
     const list = percentList.split(',');
 
-    const season = {
-        SP: 'spring',
-        SU: 'summer',
-        AU: 'autumn',
-        WI: 'winter',
-    };
-
     const resultColor = SeasonTone(season[seasonTone]);
 
     console.log(resultColor);
 
     return (
         <>
+            <NavBackgroundDiv />
             <Fashion />
             <ContentContainerDiv>
                 <ResultImage />

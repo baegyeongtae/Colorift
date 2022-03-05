@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { GrayButton } from '..';
 
 export function MyModalTable({ id }) {
     return (
@@ -14,12 +13,7 @@ export function MyModalTable({ id }) {
                 </thead>
                 <tbody>
                     <tr>
-                        <td className="id">
-                            {id}
-                            <GrayButton width="70px" className="button">
-                                삭제하기
-                            </GrayButton>
-                        </td>
+                        <td>{id}</td>
                         <td>2022.02.11</td>
                         <td>사용자 지정 제목</td>
                     </tr>
@@ -55,14 +49,5 @@ const TableDiv = styled.div`
     th,
     td {
         border: 1px solid black;
-    }
-
-    .id {
-        ${({ theme }) => theme.flexStyled.flexRow};
-        ${({ theme }) => theme.flexStyled.flexCenter};
-
-        .button {
-            margin: 0 10px;
-        }
     }
 `;

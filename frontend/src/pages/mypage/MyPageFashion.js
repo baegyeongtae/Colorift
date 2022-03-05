@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
-import { MyStyleModal } from '../../components';
+import { MyStyleModal, GrayButton } from '../../components';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 import { getFashionList } from '../../utils/api/service';
 
@@ -51,13 +51,16 @@ export function MyPageFashion() {
             <FashionDiv>
                 <FasionImageDiv>
                     {fashionList?.slice(0, imageMaxIndex)?.map(item => (
-                        <input
-                            key={item.id}
-                            type="image"
-                            src={item.image}
-                            alt={`패션 이미지 ${item.id}`}
-                            onClick={() => handleToggleDetailClick(item.id)}
-                        />
+                        <div>
+                            <GrayButton width="70px">삭제하기</GrayButton>
+                            <input
+                                key={item.id}
+                                type="image"
+                                src={item.image}
+                                alt={`패션 이미지 ${item.id}`}
+                                onClick={() => handleToggleDetailClick(item.id)}
+                            />
+                        </div>
                     ))}
                 </FasionImageDiv>
                 {fashionList?.length === 0 ? (
@@ -93,6 +96,16 @@ const FasionImageDiv = styled.div`
     width: 100%;
 
     margin-top: 10px;
+
+    div {
+        position: relative;
+    }
+
+    button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
 
     input {
         width: 100%;

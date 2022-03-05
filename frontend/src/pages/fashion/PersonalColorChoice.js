@@ -199,7 +199,6 @@ export { PersonalColorChoice };
 
 const ChoiceContainerDiv = styled(ContainerDiv)`
     width: 850px;
-    height: auto;
     display: grid;
     grid-template-rows: repeat(3, 1fr);
     grid-template-columns: repeat(2, 1fr);
@@ -215,6 +214,7 @@ const ChoiceContainerDiv = styled(ContainerDiv)`
         align-items: center;
         margin-top: 40px;
         margin-left: 60px;
+        margin-bottom: 30px;
     }
 `;
 
@@ -350,10 +350,15 @@ const MyPersonalColorDiv = styled.div`
 `;
 
 const ButtonContainerDiv = styled(ContainerDiv)`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    ${({ theme }) => theme.flexStyled.flexColumn};
+    justify-content: flex-start;
     align-items: center;
+
+    height: 15vh;
+
+    @media ${({ theme }) => theme.device.mobile} {
+        height: 12vh;
+    }
 `;
 
 const TextH3 = styled.h3`

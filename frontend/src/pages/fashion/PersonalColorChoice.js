@@ -3,11 +3,12 @@
 /* eslint-disable jsx-a11y/tabindex-no-positive */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { ContainerDiv, Fashion, MediumTextH, WhiteButton, RadioTextH, MyPersonalListModal } from '../../components';
 import { fashionPageState, toneChoiceState } from '../../utils/data/atom';
+import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 
 function PersonalColorChoice() {
     // 리스트 보기 모달
@@ -45,6 +46,9 @@ function PersonalColorChoice() {
         AU: '가을 웜톤',
         WI: '겨울 쿨톤',
     };
+
+    // 마이퍼스널 컬러 선택 모달
+    const [personalModal, setPersonalModal] = useState(false);
 
     const checkedColor = () => {
         if (seasonTone) {

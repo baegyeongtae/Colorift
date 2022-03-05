@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { MyStyleModal } from '../../components';
+import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 
 export function MyPageFashion() {
     // 상세보기 모달
@@ -85,6 +86,9 @@ export function MyPageFashion() {
         if (fashionModal) setFashionModal(current => !current);
     };
 
+    // 모달 뜬 상태에서는 스크롤 막기
+    useEffect(() => setScrollDisabled(fashionModal), [fashionModal]);
+
     return (
         <>
             <MyStyleModal className={fashionModal && 'show'} toggleClickProps={handleToggleClick} colorId={colorId} />
@@ -100,7 +104,9 @@ export function MyPageFashion() {
                         />
                     ))}
                 </FasionImageDiv>
-                <PlusButton onClick={handleMoreClick}>더보기</PlusButton>
+                <PlusButton disabled={4 * (buttonClick + 1) >= fashionData.length} onClick={handleMoreClick}>
+                    더보기
+                </PlusButton>
             </FashionDiv>
         </>
     );

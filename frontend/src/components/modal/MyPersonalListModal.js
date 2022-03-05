@@ -79,6 +79,14 @@ export function MyPersonalListModal({ toggleClickProps, className }) {
         }
     };
 
+    const handleToggleClick = (id = colorId) => {
+        if (personalListModal) setPersonalListModal(false);
+        if (!personalListModal) {
+            setColorId(id);
+            setPersonalListModal(true);
+        }
+    };
+
     return (
         <>
             <BackgroundDiv className={className} onClick={handlePropsClick} />

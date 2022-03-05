@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { getPersonalList } from '../../utils/api/service';
-import { GrayButton, MyPersonalColorModal } from '../../components';
+import { GrayButton, MyPersonalColorModal, BackgroundDiv } from '../../components';
+import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 
 export function MyPagePersonal() {
     // 상세보기 모달
@@ -63,6 +64,9 @@ export function MyPagePersonal() {
 
     // 퍼스널 컬러 목록 조회
     useEffect(() => getPersonalList(), []);
+
+    // 모달 뜬 상태에서는 스크롤 막기
+    useEffect(() => setScrollDisabled(personalModal), [personalModal]);
 
     return (
         <>

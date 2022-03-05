@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { UserButton, Input, UserOutModal } from '../../components';
+import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 
 export function MyPageInfo() {
     // 회원탈퇴 모달
@@ -11,11 +12,14 @@ export function MyPageInfo() {
         setUserOutModal(current => !current);
     };
 
+    // 모달 뜬 상태에서는 스크롤 막기
+    useEffect(() => setScrollDisabled(userOutModal), [userOutModal]);
+
     return (
         <>
             <UserOutModal
                 className={userOutModal && 'show'}
-                toggleClickProps={() => handleUserOut()}
+                toggleClickProps={handleUserOut}
                 text="정말 탈퇴하시겠습니까?"
             />
             <UserInfoDiv>
@@ -40,11 +44,11 @@ export function MyPageInfo() {
 const UserInfoDiv = styled.div`
     display: grid;
     grid-template-rows: repeat(3, 1fr);
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 1.2fr 2fr 1fr;
     grid-row-gap: 20px;
     align-items: center;
 
-    padding: 50px 60px;
+    padding: 50px 30px;
 
     .option {
         font-weight: bold;

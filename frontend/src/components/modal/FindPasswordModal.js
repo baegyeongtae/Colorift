@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import { BackgroundDiv, ModalCloseIcon, UserInputDiv, UserButton } from '..';
+import { BackgroundDiv, ModalCloseIcon, UserInputDiv, UserButton, TitleP } from '..';
 import { ModalDiv } from './ModalDiv';
 import { TextModal } from './TextModal';
 import { setUserPassword } from '../../utils/api/user';
@@ -65,6 +65,11 @@ export function FindPasswordModal({ clickProps, className }) {
             <BackgroundDiv className={className} onClick={handleClick} />
             <ModalGridDiv className={className}>
                 <form onSubmit={handleSubmit}>
+                    <TitleP color="#3C64B1">
+                        Change
+                        <br />
+                        Password
+                    </TitleP>
                     <UserInputDiv text="가입한 ID를 입력해주세요." type="text" ref={idRef} />
                     <UserInputDiv text="가입한 닉네임을 입력해주세요." type="text" ref={nicknameRef} />
                     <div>
@@ -108,10 +113,18 @@ export function FindPasswordModal({ clickProps, className }) {
 
 const ModalGridDiv = styled(ModalDiv)`
     &.show {
+        ${({ theme }) => theme.flexStyled.flexColumn};
+
         form {
             display: grid;
-            grid-template-rows: repeat(4, 0.8fr) 1fr;
+            grid-template-rows: 1fr repeat(4, 0.6fr) 0.8fr;
             justify-items: center;
+
+            .title {
+                justify-self: start;
+
+                margin-bottom: 20px;
+            }
 
             div .error {
                 font-size: 0.7rem;

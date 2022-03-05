@@ -25,9 +25,9 @@ export function Login() {
     const passwordRef = useRef();
 
     // 비밀번호 찾기 모달의 상태 변환 함수
-    function handlePasswordToggleModal() {
+    const handlePasswordToggleModal = () => {
         setFindModal(current => !current);
-    }
+    };
 
     // 아이디 비밀번호 오류 모달의 상태 변환 함수
     const handleNoUserToggleModal = () => {
@@ -50,7 +50,7 @@ export function Login() {
                 toggleClickProps={handleNoUserToggleModal}
                 text="아이디 또는 비밀번호를 잘못 입력했습니다"
             />
-            <FindPasswordModal className={findModal && 'show'} clickProps={() => handlePasswordToggleModal()} />
+            <FindPasswordModal className={findModal && 'show'} clickProps={handlePasswordToggleModal} />
             <Article>
                 <NavBackgroundDiv />
                 <ContainerDiv>
@@ -71,7 +71,7 @@ export function Login() {
                             width="80%"
                             height="50%"
                             className="button"
-                            onClick={() => handlePasswordToggleModal()}
+                            onClick={handlePasswordToggleModal}
                         >
                             비밀번호 변경
                         </UserButton>

@@ -8,7 +8,6 @@ import { MyModalTable } from './MyModalTable';
 export function MyStyleModal({ theme, toggleClickProps, className, colorId }) {
     // API 요청 결과
     const [resultPercent, setResultPercent] = useState({});
-    console.log(resultPercent.date);
 
     // 퍼스널컬러 결과에 따른 폰트 색상
     const resultColor = SeasonTone(season[resultPercent?.color]);
@@ -38,7 +37,7 @@ export function MyStyleModal({ theme, toggleClickProps, className, colorId }) {
                 <MyModalTable id={resultPercent.id} date={resultPercent.date} />
                 <ModalCloseIcon clickProps={handleToggleClick} />
                 <ContentContainerDiv>
-                    <ResultImage />
+                    <ResultImage image={resultPercent.image} />
                 </ContentContainerDiv>
 
                 <SubTitleP>

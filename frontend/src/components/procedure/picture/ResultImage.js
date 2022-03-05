@@ -1,7 +1,7 @@
 // import Box from '@mui/material/Box';
 import styled from 'styled-components';
 
-export function ResultImage() {
+export function ResultImage({ image }) {
     const uploadedImage = sessionStorage.getItem('photoProps');
     // if (colorPage === 2 && fashionPage !== 3)
     //     return (
@@ -15,7 +15,7 @@ export function ResultImage() {
     return (
         <BoxDiv>
             <div className="faceImg">
-                <img className="photoImg" alt="Img" src={uploadedImage} />
+                <img className="photoImg" alt="Img" src={image} />
             </div>
         </BoxDiv>
     );

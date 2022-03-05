@@ -6,6 +6,9 @@ export function MyPageFashion() {
     // 상세보기 모달
     const [fashionModal, setFashionModal] = useState(false);
 
+    // 상세보기 모달에서 선택한 컬러 ID 값
+    const [colorId, setColorId] = useState(0);
+
     // 패션 사진 더미 데이터
     const fashionData = [
         {
@@ -70,6 +73,12 @@ export function MyPageFashion() {
     const handleMoreClick = () => {
         setButtonClick(current => current + 1);
     };
+    // 사진 이미지 클릭 했을 때
+    const handleToggleDetailClick = (id = colorId) => {
+        setColorId(id);
+        setFashionModal(current => !current);
+    };
+    console.log(colorId);
 
     // 상세보기 모달 토클 함수
     const handleToggleClick = () => {
@@ -78,7 +87,7 @@ export function MyPageFashion() {
 
     return (
         <>
-            <MyStyleModal className={fashionModal && 'show'} toggleClickProps={handleToggleClick} />
+            <MyStyleModal className={fashionModal && 'show'} toggleClickProps={handleToggleClick} colorId={colorId} />
             <FashionDiv>
                 <FasionImageDiv>
                     {fashionData.slice(0, imageMaxIndex).map(item => (
@@ -87,7 +96,7 @@ export function MyPageFashion() {
                             type="image"
                             src={item.image}
                             alt={`패션 이미지 ${item.id}`}
-                            onClick={() => setFashionModal(current => !current)}
+                            onClick={() => handleToggleDetailClick(item.id)}
                         />
                     ))}
                 </FasionImageDiv>

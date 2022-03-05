@@ -27,6 +27,7 @@ export const ModalDiv = styled.div`
         }
 
         @media ${({ theme }) => theme.device.tablet} {
+            width: 90%;
             .text {
                 font-size: 1.5rem;
             }

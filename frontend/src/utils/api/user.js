@@ -15,12 +15,12 @@ export const axiosUserConfig = axios.create({
 });
 
 // 회원가입
-export async function setUserRegister(_email, _password) {
+export async function setUserRegister(_userId, _password) {
     try {
         const response = await axiosUserConfig({
             url: 'register/',
             data: {
-                username: _email,
+                username: _userId,
                 password: _password,
             },
         });
@@ -31,9 +31,9 @@ export async function setUserRegister(_email, _password) {
 }
 
 // 로그인
-export async function setUserLogin(_email, _password) {
+export async function setUserLogin(_userId, _password) {
     const userData = {
-        username: _email,
+        username: _userId,
         password: _password,
     };
 
@@ -43,7 +43,7 @@ export async function setUserLogin(_email, _password) {
             data: userData,
         });
 
-        sessionStorage.setItem('userEmail', _email);
+        sessionStorage.setItem('userEmail', _userId);
         Cookies.set('accessToken', response.data.access, {
             path: '/',
             expires: expire, // 테스트 기준 5분 (하루 단위로 응답)
@@ -62,4 +62,22 @@ export async function setUserLogin(_email, _password) {
         return error.response;
     }
     return null;
+}
+
+// 비밀번호 변경
+export async function setUserPassword(_userId, _nickname, _password) {
+    try {
+        const response = await axiosUserConfig({
+            method: 'patch',
+            url: 'edit/',
+            data: {
+                username: _userId,
+                nickname: _nickname,
+                password: _password,
+            },
+        });
+        return response;
+    } catch (error) {
+        return error.response;
+    }
 }

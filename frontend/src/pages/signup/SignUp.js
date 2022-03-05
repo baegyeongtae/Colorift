@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useEffect, useRef, useState } from 'react';
 import { setUserRegister } from '../../utils/api/user';
+import { useUser } from '../../utils/hooks/useUser';
 import { UserInputDiv, TitleP, UserButton, NavBackgroundDiv, TextModal, ContainerDiv, Article } from '../../components';
 
 export function SignUp() {
@@ -11,10 +12,7 @@ export function SignUp() {
     const [regiseterModal, setRegisterModal] = useState(false);
 
     // 입력 값 가져오는 ref
-    const idRef = useRef();
-    const nicknameRef = useRef();
-    const passwordRef = useRef();
-    const passwordCheckRef = useRef();
+    const { idRef, nicknameRef, passwordRef, passwordCheckRef } = useUser();
 
     // 정규표현식
     const pattern3 = /[ㄱ-ㅎㅏ-ㅣ가-힣]/; // 한글

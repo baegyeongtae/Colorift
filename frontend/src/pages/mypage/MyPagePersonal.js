@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import { getColorList } from '../../utils/api/service';
+import { getColorList, setDeletePersonal } from '../../utils/api/service';
 import { GrayButton, MyPersonalColorModal } from '../../components';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 import { seasonPersonal } from '../../utils/data/season';
@@ -26,6 +26,17 @@ export function MyPagePersonal() {
         setPersonalModal(current => !current);
     };
 
+    // 삭제하기 버튼 클릭 시 함수
+    async function handleDeleteClick(id) {
+        const result = window.confirm('정말 삭제하시겠습니까?');
+        if (result) {
+            const response = await setDeletePersonal(id);
+            if (response.status === 204) {
+                window.open('/mypage', '_self');
+            }
+        }
+    }
+
     // 모달 뜬 상태에서는 스크롤 막기
     useEffect(() => setScrollDisabled(personalModal), [personalModal]);
 
@@ -37,11 +48,13 @@ export function MyPagePersonal() {
 
     return (
         <>
-            <MyPersonalColorModal
-                className={personalModal && 'show'}
-                toggleClickProps={handleToggleClick}
-                colorId={colorId}
-            />
+            {personalModal && (
+                <MyPersonalColorModal
+                    className={personalModal && 'show'}
+                    toggleClickProps={handleToggleClick}
+                    colorId={colorId}
+                />
+            )}
             <PersonalTableDiv className="personal">
                 <table>
                     <tbody>
@@ -56,7 +69,7 @@ export function MyPagePersonal() {
                                     </GrayButton>
                                 </td>
                                 <td className="button">
-                                    <GrayButton width="90%" onClick={() => alert(`${item.id}번을 삭제했습니다`)}>
+                                    <GrayButton width="90%" onClick={() => handleDeleteClick(item.id)}>
                                         삭제하기
                                     </GrayButton>
                                 </td>

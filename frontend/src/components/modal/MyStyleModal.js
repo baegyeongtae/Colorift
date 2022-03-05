@@ -5,18 +5,18 @@ import { getFashionDetailModal } from '../../utils/api/service';
 import { ContainerDiv, BackgroundDiv, ModalCloseIcon, SubTitleP, ResultImage, PercentResult } from '..';
 import { MyModalTable } from './MyModalTable';
 
-export function MyStyleModal({ theme, toggleClickProps, className, colorId }) {
+export function MyStyleModal({ toggleClickProps, className, colorId }) {
     // API 요청 결과
-    const [resultPercent, setResultPercent] = useState({});
+    const [resultFashion, setResultFashion] = useState({});
 
     // 퍼스널컬러 결과에 따른 폰트 색상
-    const resultColor = SeasonTone(season[resultPercent?.color]);
+    const resultColor = SeasonTone(season[resultFashion?.color]);
 
     // 3가지 결과에 따른 평균 점수
     const average =
-        (Number(resultPercent?.color_match_rate) +
-            Number(resultPercent?.saturation_match_rate) +
-            Number(resultPercent?.brightness_match_rate)) /
+        (Number(resultFashion?.color_match_rate) +
+            Number(resultFashion?.saturation_match_rate) +
+            Number(resultFashion?.brightness_match_rate)) /
         3;
 
     // 모달 ON/OFF 함수
@@ -27,17 +27,17 @@ export function MyStyleModal({ theme, toggleClickProps, className, colorId }) {
     // 모달 켜지면 API 요청
     useEffect(async () => {
         const response = await getFashionDetailModal(colorId);
-        setResultPercent(response.data);
+        setResultFashion(response.data);
     }, []);
 
     return (
         <>
             <BackgroundDiv className={className} onClick={handleToggleClick} />
             <ModalDiv className={className}>
-                <MyModalTable id={resultPercent.id} date={resultPercent.date} />
+                <MyModalTable id={resultFashion.id} date={resultFashion.date} />
                 <ModalCloseIcon clickProps={handleToggleClick} />
                 <ContentContainerDiv>
-                    <ResultImage image={resultPercent.image} />
+                    <ResultImage image={resultFashion.image} />
                 </ContentContainerDiv>
 
                 <SubTitleP>
@@ -45,9 +45,9 @@ export function MyStyleModal({ theme, toggleClickProps, className, colorId }) {
                 </SubTitleP>
                 <PercentResult
                     resultColor={resultColor}
-                    hue={resultPercent.color_match_rate}
-                    saturation={resultPercent.brightness_match_rate}
-                    value={resultPercent.saturation_match_rate}
+                    hue={resultFashion.color_match_rate}
+                    saturation={resultFashion.brightness_match_rate}
+                    value={resultFashion.saturation_match_rate}
                 />
                 <SubTitleP>
                     종합 <ResultTextS color={resultColor}>{average}%</ResultTextS>만큼 매칭됩니다.

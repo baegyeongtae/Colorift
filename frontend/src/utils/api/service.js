@@ -111,13 +111,8 @@ export async function getColorDetailModal(id) {
         const response = await axiosConfig({
             method: 'get',
             url: `color/detail/${id}/`,
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
         });
-
-        const resultColor = response.data.color;
-        return resultColor;
+        return response.data;
     } catch (error) {
         return error.response;
     }
@@ -129,6 +124,19 @@ export async function getFashionDetailModal(id) {
         const response = await axiosConfig({
             method: 'get',
             url: `fashion/detail/${id}/`,
+        });
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}
+
+// 퍼스널컬러 삭제하기
+export async function setDeletePersonal(id) {
+    try {
+        const response = await axiosConfig({
+            method: 'delete',
+            url: `color/detail/${id}/`,
         });
         return response;
     } catch (error) {

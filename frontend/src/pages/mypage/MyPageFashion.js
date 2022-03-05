@@ -42,12 +42,12 @@ export function MyPageFashion() {
         if (result) {
             const response = await setDeleteFashion(id);
             if (response.status === 204) {
-                // window.open('/mypage', '_self');
-                setFashionList(current => {
-                    const newCurrent = current;
-                    newCurrent.splice(index, 1);
-                    return newCurrent;
-                });
+                window.open('/mypage', '_self');
+                // setFashionList(current => {
+                //     const newCurrent = current;
+                //     newCurrent.splice(index, 1);
+                //     return newCurrent;
+                // });
             } else {
                 console.log(response);
             }
@@ -65,7 +65,13 @@ export function MyPageFashion() {
 
     return (
         <>
-            <MyStyleModal className={fashionModal && 'show'} toggleClickProps={handleToggleClick} colorId={colorId} />
+            {fashionModal && (
+                <MyStyleModal
+                    className={fashionModal && 'show'}
+                    toggleClickProps={handleToggleClick}
+                    colorId={colorId}
+                />
+            )}
             <FashionDiv>
                 <FasionImageDiv>
                     {fashionList?.slice(0, imageMaxIndex)?.map((item, index) => (

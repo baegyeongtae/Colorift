@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import { getPersonalList } from '../../utils/api/service';
-import { GrayButton, MyPersonalColorModal, BackgroundDiv } from '../../components';
+import { getColorList } from '../../utils/api/service';
+import { GrayButton, MyPersonalColorModal } from '../../components';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 
 export function MyPagePersonal() {
@@ -11,44 +11,46 @@ export function MyPagePersonal() {
     // 상세보기 모달에서 선택한 컬러 ID 값
     const [colorId, setColorId] = useState(0);
 
-    // 퍼스널 컬러 더미 데이터
-    const dummyData = [
-        {
-            id: 1,
-            date: '2022.02.10',
-            color: '봄 웜톤',
-        },
-        {
-            id: 2,
-            date: '2022.02.12',
-            color: '여름 쿨톤',
-        },
-        {
-            id: 3,
-            date: '2022.02.15',
-            color: '겨울 쿨톤',
-        },
-        {
-            id: 4,
-            date: '2022.02.18',
-            color: '가을 웜톤',
-        },
-        {
-            id: 5,
-            date: '2022.02.20',
-            color: '봄 웜톤',
-        },
-        {
-            id: 6,
-            date: '2022.02.21',
-            color: '가을 웜톤',
-        },
-        {
-            id: 7,
-            date: '2022.02.25',
-            color: '겨울 쿨톤',
-        },
-    ];
+    // // 퍼스널 컬러 더미 데이터
+    // const dummyData = [
+    //     {
+    //         id: 1,
+    //         date: '2022.02.10',
+    //         color: '봄 웜톤',
+    //     },
+    //     {
+    //         id: 2,
+    //         date: '2022.02.12',
+    //         color: '여름 쿨톤',
+    //     },
+    //     {
+    //         id: 3,
+    //         date: '2022.02.15',
+    //         color: '겨울 쿨톤',
+    //     },
+    //     {
+    //         id: 4,
+    //         date: '2022.02.18',
+    //         color: '가을 웜톤',
+    //     },
+    //     {
+    //         id: 5,
+    //         date: '2022.02.20',
+    //         color: '봄 웜톤',
+    //     },
+    //     {
+    //         id: 6,
+    //         date: '2022.02.21',
+    //         color: '가을 웜톤',
+    //     },
+    //     {
+    //         id: 7,
+    //         date: '2022.02.25',
+    //         color: '겨울 쿨톤',
+    //     },
+    // ];
+    // API로 받아온 컬러 데이터 목록
+    const [colorList, setColorList] = useState([]);
 
     // 상세보기 또는 삭제하기 클릭 시 모달 토클 함수
     const handleToggleClick = () => {
@@ -60,13 +62,15 @@ export function MyPagePersonal() {
         setColorId(id);
         setPersonalModal(current => !current);
     };
-    console.log(colorId);
-
-    // 퍼스널 컬러 목록 조회
-    useEffect(() => getPersonalList(), []);
 
     // 모달 뜬 상태에서는 스크롤 막기
     useEffect(() => setScrollDisabled(personalModal), [personalModal]);
+
+    // 컬러 목록 API 요청
+    useEffect(async () => {
+        const response = await getColorList();
+        setColorList(response.data);
+    }, []);
 
     return (
         <>
@@ -78,7 +82,7 @@ export function MyPagePersonal() {
             <PersonalTableDiv className="personal">
                 <table>
                     <tbody>
-                        {dummyData.map(item => (
+                        {colorList?.map(item => (
                             <tr key={item.id}>
                                 <td className="id">{item.id}</td>
                                 <td className="date">{item.date}</td>

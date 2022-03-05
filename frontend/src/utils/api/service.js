@@ -1,7 +1,5 @@
 import Cookies from 'js-cookie';
-import { useSetRecoilState } from 'recoil';
 import axiosConfig from './token';
-import { colorPageState, seasonState } from '../data/atom';
 
 // 회원탈퇴
 export async function setUserOut() {
@@ -68,9 +66,57 @@ export async function postFashionPhoto(fashionData) {
         });
 
         console.log(response);
-        const season = response.data.color;
+        const hue = response.data.color_match_rate;
+        const value = response.data.brightness_match_rate;
+        const saturation = response.data.saturation_match_rate;
 
-        return season;
+        const average = (hue + saturation + value) / 3;
+
+        return [hue, value, saturation, average];
+    } catch (error) {
+        return error.response;
+    }
+}
+
+export async function getColorDetailModal(id) {
+    try {
+        const response = await axiosConfig({
+            method: 'get',
+            url: `color/detail/${id}/`,
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+
+        console.log(response);
+
+        const resultColor = response.data.color;
+        console.log(resultColor);
+        return resultColor;
+    } catch (error) {
+        return error.response;
+    }
+}
+
+export async function getPercentDetailModal(id) {
+    try {
+        const response = await axiosConfig({
+            method: 'get',
+            url: `fashion/detail/${id}/`,
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+
+        console.log(response);
+        const season = response.data.color;
+        const hue = response.data.color_match_rate;
+        const value = response.data.brightness_match_rate;
+        const saturation = response.data.saturation_match_rate;
+
+        const average = (hue + saturation + value) / 3;
+
+        return [hue, value, saturation, average, season];
     } catch (error) {
         return error.response;
     }

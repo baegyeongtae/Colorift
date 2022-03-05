@@ -10,6 +10,16 @@ export function MyPersonalListModal({ toggleClickProps, className }) {
     // 상세보기 모달에서 선택한 컬러 ID 값
     const [colorId, setColorId] = useState(0);
 
+    // CheckBox Button Select
+    const [chosen, setChosen] = useState('');
+    const handleSelectChange = event => {
+        const { value } = event.target;
+        console.log(value);
+        setChosen(value);
+    };
+
+    const loggedUser = sessionStorage.getItem('userEmail');
+
     // 퍼스널 컬러 더미 데이터
     const dummyData = [
         {
@@ -48,10 +58,25 @@ export function MyPersonalListModal({ toggleClickProps, className }) {
             color: '겨울 쿨톤',
         },
     ];
-
-    // 마이퍼스널 목록 모달 토글 함수
+    // 마이퍼스널 목록 모달 닫는 토글 함수
     const handlePropsClick = () => {
+        if (!chosen) {
+            alert('컬러를 선택해주세요!');
+            return;
+        }
+        toggleClickProps({ chosen });
+    };
+
+    const handleClosedClick = () => {
         toggleClickProps();
+    };
+    // 상세보기 모달을 클릭 할 때
+    const handleToggleClick = (id = colorId) => {
+        if (personalListModal) setPersonalListModal(false);
+        if (!personalListModal) {
+            setColorId(id);
+            setPersonalListModal(true);
+        }
     };
 
     const handleToggleClick = (id = colorId) => {
@@ -65,32 +90,45 @@ export function MyPersonalListModal({ toggleClickProps, className }) {
     return (
         <>
             <BackgroundDiv className={className} onClick={handlePropsClick} />
-            <ModalTableDiv className={className}>
-                <TextP>회원님이 저장한 퍼스널 컬러 목록입니다.</TextP>
-                <PersonalTableDiv>
-                    <table>
-                        <tbody>
-                            {dummyData.map(item => (
-                                <tr key={item.id}>
-                                    <td className="checkbox">
-                                        <CheckboxInput type="radio" name="checkbox" value={item.id} />
-                                    </td>
-                                    <td className="id">{item.id}</td>
-                                    <td className="date">{item.date}</td>
-                                    <td className="color">{item.color}</td>
-                                    <td className="button">
-                                        <GrayButton width="90%" onClick={() => handleToggleClick(item.id)}>
-                                            상세보기
-                                        </GrayButton>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                    <ModalCloseIcon clickProps={handlePropsClick} />
-                </PersonalTableDiv>
-                <BlueButton>확인</BlueButton>
-            </ModalTableDiv>
+            {loggedUser ? (
+                <ModalTableDiv className={className}>
+                    <TextP>회원님이 저장한 퍼스널 컬러 목록입니다.</TextP>
+                    <PersonalTableDiv>
+                        <table>
+                            <tbody>
+                                {dummyData.map(item => (
+                                    <tr key={item.id}>
+                                        <td className="checkbox">
+                                            <CheckboxInput
+                                                type="radio"
+                                                name="checkbox"
+                                                value={item.color}
+                                                onChange={event => handleSelectChange(event)}
+                                            />
+                                        </td>
+                                        <td className="id">{item.id}</td>
+                                        <td className="date">{item.date}</td>
+                                        <td className="color">{item.color}</td>
+                                        <td className="button">
+                                            <GrayButton width="90%" onClick={() => handleToggleClick(item.id)}>
+                                                상세보기
+                                            </GrayButton>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                        <ModalCloseIcon clickProps={handlePropsClick} />
+                    </PersonalTableDiv>
+                    <BlueButton onClick={handlePropsClick}>확인</BlueButton>
+                </ModalTableDiv>
+            ) : (
+                <TextTableDiv className={className}>
+                    <TextP>로그인 이후 이용해주세요.</TextP>
+                    <ModalCloseIcon clickProps={handleClosedClick} />
+                </TextTableDiv>
+            )}
+
             <MyPersonalColorModal
                 className={personalListModal && 'show'}
                 toggleClickProps={handleToggleClick}
@@ -109,6 +147,20 @@ const ModalTableDiv = styled(ModalDiv)`
         width: 700px;
         height: auto;
 
+        padding: 30px;
+
+        @media ${({ theme }) => theme.device.tablet} {
+            width: 90%;
+        }
+    }
+`;
+
+const TextTableDiv = styled(ModalDiv)`
+    &.show {
+        ${({ theme }) => theme.flexStyled.flexColumn};
+
+        width: 350px;
+        height: auto;
         padding: 30px;
 
         @media ${({ theme }) => theme.device.tablet} {

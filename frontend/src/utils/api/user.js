@@ -63,3 +63,49 @@ export async function setUserLogin(_email, _password) {
     }
     return null;
 }
+
+export async function postNotLoggedInFacePhoto(imgData) {
+    try {
+        const response = await axiosUserConfig({
+            method: 'post',
+            url: 'color/test/',
+            data: imgData,
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+
+        console.log(response);
+        const season = response.data.color;
+        sessionStorage.setItem('season', season);
+
+        return season;
+    } catch (error) {
+        return error.response;
+    }
+}
+
+// 패션 사진 및 컬러 조합 결과
+export async function postNotLoggedInFashionPhoto(fashionData) {
+    try {
+        const response = await axiosUserConfig({
+            method: 'post',
+            url: 'fashion/test/',
+            data: fashionData,
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+
+        console.log(response);
+        const hue = response.data.color_match_rate;
+        const value = response.data.brightness_match_rate;
+        const saturation = response.data.saturation_match_rate;
+
+        const average = (hue + saturation + value) / 3;
+
+        return [hue, value, saturation, average];
+    } catch (error) {
+        return error.response;
+    }
+}

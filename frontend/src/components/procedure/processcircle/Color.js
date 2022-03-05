@@ -3,18 +3,19 @@ import { useRecoilValue } from 'recoil';
 import { ContainerDiv, DescriptionP } from '../..';
 import { colorPageState } from '../../../utils/data/atom';
 
-export function Color() {
+export function Color({ number }) {
     const currentPage = useRecoilValue(colorPageState);
+    console.log(number);
 
     return (
         <CircleContainerDiv>
             <div className="wrapper">
-                <div className={` ${currentPage === 0 ? 'current_circle' : 'left_circle'}`}>
+                <div className={` ${currentPage === 0 && number === 0 ? 'current_circle' : 'left_circle'}`}>
                     <TextH0>
                         얼굴 사진 <br /> 업로드
                     </TextH0>
                 </div>
-                <div className={` ${currentPage === 1 ? 'current_circle' : 'left_circle'}`}>
+                <div className={` ${currentPage === 0 && number === 1 ? 'current_circle' : 'left_circle'}`}>
                     <TextH0>
                         피부톤 <br />
                         정밀 분석
@@ -38,7 +39,7 @@ const CircleContainerDiv = styled(ContainerDiv)`
     justify-content: space-around;
     align-items: center;
     margin-bottom: 20px;
-    margin-top: 120px;
+    margin-top: 50px;
     color: white;
 
     .wrapper {

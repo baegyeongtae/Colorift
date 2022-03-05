@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useSetRecoilState, useRecoilState } from 'recoil';
+import { useState, useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import {
     ContainerDiv,
@@ -90,6 +90,9 @@ function PersonalColorChoice() {
         }
     };
 
+    // 모바일 버전 메뉴바 show 상태에서는 스크롤 막기
+    useEffect(() => setScrollDisabled(listModal), [listModal]);
+
     return (
         <>
             {loggedUser ? (
@@ -154,7 +157,7 @@ function PersonalColorChoice() {
                         <RadioButtonLabel />
                         <RadioTextH>직전에 분석한 퍼스널 컬러</RadioTextH>
                     </Item>
-                    <TextH3>퍼스널 컬러 결과 페이지에서 ‘패션 매칭하기’ 버튼을 클릭해야 합니다.</TextH3>
+                    <TextH3>회원님이 직전에 분석한 퍼스널 컬러 결과입니다.</TextH3>
                 </div>
                 <div>
                     <ResultText>{checkedColorText}</ResultText>

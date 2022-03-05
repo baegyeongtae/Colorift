@@ -11,44 +11,6 @@ export function MyPagePersonal() {
     // 상세보기 모달에서 선택한 컬러 ID 값
     const [colorId, setColorId] = useState(0);
 
-    // // 퍼스널 컬러 더미 데이터
-    // const dummyData = [
-    //     {
-    //         id: 1,
-    //         date: '2022.02.10',
-    //         color: '봄 웜톤',
-    //     },
-    //     {
-    //         id: 2,
-    //         date: '2022.02.12',
-    //         color: '여름 쿨톤',
-    //     },
-    //     {
-    //         id: 3,
-    //         date: '2022.02.15',
-    //         color: '겨울 쿨톤',
-    //     },
-    //     {
-    //         id: 4,
-    //         date: '2022.02.18',
-    //         color: '가을 웜톤',
-    //     },
-    //     {
-    //         id: 5,
-    //         date: '2022.02.20',
-    //         color: '봄 웜톤',
-    //     },
-    //     {
-    //         id: 6,
-    //         date: '2022.02.21',
-    //         color: '가을 웜톤',
-    //     },
-    //     {
-    //         id: 7,
-    //         date: '2022.02.25',
-    //         color: '겨울 쿨톤',
-    //     },
-    // ];
     // API로 받아온 컬러 데이터 목록
     const [colorList, setColorList] = useState([]);
 

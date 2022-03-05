@@ -21,7 +21,6 @@ function PersonalColorChoice() {
     const [select, setSelect] = useState('');
     const handleSelectChange = event => {
         const { value } = event.target;
-        console.log(value);
         setSelect(value);
     };
 
@@ -75,7 +74,6 @@ function PersonalColorChoice() {
 
     // 불러오기 클릭 시 모달 토글 함수 + 선택한 마이퍼스널컬러 가져오기
     const handleToggleClick = chosenColor => {
-        console.log(chosenColor);
         setListModal(current => !current);
         setMyPersonalColor(chosenColor.chosen);
     };

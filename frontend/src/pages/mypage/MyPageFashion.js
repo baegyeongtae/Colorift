@@ -83,7 +83,6 @@ export function MyPageFashion() {
         setColorId(id);
         setFashionModal(current => !current);
     };
-    console.log(colorId);
 
     // 상세보기 모달 토클 함수
     const handleToggleClick = () => {

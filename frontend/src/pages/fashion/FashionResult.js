@@ -27,8 +27,6 @@ function FashionResult() {
 
     const resultColor = SeasonTone(season[seasonTone]);
 
-    console.log(resultColor);
-
     return (
         <>
             <NavBackgroundDiv />
@@ -98,9 +96,6 @@ const ContentContainerDiv = styled.div`
     align-items: center;
     margin-bottom: 8px;
     margin-top: 8px;
-
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;
 
 const ColorContainerDiv = styled(ContainerDiv)`
@@ -133,9 +128,6 @@ const ColorContainerDiv = styled(ContainerDiv)`
     align-items: center;
     margin-bottom: 8px;
     margin-top: 8px;
-
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;
 
 const ImgContainerDiv = styled(ContainerDiv)`
@@ -154,22 +146,15 @@ const ImgContainerDiv = styled(ContainerDiv)`
     align-items: center;
     margin-bottom: 8px;
     margin-top: 20px;
-
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;
 
 const ButtonContainerDiv = styled.div`
-    background-color: ${({ theme }) => theme.color.white};
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     margin-bottom: 50px;
     margin-top: 20px;
-
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;
 
 const CustomButton = styled(BlueButton)`

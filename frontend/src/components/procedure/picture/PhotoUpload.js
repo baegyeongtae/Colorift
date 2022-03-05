@@ -4,6 +4,8 @@ import Button from '@mui/material/Button';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
 export function PhotoUpload({ photoProps }) {
+    sessionStorage.setItem('photoProps', photoProps);
+
     if (photoProps === '') {
         return (
             <ButtonContainerDiv>

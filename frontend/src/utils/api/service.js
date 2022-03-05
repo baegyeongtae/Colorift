@@ -33,6 +33,19 @@ export async function getPersonalList() {
     }
 }
 
+// 패션 목록 조회
+export async function getFashionList() {
+    try {
+        const response = await axiosConfig({
+            method: 'get',
+            url: 'fashion/list/',
+        });
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}
+
 // 얼굴 사진 업로드
 export async function postFacePhoto(imgData) {
     try {

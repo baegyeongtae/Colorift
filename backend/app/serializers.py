@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import User, Color, Fashion
 from datetime import date
+from ai import personal_color
 import numpy as np
 import cv2
 

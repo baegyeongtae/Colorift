@@ -28,4 +28,5 @@ export {
     MyStyleModal,
     MyPersonalListModal,
     MyChangePWModal,
+    ChangeNameModal,
 } from './modal';

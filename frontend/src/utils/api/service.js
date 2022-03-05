@@ -3,6 +3,22 @@ import { useSetRecoilState } from 'recoil';
 import axiosConfig from './token';
 import { colorPageState, seasonState } from '../data/atom';
 
+// 닉네임 변경
+export async function setUserNickname(_nickname) {
+    try {
+        const response = await axiosConfig({
+            method: 'patch',
+            url: 'edit/nickname/',
+            data: {
+                nickname: _nickname,
+            },
+        });
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}
+
 // 회원탈퇴
 export async function setUserOut() {
     try {

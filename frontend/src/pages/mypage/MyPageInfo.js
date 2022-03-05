@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
-import { UserButton, UserOutModal, MyChangePWModal } from '../../components';
+import { UserButton, UserOutModal, MyChangePWModal, ChangeNameModal } from '../../components';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 
 export function MyPageInfo() {
     // 회원탈퇴 모달
     const [userOutModal, setUserOutModal] = useState(false);
+
+    // 닉네임 변경 모달
+    const [changeNicknameModal, setChangeNicknameModal] = useState(false);
 
     // 비밀번호 변경 모달
     const [changePasswordModal, setChangePasswordModal] = useState(false);
@@ -13,6 +16,11 @@ export function MyPageInfo() {
     // 회원탈퇴 모달 토글 함수
     const handleUserOut = () => {
         setUserOutModal(current => !current);
+    };
+
+    // 닉네임 변경 모달 토글 함수
+    const handleChangeNickname = () => {
+        setChangeNicknameModal(current => !current);
     };
 
     // 비밀번호 변경 모달 토글 함수
@@ -31,16 +39,20 @@ export function MyPageInfo() {
                 text="정말 탈퇴하시겠습니까?"
             />
             <MyChangePWModal className={changePasswordModal && 'show'} toggleClickProps={handleChangePassword} />
+            <ChangeNameModal className={changeNicknameModal && 'show'} toggleClickProps={handleChangeNickname} />
             <UserInfoDiv>
                 <p className="option">아이디</p>
                 <p className="id">{sessionStorage.getItem('userId')}</p>
                 <p className="option">닉네임</p>
                 <p className="nickname">{sessionStorage.getItem('userNickname')}</p>
-                <p className="option">비밀번호 변경</p>
+                <UserButton height="100%" onClick={handleChangeNickname}>
+                    변경하기
+                </UserButton>
+                <p className="option password">비밀번호 변경</p>
                 <UserButton height="100%" onClick={handleChangePassword}>
                     변경하기
                 </UserButton>
-                <p className="option">회원탈퇴는 신중히 결정해주세요.</p>
+                <p className="option delete">회원탈퇴는 신중히 결정해주세요.</p>
                 <UserButton height="100%" onClick={handleUserOut}>
                     회원탈퇴
                 </UserButton>
@@ -56,7 +68,7 @@ const UserInfoDiv = styled.div`
 
     display: grid;
     grid-template-rows: repeat(4, 30px);
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 1fr 1.5fr 1fr;
     grid-row-gap: 20px;
     align-items: center;
 
@@ -64,6 +76,17 @@ const UserInfoDiv = styled.div`
 
     .option {
         font-weight: bold;
+    }
+
+    .id {
+        grid-column-start: 2;
+        grid-column-end: 4;
+    }
+
+    .password,
+    .delete {
+        grid-column-start: 1;
+        grid-column-end: 3;
     }
 
     @media ${({ theme }) => theme.device.tablet} {

@@ -5,3 +5,4 @@ export { MyPersonalColorModal } from './MyPersonalColorModal';
 export { MyStyleModal } from './MyStyleModal';
 export { MyPersonalListModal } from './MyPersonalListModal';
 export { MyChangePWModal } from './MyChangePWModal';
+export { ChangeNameModal } from './ChangeNameModal';

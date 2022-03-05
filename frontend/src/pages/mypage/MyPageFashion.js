@@ -114,9 +114,13 @@ export function MyPageFashion() {
                         />
                     ))}
                 </FasionImageDiv>
-                <PlusButton disabled={4 * (buttonClick + 1) >= fashionList?.length} onClick={handleMoreClick}>
-                    더보기
-                </PlusButton>
+                {fashionList?.length === 0 ? (
+                    <p>매칭한 패션이 없습니다.</p>
+                ) : (
+                    <PlusButton disabled={4 * (buttonClick + 1) >= fashionList?.length} onClick={handleMoreClick}>
+                        더보기
+                    </PlusButton>
+                )}
             </FashionDiv>
         </>
     );

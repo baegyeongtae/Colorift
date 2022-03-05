@@ -15,9 +15,9 @@ export function FindPasswordModal({ clickProps, className }) {
     const [changeSuccess, setChangeSuccess] = useState(false);
 
     // 비밀번호 변경 성공 및 실패 모달 띄우기
-    const [chaneModal, setChangeModal] = useState(false);
+    const [changeModal, setChangeModal] = useState(false);
 
-    // 정규표현식에 맞는지, 패스워드는 일치하는지 체크
+    // 변경할 비밀번호가 정규표현식에 맞는지, 일치하는지 체크
     const [regexCheck, setRegexCheck] = useState({
         password: true,
         passwordCheck: true,
@@ -28,7 +28,7 @@ export function FindPasswordModal({ clickProps, className }) {
         clickProps();
     };
 
-    // 변경하기 버튼 클릭 시 함수
+    // 변경하기 버튼 클릭 시 API 요청
     const handleSubmit = async event => {
         event.preventDefault();
         const passwordTest = checkRegexPassword(passwordRef.current.value);
@@ -44,7 +44,6 @@ export function FindPasswordModal({ clickProps, className }) {
                 nicknameRef.current.value,
                 passwordRef.current.value,
             );
-            console.log(response);
 
             if (response.status === 200) {
                 setChangeSuccess(true);
@@ -83,7 +82,7 @@ export function FindPasswordModal({ clickProps, className }) {
                 <ModalCloseIcon clickProps={handleClick} />
             </ModalGridDiv>
             <TextModal
-                className={chaneModal && 'show'}
+                className={changeModal && 'show'}
                 toggleClickProps={handleToggleModal}
                 text={
                     changeSuccess ? (

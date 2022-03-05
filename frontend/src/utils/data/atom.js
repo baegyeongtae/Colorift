@@ -16,8 +16,7 @@ export const seasonState = atom({
     default: '',
 });
 
-// PersonalColorChoice Page에서 '기본 퍼스널 컬러' 선택된 값
 export const toneChoiceState = atom({
-    key: 'tonechoicestate',
+    key: 'toneChoiceState',
     default: '',
 });

@@ -4,8 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import Stack from '@mui/material/Stack';
 import { colorPageState } from '../../utils/data/atom';
+import { season } from '../../utils/data/season';
+
 import {
     ResultImage,
+    NavBackgroundDiv,
     Color,
     SubTitleP,
     ContainerDiv,
@@ -20,18 +23,12 @@ function ColorResult() {
     const setColorPage = useSetRecoilState(colorPageState);
     const seasonTone = sessionStorage.getItem('season');
     console.log(seasonTone);
-
-    const season = {
-        SP: 'spring',
-        SU: 'summer',
-        AU: 'autumn',
-        WI: 'winter',
-    };
-
-    const resultColor = SeasonTone(season.SP);
+    const resultColor = SeasonTone(season[seasonTone]);
+    console.log(resultColor);
 
     return (
         <>
+            <NavBackgroundDiv />
             <Color number={2} />
 
             <ResultContainerDiv>
@@ -44,7 +41,7 @@ function ColorResult() {
 
             <ColorContainerDiv>
                 <MediumTextLeftH>회원님에게 어울리는 컬러</MediumTextLeftH>
-                <SeasonColor season={season.SP} />
+                <SeasonColor season={season[seasonTone]} />
             </ColorContainerDiv>
 
             <ButtonContainerDiv>
@@ -121,6 +118,7 @@ const ButtonContainerDiv = styled.div`
     align-items: center;
     margin-bottom: 100px;
     margin-top: 50px;
+    padding-bottom: 100px;
 
     @media ${({ theme }) => theme.device.mobile} {
         background-color: ${({ theme }) => theme.color.white};

@@ -1,6 +1,6 @@
 import { useRecoilValue } from 'recoil';
 import { colorPageState } from '../../utils/data/atom';
-import { ColorResult, UploadFace } from '.';
+import { ColorResult, Loading, UploadFace } from '.';
 
 function PersonalColorPage() {
     // 0은 정보 입력, 1은 직군 선택
@@ -15,7 +15,10 @@ function PersonalColorPage() {
         if (colorPage === 0) {
             return <UploadFace />;
         }
-        return <ColorResult />;
+        if (colorPage === 2) {
+            return <ColorResult />;
+        }
+        return null;
     }
 
     const renderPage = renderHTML();

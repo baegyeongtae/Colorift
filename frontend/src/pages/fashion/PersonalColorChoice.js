@@ -11,6 +11,12 @@ import { fashionPageState, toneChoiceState } from '../../utils/data/atom';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 
 function PersonalColorChoice() {
+    // 리스트 보기 모달
+    const [listModal, setListModal] = useState(false);
+
+    // 리스트에서 받아온 컬러 선택값
+    const [myPersonalColor, setMyPersonalColor] = useState('선택안함');
+
     // Radio Button Select
     const [select, setSelect] = useState('');
     const handleSelectChange = event => {
@@ -27,7 +33,9 @@ function PersonalColorChoice() {
     const onChangeSelect = e => {
         const tone = e.target.value;
         setToneValue(tone);
-        sessionStorage.setItem('color', tone);
+        if (select === 'basic') {
+            sessionStorage.setItem('color', tone);
+        }
     };
 
     // 컬러 페이지 검사 결과 받아오기 & 세션 스토리지에 넣기
@@ -44,8 +52,9 @@ function PersonalColorChoice() {
 
     const checkedColor = () => {
         if (seasonTone) {
-            sessionStorage.setItem('color', seasonTone);
-
+            if (select === 'previous') {
+                sessionStorage.setItem('color', seasonTone);
+            }
             if (seasonTone === 'SP') {
                 return season.SP;
             }
@@ -64,17 +73,16 @@ function PersonalColorChoice() {
 
     const checkedColorText = checkedColor();
 
-    // 마이퍼스널 컬러 선택 모달 토클 함수
-    const handleToggleClick = () => {
-        setPersonalModal(current => !current);
+    // 불러오기 클릭 시 모달 토글 함수 + 선택한 마이퍼스널컬러 가져오기
+    const handleToggleClick = chosenColor => {
+        console.log(chosenColor);
+        setListModal(current => !current);
+        setMyPersonalColor(chosenColor.chosen);
     };
-
-    // 모달 뜬 상태에서는 스크롤 막기
-    useEffect(() => setScrollDisabled(personalModal), [personalModal]);
 
     return (
         <>
-            <MyPersonalListModal className={personalModal && 'show'} toggleClickProps={handleToggleClick} />
+            <MyPersonalListModal className={listModal && 'show'} toggleClickProps={handleToggleClick} />
             <Fashion />
 
             <MediumTextH>매칭하고싶은 퍼스널 컬러를 아래 3가지 방법 중 선택해주세요.</MediumTextH>
@@ -146,8 +154,13 @@ function PersonalColorChoice() {
                 </div>
                 <div>
                     <MyPersonalColorDiv>
-                        <ResultText>선택안함</ResultText>
-                        <CustomButton disabled={select !== 'my'} onClick={handleToggleClick}>
+                        <ResultText>{myPersonalColor}</ResultText>
+                        <CustomButton
+                            disabled={select !== 'my'}
+                            onClick={() => {
+                                handleToggleClick();
+                            }}
+                        >
                             불러오기
                         </CustomButton>
                     </MyPersonalColorDiv>
@@ -389,7 +402,7 @@ const ButtonContainerDiv = styled(ContainerDiv)`
     justify-content: space-evenly;
     align-items: center;
     margin-top: 50px;
-    margin-bottom: 100px;
+    padding-bottom: 100px;
 `;
 
 const TextH3 = styled.h3`

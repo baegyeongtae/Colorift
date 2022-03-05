@@ -72,7 +72,7 @@ export async function setUserPassword(_userId, _nickname, _password) {
     try {
         const response = await axiosUserConfig({
             method: 'patch',
-            url: 'edit/',
+            url: 'edit/password/',
             data: {
                 username: _userId,
                 nickname: _nickname,

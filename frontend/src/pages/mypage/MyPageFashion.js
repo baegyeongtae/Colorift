@@ -11,60 +11,6 @@ export function MyPageFashion() {
     // 상세보기 모달에서 선택한 컬러 ID 값
     const [colorId, setColorId] = useState(0);
 
-    // 패션 사진 더미 데이터
-    // const fashionList = [
-    //     {
-    //         id: 1,
-    //         date: '2022-02-24',
-    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
-    //     },
-    //     {
-    //         id: 2,
-    //         date: '2022-02-24',
-    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/moncler.jpg',
-    //     },
-    //     {
-    //         id: 3,
-    //         date: '2022-02-24',
-    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/moncler_i0f6Fwi.jpg',
-    //     },
-    //     {
-    //         id: 4,
-    //         date: '2022-02-26',
-    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
-    //     },
-    //     {
-    //         id: 5,
-    //         date: '2022-02-27',
-    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
-    //     },
-    //     {
-    //         id: 6,
-    //         date: '2022-02-28',
-    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
-    //     },
-    //     {
-    //         id: 7,
-    //         date: '2022-02-28',
-    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
-    //     },
-    //     {
-    //         id: 8,
-    //         date: '2022-03-01',
-    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
-    //     },
-    //     {
-    //         id: 9,
-    //         date: '2022-03-02',
-    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
-    //     },
-    //     {
-    //         id: 10,
-    //         date: '2022-03-02',
-    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
-    //     },
-    // ];
-
     // API로 받아온 패션 데이터 목록
     const [fashionList, setFashionList] = useState([]);
 

@@ -44,9 +44,9 @@ export function MyPagePersonal() {
             <PersonalTableDiv className="personal">
                 <table>
                     <tbody>
-                        {colorList?.map(item => (
+                        {colorList?.map((item, index) => (
                             <tr key={item.id}>
-                                <td className="id">{item.id}</td>
+                                <td className="id">{index + 1}</td>
                                 <td className="date">{item.date}</td>
                                 <td className="color">{item.color}</td>
                                 <td className="button">

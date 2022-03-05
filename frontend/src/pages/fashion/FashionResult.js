@@ -22,8 +22,7 @@ function FashionResult() {
     const navigate = useNavigate();
     const setFashionPage = useSetRecoilState(fashionPageState);
     const seasonTone = sessionStorage.getItem('color');
-    const percentList = sessionStorage.getItem('percent');
-    const list = percentList.split(',');
+    const percentList = JSON.parse(sessionStorage.getItem('percent'));
 
     const resultColor = SeasonTone(season[seasonTone]);
 
@@ -40,9 +39,14 @@ function FashionResult() {
             <SubTitleP>
                 이 옷은 <ResultTextS color={resultColor}>봄 웜톤</ResultTextS>인 회원님께
             </SubTitleP>
-            <PercentResult resultColor={resultColor} hue={list[0]} saturation={list[1]} value={list[2]} />
+            <PercentResult
+                resultColor={resultColor}
+                hue={percentList[0]}
+                saturation={percentList[1]}
+                value={percentList[2]}
+            />
             <SubTitleP>
-                종합 <ResultTextS color={resultColor}>{list[3]}%</ResultTextS>만큼 매칭됩니다.
+                종합 <ResultTextS color={resultColor}>{percentList[3]}%</ResultTextS>만큼 매칭됩니다.
             </SubTitleP>
             <ColorContainerDiv>
                 <div className="wrapper">
@@ -71,7 +75,7 @@ function FashionResult() {
             </ColorContainerDiv>
 
             <ContentContainerDiv>
-                <MatchingResult average={list[3]} />
+                <MatchingResult average={percentList[3]} />
             </ContentContainerDiv>
             <ButtonContainerDiv>
                 <Stack spacing={2} direction="row">

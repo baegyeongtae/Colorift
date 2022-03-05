@@ -33,11 +33,8 @@ function UploadFashion() {
 
     const handlePhoto = e => {
         const photoToAdd = e.target.files;
-        console.log(photoToAdd[0]);
-        const fileImg = URL.createObjectURL(photoToAdd[0]);
-        console.log(fileImg);
-        console.log(seasonTone);
-        const uploadFile = photoToAdd[0];
+        const fileImg = URL.createObjectURL(photoToAdd?.[0]);
+        const uploadFile = photoToAdd?.[0];
 
         const formData = new FormData();
         formData.append('image', uploadFile);
@@ -57,21 +54,19 @@ function UploadFashion() {
         }
     };
 
-    const fileCheck = async () => {
-        if (photoUpload === '') {
+    const handleFileCheck = async () => {
+        if (!photoUpload) {
             setTextModal(true);
-        } else if (photoUpload !== '') {
+        } else {
             setIsLoading(true);
-            const checkedUser = sessionStorage.getItem('userEmail');
+            const checkedUser = sessionStorage.getItem('userId');
             if (checkedUser) {
                 const matchingResult = await postFashionPhoto(fashionData);
-                console.log(matchingResult);
-                sessionStorage.setItem('percent', matchingResult);
+                sessionStorage.setItem('percent', JSON.stringify(matchingResult));
             }
             if (!checkedUser) {
                 const matchingResult = await postNotLoggedInFashionPhoto(fashionData);
-                console.log(matchingResult);
-                sessionStorage.setItem('percent', matchingResult);
+                sessionStorage.setItem('percent', JSON.stringify(matchingResult));
             }
             setIsLoading(false);
             setFashionPage(3);
@@ -80,7 +75,6 @@ function UploadFashion() {
 
     return (
         <>
-            {' '}
             <TextModal className={textModal && 'show'} toggleClickProps={handleToggleClick} text="사진을 올려주세요." />
             <NavBackgroundDiv />
             {isLoading ? (
@@ -109,7 +103,7 @@ function UploadFashion() {
                                             />
                                             업로드
                                         </BlueButton>
-                                        <WhiteButton onClick={() => fileCheck()}>결과보기</WhiteButton>
+                                        <WhiteButton onClick={handleFileCheck}>결과보기</WhiteButton>
                                     </Stack>
                                 </ButtonContainerDiv>
                             </TextContainerDiv>
@@ -128,12 +122,6 @@ export { UploadFashion };
 const TextContainerDiv = styled(ContainerDiv)`
     @media ${({ theme }) => theme.device.mobile} {
         all: unset;
-
-        background-color: ${({ theme }) => theme.color.white};
-        display: flex;
-        flex-direction: column;
-        align-items: left;
-        margin-bottom: 30px;
     }
     all: unset;
 
@@ -145,14 +133,10 @@ const TextContainerDiv = styled(ContainerDiv)`
     align-items: left;
     margin-bottom: 30px;
     margin-left: 30px;
-
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;
 
 const PhotoContainerDiv = styled(ContainerDiv)`
     @media ${({ theme }) => theme.device.mobile} {
-        background-color: ${({ theme }) => theme.color.white};
         display: flex;
         flex-direction: column;
         justify-content: space-around;
@@ -164,21 +148,14 @@ const PhotoContainerDiv = styled(ContainerDiv)`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;
 
 const ContentContainerDiv = styled(ContainerDiv)`
     align-items: center;
-
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;
 
 const ButtonContainerDiv = styled(ContainerDiv)`
     @media ${({ theme }) => theme.device.mobile} {
-        background-color: ${({ theme }) => theme.color.white};
         display: flex;
         flex-direction: column;
         justify-content: space-around;
@@ -191,6 +168,4 @@ const ButtonContainerDiv = styled(ContainerDiv)`
     justify-content: space-around;
     align-items: center;
     margin-top: 40px;
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;

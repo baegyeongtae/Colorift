@@ -44,7 +44,7 @@ const CircleContainerDiv = styled(ContainerDiv)`
     justify-content: space-around;
     align-items: center;
     margin-bottom: 50px;
-    margin-top: 120px;
+    margin-top: 50px;
     color: white;
 
     .wrapper {
@@ -96,7 +96,7 @@ const CircleContainerDiv = styled(ContainerDiv)`
         justify-content: space-around;
         align-items: center;
         margin-bottom: 20px;
-        margin-top: 100px;
+        margin-top: 50px;
         color: white;
 
         .wrapper {

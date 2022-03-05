@@ -59,7 +59,7 @@ function UploadFace() {
             setTextModal(true);
         } else if (photoUpload !== '') {
             setIsLoading(true);
-            const checkedUser = sessionStorage.getItem('userEmail');
+            const checkedUser = sessionStorage.getItem('userId');
             if (checkedUser) {
                 const resultPercent = await postFacePhoto(imgData);
                 console.log(resultPercent);

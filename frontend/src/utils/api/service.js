@@ -94,7 +94,6 @@ export async function postFashionPhoto(fashionData) {
             },
         });
 
-        console.log(response);
         const hue = response.data.color_match_rate;
         const value = response.data.brightness_match_rate;
         const saturation = response.data.saturation_match_rate;
@@ -103,6 +102,7 @@ export async function postFashionPhoto(fashionData) {
 
         return [hue, value, saturation, average];
     } catch (error) {
+        console.log(error.response);
         return error.response;
     }
 }

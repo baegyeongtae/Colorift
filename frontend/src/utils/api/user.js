@@ -15,12 +15,13 @@ export const axiosUserConfig = axios.create({
 });
 
 // 회원가입
-export async function setUserRegister(_userId, _password) {
+export async function setUserRegister(_userId, _nickname, _password) {
     try {
         const response = await axiosUserConfig({
             url: 'register/',
             data: {
                 username: _userId,
+                nickname: _nickname,
                 password: _password,
             },
         });

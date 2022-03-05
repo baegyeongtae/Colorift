@@ -14,7 +14,6 @@ export function MyPersonalListModal({ toggleClickProps, className }) {
     const [chosen, setChosen] = useState('');
     const handleSelectChange = event => {
         const { value } = event.target;
-        console.log(value);
         setChosen(value);
     };
 

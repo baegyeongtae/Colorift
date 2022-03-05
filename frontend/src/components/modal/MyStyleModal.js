@@ -58,9 +58,6 @@ const ContentContainerDiv = styled.div`
     align-items: center;
     margin-bottom: 8px;
     margin-top: 8px;
-
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;
 
 const ColorContainerDiv = styled(ContainerDiv)`
@@ -93,9 +90,6 @@ const ColorContainerDiv = styled(ContainerDiv)`
     align-items: center;
     margin-bottom: 8px;
     margin-top: 8px;
-
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;
 
 const ResultTextS = styled.span`

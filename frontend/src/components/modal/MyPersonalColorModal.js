@@ -9,7 +9,6 @@ export function MyPersonalColorModal({ toggleClickProps, className, colorId }) {
     const handleToggleClick = () => {
         toggleClickProps();
     };
-    console.log(colorId);
     const loggedUser = sessionStorage.getItem('userEmail');
 
     const [resultColor, setResultColor] = useState('');
@@ -20,8 +19,6 @@ export function MyPersonalColorModal({ toggleClickProps, className, colorId }) {
         const response = await getColorDetailModal(colorId);
         setResultColor(response);
     }, [colorId]);
-
-    console.log(resultColor);
 
     const seasonTone = season[resultColor];
 
@@ -51,7 +48,6 @@ export function MyPersonalColorModal({ toggleClickProps, className, colorId }) {
 // styled-components
 
 const ColorContainerDiv = styled(ContainerDiv)`
-    background-color: ${({ theme }) => theme.color.white};
     align-items: center;
 
     width: 640px;
@@ -60,7 +56,6 @@ const ColorContainerDiv = styled(ContainerDiv)`
         all: unset;
 
         width: 270px;
-        background-color: ${({ theme }) => theme.color.white};
         align-items: center;
         margin-bottom: 8px;
         margin-left: 20px;
@@ -69,7 +64,6 @@ const ColorContainerDiv = styled(ContainerDiv)`
 `;
 
 const ResultContainerDiv = styled(ContainerDiv)`
-    background-color: ${({ theme }) => theme.color.white};
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -78,7 +72,6 @@ const ResultContainerDiv = styled(ContainerDiv)`
     margin-top: 8px;
 
     @media ${({ theme }) => theme.device.tablet} {
-        background-color: ${({ theme }) => theme.color.white};
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -88,7 +81,6 @@ const ResultContainerDiv = styled(ContainerDiv)`
     }
 
     @media ${({ theme }) => theme.device.mobile} {
-        background-color: ${({ theme }) => theme.color.white};
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;

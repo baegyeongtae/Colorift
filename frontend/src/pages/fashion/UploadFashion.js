@@ -137,15 +137,13 @@ const TextContainerDiv = styled(ContainerDiv)`
 
 const PhotoContainerDiv = styled(ContainerDiv)`
     @media ${({ theme }) => theme.device.mobile} {
-        display: flex;
-        flex-direction: column;
+        ${({ theme }) => theme.flexStyled.flexColumn};
         justify-content: space-around;
         align-items: center;
         margin-bottom: 0px;
     }
     margin: 30px;
-    display: flex;
-    flex-direction: row;
+    ${({ theme }) => theme.flexStyled.flexRow};
     justify-content: center;
     align-items: center;
 `;
@@ -156,15 +154,10 @@ const ContentContainerDiv = styled(ContainerDiv)`
 
 const ButtonContainerDiv = styled(ContainerDiv)`
     @media ${({ theme }) => theme.device.mobile} {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
         margin-bottom: 0px;
     }
 
-    display: flex;
-    flex-direction: column;
+    ${({ theme }) => theme.flexStyled.flexColumn};
     justify-content: space-around;
     align-items: center;
     margin-top: 40px;

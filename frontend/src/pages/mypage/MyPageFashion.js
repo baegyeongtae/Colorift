@@ -104,7 +104,7 @@ export function MyPageFashion() {
             <MyStyleModal className={fashionModal && 'show'} toggleClickProps={handleToggleClick} colorId={colorId} />
             <FashionDiv>
                 <FasionImageDiv>
-                    {fashionList?.slice(0, imageMaxIndex).map(item => (
+                    {fashionList?.slice(0, imageMaxIndex)?.map(item => (
                         <input
                             key={item.id}
                             type="image"

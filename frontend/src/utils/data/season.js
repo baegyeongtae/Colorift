@@ -5,6 +5,13 @@ export const season = {
     WI: 'winter',
 };
 
+export const seasonPersonal = {
+    SP: '봄 웜톤',
+    SU: '여름 쿨톤',
+    AU: '가을 웜톤',
+    WI: '겨울 쿨톤',
+};
+
 export function SeasonTone(_season) {
     const colorData = {
         spring: '#E6324B',

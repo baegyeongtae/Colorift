@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { getColorList } from '../../utils/api/service';
 import { GrayButton, MyPersonalColorModal } from '../../components';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
+import { seasonPersonal } from '../../utils/data/season';
 
 export function MyPagePersonal() {
     // 상세보기 모달
@@ -48,7 +49,7 @@ export function MyPagePersonal() {
                             <tr key={item.id}>
                                 <td className="id">{index + 1}</td>
                                 <td className="date">{item.date}</td>
-                                <td className="color">{item.color}</td>
+                                <td className="color">{seasonPersonal[item.color]}</td>
                                 <td className="button">
                                     <GrayButton width="90%" onClick={() => handleToggleDetailClick(item.id)}>
                                         상세보기

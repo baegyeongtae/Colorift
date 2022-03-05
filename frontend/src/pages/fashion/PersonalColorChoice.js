@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import {
@@ -182,13 +182,13 @@ export { PersonalColorChoice };
 
 const ChoiceContainerDiv = styled(ContainerDiv)`
     width: 850px;
-    height: 450px;
+    height: auto;
     display: grid;
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     grid-template-columns: repeat(2, 1fr);
     align-items: left;
     margin-bottom: 50px;
-    margin-top: 120px;
+    margin-top: 80px;
 
     @media ${({ theme }) => theme.device.mobile} {
         width: 270px;
@@ -337,8 +337,8 @@ const ButtonContainerDiv = styled(ContainerDiv)`
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    margin-top: 50px;
-    padding-bottom: 100px;
+    /* margin-top: 50px;
+    padding-bottom: 100px; */
 `;
 
 const TextH3 = styled.h3`

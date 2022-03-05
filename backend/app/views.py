@@ -71,6 +71,17 @@ class ChangePassword(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class ChangeNickname(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def patch(self, request, format=None):
+        user = request.user
+        user.nickname = request.data['nickname']
+        user.save()
+        return Response(status=status.HTTP_200_OK)
+
+
 class DeleteUser(APIView):
 
     permission_classes = [IsAuthenticated]

@@ -6,10 +6,16 @@
 import React, { useState } from 'react';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { ContainerDiv, Fashion, MediumTextH, WhiteButton, RadioTextH } from '../../components';
+import { ContainerDiv, Fashion, MediumTextH, WhiteButton, RadioTextH, MyPersonalListModal } from '../../components';
 import { fashionPageState, toneChoiceState } from '../../utils/data/atom';
 
 function PersonalColorChoice() {
+    // 리스트 보기 모달
+    const [listModal, setListModal] = useState(false);
+
+    // 리스트에서 받아온 컬러 선택값
+    const [myPersonalColor, setMyPersonalColor] = useState('선택안함');
+
     // Radio Button Select
     const [select, setSelect] = useState('');
     const handleSelectChange = event => {
@@ -63,8 +69,16 @@ function PersonalColorChoice() {
 
     const checkedColorText = checkedColor();
 
+    // 불러오기 클릭 시 모달 토글 함수 + 선택한 마이퍼스널컬러 가져오기
+    const handleToggleClick = chosenColor => {
+        console.log(chosenColor);
+        setListModal(current => !current);
+        setMyPersonalColor(chosenColor.chosen);
+    };
+
     return (
         <>
+            <MyPersonalListModal className={listModal && 'show'} toggleClickProps={handleToggleClick} />
             <Fashion />
 
             <MediumTextH>매칭하고싶은 퍼스널 컬러를 아래 3가지 방법 중 선택해주세요.</MediumTextH>
@@ -136,11 +150,11 @@ function PersonalColorChoice() {
                 </div>
                 <div>
                     <MyPersonalColorDiv>
-                        <ResultText>선택안함</ResultText>
+                        <ResultText>{myPersonalColor}</ResultText>
                         <CustomButton
                             disabled={select !== 'my'}
                             onClick={() => {
-                                console.log(1);
+                                handleToggleClick();
                             }}
                         >
                             불러오기
@@ -384,7 +398,7 @@ const ButtonContainerDiv = styled(ContainerDiv)`
     justify-content: space-evenly;
     align-items: center;
     margin-top: 50px;
-    margin-bottom: 100px;
+    padding-bottom: 100px;
 `;
 
 const TextH3 = styled.h3`

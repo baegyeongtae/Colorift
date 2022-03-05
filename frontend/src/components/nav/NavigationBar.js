@@ -46,7 +46,7 @@ function NavigationBar() {
     ];
 
     // 세션 스토리지에 정보가 있으면 받아오기 (로그인 상태 확인)
-    const [userEmail, setUserEmail] = useState(sessionStorage.getItem('userEmail') || '');
+    const [userId, setUserId] = useState(sessionStorage.getItem('userId') || '');
 
     // 메뉴바 클릭 상태 변환하는 함수
     const handleToggleClick = () => {
@@ -64,7 +64,7 @@ function NavigationBar() {
         Cookies.remove('accessToken');
         Cookies.remove('refreshToken');
         sessionStorage.clear();
-        setUserEmail('');
+        setUserId('');
     }
 
     // 모바일 버전 메뉴바 show 상태에서는 스크롤 막기
@@ -98,19 +98,19 @@ function NavigationBar() {
                                     </NavLink>
                                 ))}
                             </MenuDiv>
-                            <UserDiv className={isToggle && 'show'} login={userEmail}>
+                            <UserDiv className={isToggle && 'show'} login={userId}>
                                 <NavLink
-                                    to={userEmail ? '/' : '/login'}
+                                    to={userId ? '/' : '/login'}
                                     className={pathname === '/' && scrollY === 0 ? 'transparent login' : 'login'}
-                                    onClick={() => userEmail && userSessionReset()}
+                                    onClick={() => userId && userSessionReset()}
                                 >
-                                    {userEmail ? 'Logout' : 'Log In'}
+                                    {userId ? 'Logout' : 'Log In'}
                                 </NavLink>
                                 <NavLink
-                                    to={userEmail ? `/mypage/${userEmail}` : '/signup'}
+                                    to={userId ? `/mypage` : '/signup'}
                                     className={pathname === '/' && scrollY === 0 ? 'transparent signup' : 'signup'}
                                 >
-                                    {userEmail ? (
+                                    {userId ? (
                                         <img
                                             src={profileIcon}
                                             alt="마이페이지 아이콘"

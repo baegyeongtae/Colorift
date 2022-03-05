@@ -31,6 +31,8 @@ const MyPageContainerDiv = styled(ContainerDiv)`
 `;
 
 const FlexRowDiv = styled.div`
+    width: 100%;
+
     ${({ theme }) => theme.flexStyled.flexRow};
     align-items: center;
 
@@ -41,6 +43,8 @@ const FlexRowDiv = styled.div`
         ${({ theme }) => theme.flexStyled.flexCenter};
 
         height: auto;
+
+        margin-top: 0;
     }
 `;
 

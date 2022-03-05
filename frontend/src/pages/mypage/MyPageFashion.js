@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { MyStyleModal } from '../../components';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
+import { getFashionList } from '../../utils/api/service';
 
 export function MyPageFashion() {
     // 상세보기 모달
@@ -11,64 +12,67 @@ export function MyPageFashion() {
     const [colorId, setColorId] = useState(0);
 
     // 패션 사진 더미 데이터
-    const fashionData = [
-        {
-            id: 1,
-            date: '2022-02-24',
-            image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
-        },
-        {
-            id: 2,
-            date: '2022-02-24',
-            image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/moncler.jpg',
-        },
-        {
-            id: 3,
-            date: '2022-02-24',
-            image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/moncler_i0f6Fwi.jpg',
-        },
-        {
-            id: 4,
-            date: '2022-02-26',
-            image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
-        },
-        {
-            id: 5,
-            date: '2022-02-27',
-            image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
-        },
-        {
-            id: 6,
-            date: '2022-02-28',
-            image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
-        },
-        {
-            id: 7,
-            date: '2022-02-28',
-            image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
-        },
-        {
-            id: 8,
-            date: '2022-03-01',
-            image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
-        },
-        {
-            id: 9,
-            date: '2022-03-02',
-            image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
-        },
-        {
-            id: 10,
-            date: '2022-03-02',
-            image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
-        },
-    ];
+    // const fashionList = [
+    //     {
+    //         id: 1,
+    //         date: '2022-02-24',
+    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
+    //     },
+    //     {
+    //         id: 2,
+    //         date: '2022-02-24',
+    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/moncler.jpg',
+    //     },
+    //     {
+    //         id: 3,
+    //         date: '2022-02-24',
+    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/moncler_i0f6Fwi.jpg',
+    //     },
+    //     {
+    //         id: 4,
+    //         date: '2022-02-26',
+    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
+    //     },
+    //     {
+    //         id: 5,
+    //         date: '2022-02-27',
+    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
+    //     },
+    //     {
+    //         id: 6,
+    //         date: '2022-02-28',
+    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
+    //     },
+    //     {
+    //         id: 7,
+    //         date: '2022-02-28',
+    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
+    //     },
+    //     {
+    //         id: 8,
+    //         date: '2022-03-01',
+    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
+    //     },
+    //     {
+    //         id: 9,
+    //         date: '2022-03-02',
+    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
+    //     },
+    //     {
+    //         id: 10,
+    //         date: '2022-03-02',
+    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
+    //     },
+    // ];
+
+    // API로 받아온 패션 데이터 목록
+    const [fashionList, setFashionList] = useState([]);
 
     // 버튼 클릭 횟수
     const [buttonClick, setButtonClick] = useState(0);
 
     // 마이 패션에 보이는 사진의 최대 갯수
-    const imageMaxIndex = 4 * (buttonClick + 1) < fashionData.length ? 4 * (buttonClick + 1) : fashionData.length;
+    const imageMaxIndex = 4 * (buttonClick + 1) < fashionList?.length ? 4 * (buttonClick + 1) : fashionList?.length;
 
     // 더보기 버튼 클릭 함수
     const handleMoreClick = () => {
@@ -89,12 +93,18 @@ export function MyPageFashion() {
     // 모달 뜬 상태에서는 스크롤 막기
     useEffect(() => setScrollDisabled(fashionModal), [fashionModal]);
 
+    // 패션 목록 API 요청
+    useEffect(async () => {
+        const response = await getFashionList();
+        setFashionList(response.data);
+    }, []);
+
     return (
         <>
             <MyStyleModal className={fashionModal && 'show'} toggleClickProps={handleToggleClick} colorId={colorId} />
             <FashionDiv>
                 <FasionImageDiv>
-                    {fashionData.slice(0, imageMaxIndex).map(item => (
+                    {fashionList?.slice(0, imageMaxIndex).map(item => (
                         <input
                             key={item.id}
                             type="image"
@@ -104,7 +114,7 @@ export function MyPageFashion() {
                         />
                     ))}
                 </FasionImageDiv>
-                <PlusButton disabled={4 * (buttonClick + 1) >= fashionData.length} onClick={handleMoreClick}>
+                <PlusButton disabled={4 * (buttonClick + 1) >= fashionList?.length} onClick={handleMoreClick}>
                     더보기
                 </PlusButton>
             </FashionDiv>

@@ -1,6 +1,22 @@
 import Cookies from 'js-cookie';
 import axiosConfig from './token';
 
+// 닉네임 변경
+export async function setUserNickname(_nickname) {
+    try {
+        const response = await axiosConfig({
+            method: 'patch',
+            url: 'edit/nickname/',
+            data: {
+                nickname: _nickname,
+            },
+        });
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}
+
 // 회원탈퇴
 export async function setUserOut() {
     try {
@@ -24,6 +40,19 @@ export async function getPersonalList() {
         const response = await axiosConfig({
             method: 'get',
             url: 'color/list/',
+        });
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}
+
+// 패션 목록 조회
+export async function getFashionList() {
+    try {
+        const response = await axiosConfig({
+            method: 'get',
+            url: 'fashion/list/',
         });
         return response;
     } catch (error) {

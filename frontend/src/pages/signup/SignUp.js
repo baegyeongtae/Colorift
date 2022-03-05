@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { useEffect, useRef, useState } from 'react';
 import { setUserRegister } from '../../utils/api/user';
+import { useUser } from '../../utils/hooks/useUser';
 import { UserInputDiv, TitleP, UserButton, NavBackgroundDiv, TextModal, ContainerDiv, Article } from '../../components';
+import { checkRegexId, checkRegexNickname, checkRegexPassword } from '../../utils/data/checkRegexUser';
 
 export function SignUp() {
     // 가입 완료 or 존재하는 아이디 모달에 들어갈 텍스트
@@ -11,42 +13,7 @@ export function SignUp() {
     const [regiseterModal, setRegisterModal] = useState(false);
 
     // 입력 값 가져오는 ref
-    const idRef = useRef();
-    const nicknameRef = useRef();
-    const passwordRef = useRef();
-    const passwordCheckRef = useRef();
-
-    // 정규표현식
-    const pattern3 = /[ㄱ-ㅎㅏ-ㅣ가-힣]/; // 한글
-    const pattern4 = /[~!@#$%<>^&*]/; // 특수문자
-    const pattern5 = /\s/; // 공백
-
-    // id 정규식 체크
-    function checkRegexId(id) {
-        if (id.length >= 4 && !pattern3.test(id) && !pattern4.test(id) && !pattern5.test(id)) {
-            return true;
-        }
-
-        return false;
-    }
-
-    // 닉네임 체크
-    function checkRegexNickname(nickname) {
-        if (nickname.length >= 4 && !pattern4.test(nickname) && !pattern5.test(nickname)) {
-            return true;
-        }
-
-        return false;
-    }
-
-    // 비밀번호 체크
-    function checkRegexPassword(password) {
-        if (password.length >= 8 && !pattern3.test(password) && !pattern5.test(password)) {
-            return true;
-        }
-
-        return false;
-    }
+    const { idRef, nicknameRef, passwordRef, passwordCheckRef } = useUser();
 
     // 정규표현식에 맞는지, 패스워드는 일치하는지 체크
     const [regexCheck, setRegexCheck] = useState({
@@ -71,7 +38,11 @@ export function SignUp() {
             passwordCheck: passwordDoubleTest,
         }));
         if (idTest && nicknameTest && passwordTest && passwordDoubleTest) {
-            const response = await setUserRegister(idRef.current.value, passwordRef.current.value);
+            const response = await setUserRegister(
+                idRef.current.value,
+                nicknameRef.current.value,
+                passwordRef.current.value,
+            );
             if (response.status === 201) {
                 setSignUpSuccess(true);
             }

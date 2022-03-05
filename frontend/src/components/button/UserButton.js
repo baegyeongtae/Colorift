@@ -4,5 +4,5 @@ import { HomeButton } from './HomeButton';
 export const UserButton = styled(HomeButton)`
     height: ${({ height }) => height};
 
-    border-radius: 10px;
+    border-radius: 5px;
 `;

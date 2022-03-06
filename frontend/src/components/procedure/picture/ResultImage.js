@@ -15,7 +15,7 @@ export function ResultImage({ image }) {
     return (
         <BoxDiv>
             <div className="faceImg">
-                <img className="photoImg" alt="Img" src={image} />
+                <img className="photoImg" alt="Img" src={image || uploadedImage} />
             </div>
         </BoxDiv>
     );

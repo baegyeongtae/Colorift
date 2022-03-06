@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import pymysql
 from datetime import timedelta
 from pathlib import Path
 from .conf import aws
@@ -27,7 +28,7 @@ SECRET_KEY = 'django-insecure-+(!5vblc2a41&k)=ef&zme8&qia2e=6s1-d@adrrf6y)@4#0!6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['backend']
 
 
 # Application definition
@@ -127,7 +128,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 """
-local sqlite3
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -135,6 +135,8 @@ DATABASES = {
     }
 }
 """
+
+pymysql.install_as_MySQLdb()
 
 DATABASES = {
     'default': {

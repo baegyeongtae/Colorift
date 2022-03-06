@@ -66,30 +66,34 @@ export function MyPersonalListModal({ toggleClickProps, className }) {
             <ModalTableDiv className={className}>
                 <TextP>회원님이 저장한 퍼스널 컬러 목록입니다.</TextP>
                 <PersonalTableDiv>
-                    <table>
-                        <tbody>
-                            {colorList?.map(item => (
-                                <tr key={item.id}>
-                                    <td className="checkbox">
-                                        <CheckboxInput
-                                            type="radio"
-                                            name="checkbox"
-                                            value={item.color}
-                                            onChange={event => handleSelectChange(event)}
-                                        />
-                                    </td>
-                                    <td className="id">{item.id}</td>
-                                    <td className="date">{item.date?.replace(/-/gi, '. ')}</td>
-                                    <td className="color">{seasonPersonal[item.color]}</td>
-                                    <td className="button">
-                                        <GrayButton width="90%" onClick={() => handleToggleClick(item.id)}>
-                                            상세보기
-                                        </GrayButton>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    {colorList.length !== 0 ? (
+                        <table>
+                            <tbody>
+                                {colorList?.map(item => (
+                                    <tr key={item.id}>
+                                        <td className="checkbox">
+                                            <CheckboxInput
+                                                type="radio"
+                                                name="checkbox"
+                                                value={item.color}
+                                                onChange={event => handleSelectChange(event)}
+                                            />
+                                        </td>
+                                        <td className="id">{item.id}</td>
+                                        <td className="date">{item.date?.replace(/-/gi, '. ')}</td>
+                                        <td className="color">{seasonPersonal[item.color]}</td>
+                                        <td className="button">
+                                            <GrayButton width="90%" onClick={() => handleToggleClick(item.id)}>
+                                                상세보기
+                                            </GrayButton>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    ) : (
+                        <p>분석한 퍼스널컬러가 없습니다.</p>
+                    )}
                     <ModalCloseIcon clickProps={handleClosedClick} />
                 </PersonalTableDiv>
                 <BlueButton onClick={handlePropsClick}>확인</BlueButton>
@@ -119,20 +123,6 @@ const ModalTableDiv = styled(ModalDiv)`
         width: 700px;
         height: auto;
 
-        padding: 30px;
-
-        @media ${({ theme }) => theme.device.tablet} {
-            width: 90%;
-        }
-    }
-`;
-
-const TextTableDiv = styled(ModalDiv)`
-    &.show {
-        ${({ theme }) => theme.flexStyled.flexColumn};
-
-        width: 350px;
-        height: auto;
         padding: 30px;
 
         @media ${({ theme }) => theme.device.tablet} {
@@ -177,6 +167,10 @@ const PersonalTableDiv = styled.div`
         border-radius: 100px;
         background-color: #e9e9e9;
         box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+    }
+
+    p {
+        line-height: 200px;
     }
 
     table {

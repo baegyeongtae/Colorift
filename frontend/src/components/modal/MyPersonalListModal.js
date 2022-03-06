@@ -92,7 +92,7 @@ export function MyPersonalListModal({ toggleClickProps, className }) {
                             </tbody>
                         </table>
                     ) : (
-                        <p>분석한 퍼스널컬러가 없습니다.</p>
+                        <p>저장된 퍼스널컬러가 없습니다.</p>
                     )}
                     <ModalCloseIcon clickProps={handleClosedClick} />
                 </PersonalTableDiv>

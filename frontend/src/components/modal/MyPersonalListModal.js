@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { ModalDiv } from './ModalDiv';
-import { BackgroundDiv, ModalCloseIcon, GrayButton, BlueButton, MyPersonalColorModal } from '..';
+import { BackgroundDiv, ModalCloseIcon, GrayButton, BlueButton, MyPersonalColorModal, TextModal } from '..';
 import { getColorList } from '../../utils/api/service';
 import { seasonPersonal } from '../../utils/data/season';
 
@@ -11,6 +11,9 @@ export function MyPersonalListModal({ toggleClickProps, className }) {
 
     // 상세보기 모달 상태
     const [personalListModal, setPersonalListModal] = useState(false);
+
+    // 컬러 선택 모달
+    const [colorChoiceModal, setColorChoiceModal] = useState(false);
 
     // 상세보기 모달에서 선택한 컬러 ID 값
     const [colorId, setColorId] = useState(0);
@@ -22,17 +25,24 @@ export function MyPersonalListModal({ toggleClickProps, className }) {
         setChosen(value);
     };
 
-    // 마이퍼스널 목록 모달 닫는 토글 함수
+    // 확인 버튼 눌렀을 때 함수
     const handlePropsClick = () => {
         if (!chosen) {
-            alert('컬러를 선택해주세요!');
+            setColorChoiceModal(true);
         } else {
-            toggleClickProps({ chosen });
+            const chosenColor = seasonPersonal[chosen];
+            toggleClickProps({ chosenColor });
         }
     };
 
+    // 마이퍼스널 목록 모달 닫는 토글 함수
     const handleClosedClick = () => {
         toggleClickProps();
+    };
+
+    // 컬러를 선택해주세요 모달 닫는 함수
+    const handleChoiceClick = () => {
+        setColorChoiceModal(current => !current);
     };
 
     // 상세보기 모달을 클릭 할 때
@@ -52,7 +62,7 @@ export function MyPersonalListModal({ toggleClickProps, className }) {
 
     return (
         <>
-            <BackgroundDiv className={className} onClick={handlePropsClick} />
+            <BackgroundDiv className={className} onClick={handleClosedClick} />
             <ModalTableDiv className={className}>
                 <TextP>회원님이 저장한 퍼스널 컬러 목록입니다.</TextP>
                 <PersonalTableDiv>
@@ -89,6 +99,13 @@ export function MyPersonalListModal({ toggleClickProps, className }) {
                 toggleClickProps={handleToggleClick}
                 colorId={colorId}
             />
+            {colorChoiceModal && (
+                <TextModal
+                    text="색상을 선택해주세요."
+                    toggleClickProps={handleChoiceClick}
+                    className={colorChoiceModal && 'show'}
+                />
+            )}
         </>
     );
 }

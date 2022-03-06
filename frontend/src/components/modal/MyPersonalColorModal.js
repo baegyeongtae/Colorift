@@ -1,54 +1,57 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import { season } from '../../utils/data/season';
-import { ContainerDiv, ModalCloseIcon, ResultImage, SubTitleP, MediumTextH, SeasonColor } from '..';
+import { season, SeasonTone } from '../../utils/data/season';
+import { ContainerDiv, ModalCloseIcon, ResultImage, SubTitleP, MediumTextH, SeasonColor, BackgroundDiv } from '..';
 import { MyModalTable } from './MyModalTable';
 import { getColorDetailModal } from '../../utils/api/service';
 
 export function MyPersonalColorModal({ toggleClickProps, className, colorId }) {
+    // API 요청 결과
+    const [resultColor, setResultColor] = useState({});
+
+    // 어울리는 컬러 목록을 위한 퍼스널컬러 추출
+    const colorList = season[resultColor?.color];
+
+    // 퍼스널컬러 키워드에 따른 색상 추출
+    const seasonColor = SeasonTone(season[resultColor?.color]);
+
+    // 모달 ON/OFF 함수
     const handleToggleClick = () => {
         toggleClickProps();
     };
-    console.log(colorId);
-    const loggedUser = sessionStorage.getItem('userEmail');
 
-    const [resultColor, setResultColor] = useState('');
+    // 모달 켜지면 API 요청
     useEffect(async () => {
-        if (!loggedUser) {
-            return;
-        }
         const response = await getColorDetailModal(colorId);
         setResultColor(response);
-    }, [colorId]);
-
-    console.log(resultColor);
-
-    const seasonTone = season[resultColor];
+    }, []);
 
     return (
-        <ModalDiv className={className}>
-            <MyModalTable id={colorId} />
-            <ModalCloseIcon clickProps={handleToggleClick} />
-            <ResultContainerDiv>
-                <ResultImage />
-            </ResultContainerDiv>
+        <>
+            <BackgroundDiv className={className} onClick={handleToggleClick} />
+            <ModalDiv className={className}>
+                <MyModalTable id={colorId} date={resultColor.date} title={resultColor.color} />
+                <ModalCloseIcon clickProps={handleToggleClick} />
+                <ResultContainerDiv>
+                    <ResultImage image={resultColor.image} />
+                </ResultContainerDiv>
 
-            <SubTitleP>
-                회원님은 <ResultTextS color={resultColor}>봄 웜톤</ResultTextS> 입니다.
-            </SubTitleP>
+                <SubTitleP>
+                    회원님은 <ResultTextS color={seasonColor}>봄 웜톤</ResultTextS> 입니다.
+                </SubTitleP>
 
-            <ColorContainerDiv>
-                <MediumTextLeftH>회원님에게 어울리는 컬러</MediumTextLeftH>
-                <SeasonColor season={seasonTone} />
-            </ColorContainerDiv>
-        </ModalDiv>
+                <ColorContainerDiv>
+                    <MediumTextLeftH>회원님에게 어울리는 컬러</MediumTextLeftH>
+                    <SeasonColor season={colorList} />
+                </ColorContainerDiv>
+            </ModalDiv>
+        </>
     );
 }
 
 // styled-components
 
 const ColorContainerDiv = styled(ContainerDiv)`
-    background-color: ${({ theme }) => theme.color.white};
     align-items: center;
 
     width: 640px;
@@ -57,7 +60,6 @@ const ColorContainerDiv = styled(ContainerDiv)`
         all: unset;
 
         width: 270px;
-        background-color: ${({ theme }) => theme.color.white};
         align-items: center;
         margin-bottom: 8px;
         margin-left: 20px;
@@ -66,7 +68,6 @@ const ColorContainerDiv = styled(ContainerDiv)`
 `;
 
 const ResultContainerDiv = styled(ContainerDiv)`
-    background-color: ${({ theme }) => theme.color.white};
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -75,7 +76,6 @@ const ResultContainerDiv = styled(ContainerDiv)`
     margin-top: 8px;
 
     @media ${({ theme }) => theme.device.tablet} {
-        background-color: ${({ theme }) => theme.color.white};
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -85,7 +85,6 @@ const ResultContainerDiv = styled(ContainerDiv)`
     }
 
     @media ${({ theme }) => theme.device.mobile} {
-        background-color: ${({ theme }) => theme.color.white};
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
-import { MyStyleModal } from '../../components';
+import { MyStyleModal, GrayButton } from '../../components';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
-import { getFashionList } from '../../utils/api/service';
+import { getFashionList, setDeleteFashion } from '../../utils/api/service';
 
 export function MyPageFashion() {
     // 상세보기 모달
@@ -10,60 +10,6 @@ export function MyPageFashion() {
 
     // 상세보기 모달에서 선택한 컬러 ID 값
     const [colorId, setColorId] = useState(0);
-
-    // 패션 사진 더미 데이터
-    // const fashionList = [
-    //     {
-    //         id: 1,
-    //         date: '2022-02-24',
-    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
-    //     },
-    //     {
-    //         id: 2,
-    //         date: '2022-02-24',
-    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/moncler.jpg',
-    //     },
-    //     {
-    //         id: 3,
-    //         date: '2022-02-24',
-    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/moncler_i0f6Fwi.jpg',
-    //     },
-    //     {
-    //         id: 4,
-    //         date: '2022-02-26',
-    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
-    //     },
-    //     {
-    //         id: 5,
-    //         date: '2022-02-27',
-    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
-    //     },
-    //     {
-    //         id: 6,
-    //         date: '2022-02-28',
-    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
-    //     },
-    //     {
-    //         id: 7,
-    //         date: '2022-02-28',
-    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
-    //     },
-    //     {
-    //         id: 8,
-    //         date: '2022-03-01',
-    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
-    //     },
-    //     {
-    //         id: 9,
-    //         date: '2022-03-02',
-    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
-    //     },
-    //     {
-    //         id: 10,
-    //         date: '2022-03-02',
-    //         image: 'https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg',
-    //     },
-    // ];
 
     // API로 받아온 패션 데이터 목록
     const [fashionList, setFashionList] = useState([]);
@@ -83,15 +29,27 @@ export function MyPageFashion() {
         setColorId(id);
         setFashionModal(current => !current);
     };
-    console.log(colorId);
 
     // 상세보기 모달 토클 함수
     const handleToggleClick = () => {
         if (fashionModal) setFashionModal(current => !current);
     };
 
-    // 모달 뜬 상태에서는 스크롤 막기
-    useEffect(() => setScrollDisabled(fashionModal), [fashionModal]);
+    // 삭제하기 버튼 클릭 시 함수
+    async function handleDeleteClick(id, index) {
+        const result = window.confirm('정말 삭제하시겠습니까?');
+        if (result) {
+            const response = await setDeleteFashion(id);
+            if (response.status === 204) {
+                window.open('/mypage', '_self');
+                // setFashionList(current => {
+                //     const newCurrent = current;
+                //     newCurrent.splice(index, 1);
+                //     return newCurrent;
+                // });
+            }
+        }
+    }
 
     // 패션 목록 API 요청
     useEffect(async () => {
@@ -99,24 +57,41 @@ export function MyPageFashion() {
         setFashionList(response.data);
     }, []);
 
+    // 모달 뜬 상태에서는 스크롤 막기
+    useEffect(() => setScrollDisabled(fashionModal), [fashionModal]);
+
     return (
         <>
-            <MyStyleModal className={fashionModal && 'show'} toggleClickProps={handleToggleClick} colorId={colorId} />
+            {fashionModal && (
+                <MyStyleModal
+                    className={fashionModal && 'show'}
+                    toggleClickProps={handleToggleClick}
+                    colorId={colorId}
+                />
+            )}
             <FashionDiv>
                 <FasionImageDiv>
-                    {fashionList?.slice(0, imageMaxIndex).map(item => (
-                        <input
-                            key={item.id}
-                            type="image"
-                            src={item.image}
-                            alt={`패션 이미지 ${item.id}`}
-                            onClick={() => handleToggleDetailClick(item.id)}
-                        />
+                    {fashionList?.slice(0, imageMaxIndex)?.map((item, index) => (
+                        <div key={item.id}>
+                            <GrayButton width="70px" onClick={() => handleDeleteClick(item.id, index)}>
+                                삭제하기
+                            </GrayButton>
+                            <input
+                                type="image"
+                                src={item.image}
+                                alt={`패션 이미지 ${item.id}`}
+                                onClick={() => handleToggleDetailClick(item.id)}
+                            />
+                        </div>
                     ))}
                 </FasionImageDiv>
-                <PlusButton disabled={4 * (buttonClick + 1) >= fashionList?.length} onClick={handleMoreClick}>
-                    더보기
-                </PlusButton>
+                {fashionList?.length === 0 ? (
+                    <p>매칭한 패션이 없습니다.</p>
+                ) : (
+                    <PlusButton disabled={4 * (buttonClick + 1) >= fashionList?.length} onClick={handleMoreClick}>
+                        더보기
+                    </PlusButton>
+                )}
             </FashionDiv>
         </>
     );
@@ -143,6 +118,16 @@ const FasionImageDiv = styled.div`
     width: 100%;
 
     margin-top: 10px;
+
+    div {
+        position: relative;
+    }
+
+    button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
 
     input {
         width: 100%;

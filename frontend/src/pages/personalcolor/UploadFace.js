@@ -32,10 +32,8 @@ function UploadFace() {
 
     const handlePhoto = e => {
         const photoToAdd = e.target.files;
-        console.log(photoToAdd[0]);
-        const fileImg = URL.createObjectURL(photoToAdd[0]);
-        console.log(fileImg);
-        const uploadFile = photoToAdd[0];
+        const fileImg = URL.createObjectURL(photoToAdd?.[0]);
+        const uploadFile = photoToAdd?.[0];
 
         const formData = new FormData();
         formData.append('image', uploadFile);
@@ -59,14 +57,12 @@ function UploadFace() {
             setTextModal(true);
         } else if (photoUpload !== '') {
             setIsLoading(true);
-            const checkedUser = sessionStorage.getItem('userEmail');
+            const checkedUser = sessionStorage.getItem('userId');
             if (checkedUser) {
                 const resultPercent = await postFacePhoto(imgData);
-                console.log(resultPercent);
             }
             if (!checkedUser) {
                 const resultPercent = await postNotLoggedInFacePhoto(imgData);
-                console.log(resultPercent);
             }
             setIsLoading(false);
             setColorPage(2);
@@ -74,7 +70,6 @@ function UploadFace() {
     };
     return (
         <>
-            {' '}
             <TextModal className={textModal && 'show'} toggleClickProps={handleToggleClick} text="사진을 올려주세요." />
             <NavBackgroundDiv />
             {isLoading ? (
@@ -124,7 +119,6 @@ const TextContainerDiv = styled(ContainerDiv)`
     @media ${({ theme }) => theme.device.mobile} {
         all: unset;
 
-        background-color: ${({ theme }) => theme.color.white};
         display: flex;
         flex-direction: column;
         align-items: left;
@@ -140,14 +134,10 @@ const TextContainerDiv = styled(ContainerDiv)`
     align-items: left;
     margin-bottom: 30px;
     margin-left: 30px;
-
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;
 
 const PhotoContainerDiv = styled(ContainerDiv)`
     @media ${({ theme }) => theme.device.mobile} {
-        background-color: ${({ theme }) => theme.color.white};
         display: flex;
         flex-direction: column;
         justify-content: space-around;
@@ -159,21 +149,14 @@ const PhotoContainerDiv = styled(ContainerDiv)`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;
 
 const ContentContainerDiv = styled(ContainerDiv)`
     align-items: center;
-
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;
 
 const ButtonContainerDiv = styled(ContainerDiv)`
     @media ${({ theme }) => theme.device.mobile} {
-        background-color: ${({ theme }) => theme.color.white};
         display: flex;
         flex-direction: column;
         justify-content: space-around;
@@ -186,6 +169,4 @@ const ButtonContainerDiv = styled(ContainerDiv)`
     justify-content: space-around;
     align-items: center;
     margin-top: 40px;
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;

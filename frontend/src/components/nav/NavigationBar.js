@@ -74,10 +74,13 @@ function NavigationBar() {
     useEffect(() => setIsToggle(false), [pathname]);
 
     // 홈페이지가 꺼질 때 토큰도 정리하기
-    // useEffect(() => {
-    //     console.log('컴포넌트가 화면에 나타남');
-    //     return userSessionReset();
-    // });
+    useEffect(
+        () => () => {
+            Cookies.remove('accessToken');
+            Cookies.remove('refreshToken');
+        },
+        [],
+    );
 
     return (
         <>

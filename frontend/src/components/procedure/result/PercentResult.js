@@ -40,9 +40,6 @@ const ContentContainerDiv = styled.div`
     align-items: center;
     margin-bottom: 8px;
     margin-top: 8px;
-
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;
 
 const ProgressDiv = styled.div`
@@ -67,6 +64,4 @@ const ProgressDiv = styled.div`
     .progress {
         margin: 8px;
     }
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;

@@ -34,8 +34,8 @@ export async function setUserOut() {
     return null;
 }
 
-// 퍼스널 컬러 목록 조회
-export async function getPersonalList() {
+// 패션 목록 조회
+export async function getFashionList() {
     try {
         const response = await axiosConfig({
             method: 'get',
@@ -48,7 +48,7 @@ export async function getPersonalList() {
 }
 
 // 패션 목록 조회
-export async function getFashionList() {
+export async function getColorList() {
     try {
         const response = await axiosConfig({
             method: 'get',
@@ -72,7 +72,6 @@ export async function postFacePhoto(imgData) {
             },
         });
 
-        console.log(response);
         const season = response.data.color;
         sessionStorage.setItem('season', season);
 
@@ -94,7 +93,6 @@ export async function postFashionPhoto(fashionData) {
             },
         });
 
-        console.log(response);
         const hue = response.data.color_match_rate;
         const value = response.data.brightness_match_rate;
         const saturation = response.data.saturation_match_rate;
@@ -103,6 +101,7 @@ export async function postFashionPhoto(fashionData) {
 
         return [hue, value, saturation, average];
     } catch (error) {
+        console.log(error.response);
         return error.response;
     }
 }
@@ -112,40 +111,47 @@ export async function getColorDetailModal(id) {
         const response = await axiosConfig({
             method: 'get',
             url: `/app/color/detail/${id}/`,
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
         });
-
-        console.log(response);
-
-        const resultColor = response.data.color;
-        console.log(resultColor);
-        return resultColor;
+        return response.data;
     } catch (error) {
         return error.response;
     }
 }
 
-export async function getPercentDetailModal(id) {
+// 패션 상세보기
+export async function getFashionDetailModal(id) {
     try {
         const response = await axiosConfig({
             method: 'get',
             url: `/app/fashion/detail/${id}/`,
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
         });
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}
 
-        console.log(response);
-        const season = response.data.color;
-        const hue = response.data.color_match_rate;
-        const value = response.data.brightness_match_rate;
-        const saturation = response.data.saturation_match_rate;
+// 퍼스널컬러 삭제하기
+export async function setDeletePersonal(id) {
+    try {
+        const response = await axiosConfig({
+            method: 'delete',
+            url: `/app/color/detail/${id}/`,
+        });
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+}
 
-        const average = (hue + saturation + value) / 3;
-
-        return [hue, value, saturation, average, season];
+// 패션 삭제하기
+export async function setDeleteFashion(id) {
+    try {
+        const response = await axiosConfig({
+            method: 'delete',
+            url: `/app/fashion/detail/${id}/`,
+        });
+        return response;
     } catch (error) {
         return error.response;
     }

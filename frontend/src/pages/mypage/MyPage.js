@@ -49,7 +49,13 @@ const FlexRowDiv = styled.div`
 `;
 
 const PersonalDiv = styled.div`
+    width: 50%;
+
     padding: 0 20px;
+
+    @media ${({ theme }) => theme.device.tablet} {
+        width: 100%;
+    }
 `;
 
 const SubTitleP = styled.p`

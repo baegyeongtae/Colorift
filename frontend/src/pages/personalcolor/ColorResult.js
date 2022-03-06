@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import Stack from '@mui/material/Stack';
 import { colorPageState } from '../../utils/data/atom';
-import { season } from '../../utils/data/season';
+import { season, SeasonTone } from '../../utils/data/season';
 
 import {
     ResultImage,
@@ -15,16 +15,13 @@ import {
     BlueButton,
     SeasonColor,
     MediumTextH,
-    SeasonTone,
 } from '../../components';
 
 function ColorResult() {
     const navigate = useNavigate();
     const setColorPage = useSetRecoilState(colorPageState);
     const seasonTone = sessionStorage.getItem('season');
-    console.log(seasonTone);
     const resultColor = SeasonTone(season[seasonTone]);
-    console.log(resultColor);
 
     return (
         <>
@@ -63,7 +60,6 @@ export { ColorResult };
 // styled-components
 
 const ColorContainerDiv = styled(ContainerDiv)`
-    background-color: ${({ theme }) => theme.color.white};
     align-items: center;
 
     width: 640px;
@@ -72,7 +68,6 @@ const ColorContainerDiv = styled(ContainerDiv)`
         all: unset;
 
         width: 270px;
-        background-color: ${({ theme }) => theme.color.white};
         align-items: center;
         margin-bottom: 8px;
         margin-left: 20px;
@@ -81,7 +76,6 @@ const ColorContainerDiv = styled(ContainerDiv)`
 `;
 
 const ResultContainerDiv = styled(ContainerDiv)`
-    background-color: ${({ theme }) => theme.color.white};
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -90,7 +84,6 @@ const ResultContainerDiv = styled(ContainerDiv)`
     margin-top: 8px;
 
     @media ${({ theme }) => theme.device.tablet} {
-        background-color: ${({ theme }) => theme.color.white};
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -100,7 +93,6 @@ const ResultContainerDiv = styled(ContainerDiv)`
     }
 
     @media ${({ theme }) => theme.device.mobile} {
-        background-color: ${({ theme }) => theme.color.white};
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -111,7 +103,6 @@ const ResultContainerDiv = styled(ContainerDiv)`
 `;
 
 const ButtonContainerDiv = styled.div`
-    background-color: ${({ theme }) => theme.color.white};
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -121,7 +112,6 @@ const ButtonContainerDiv = styled.div`
     padding-bottom: 100px;
 
     @media ${({ theme }) => theme.device.mobile} {
-        background-color: ${({ theme }) => theme.color.white};
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;

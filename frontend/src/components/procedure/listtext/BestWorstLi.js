@@ -44,7 +44,6 @@ const TextH2 = styled.h2`
     font-weight: bold;
     font-size: 1rem;
     color: ${({ theme }) => theme.color.darkgray};
-    background-color: ${props => props.theme.color.white};
 `;
 
 const TextH3 = styled.h3`
@@ -60,5 +59,4 @@ const TextH3 = styled.h3`
     margin-top: 20px;
     font-weight: bold;
     color: ${({ theme }) => theme.color.darkgray};
-    background-color: ${props => props.theme.color.white};
 `;

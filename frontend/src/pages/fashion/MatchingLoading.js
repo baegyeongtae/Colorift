@@ -16,7 +16,6 @@ function MatchingLoading() {
 export { MatchingLoading };
 
 const LoadingContainerDiv = styled(ContainerDiv)`
-    background-color: ${({ theme }) => theme.color.white};
     display: flex;
     flex-direction: column;
     justify-content: space-around;

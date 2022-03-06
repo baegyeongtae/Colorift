@@ -38,13 +38,12 @@ export function Fashion({ number }) {
 
 // styled-components
 const CircleContainerDiv = styled(ContainerDiv)`
-    background-color: ${({ theme }) => theme.color.white};
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     margin-bottom: 50px;
-    margin-top: 120px;
+    margin-top: 50px;
     color: white;
 
     .wrapper {
@@ -90,13 +89,12 @@ const CircleContainerDiv = styled(ContainerDiv)`
     @media ${({ theme }) => theme.device.mobile} {
         all: unset;
 
-        background-color: ${({ theme }) => theme.color.white};
         display: flex;
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
         margin-bottom: 20px;
-        margin-top: 100px;
+        margin-top: 50px;
         color: white;
 
         .wrapper {
@@ -151,6 +149,4 @@ const TextH0 = styled(DescriptionP)`
     margin-top: 38px;
     font-weight: bold;
     font-size: ${({ theme }) => theme.fontSizes.mediumtext};
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;

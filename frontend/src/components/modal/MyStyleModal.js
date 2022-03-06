@@ -1,34 +1,43 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import { season } from '../../utils/data/season';
-import { getPercentDetailModal } from '../../utils/api/service';
-import { ContainerDiv, BackgroundDiv, ModalCloseIcon, SubTitleP, SeasonTone, ResultImage, PercentResult } from '..';
+import { season, SeasonTone } from '../../utils/data/season';
+import { getFashionDetailModal } from '../../utils/api/service';
+import { ContainerDiv, BackgroundDiv, ModalCloseIcon, SubTitleP, ResultImage, PercentResult } from '..';
 import { MyModalTable } from './MyModalTable';
 
 export function MyStyleModal({ toggleClickProps, className, colorId }) {
+    // API 요청 결과
+    const [resultFashion, setResultFashion] = useState({});
+
+    // 퍼스널컬러 결과에 따른 폰트 색상
+    const resultColor = SeasonTone(season[resultFashion?.color]);
+
+    // 3가지 결과에 따른 평균 점수
+    const average =
+        (Number(resultFashion?.color_match_rate) +
+            Number(resultFashion?.saturation_match_rate) +
+            Number(resultFashion?.brightness_match_rate)) /
+        3;
+
+    // 모달 ON/OFF 함수
     const handleToggleClick = () => {
         toggleClickProps();
     };
 
-    console.log(colorId);
-
-    const [resultPercent, setResultPercent] = useState('');
+    // 모달 켜지면 API 요청
     useEffect(async () => {
-        const response = await getPercentDetailModal(colorId);
-        setResultPercent(response);
-    }, [colorId]);
+        const response = await getFashionDetailModal(colorId);
+        setResultFashion(response.data);
+    }, []);
 
-    console.log(resultPercent[4]);
-
-    const resultColor = SeasonTone(season[resultPercent[4]]);
     return (
         <>
             <BackgroundDiv className={className} onClick={handleToggleClick} />
             <ModalDiv className={className}>
-                <MyModalTable />
+                <MyModalTable id={resultFashion.id} date={resultFashion.date} />
                 <ModalCloseIcon clickProps={handleToggleClick} />
                 <ContentContainerDiv>
-                    <ResultImage />
+                    <ResultImage image={resultFashion.image} />
                 </ContentContainerDiv>
 
                 <SubTitleP>
@@ -36,12 +45,12 @@ export function MyStyleModal({ toggleClickProps, className, colorId }) {
                 </SubTitleP>
                 <PercentResult
                     resultColor={resultColor}
-                    hue={resultPercent[0]}
-                    saturation={resultPercent[1]}
-                    value={resultPercent[2]}
+                    hue={resultFashion.color_match_rate}
+                    saturation={resultFashion.brightness_match_rate}
+                    value={resultFashion.saturation_match_rate}
                 />
                 <SubTitleP>
-                    종합 <ResultTextS color={resultColor}>{resultPercent[3]}%</ResultTextS>만큼 매칭됩니다.
+                    종합 <ResultTextS color={resultColor}>{average}%</ResultTextS>만큼 매칭됩니다.
                 </SubTitleP>
                 <ColorContainerDiv />
             </ModalDiv>
@@ -58,9 +67,6 @@ const ContentContainerDiv = styled.div`
     align-items: center;
     margin-bottom: 8px;
     margin-top: 8px;
-
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;
 
 const ColorContainerDiv = styled(ContainerDiv)`
@@ -93,9 +99,6 @@ const ColorContainerDiv = styled(ContainerDiv)`
     align-items: center;
     margin-bottom: 8px;
     margin-top: 8px;
-
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;
 
 const ResultTextS = styled.span`

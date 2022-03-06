@@ -1,6 +1,10 @@
 import styled from 'styled-components';
+import { seasonPersonal } from '../../utils/data/season';
 
-export function MyModalTable({ id }) {
+export function MyModalTable({ id, date, title }) {
+    const dateReplace = date?.replace(/-/gi, '. ');
+    const titleReplace = seasonPersonal[title];
+
     return (
         <TableDiv>
             <table>
@@ -14,8 +18,8 @@ export function MyModalTable({ id }) {
                 <tbody>
                     <tr>
                         <td>{id}</td>
-                        <td>2022.02.11</td>
-                        <td>사용자 지정 제목</td>
+                        <td>{dateReplace}</td>
+                        <td>{titleReplace}</td>
                     </tr>
                 </tbody>
             </table>

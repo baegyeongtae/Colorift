@@ -32,8 +32,8 @@ function UploadFace() {
 
     const handlePhoto = e => {
         const photoToAdd = e.target.files;
-        const fileImg = URL.createObjectURL(photoToAdd[0]);
-        const uploadFile = photoToAdd[0];
+        const fileImg = URL.createObjectURL(photoToAdd?.[0]);
+        const uploadFile = photoToAdd?.[0];
 
         const formData = new FormData();
         formData.append('image', uploadFile);
@@ -70,7 +70,6 @@ function UploadFace() {
     };
     return (
         <>
-            {' '}
             <TextModal className={textModal && 'show'} toggleClickProps={handleToggleClick} text="사진을 올려주세요." />
             <NavBackgroundDiv />
             {isLoading ? (

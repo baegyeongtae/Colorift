@@ -13,7 +13,6 @@ export function MyPageFashion() {
 
     // API로 받아온 패션 데이터 목록
     const [fashionList, setFashionList] = useState([]);
-    console.log('fashionList', fashionList);
 
     // 버튼 클릭 횟수
     const [buttonClick, setButtonClick] = useState(0);
@@ -37,20 +36,20 @@ export function MyPageFashion() {
     };
 
     // 삭제하기 버튼 클릭 시 함수
-    async function handleDeleteClick(id) {
+    async function handleDeleteClick(id, index) {
         const result = window.confirm('정말 삭제하시겠습니까?');
         if (result) {
             const response = await setDeleteFashion(id);
             if (response.status === 204) {
                 window.open('/mypage', '_self');
-            } else {
-                console.log(response);
+                // setFashionList(current => {
+                //     const newCurrent = current;
+                //     newCurrent.splice(index, 1);
+                //     return newCurrent;
+                // });
             }
         }
     }
-
-    // 모달 뜬 상태에서는 스크롤 막기
-    useEffect(() => setScrollDisabled(fashionModal), [fashionModal]);
 
     // 패션 목록 API 요청
     useEffect(async () => {
@@ -58,18 +57,26 @@ export function MyPageFashion() {
         setFashionList(response.data);
     }, []);
 
+    // 모달 뜬 상태에서는 스크롤 막기
+    useEffect(() => setScrollDisabled(fashionModal), [fashionModal]);
+
     return (
         <>
-            <MyStyleModal className={fashionModal && 'show'} toggleClickProps={handleToggleClick} colorId={colorId} />
+            {fashionModal && (
+                <MyStyleModal
+                    className={fashionModal && 'show'}
+                    toggleClickProps={handleToggleClick}
+                    colorId={colorId}
+                />
+            )}
             <FashionDiv>
                 <FasionImageDiv>
-                    {fashionList?.slice(0, imageMaxIndex)?.map(item => (
-                        <div>
-                            <GrayButton width="70px" onClick={() => handleDeleteClick(item.id)}>
+                    {fashionList?.slice(0, imageMaxIndex)?.map((item, index) => (
+                        <div key={item.id}>
+                            <GrayButton width="70px" onClick={() => handleDeleteClick(item.id, index)}>
                                 삭제하기
                             </GrayButton>
                             <input
-                                key={item.id}
                                 type="image"
                                 src={item.image}
                                 alt={`패션 이미지 ${item.id}`}

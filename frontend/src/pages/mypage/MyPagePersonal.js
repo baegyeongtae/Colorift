@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import { getColorList } from '../../utils/api/service';
+import { getColorList, setDeletePersonal } from '../../utils/api/service';
 import { GrayButton, MyPersonalColorModal } from '../../components';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
+import { seasonPersonal } from '../../utils/data/season';
 
 export function MyPagePersonal() {
     // 상세보기 모달
@@ -11,44 +12,6 @@ export function MyPagePersonal() {
     // 상세보기 모달에서 선택한 컬러 ID 값
     const [colorId, setColorId] = useState(0);
 
-    // // 퍼스널 컬러 더미 데이터
-    // const dummyData = [
-    //     {
-    //         id: 1,
-    //         date: '2022.02.10',
-    //         color: '봄 웜톤',
-    //     },
-    //     {
-    //         id: 2,
-    //         date: '2022.02.12',
-    //         color: '여름 쿨톤',
-    //     },
-    //     {
-    //         id: 3,
-    //         date: '2022.02.15',
-    //         color: '겨울 쿨톤',
-    //     },
-    //     {
-    //         id: 4,
-    //         date: '2022.02.18',
-    //         color: '가을 웜톤',
-    //     },
-    //     {
-    //         id: 5,
-    //         date: '2022.02.20',
-    //         color: '봄 웜톤',
-    //     },
-    //     {
-    //         id: 6,
-    //         date: '2022.02.21',
-    //         color: '가을 웜톤',
-    //     },
-    //     {
-    //         id: 7,
-    //         date: '2022.02.25',
-    //         color: '겨울 쿨톤',
-    //     },
-    // ];
     // API로 받아온 컬러 데이터 목록
     const [colorList, setColorList] = useState([]);
 
@@ -63,6 +26,17 @@ export function MyPagePersonal() {
         setPersonalModal(current => !current);
     };
 
+    // 삭제하기 버튼 클릭 시 함수
+    async function handleDeleteClick(id) {
+        const result = window.confirm('정말 삭제하시겠습니까?');
+        if (result) {
+            const response = await setDeletePersonal(id);
+            if (response.status === 204) {
+                window.open('/mypage', '_self');
+            }
+        }
+    }
+
     // 모달 뜬 상태에서는 스크롤 막기
     useEffect(() => setScrollDisabled(personalModal), [personalModal]);
 
@@ -74,33 +48,39 @@ export function MyPagePersonal() {
 
     return (
         <>
-            <MyPersonalColorModal
-                className={personalModal && 'show'}
-                toggleClickProps={handleToggleClick}
-                colorId={colorId}
-            />
+            {personalModal && (
+                <MyPersonalColorModal
+                    className={personalModal && 'show'}
+                    toggleClickProps={handleToggleClick}
+                    colorId={colorId}
+                />
+            )}
             <PersonalTableDiv className="personal">
-                <table>
-                    <tbody>
-                        {colorList?.map(item => (
-                            <tr key={item.id}>
-                                <td className="id">{item.id}</td>
-                                <td className="date">{item.date}</td>
-                                <td className="color">{item.color}</td>
-                                <td className="button">
-                                    <GrayButton width="90%" onClick={() => handleToggleDetailClick(item.id)}>
-                                        상세보기
-                                    </GrayButton>
-                                </td>
-                                <td className="button">
-                                    <GrayButton width="90%" onClick={() => alert(`${item.id}번을 삭제했습니다`)}>
-                                        삭제하기
-                                    </GrayButton>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                {colorList.length !== 0 ? (
+                    <table>
+                        <tbody>
+                            {colorList?.map((item, index) => (
+                                <tr key={item.id}>
+                                    <td className="id">{index + 1}</td>
+                                    <td className="date">{item.date}</td>
+                                    <td className="color">{seasonPersonal[item.color]}</td>
+                                    <td className="button">
+                                        <GrayButton width="90%" onClick={() => handleToggleDetailClick(item.id)}>
+                                            상세보기
+                                        </GrayButton>
+                                    </td>
+                                    <td className="button">
+                                        <GrayButton width="90%" onClick={() => handleDeleteClick(item.id)}>
+                                            삭제하기
+                                        </GrayButton>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                ) : (
+                    <p>분석한 퍼스널컬러가 없습니다.</p>
+                )}
             </PersonalTableDiv>
         </>
     );
@@ -137,6 +117,10 @@ const PersonalTableDiv = styled.div`
         border-radius: 100px;
         background-color: #e9e9e9;
         box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+    }
+
+    p {
+        line-height: 200px;
     }
 
     tr {

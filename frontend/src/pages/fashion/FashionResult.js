@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import { useSetRecoilState } from 'recoil';
-import { season } from '../../utils/data/season';
+import { season, SeasonTone } from '../../utils/data/season';
 import { fashionPageState } from '../../utils/data/atom';
 import {
     ResultImage,
@@ -14,7 +14,6 @@ import {
     MatchingResult,
     ContainerDiv,
     PercentResult,
-    SeasonTone,
 } from '../../components';
 import { hue, saturation, value } from '../../image';
 
@@ -100,6 +99,9 @@ const ContentContainerDiv = styled.div`
     align-items: center;
     margin-bottom: 8px;
     margin-top: 8px;
+
+    color: ${({ theme }) => theme.color.white};
+    background-color: ${props => props.theme.color.white};
 `;
 
 const ColorContainerDiv = styled(ContainerDiv)`
@@ -132,6 +134,9 @@ const ColorContainerDiv = styled(ContainerDiv)`
     align-items: center;
     margin-bottom: 8px;
     margin-top: 8px;
+
+    color: ${({ theme }) => theme.color.white};
+    background-color: ${props => props.theme.color.white};
 `;
 
 const ImgContainerDiv = styled(ContainerDiv)`
@@ -150,15 +155,22 @@ const ImgContainerDiv = styled(ContainerDiv)`
     align-items: center;
     margin-bottom: 8px;
     margin-top: 20px;
+
+    color: ${({ theme }) => theme.color.white};
+    background-color: ${props => props.theme.color.white};
 `;
 
 const ButtonContainerDiv = styled.div`
+    background-color: ${({ theme }) => theme.color.white};
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     margin-bottom: 50px;
     margin-top: 20px;
+
+    color: ${({ theme }) => theme.color.white};
+    background-color: ${props => props.theme.color.white};
 `;
 
 const CustomButton = styled(BlueButton)`

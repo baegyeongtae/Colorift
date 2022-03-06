@@ -106,7 +106,7 @@ export async function postNotLoggedInFacePhoto(imgData) {
     }
 }
 
-// 패션 사진 및 컬러 조합 결과
+// 패션 사진 및 컬러 조합 결과 (비유저용)
 export async function postNotLoggedInFashionPhoto(fashionData) {
     try {
         const response = await axiosUserConfig({
@@ -118,7 +118,6 @@ export async function postNotLoggedInFashionPhoto(fashionData) {
             },
         });
 
-        console.log(response);
         const hue = response.data.color_match_rate;
         const value = response.data.brightness_match_rate;
         const saturation = response.data.saturation_match_rate;

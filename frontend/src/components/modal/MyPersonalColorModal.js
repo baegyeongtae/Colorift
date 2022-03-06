@@ -1,44 +1,48 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import { season } from '../../utils/data/season';
+import { season, SeasonTone } from '../../utils/data/season';
 import { ContainerDiv, ModalCloseIcon, ResultImage, SubTitleP, MediumTextH, SeasonColor, BackgroundDiv } from '..';
 import { MyModalTable } from './MyModalTable';
 import { getColorDetailModal } from '../../utils/api/service';
 
 export function MyPersonalColorModal({ toggleClickProps, className, colorId }) {
+    // API 요청 결과
+    const [resultColor, setResultColor] = useState({});
+
+    // 어울리는 컬러 목록을 위한 퍼스널컬러 추출
+    const colorList = season[resultColor?.color];
+
+    // 퍼스널컬러 키워드에 따른 색상 추출
+    const seasonColor = SeasonTone(season[resultColor?.color]);
+
+    // 모달 ON/OFF 함수
     const handleToggleClick = () => {
         toggleClickProps();
     };
-    const loggedUser = sessionStorage.getItem('userEmail');
 
-    const [resultColor, setResultColor] = useState('');
+    // 모달 켜지면 API 요청
     useEffect(async () => {
-        if (!loggedUser) {
-            return;
-        }
         const response = await getColorDetailModal(colorId);
         setResultColor(response);
-    }, [colorId]);
-
-    const seasonTone = season[resultColor];
+    }, []);
 
     return (
         <>
             <BackgroundDiv className={className} onClick={handleToggleClick} />
             <ModalDiv className={className}>
-                <MyModalTable id={colorId} />
+                <MyModalTable id={colorId} date={resultColor.date} title={resultColor.color} />
                 <ModalCloseIcon clickProps={handleToggleClick} />
                 <ResultContainerDiv>
-                    <ResultImage />
+                    <ResultImage image={resultColor.image} />
                 </ResultContainerDiv>
 
                 <SubTitleP>
-                    회원님은 <ResultTextS color={resultColor}>봄 웜톤</ResultTextS> 입니다.
+                    회원님은 <ResultTextS color={seasonColor}>봄 웜톤</ResultTextS> 입니다.
                 </SubTitleP>
 
                 <ColorContainerDiv>
                     <MediumTextLeftH>회원님에게 어울리는 컬러</MediumTextLeftH>
-                    <SeasonColor season={seasonTone} />
+                    <SeasonColor season={colorList} />
                 </ColorContainerDiv>
             </ModalDiv>
         </>

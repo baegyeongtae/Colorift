@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { ModalDiv } from './ModalDiv';
 import { BackgroundDiv, ModalCloseIcon, GrayButton, BlueButton, MyPersonalColorModal } from '..';
 import { getColorList } from '../../utils/api/service';
+import { seasonPersonal } from '../../utils/data/season';
 
 export function MyPersonalListModal({ toggleClickProps, className }) {
     // API로 받아온 컬러 데이터 목록
@@ -68,8 +69,8 @@ export function MyPersonalListModal({ toggleClickProps, className }) {
                                         />
                                     </td>
                                     <td className="id">{item.id}</td>
-                                    <td className="date">{item.date}</td>
-                                    <td className="color">{item.color}</td>
+                                    <td className="date">{item.date?.replace(/-/gi, '. ')}</td>
+                                    <td className="color">{seasonPersonal[item.color]}</td>
                                     <td className="button">
                                         <GrayButton width="90%" onClick={() => handleToggleClick(item.id)}>
                                             상세보기

@@ -74,13 +74,13 @@ function NavigationBar() {
     useEffect(() => setIsToggle(false), [pathname]);
 
     // 홈페이지가 꺼질 때 토큰도 정리하기
-    useEffect(() => {
-        console.log(null);
-        return () => {
+    useEffect(
+        () => () => {
             Cookies.remove('accessToken');
             Cookies.remove('refreshToken');
-        };
-    }, []);
+        },
+        [],
+    );
 
     return (
         <>

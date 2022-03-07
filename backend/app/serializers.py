@@ -52,6 +52,7 @@ class ColorTestSerializer(serializers.ModelSerializer):
         fields = ['user', 'image']
 
     def ai_model(self, file):
+        return "SU"
         nparr = np.fromstring(file.read(), np.uint8)
         img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
         return personal_color.analysis(img)

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import Stack from '@mui/material/Stack';
 import { colorPageState } from '../../utils/data/atom';
-import { season, SeasonTone } from '../../utils/data/season';
+import { season, SeasonTone, seasonPersonal } from '../../utils/data/season';
 
 import {
     ResultImage,
@@ -33,7 +33,7 @@ function ColorResult() {
             </ResultContainerDiv>
 
             <SubTitleP>
-                회원님은 <ResultTextS color={resultColor}>봄 웜톤</ResultTextS> 입니다.
+                회원님은 <ResultTextS color={resultColor}>{seasonPersonal[seasonTone]}</ResultTextS> 입니다.
             </SubTitleP>
 
             <ColorContainerDiv>

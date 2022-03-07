@@ -6,7 +6,7 @@ export async function setUserNickname(_nickname) {
     try {
         const response = await axiosConfig({
             method: 'patch',
-            url: 'edit/nickname/',
+            url: '/app/edit/nickname/',
             data: {
                 nickname: _nickname,
             },
@@ -22,7 +22,7 @@ export async function setUserOut() {
     try {
         await axiosConfig({
             method: 'delete',
-            url: 'quit/',
+            url: '/app/quit/',
         });
         sessionStorage.clear();
         Cookies.remove('accessToken');
@@ -39,7 +39,7 @@ export async function getFashionList() {
     try {
         const response = await axiosConfig({
             method: 'get',
-            url: 'fashion/list/',
+            url: '/app/fashion/list/',
         });
         return response;
     } catch (error) {
@@ -47,12 +47,12 @@ export async function getFashionList() {
     }
 }
 
-// 패션 목록 조회
+// 퍼스널컬러 목록 조회
 export async function getColorList() {
     try {
         const response = await axiosConfig({
             method: 'get',
-            url: 'color/list/',
+            url: '/app/color/list/',
         });
         return response;
     } catch (error) {
@@ -65,7 +65,7 @@ export async function postFacePhoto(imgData) {
     try {
         const response = await axiosConfig({
             method: 'post',
-            url: 'color/test/',
+            url: '/app/color/test/',
             data: imgData,
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -86,7 +86,7 @@ export async function postFashionPhoto(fashionData) {
     try {
         const response = await axiosConfig({
             method: 'post',
-            url: 'fashion/test/',
+            url: '/app/fashion/test/',
             data: fashionData,
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -110,7 +110,7 @@ export async function getColorDetailModal(id) {
     try {
         const response = await axiosConfig({
             method: 'get',
-            url: `color/detail/${id}/`,
+            url: `/app/color/detail/${id}/`,
         });
         return response.data;
     } catch (error) {
@@ -123,7 +123,7 @@ export async function getFashionDetailModal(id) {
     try {
         const response = await axiosConfig({
             method: 'get',
-            url: `fashion/detail/${id}/`,
+            url: `/app/fashion/detail/${id}/`,
         });
         return response;
     } catch (error) {
@@ -136,7 +136,7 @@ export async function setDeletePersonal(id) {
     try {
         const response = await axiosConfig({
             method: 'delete',
-            url: `color/detail/${id}/`,
+            url: `/app/color/detail/${id}/`,
         });
         return response;
     } catch (error) {
@@ -149,7 +149,7 @@ export async function setDeleteFashion(id) {
     try {
         const response = await axiosConfig({
             method: 'delete',
-            url: `fashion/detail/${id}/`,
+            url: `/app/fashion/detail/${id}/`,
         });
         return response;
     } catch (error) {

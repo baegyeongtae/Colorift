@@ -7,7 +7,7 @@ export const expire = (1 / 24 / 60) * 5; // 5분
 // axios 기본 인스턴스 생성
 export const axiosUserConfig = axios.create({
     method: 'post',
-    baseURL: `${process.env.REACT_APP_SERVER_ADDRESS}`, // 기본 서버 주소 입력 => 아직 미정
+    //baseURL: `${process.env.REACT_APP_SERVER_ADDRESS}`, // 기본 서버 주소 입력 => 아직 미정
     headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -18,7 +18,7 @@ export const axiosUserConfig = axios.create({
 export async function setUserRegister(_userId, _nickname, _password) {
     try {
         const response = await axiosUserConfig({
-            url: 'register/',
+            url: '/app/register/',
             data: {
                 username: _userId,
                 nickname: _nickname,
@@ -40,7 +40,7 @@ export async function setUserLogin(_userId, _password) {
 
     try {
         const response = await axiosUserConfig({
-            url: 'token/',
+            url: '/app/token/',
             data: userData,
         });
 
@@ -71,7 +71,7 @@ export async function setUserPassword(_userId, _nickname, _password) {
     try {
         const response = await axiosUserConfig({
             method: 'patch',
-            url: 'edit/password/',
+            url: '/app/edit/password/',
             data: {
                 username: _userId,
                 nickname: _nickname,
@@ -88,7 +88,7 @@ export async function postNotLoggedInFacePhoto(imgData) {
     try {
         const response = await axiosUserConfig({
             method: 'post',
-            url: 'color/test/',
+            url: '/app/color/test/',
             data: imgData,
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -110,7 +110,7 @@ export async function postNotLoggedInFashionPhoto(fashionData) {
     try {
         const response = await axiosUserConfig({
             method: 'post',
-            url: 'fashion/test/',
+            url: '/app/fashion/test/',
             data: fashionData,
             headers: {
                 'Content-Type': 'multipart/form-data',

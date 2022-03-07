@@ -109,7 +109,7 @@ export function SignUp() {
 
 const SignUpForm = styled.form`
     display: grid;
-    grid-template-rows: 1fr repeat(4, 0.9fr) 1fr;
+    grid-template-rows: 1fr repeat(4, 1fr) 1fr;
     align-items: center;
     justify-items: center;
 
@@ -123,7 +123,7 @@ const SignUpForm = styled.form`
     }
 
     .title_div {
-        margin-bottom: 50px;
+        margin-bottom: 4vh;
     }
 
     .rule {
@@ -136,7 +136,7 @@ const SignUpForm = styled.form`
     }
 
     @media screen and (max-width: 420px) {
-        grid-template-rows: 1fr repeat(4, 1.2fr) 1fr;
+        grid-template-rows: 1fr repeat(4, 1.3fr) 1fr;
 
         font-size: 1.6rem;
 

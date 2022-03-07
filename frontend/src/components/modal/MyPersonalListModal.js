@@ -15,8 +15,11 @@ export function MyPersonalListModal({ toggleProps, checkProps, className }) {
     // 컬러 선택 모달
     const [colorChoiceModal, setColorChoiceModal] = useState(false);
 
-    // 상세보기 모달에서 선택한 컬러 ID 값
-    const [colorId, setColorId] = useState(0);
+    // 유저가 선택한 퍼스널컬러의 정보
+    const [personalInfo, setPersonalInfo] = useState({
+        id: 0,
+        index: 0,
+    });
 
     // CheckBox Button Select
     const [chosen, setChosen] = useState('');
@@ -47,10 +50,14 @@ export function MyPersonalListModal({ toggleProps, checkProps, className }) {
     };
 
     // 상세보기 모달을 클릭 할 때
-    const handleToggleClick = (id = colorId) => {
+    const handleToggleClick = (id, index) => {
         if (personalListModal) setPersonalListModal(false);
         if (!personalListModal) {
-            setColorId(id);
+            setPersonalInfo(current => ({
+                ...current,
+                id,
+                index,
+            }))
             setPersonalListModal(true);
         }
     };
@@ -70,7 +77,7 @@ export function MyPersonalListModal({ toggleProps, checkProps, className }) {
                     {colorList.length !== 0 ? (
                         <table>
                             <tbody>
-                                {colorList.map(item => (
+                                {colorList.map((item, index) => (
                                     <tr key={item.id}>
                                         <td className="checkbox">
                                             <CheckboxInput
@@ -84,7 +91,7 @@ export function MyPersonalListModal({ toggleProps, checkProps, className }) {
                                         <td className="date">{item.date?.replace(/-/gi, '. ')}</td>
                                         <td className="color">{seasonPersonal[item.color]}</td>
                                         <td className="button">
-                                            <GrayButton width="90%" onClick={() => handleToggleClick(item.id)}>
+                                            <GrayButton width="90%" onClick={() => handleToggleClick(item.id, index + 1)}>
                                                 상세보기
                                             </GrayButton>
                                         </td>
@@ -99,11 +106,14 @@ export function MyPersonalListModal({ toggleProps, checkProps, className }) {
                 </PersonalTableDiv>
                 <BlueButton onClick={handlePropsClick}>확인</BlueButton>
             </ModalTableDiv>
-            <MyPersonalColorModal
-                className={personalListModal && 'show'}
-                toggleProps={handleToggleClick}
-                colorId={colorId}
-            />
+            {personalListModal && (
+                <MyPersonalColorModal
+                    className={personalListModal && 'show'}
+                    toggleProps={handleToggleClick}
+                    selectData={personalInfo}
+                />
+            )}
+
             {colorChoiceModal && (
                 <TextModal
                     text="색상을 선택해주세요."

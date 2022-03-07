@@ -5,7 +5,7 @@ import { BackgroundDiv, ModalCloseIcon, GrayButton, BlueButton, MyPersonalColorM
 import { getColorList } from '../../utils/api/service';
 import { seasonPersonal } from '../../utils/data/season';
 
-export function MyPersonalListModal({ toggleProps, className }) {
+export function MyPersonalListModal({ toggleProps, checkProps, className }) {
     // API로 받아온 컬러 데이터 목록
     const [colorList, setColorList] = useState([]);
 
@@ -31,7 +31,8 @@ export function MyPersonalListModal({ toggleProps, className }) {
             setColorChoiceModal(true);
         } else {
             const chosenColor = seasonPersonal[chosen];
-            toggleProps({ chosenColor });
+            // eslint-disable-next-line no-unused-expressions
+            checkProps && checkProps({ chosenColor });
         }
     };
 
@@ -69,7 +70,7 @@ export function MyPersonalListModal({ toggleProps, className }) {
                     {colorList.length !== 0 ? (
                         <table>
                             <tbody>
-                                {colorList?.map(item => (
+                                {colorList.map(item => (
                                     <tr key={item.id}>
                                         <td className="checkbox">
                                             <CheckboxInput

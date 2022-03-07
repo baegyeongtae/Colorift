@@ -80,11 +80,14 @@ function PersonalColorChoice() {
     const checkedColorText = checkedColor();
 
     // 불러오기 클릭 시 모달 토글 함수 + 선택한 마이퍼스널컬러 가져오기
-    const handleToggleClick = ({ chosenColor = null }) => {
+    const handleToggleClick = () => {
         setListModal(current => !current);
-        if (chosenColor) {
-            setMyPersonalColor(chosenColor);
-        }
+    };
+
+    // 마이퍼스널 목록에서 확인 버튼 눌렀을 때
+    const handleCheckClick = ({ chosenColor }) => {
+        setMyPersonalColor(chosenColor);
+        handleToggleClick();
     };
 
     // 다음으로 클릭 시 선택한 색상이 없을 때 모달 토글 함수
@@ -107,7 +110,11 @@ function PersonalColorChoice() {
     return (
         <>
             {loggedUser ? (
-                <MyPersonalListModal className={listModal && 'show'} toggleProps={handleToggleClick} />
+                <MyPersonalListModal
+                    className={listModal && 'show'}
+                    toggleProps={handleToggleClick}
+                    checkProps={handleCheckClick}
+                />
             ) : (
                 <TextModal
                     text="로그인 이후 이용해주세요."

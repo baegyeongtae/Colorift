@@ -39,7 +39,7 @@ export async function getFashionList() {
     try {
         const response = await axiosConfig({
             method: 'get',
-            url: '/app/color/list/',
+            url: '/app/fashion/list/',
         });
         return response;
     } catch (error) {
@@ -52,7 +52,7 @@ export async function getColorList() {
     try {
         const response = await axiosConfig({
             method: 'get',
-            url: '/app/fashion/list/',
+            url: '/app/color/list/',
         });
         return response;
     } catch (error) {

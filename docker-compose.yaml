@@ -19,10 +19,12 @@ services:
     volumes:
       - db-data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: 0
+      MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: colorfit
       MYSQL_USER: colorfit
       MYSQL_PASSWORD: colorfit
+    ports:
+      - 3306:3306
   backend:
     build:
       context: ./backend

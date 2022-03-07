@@ -62,7 +62,7 @@ export function SignUp() {
         <>
             <TextModal
                 className={regiseterModal && 'show'}
-                toggleClickProps={() => handleToggleModal()}
+                toggleProps={() => handleToggleModal()}
                 text={signUpSuccess ? '가입을 환영합니다.' : '존재하는 아이디입니다.'}
             />
             <Article>

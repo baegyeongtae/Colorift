@@ -63,11 +63,7 @@ export function MyPageFashion() {
     return (
         <>
             {fashionModal && (
-                <MyStyleModal
-                    className={fashionModal && 'show'}
-                    toggleClickProps={handleToggleClick}
-                    colorId={colorId}
-                />
+                <MyStyleModal className={fashionModal && 'show'} toggleProps={handleToggleClick} colorId={colorId} />
             )}
             <FashionDiv>
                 <FasionImageDiv>

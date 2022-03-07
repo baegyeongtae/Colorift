@@ -7,7 +7,7 @@ import { setUserNickname } from '../../utils/api/service';
 import { useUser } from '../../utils/hooks/useUser';
 import { checkRegexNickname } from '../../utils/data/checkRegexUser';
 
-export function ChangeNameModal({ toggleClickProps, className }) {
+export function ChangeNameModal({ toggleProps, className }) {
     // 입력 값 가져오는 ref
     const { nicknameRef } = useUser();
 
@@ -19,7 +19,7 @@ export function ChangeNameModal({ toggleClickProps, className }) {
 
     // 모달 ON/OFF 함수
     const handleClick = () => {
-        toggleClickProps();
+        toggleProps();
     };
 
     // 변경하기 버튼 클릭 시 API 요청
@@ -57,11 +57,11 @@ export function ChangeNameModal({ toggleClickProps, className }) {
                         닉네임 변경
                     </UserButton>
                 </form>
-                <ModalCloseIcon toggleClickProps={handleClick} />
+                <ModalCloseIcon toggleProps={handleClick} />
             </ModalGridDiv>
             <TextModal
                 className={changeModal && 'show'}
-                toggleClickProps={handleToggleModal}
+                toggleProps={handleToggleModal}
                 text="닉네임이 변경되었습니다."
             />
         </>

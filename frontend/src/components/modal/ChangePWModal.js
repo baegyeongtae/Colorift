@@ -7,7 +7,7 @@ import { setUserPassword } from '../../utils/api/user';
 import { useUser } from '../../utils/hooks/useUser';
 import { checkRegexPassword } from '../../utils/data/checkRegexUser';
 
-export function ChangePWModal({ toggleClickProps, className }) {
+export function ChangePWModal({ toggleProps, className }) {
     // 입력 값 가져오는 ref
     const { idRef, nicknameRef, passwordRef, passwordCheckRef } = useUser();
 
@@ -25,7 +25,7 @@ export function ChangePWModal({ toggleClickProps, className }) {
 
     // 모달 ON/OFF 함수
     const handleClick = () => {
-        toggleClickProps();
+        toggleProps();
     };
 
     // 변경하기 버튼 클릭 시 API 요청
@@ -84,11 +84,11 @@ export function ChangePWModal({ toggleClickProps, className }) {
                         비밀번호 변경
                     </UserButton>
                 </form>
-                <ModalCloseIcon toggleClickProps={handleClick} />
+                <ModalCloseIcon toggleProps={handleClick} />
             </ModalGridDiv>
             <TextModal
                 className={changeModal && 'show'}
-                toggleClickProps={handleToggleModal}
+                toggleProps={handleToggleModal}
                 text={
                     changeSuccess ? (
                         <>

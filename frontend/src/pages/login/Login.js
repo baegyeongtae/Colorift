@@ -47,10 +47,10 @@ export function Login() {
         <>
             <TextModal
                 className={noUserModal && 'show'}
-                toggleClickProps={handleNoUserToggleModal}
+                toggleProps={handleNoUserToggleModal}
                 text="아이디 또는 비밀번호를 잘못 입력했습니다"
             />
-            <ChangePWModal className={findModal && 'show'} clickProps={handlePasswordToggleModal} />
+            <ChangePWModal className={findModal && 'show'} toggleProps={handlePasswordToggleModal} />
             <Article>
                 <NavBackgroundDiv />
                 <ContainerDiv>

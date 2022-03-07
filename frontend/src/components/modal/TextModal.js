@@ -1,9 +1,9 @@
 import { BackgroundDiv, ModalCloseIcon, SubTitleP } from '..';
 import { ModalDiv } from './ModalDiv';
 
-export function TextModal({ toggleClickProps, className, text }) {
+export function TextModal({ toggleProps, className, text }) {
     const handleToggleClick = () => {
-        toggleClickProps();
+        toggleProps();
     };
 
     return (
@@ -11,7 +11,7 @@ export function TextModal({ toggleClickProps, className, text }) {
             <BackgroundDiv className={className} onClick={handleToggleClick} />
             <ModalDiv className={className}>
                 <SubTitleP className="text">{text}</SubTitleP>
-                <ModalCloseIcon clickProps={handleToggleClick} />
+                <ModalCloseIcon toggleProps={handleToggleClick} />
             </ModalDiv>
         </>
     );

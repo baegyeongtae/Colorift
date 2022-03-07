@@ -51,7 +51,7 @@ export function MyPagePersonal() {
             {personalModal && (
                 <MyPersonalColorModal
                     className={personalModal && 'show'}
-                    toggleClickProps={handleToggleClick}
+                    toggleProps={handleToggleClick}
                     colorId={colorId}
                 />
             )}

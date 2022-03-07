@@ -5,7 +5,7 @@ import { getFashionDetailModal } from '../../utils/api/service';
 import { ContainerDiv, BackgroundDiv, ModalCloseIcon, SubTitleP, ResultImage, PercentResult } from '..';
 import { MyModalTable } from './MyModalTable';
 
-export function MyStyleModal({ toggleClickProps, className, colorId }) {
+export function MyStyleModal({ toggleProps, className, colorId }) {
     // API 요청 결과
     const [resultFashion, setResultFashion] = useState({});
 
@@ -21,7 +21,7 @@ export function MyStyleModal({ toggleClickProps, className, colorId }) {
 
     // 모달 ON/OFF 함수
     const handleToggleClick = () => {
-        toggleClickProps();
+        toggleProps();
     };
 
     // 모달 켜지면 API 요청
@@ -35,7 +35,7 @@ export function MyStyleModal({ toggleClickProps, className, colorId }) {
             <BackgroundDiv className={className} onClick={handleToggleClick} />
             <ModalDiv className={className}>
                 <MyModalTable id={resultFashion.id} date={resultFashion.date} />
-                <ModalCloseIcon clickProps={handleToggleClick} />
+                <ModalCloseIcon toggleProps={handleToggleClick} />
                 <ContentContainerDiv>
                     <ResultImage image={resultFashion.image} />
                 </ContentContainerDiv>

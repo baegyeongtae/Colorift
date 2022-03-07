@@ -107,18 +107,18 @@ function PersonalColorChoice() {
     return (
         <>
             {loggedUser ? (
-                <MyPersonalListModal className={listModal && 'show'} toggleClickProps={handleToggleClick} />
+                <MyPersonalListModal className={listModal && 'show'} toggleProps={handleToggleClick} />
             ) : (
                 <TextModal
                     text="로그인 이후 이용해주세요."
-                    toggleClickProps={handleToggleClick}
+                    toggleProps={handleToggleClick}
                     className={listModal && 'show'}
                 />
             )}
             {nextDisabledModal && (
                 <TextModal
                     text="색상을 선택해주세요."
-                    toggleClickProps={handleNextDisabled}
+                    toggleProps={handleNextDisabled}
                     className={nextDisabledModal && 'show'}
                 />
             )}

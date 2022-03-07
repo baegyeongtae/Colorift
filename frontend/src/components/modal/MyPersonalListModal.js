@@ -5,7 +5,7 @@ import { BackgroundDiv, ModalCloseIcon, GrayButton, BlueButton, MyPersonalColorM
 import { getColorList } from '../../utils/api/service';
 import { seasonPersonal } from '../../utils/data/season';
 
-export function MyPersonalListModal({ toggleClickProps, className }) {
+export function MyPersonalListModal({ toggleProps, className }) {
     // API로 받아온 컬러 데이터 목록
     const [colorList, setColorList] = useState([]);
 
@@ -31,13 +31,13 @@ export function MyPersonalListModal({ toggleClickProps, className }) {
             setColorChoiceModal(true);
         } else {
             const chosenColor = seasonPersonal[chosen];
-            toggleClickProps({ chosenColor });
+            toggleProps({ chosenColor });
         }
     };
 
     // 마이퍼스널 목록 모달 닫는 토글 함수
     const handleClosedClick = () => {
-        toggleClickProps();
+        toggleProps();
     };
 
     // 컬러를 선택해주세요 모달 닫는 함수
@@ -94,19 +94,19 @@ export function MyPersonalListModal({ toggleClickProps, className }) {
                     ) : (
                         <p>저장된 퍼스널컬러가 없습니다.</p>
                     )}
-                    <ModalCloseIcon clickProps={handleClosedClick} />
+                    <ModalCloseIcon toggleProps={handleClosedClick} />
                 </PersonalTableDiv>
                 <BlueButton onClick={handlePropsClick}>확인</BlueButton>
             </ModalTableDiv>
             <MyPersonalColorModal
                 className={personalListModal && 'show'}
-                toggleClickProps={handleToggleClick}
+                toggleProps={handleToggleClick}
                 colorId={colorId}
             />
             {colorChoiceModal && (
                 <TextModal
                     text="색상을 선택해주세요."
-                    toggleClickProps={handleChoiceClick}
+                    toggleProps={handleChoiceClick}
                     className={colorChoiceModal && 'show'}
                 />
             )}

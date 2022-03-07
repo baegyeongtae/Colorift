@@ -1,11 +1,14 @@
 import styled from 'styled-components';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { setUserRegister } from '../../utils/api/user';
 import { useUser } from '../../utils/hooks/useUser';
 import { UserInputDiv, TitleP, UserButton, NavBackgroundDiv, TextModal, ContainerDiv, Article } from '../../components';
 import { checkRegexId, checkRegexNickname, checkRegexPassword } from '../../utils/data/checkRegexUser';
 
 export function SignUp() {
+    const navigate = useNavigate();
+
     // 가입 완료 or 존재하는 아이디 모달에 들어갈 텍스트
     const [signUpSuccess, setSignUpSuccess] = useState(false);
 
@@ -55,14 +58,14 @@ export function SignUp() {
 
     const handleToggleModal = () => {
         setRegisterModal(current => !current);
-        if (signUpSuccess) window.open('/login', '_self');
+        if (signUpSuccess) navigate('/login', { replace: true });
     };
 
     return (
         <>
             <TextModal
                 className={regiseterModal && 'show'}
-                toggleClickProps={() => handleToggleModal()}
+                toggleProps={() => handleToggleModal()}
                 text={signUpSuccess ? '가입을 환영합니다.' : '존재하는 아이디입니다.'}
             />
             <Article>
@@ -106,7 +109,7 @@ export function SignUp() {
 
 const SignUpForm = styled.form`
     display: grid;
-    grid-template-rows: 1fr repeat(4, 0.9fr) 1fr;
+    grid-template-rows: 1fr repeat(4, 1fr) 1fr;
     align-items: center;
     justify-items: center;
 
@@ -120,7 +123,7 @@ const SignUpForm = styled.form`
     }
 
     .title_div {
-        margin-bottom: 50px;
+        margin-bottom: 4vh;
     }
 
     .rule {
@@ -133,7 +136,7 @@ const SignUpForm = styled.form`
     }
 
     @media screen and (max-width: 420px) {
-        grid-template-rows: 1fr repeat(4, 1.2fr) 1fr;
+        grid-template-rows: 1fr repeat(4, 1.3fr) 1fr;
 
         font-size: 1.6rem;
 

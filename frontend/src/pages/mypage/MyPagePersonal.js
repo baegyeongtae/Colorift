@@ -51,7 +51,7 @@ export function MyPagePersonal() {
             {personalModal && (
                 <MyPersonalColorModal
                     className={personalModal && 'show'}
-                    toggleClickProps={handleToggleClick}
+                    toggleProps={handleToggleClick}
                     colorId={colorId}
                 />
             )}
@@ -59,7 +59,7 @@ export function MyPagePersonal() {
                 {colorList.length !== 0 ? (
                     <table>
                         <tbody>
-                            {colorList?.map((item, index) => (
+                            {colorList.map((item, index) => (
                                 <tr key={item.id}>
                                     <td className="id">{index + 1}</td>
                                     <td className="date">{item.date}</td>

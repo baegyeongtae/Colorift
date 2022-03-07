@@ -60,11 +60,10 @@ export async function setUserLogin(_userId, _password) {
             // httpOnly: true, // 배포하면 주석 제거 필수 (보안용)
         });
 
-        window.open('/', '_self');
+        return response;
     } catch (error) {
         return error.response;
     }
-    return null;
 }
 
 // 비밀번호 변경

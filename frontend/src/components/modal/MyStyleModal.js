@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import { season, SeasonTone } from '../../utils/data/season';
+import { season, SeasonTone, seasonPersonal } from '../../utils/data/season';
 import { getFashionDetailModal } from '../../utils/api/service';
-import { ContainerDiv, BackgroundDiv, ModalCloseIcon, SubTitleP, ResultImage, PercentResult } from '..';
+import { ContainerDiv, BlurBackgroundDiv, ModalCloseIcon, SubTitleP, ResultImage, PercentResult } from '..';
 import { MyModalTable } from './MyModalTable';
 
-export function MyStyleModal({ toggleClickProps, className, colorId }) {
+export function MyStyleModal({ toggleProps, className, selectData }) {
     // API 요청 결과
     const [resultFashion, setResultFashion] = useState({});
 
@@ -21,27 +21,28 @@ export function MyStyleModal({ toggleClickProps, className, colorId }) {
 
     // 모달 ON/OFF 함수
     const handleToggleClick = () => {
-        toggleClickProps();
+        toggleProps();
     };
 
     // 모달 켜지면 API 요청
     useEffect(async () => {
-        const response = await getFashionDetailModal(colorId);
+        const response = await getFashionDetailModal(selectData.id);
         setResultFashion(response.data);
     }, []);
 
     return (
         <>
-            <BackgroundDiv className={className} onClick={handleToggleClick} />
+            <BlurBackgroundDiv className={className} onClick={handleToggleClick} />
             <ModalDiv className={className}>
-                <MyModalTable id={resultFashion.id} date={resultFashion.date} />
-                <ModalCloseIcon clickProps={handleToggleClick} />
+                <MyModalTable id={selectData.index} date={resultFashion.date} title={resultFashion.color} />
+                <ModalCloseIcon toggleProps={handleToggleClick} />
                 <ContentContainerDiv>
                     <ResultImage image={resultFashion.image} />
                 </ContentContainerDiv>
 
                 <SubTitleP>
-                    이 옷은 <ResultTextS color={resultColor}>봄 웜톤</ResultTextS>인 회원님께
+                    이 옷은 <ResultTextS color={resultColor}>{seasonPersonal[resultFashion.color]}</ResultTextS>인
+                    회원님께
                 </SubTitleP>
                 <PercentResult
                     resultColor={resultColor}

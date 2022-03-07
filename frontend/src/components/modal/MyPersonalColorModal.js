@@ -5,7 +5,7 @@ import { ContainerDiv, ModalCloseIcon, ResultImage, SubTitleP, MediumTextH, Seas
 import { MyModalTable } from './MyModalTable';
 import { getColorDetailModal } from '../../utils/api/service';
 
-export function MyPersonalColorModal({ toggleProps, className, colorId }) {
+export function MyPersonalColorModal({ toggleProps, className, selectData }) {
     // API 요청 결과
     const [resultColor, setResultColor] = useState({});
 
@@ -22,7 +22,7 @@ export function MyPersonalColorModal({ toggleProps, className, colorId }) {
 
     // 모달 켜지면 API 요청
     useEffect(async () => {
-        const response = await getColorDetailModal(colorId);
+        const response = await getColorDetailModal(selectData.id);
         setResultColor(response);
     }, []);
 
@@ -30,7 +30,7 @@ export function MyPersonalColorModal({ toggleProps, className, colorId }) {
         <>
             <BlurBackgroundDiv className={className} onClick={handleToggleClick} />
             <ModalDiv className={className}>
-                <MyModalTable id={colorId} date={resultColor.date} title={resultColor.color} />
+                <MyModalTable id={selectData.index} date={resultColor.date} title={resultColor.color} />
                 <ModalCloseIcon toggleProps={handleToggleClick} />
                 <ResultContainerDiv>
                     <ResultImage image={resultColor.image} />

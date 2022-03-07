@@ -80,9 +80,11 @@ function PersonalColorChoice() {
     const checkedColorText = checkedColor();
 
     // 불러오기 클릭 시 모달 토글 함수 + 선택한 마이퍼스널컬러 가져오기
-    const handleToggleClick = ({ chosenColor }) => {
+    const handleToggleClick = ({ chosenColor = null }) => {
         setListModal(current => !current);
-        setMyPersonalColor(chosenColor);
+        if (chosenColor) {
+            setMyPersonalColor(chosenColor);
+        }
     };
 
     // 다음으로 클릭 시 선택한 색상이 없을 때 모달 토글 함수

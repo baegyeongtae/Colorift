@@ -66,7 +66,7 @@ export function MyChangePWModal({ toggleClickProps, className }) {
                         비밀번호 변경
                     </UserButton>
                 </form>
-                <ModalCloseIcon clickProps={handleClick} />
+                <ModalCloseIcon toggleClickProps={handleClick} />
             </ModalGridDiv>
             <TextModal
                 className={changeModal && 'show'}

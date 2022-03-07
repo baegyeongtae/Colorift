@@ -57,7 +57,7 @@ export function ChangeNameModal({ toggleClickProps, className }) {
                         닉네임 변경
                     </UserButton>
                 </form>
-                <ModalCloseIcon clickProps={handleClick} />
+                <ModalCloseIcon toggleClickProps={handleClick} />
             </ModalGridDiv>
             <TextModal
                 className={changeModal && 'show'}

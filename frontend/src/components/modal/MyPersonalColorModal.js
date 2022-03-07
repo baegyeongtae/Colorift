@@ -31,7 +31,7 @@ export function MyPersonalColorModal({ toggleClickProps, className, colorId }) {
             <BackgroundDiv className={className} onClick={handleToggleClick} />
             <ModalDiv className={className}>
                 <MyModalTable id={colorId} date={resultColor.date} title={resultColor.color} />
-                <ModalCloseIcon clickProps={handleToggleClick} />
+                <ModalCloseIcon toggleClickProps={handleToggleClick} />
                 <ResultContainerDiv>
                     <ResultImage image={resultColor.image} />
                 </ResultContainerDiv>

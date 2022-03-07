@@ -19,6 +19,7 @@ export function SeasonTone(_season) {
         autumn: '#CA5C3D',
         winter: '#F3E902',
     };
+    
     const resultColor =
         (_season === 'spring' && colorData.spring) ||
         (_season === 'summer' && colorData.summer) ||

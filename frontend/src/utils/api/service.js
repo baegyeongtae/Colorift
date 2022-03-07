@@ -47,7 +47,7 @@ export async function getFashionList() {
     }
 }
 
-// 패션 목록 조회
+// 퍼스널컬러 목록 조회
 export async function getColorList() {
     try {
         const response = await axiosConfig({

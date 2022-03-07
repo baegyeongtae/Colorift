@@ -3,7 +3,7 @@ import { seasonPersonal } from '../../utils/data/season';
 
 export function MyModalTable({ id, date, title }) {
     const dateReplace = date?.replace(/-/gi, '. ');
-    const titleReplace = seasonPersonal[title];
+    const titleReplace = seasonPersonal?.[title];
 
     return (
         <TableDiv>

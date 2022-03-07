@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import { season, SeasonTone } from '../../utils/data/season';
+import { season, SeasonTone, seasonPersonal } from '../../utils/data/season';
 import { ContainerDiv, ModalCloseIcon, ResultImage, SubTitleP, MediumTextH, SeasonColor, BlurBackgroundDiv } from '..';
 import { MyModalTable } from './MyModalTable';
 import { getColorDetailModal } from '../../utils/api/service';
@@ -37,7 +37,7 @@ export function MyPersonalColorModal({ toggleProps, className, colorId }) {
                 </ResultContainerDiv>
 
                 <SubTitleP>
-                    회원님은 <ResultTextS color={seasonColor}>봄 웜톤</ResultTextS> 입니다.
+                    회원님은 <ResultTextS color={seasonColor}>{seasonPersonal[resultColor.color]}</ResultTextS> 입니다.
                 </SubTitleP>
 
                 <ColorContainerDiv>

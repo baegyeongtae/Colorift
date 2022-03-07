@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { ModalDiv } from './ModalDiv';
-import { BackgroundDiv, ModalCloseIcon, GrayButton, BlueButton, MyPersonalColorModal, TextModal } from '..';
+import { BlurBackgroundDiv, ModalCloseIcon, GrayButton, BlueButton, MyPersonalColorModal, TextModal } from '..';
 import { getColorList } from '../../utils/api/service';
 import { seasonPersonal } from '../../utils/data/season';
 
@@ -63,7 +63,7 @@ export function MyPersonalListModal({ toggleProps, checkProps, className }) {
 
     return (
         <>
-            <BackgroundDiv className={className} onClick={handleClosedClick} />
+            <BlurBackgroundDiv className={className} onClick={handleClosedClick} />
             <ModalTableDiv className={className}>
                 <TextP>회원님이 저장한 퍼스널 컬러 목록입니다.</TextP>
                 <PersonalTableDiv>

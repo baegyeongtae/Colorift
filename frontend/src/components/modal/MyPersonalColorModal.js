@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { season, SeasonTone } from '../../utils/data/season';
-import { ContainerDiv, ModalCloseIcon, ResultImage, SubTitleP, MediumTextH, SeasonColor, BackgroundDiv } from '..';
+import { ContainerDiv, ModalCloseIcon, ResultImage, SubTitleP, MediumTextH, SeasonColor, BlurBackgroundDiv } from '..';
 import { MyModalTable } from './MyModalTable';
 import { getColorDetailModal } from '../../utils/api/service';
 
@@ -28,7 +28,7 @@ export function MyPersonalColorModal({ toggleProps, className, colorId }) {
 
     return (
         <>
-            <BackgroundDiv className={className} onClick={handleToggleClick} />
+            <BlurBackgroundDiv className={className} onClick={handleToggleClick} />
             <ModalDiv className={className}>
                 <MyModalTable id={colorId} date={resultColor.date} title={resultColor.color} />
                 <ModalCloseIcon toggleProps={handleToggleClick} />

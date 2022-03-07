@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BackgroundDiv, ModalCloseIcon, UserInputDiv, UserButton, TitleP } from '..';
+import { BlurBackgroundDiv, ModalCloseIcon, UserInputDiv, UserButton, TitleP } from '..';
 import { ModalDiv } from './ModalDiv';
 import { TextModal } from './TextModal';
 import { setUserPassword } from '../../utils/api/user';
@@ -65,7 +65,7 @@ export function ChangePWModal({ toggleProps, className }) {
 
     return (
         <>
-            <BackgroundDiv className={className} onClick={handleClick} />
+            <BlurBackgroundDiv className={className} onClick={handleClick} />
             <ModalGridDiv className={className}>
                 <form onSubmit={handleSubmit}>
                     <TitleP color="#3C64B1">

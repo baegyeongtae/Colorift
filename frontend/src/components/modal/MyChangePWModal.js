@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import { BackgroundDiv, ModalCloseIcon, UserInputDiv, UserButton } from '..';
+import { BlurBackgroundDiv, ModalCloseIcon, UserInputDiv, UserButton } from '..';
 import { ModalDiv } from './ModalDiv';
 import { TextModal } from './TextModal';
 import { setUserPassword } from '../../utils/api/user';
@@ -51,7 +51,7 @@ export function MyChangePWModal({ toggleProps, className }) {
 
     return (
         <>
-            <BackgroundDiv className={className} onClick={handleClick} />
+            <BlurBackgroundDiv className={className} onClick={handleClick} />
             <ModalGridDiv className={className}>
                 <form onSubmit={handleSubmit}>
                     <div>

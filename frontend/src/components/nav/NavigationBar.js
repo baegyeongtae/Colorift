@@ -3,7 +3,7 @@ import { useSetRecoilState } from 'recoil';
 import { Outlet, useLocation, NavLink } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 import Cookies from 'js-cookie';
-import { Logo, Footer, BackgroundDiv } from '..';
+import { Logo, Footer, BlurBackgroundDiv } from '..';
 import { ContainerDiv } from '../area/ContainerDiv';
 import { useGetScrollY } from '../../utils/hooks/useGetScrollY';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
@@ -131,7 +131,7 @@ function NavigationBar() {
                         </MenuIconDiv>
                     </ContainerGridDiv>
                 </Nav>
-                <BackgroundDiv onClick={handleToggleClick} className={isToggle && 'show'} />
+                <BlurBackgroundDiv onClick={handleToggleClick} className={isToggle && 'show'} />
             </header>
             <main style={{ minHeight: '100%' }}>
                 <Outlet />

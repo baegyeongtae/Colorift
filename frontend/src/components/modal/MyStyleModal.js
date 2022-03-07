@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { season, SeasonTone, seasonPersonal } from '../../utils/data/season';
 import { getFashionDetailModal } from '../../utils/api/service';
-import { ContainerDiv, BackgroundDiv, ModalCloseIcon, SubTitleP, ResultImage, PercentResult } from '..';
+import { ContainerDiv, BlurBackgroundDiv, ModalCloseIcon, SubTitleP, ResultImage, PercentResult } from '..';
 import { MyModalTable } from './MyModalTable';
 
 export function MyStyleModal({ toggleProps, className, selectData }) {
@@ -32,7 +32,7 @@ export function MyStyleModal({ toggleProps, className, selectData }) {
 
     return (
         <>
-            <BackgroundDiv className={className} onClick={handleToggleClick} />
+            <BlurBackgroundDiv className={className} onClick={handleToggleClick} />
             <ModalDiv className={className}>
                 <MyModalTable id={selectData.index} date={resultFashion.date} title={resultFashion.color} />
                 <ModalCloseIcon toggleProps={handleToggleClick} />

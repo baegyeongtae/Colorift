@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import { BackgroundDiv, ModalCloseIcon, UserInputDiv, UserButton } from '..';
+import { BlurBackgroundDiv, ModalCloseIcon, UserInputDiv, UserButton } from '..';
 import { ModalDiv } from './ModalDiv';
 import { TextModal } from './TextModal';
 import { setUserNickname } from '../../utils/api/service';
@@ -47,7 +47,7 @@ export function ChangeNameModal({ toggleProps, className }) {
 
     return (
         <>
-            <BackgroundDiv className={className} onClick={handleToggleClick} />
+            <BlurBackgroundDiv className={className} onClick={handleToggleClick} />
             <ModalGridDiv className={className}>
                 <form onSubmit={handleSubmit}>
                     <div>

@@ -28,7 +28,7 @@ export function ChangePWModal({ toggleProps, className }) {
 
     // 모달 ON/OFF 함수
     const handleClick = () => {
-        toggleProps();
+        toggleProps && toggleProps();
     };
 
     // 변경하기 버튼 클릭 시 API 요청

@@ -41,7 +41,7 @@ export function MyPersonalListModal({ toggleProps, checkProps, className }) {
 
     // 마이퍼스널 목록 모달 닫는 토글 함수
     const handleClosedClick = () => {
-        toggleProps();
+        toggleProps && toggleProps();
     };
 
     // 컬러를 선택해주세요 모달 닫는 함수

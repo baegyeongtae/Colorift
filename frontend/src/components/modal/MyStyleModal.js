@@ -21,7 +21,7 @@ export function MyStyleModal({ toggleProps, className, selectData }) {
 
     // 모달 ON/OFF 함수
     const handleToggleClick = () => {
-        toggleProps();
+        toggleProps && toggleProps();
     };
 
     // 모달 켜지면 API 요청

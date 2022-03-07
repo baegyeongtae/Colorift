@@ -18,7 +18,7 @@ export function ChangeNameModal({ toggleProps, className }) {
     const [regexCheck, setRegexCheck] = useState(true);
 
     // 모달 ON/OFF 함수
-    const handleClick = () => {
+    const handleToggleClick = () => {
         toggleProps();
     };
 
@@ -32,7 +32,8 @@ export function ChangeNameModal({ toggleProps, className }) {
                 sessionStorage.setItem('userNickname', nicknameRef.current.value);
                 setChangeModal(true);
                 setTimeout(() => {
-                    window.open('/mypage', '_self');
+                    setChangeModal(false);
+                    handleToggleClick();
                 }, 2000);
             }
         } else {
@@ -46,7 +47,7 @@ export function ChangeNameModal({ toggleProps, className }) {
 
     return (
         <>
-            <BackgroundDiv className={className} onClick={handleClick} />
+            <BackgroundDiv className={className} onClick={handleToggleClick} />
             <ModalGridDiv className={className}>
                 <form onSubmit={handleSubmit}>
                     <div>
@@ -57,13 +58,15 @@ export function ChangeNameModal({ toggleProps, className }) {
                         닉네임 변경
                     </UserButton>
                 </form>
-                <ModalCloseIcon toggleProps={handleClick} />
+                <ModalCloseIcon toggleProps={handleToggleClick} />
             </ModalGridDiv>
-            <TextModal
-                className={changeModal && 'show'}
-                toggleProps={handleToggleModal}
-                text="닉네임이 변경되었습니다."
-            />
+            {changeModal && (
+                <TextModal
+                    className={changeModal && 'show'}
+                    toggleProps={handleToggleModal}
+                    text="닉네임이 변경되었습니다."
+                />
+            )}
         </>
     );
 }

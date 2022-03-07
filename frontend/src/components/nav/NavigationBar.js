@@ -21,6 +21,7 @@ function NavigationBar() {
     // 현재 url 받아오기
     const location = useLocation();
     const { pathname } = location;
+    const { userId } = location.state || '';
 
     // 현재 스크롤 위치 받아오기
     const { scrollY } = useGetScrollY();
@@ -45,9 +46,6 @@ function NavigationBar() {
         },
     ];
 
-    // 세션 스토리지에 정보가 있으면 받아오기 (로그인 상태 확인)
-    const [userId, setUserId] = useState(sessionStorage.getItem('userId') || '');
-
     // 메뉴바 클릭 상태 변환하는 함수
     const handleToggleClick = () => {
         setIsToggle(current => !current);
@@ -64,7 +62,6 @@ function NavigationBar() {
         Cookies.remove('accessToken');
         Cookies.remove('refreshToken');
         sessionStorage.clear();
-        setUserId('');
     }
 
     // 모바일 버전 메뉴바 show 상태에서는 스크롤 막기
@@ -76,8 +73,7 @@ function NavigationBar() {
     // 홈페이지가 꺼질 때 토큰도 정리하기
     useEffect(
         () => () => {
-            Cookies.remove('accessToken');
-            Cookies.remove('refreshToken');
+            userSessionReset();
         },
         [],
     );

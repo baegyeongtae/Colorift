@@ -1,11 +1,14 @@
 import styled from 'styled-components';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { setUserRegister } from '../../utils/api/user';
 import { useUser } from '../../utils/hooks/useUser';
 import { UserInputDiv, TitleP, UserButton, NavBackgroundDiv, TextModal, ContainerDiv, Article } from '../../components';
 import { checkRegexId, checkRegexNickname, checkRegexPassword } from '../../utils/data/checkRegexUser';
 
 export function SignUp() {
+    const navigate = useNavigate();
+
     // 가입 완료 or 존재하는 아이디 모달에 들어갈 텍스트
     const [signUpSuccess, setSignUpSuccess] = useState(false);
 
@@ -55,7 +58,7 @@ export function SignUp() {
 
     const handleToggleModal = () => {
         setRegisterModal(current => !current);
-        if (signUpSuccess) window.open('/login', '_self');
+        if (signUpSuccess) navigate('/login', { replace: true });
     };
 
     return (

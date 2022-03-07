@@ -1,10 +1,13 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { MyStyleModal, GrayButton } from '../../components';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 import { getFashionList, setDeleteFashion } from '../../utils/api/service';
 
 export function MyPageFashion() {
+    const navigate = useNavigate();
+
     // 상세보기 모달
     const [fashionModal, setFashionModal] = useState(false);
 
@@ -67,7 +70,7 @@ export function MyPageFashion() {
             )}
             <FashionDiv>
                 <FasionImageDiv>
-                    {fashionList?.slice(0, imageMaxIndex)?.map((item, index) => (
+                    {fashionList?.slice(0, imageMaxIndex + 1)?.map((item, index) => (
                         <div key={item.id}>
                             <GrayButton width="70px" onClick={() => handleDeleteClick(item.id, index)}>
                                 삭제하기

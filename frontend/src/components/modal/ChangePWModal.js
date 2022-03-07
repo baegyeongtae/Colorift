@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { BackgroundDiv, ModalCloseIcon, UserInputDiv, UserButton, TitleP } from '..';
 import { ModalDiv } from './ModalDiv';
 import { TextModal } from './TextModal';
@@ -8,6 +9,8 @@ import { useUser } from '../../utils/hooks/useUser';
 import { checkRegexPassword } from '../../utils/data/checkRegexUser';
 
 export function ChangePWModal({ toggleProps, className }) {
+    const navigate = useNavigate();
+
     // 입력 값 가져오는 ref
     const { idRef, nicknameRef, passwordRef, passwordCheckRef } = useUser();
 
@@ -57,7 +60,7 @@ export function ChangePWModal({ toggleProps, className }) {
 
     const handleToggleModal = () => {
         setChangeModal(current => !current);
-        if (changeSuccess) window.open('/login', '_self');
+        if (changeSuccess) navigate('/login');
     };
 
     return (

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
     ContainerDiv,
     UserInputDiv,
@@ -14,6 +15,8 @@ import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 import { setUserLogin } from '../../utils/api/user';
 
 export function Login() {
+    const navigate = useNavigate();
+
     // 비밀번호 찾기 모달
     const [findModal, setFindModal] = useState(false);
 
@@ -38,7 +41,14 @@ export function Login() {
     const handleSubmit = async event => {
         event.preventDefault();
         const response = await setUserLogin(idRef.current.value, passwordRef.current.value);
-        if (response.status === 401) setNoUserModal(true);
+        if (response.status === 200) {
+            navigate('/', {
+                replace: true,
+                state: {
+                    userId: sessionStorage.getItem('userId'),
+                },
+            });
+        } else if (response.status === 401) setNoUserModal(true);
     };
 
     useEffect(() => setScrollDisabled(findModal), [findModal]);
@@ -81,7 +91,7 @@ export function Login() {
                             width="80%"
                             height="50%"
                             className="button"
-                            onClick={() => window.open('/signup', '_self')}
+                            onClick={() => navigate('/signup')}
                         >
                             회원가입
                         </UserButton>

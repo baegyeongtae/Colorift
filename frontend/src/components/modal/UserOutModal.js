@@ -3,9 +3,9 @@ import { setUserOut } from '../../utils/api/service';
 import { BackgroundDiv, ModalCloseIcon, SubTitleP, HomeButton } from '..';
 import { ModalDiv } from './ModalDiv';
 
-export function UserOutModal({ toggleProps, className, text }) {
+export function UserOutModal({ toggleClickProps, className, text }) {
     const handleToggleClick = () => {
-        toggleProps();
+        toggleClickProps();
     };
 
     const handleUserOut = () => {
@@ -21,7 +21,7 @@ export function UserOutModal({ toggleProps, className, text }) {
                     <HomeButton onClick={handleUserOut}>탈퇴</HomeButton>
                     <HomeButton onClick={handleToggleClick}>취소</HomeButton>
                 </ButtonDiv>
-                <ModalCloseIcon toggleProps={handleToggleClick} />
+                <ModalCloseIcon clickProps={handleToggleClick} />
             </ModalColumnDiv>
         </>
     );

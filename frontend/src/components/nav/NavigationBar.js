@@ -22,6 +22,7 @@ function NavigationBar() {
     const location = useLocation();
     const { pathname } = location;
     const { userId } = location.state || '';
+    const isLogin = sessionStorage.getItem('userId') || '';
 
     // 현재 스크롤 위치 받아오기
     const { scrollY } = useGetScrollY();
@@ -97,19 +98,19 @@ function NavigationBar() {
                                     </NavLink>
                                 ))}
                             </MenuDiv>
-                            <UserDiv className={isToggle && 'show'} login={userId}>
+                            <UserDiv className={isToggle && 'show'} login={userId || isLogin}>
                                 <NavLink
-                                    to={userId ? '/' : '/login'}
+                                    to={userId || isLogin ? '/' : '/login'}
                                     className={pathname === '/' && scrollY === 0 ? 'transparent login' : 'login'}
-                                    onClick={() => userId && userSessionReset()}
+                                    onClick={() => userId || (isLogin && userSessionReset())}
                                 >
-                                    {userId ? 'Logout' : 'Log In'}
+                                    {userId || isLogin ? 'Logout' : 'Log In'}
                                 </NavLink>
                                 <NavLink
-                                    to={userId ? `/mypage` : '/signup'}
+                                    to={userId || isLogin ? `/mypage` : '/signup'}
                                     className={pathname === '/' && scrollY === 0 ? 'transparent signup' : 'signup'}
                                 >
-                                    {userId ? (
+                                    {userId || isLogin ? (
                                         <img
                                             src={profileIcon}
                                             alt="마이페이지 아이콘"

@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import { BackgroundDiv, ModalCloseIcon, UserInputDiv, UserButton } from '..';
+import { BlurBackgroundDiv, ModalCloseIcon, UserInputDiv, UserButton } from '..';
 import { ModalDiv } from './ModalDiv';
 import { TextModal } from './TextModal';
 import { setUserNickname } from '../../utils/api/service';
 import { useUser } from '../../utils/hooks/useUser';
 import { checkRegexNickname } from '../../utils/data/checkRegexUser';
 
-export function ChangeNameModal({ toggleClickProps, className }) {
+export function ChangeNameModal({ toggleProps, className }) {
     // 입력 값 가져오는 ref
     const { nicknameRef } = useUser();
 
@@ -18,8 +18,8 @@ export function ChangeNameModal({ toggleClickProps, className }) {
     const [regexCheck, setRegexCheck] = useState(true);
 
     // 모달 ON/OFF 함수
-    const handleClick = () => {
-        toggleClickProps();
+    const handleToggleClick = () => {
+        toggleProps();
     };
 
     // 변경하기 버튼 클릭 시 API 요청
@@ -32,7 +32,8 @@ export function ChangeNameModal({ toggleClickProps, className }) {
                 sessionStorage.setItem('userNickname', nicknameRef.current.value);
                 setChangeModal(true);
                 setTimeout(() => {
-                    window.open('/mypage', '_self');
+                    setChangeModal(false);
+                    handleToggleClick();
                 }, 2000);
             }
         } else {
@@ -46,7 +47,7 @@ export function ChangeNameModal({ toggleClickProps, className }) {
 
     return (
         <>
-            <BackgroundDiv className={className} onClick={handleClick} />
+            <BlurBackgroundDiv className={className} onClick={handleToggleClick} />
             <ModalGridDiv className={className}>
                 <form onSubmit={handleSubmit}>
                     <div>
@@ -57,13 +58,15 @@ export function ChangeNameModal({ toggleClickProps, className }) {
                         닉네임 변경
                     </UserButton>
                 </form>
-                <ModalCloseIcon clickProps={handleClick} />
+                <ModalCloseIcon toggleProps={handleToggleClick} />
             </ModalGridDiv>
-            <TextModal
-                className={changeModal && 'show'}
-                toggleClickProps={handleToggleModal}
-                text="닉네임이 변경되었습니다."
-            />
+            {changeModal && (
+                <TextModal
+                    className={changeModal && 'show'}
+                    toggleProps={handleToggleModal}
+                    text="닉네임이 변경되었습니다."
+                />
+            )}
         </>
     );
 }

@@ -3,7 +3,7 @@ import { useSetRecoilState } from 'recoil';
 import { Outlet, useLocation, NavLink } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 import Cookies from 'js-cookie';
-import { Logo, Footer, BackgroundDiv } from '..';
+import { Logo, Footer, BlurBackgroundDiv } from '..';
 import { ContainerDiv } from '../area/ContainerDiv';
 import { useGetScrollY } from '../../utils/hooks/useGetScrollY';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
@@ -21,6 +21,8 @@ function NavigationBar() {
     // 현재 url 받아오기
     const location = useLocation();
     const { pathname } = location;
+    const { userId } = location.state || '';
+    const isLogin = sessionStorage.getItem('userId') || '';
 
     // 현재 스크롤 위치 받아오기
     const { scrollY } = useGetScrollY();
@@ -45,9 +47,6 @@ function NavigationBar() {
         },
     ];
 
-    // 세션 스토리지에 정보가 있으면 받아오기 (로그인 상태 확인)
-    const [userId, setUserId] = useState(sessionStorage.getItem('userId') || '');
-
     // 메뉴바 클릭 상태 변환하는 함수
     const handleToggleClick = () => {
         setIsToggle(current => !current);
@@ -64,7 +63,6 @@ function NavigationBar() {
         Cookies.remove('accessToken');
         Cookies.remove('refreshToken');
         sessionStorage.clear();
-        setUserId('');
     }
 
     // 모바일 버전 메뉴바 show 상태에서는 스크롤 막기
@@ -76,8 +74,7 @@ function NavigationBar() {
     // 홈페이지가 꺼질 때 토큰도 정리하기
     useEffect(
         () => () => {
-            Cookies.remove('accessToken');
-            Cookies.remove('refreshToken');
+            userSessionReset();
         },
         [],
     );
@@ -101,19 +98,19 @@ function NavigationBar() {
                                     </NavLink>
                                 ))}
                             </MenuDiv>
-                            <UserDiv className={isToggle && 'show'} login={userId}>
+                            <UserDiv className={isToggle && 'show'} login={userId || isLogin}>
                                 <NavLink
-                                    to={userId ? '/' : '/login'}
+                                    to={userId || isLogin ? '/' : '/login'}
                                     className={pathname === '/' && scrollY === 0 ? 'transparent login' : 'login'}
-                                    onClick={() => userId && userSessionReset()}
+                                    onClick={() => userId || (isLogin && userSessionReset())}
                                 >
-                                    {userId ? 'Logout' : 'Log In'}
+                                    {userId || isLogin ? 'Logout' : 'Log In'}
                                 </NavLink>
                                 <NavLink
-                                    to={userId ? `/mypage` : '/signup'}
+                                    to={userId || isLogin ? `/mypage` : '/signup'}
                                     className={pathname === '/' && scrollY === 0 ? 'transparent signup' : 'signup'}
                                 >
-                                    {userId ? (
+                                    {userId || isLogin ? (
                                         <img
                                             src={profileIcon}
                                             alt="마이페이지 아이콘"
@@ -134,7 +131,7 @@ function NavigationBar() {
                         </MenuIconDiv>
                     </ContainerGridDiv>
                 </Nav>
-                <BackgroundDiv onClick={handleToggleClick} className={isToggle && 'show'} />
+                <BlurBackgroundDiv onClick={handleToggleClick} className={isToggle && 'show'} />
             </header>
             <main style={{ minHeight: '100%' }}>
                 <Outlet />

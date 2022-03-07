@@ -4,7 +4,7 @@ export { Footer } from './footer/Footer';
 export { NavigationBar, NavBackgroundDiv } from './nav';
 export { BigTextP, DescriptionP, TitleP, SubTitleP, MediumTextH, RadioTextH } from './text';
 export { HomeServiceIcon, HomeColorBar, HomeContainerDiv } from './home';
-export { Article, BackgroundArticle, BackgroundDiv, ContainerDiv } from './area';
+export { Article, BackgroundArticle, BlurBackgroundDiv, ContainerDiv } from './area';
 export { ExampleTitle, ExampleImage, ExampleColor } from './example';
 export { ScrollUpIcon, ModalCloseIcon, Logo } from './icon';
 export { UserInputDiv, Input } from './login/UserInputDiv';

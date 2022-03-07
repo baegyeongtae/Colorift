@@ -11,7 +11,7 @@ const backgroundKeyframe = keyframes`
     }
 `;
 
-export const BackgroundDiv = styled.div`
+export const BlurBackgroundDiv = styled.div`
     display: none;
 
     &.show {

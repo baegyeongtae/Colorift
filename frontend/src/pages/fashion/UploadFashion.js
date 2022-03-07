@@ -75,7 +75,7 @@ function UploadFashion() {
 
     return (
         <>
-            <TextModal className={textModal && 'show'} toggleClickProps={handleToggleClick} text="사진을 올려주세요." />
+            <TextModal className={textModal && 'show'} toggleProps={handleToggleClick} text="사진을 올려주세요." />
             <NavBackgroundDiv />
             {isLoading ? (
                 <>

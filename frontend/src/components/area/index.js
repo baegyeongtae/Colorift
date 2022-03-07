@@ -2,5 +2,5 @@
 
 export { Article } from './Article';
 export { BackgroundArticle } from './BackgroundArticle';
-export { BackgroundDiv } from './BackgroundDiv';
+export { BlurBackgroundDiv } from './BlurBackgroundDiv';
 export { ContainerDiv } from './ContainerDiv';

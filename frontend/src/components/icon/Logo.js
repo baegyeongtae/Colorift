@@ -1,9 +1,12 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { logoIcon } from '../../image';
 
 export function Logo() {
+    const navigate = useNavigate();
+
     const handleLogoClick = () => {
-        window.open('/', '_self');
+        navigate('/');
     };
 
     return (

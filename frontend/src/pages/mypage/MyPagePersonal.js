@@ -9,8 +9,11 @@ export function MyPagePersonal() {
     // 상세보기 모달
     const [personalModal, setPersonalModal] = useState(false);
 
-    // 상세보기 모달에서 선택한 컬러 ID 값
-    const [colorId, setColorId] = useState(0);
+    // 유저가 선택한 패션 사진의 정보
+    const [personalInfo, setPersonalInfo] = useState({
+        id: 0,
+        index: 0,
+    });
 
     // API로 받아온 컬러 데이터 목록
     const [colorList, setColorList] = useState([]);
@@ -21,8 +24,12 @@ export function MyPagePersonal() {
     };
 
     // 상세보기 버튼 클릭했을 때
-    const handleToggleDetailClick = (id = colorId) => {
-        setColorId(id);
+    const handleToggleDetailClick = (id, index) => {
+        setPersonalInfo(current => ({
+            ...current,
+            id,
+            index,
+        }));
         setPersonalModal(current => !current);
     };
 
@@ -52,20 +59,20 @@ export function MyPagePersonal() {
                 <MyPersonalColorModal
                     className={personalModal && 'show'}
                     toggleProps={handleToggleClick}
-                    colorId={colorId}
+                    selectData={personalInfo}
                 />
             )}
             <PersonalTableDiv className="personal">
-                {colorList.length !== 0 ? (
+                {colorList?.length !== 0 ? (
                     <table>
                         <tbody>
-                            {colorList.map((item, index) => (
+                            {colorList?.map((item, index) => (
                                 <tr key={item.id}>
                                     <td className="id">{index + 1}</td>
                                     <td className="date">{item.date}</td>
                                     <td className="color">{seasonPersonal[item.color]}</td>
                                     <td className="button">
-                                        <GrayButton width="90%" onClick={() => handleToggleDetailClick(item.id)}>
+                                        <GrayButton width="90%" onClick={() => handleToggleDetailClick(item.id, index + 1)}>
                                             상세보기
                                         </GrayButton>
                                     </td>

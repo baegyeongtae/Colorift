@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { season, SeasonTone } from '../../utils/data/season';
-import { ContainerDiv, ModalCloseIcon, ResultImage, SubTitleP, MediumTextH, SeasonColor, BackgroundDiv } from '..';
+import { ContainerDiv, ModalCloseIcon, ResultImage, SubTitleP, MediumTextH, SeasonColor, BlurBackgroundDiv } from '..';
 import { MyModalTable } from './MyModalTable';
 import { getColorDetailModal } from '../../utils/api/service';
 
-export function MyPersonalColorModal({ toggleClickProps, className, colorId }) {
+export function MyPersonalColorModal({ toggleProps, className, colorId }) {
     // API 요청 결과
     const [resultColor, setResultColor] = useState({});
 
@@ -17,7 +17,7 @@ export function MyPersonalColorModal({ toggleClickProps, className, colorId }) {
 
     // 모달 ON/OFF 함수
     const handleToggleClick = () => {
-        toggleClickProps();
+        toggleProps();
     };
 
     // 모달 켜지면 API 요청
@@ -28,10 +28,10 @@ export function MyPersonalColorModal({ toggleClickProps, className, colorId }) {
 
     return (
         <>
-            <BackgroundDiv className={className} onClick={handleToggleClick} />
+            <BlurBackgroundDiv className={className} onClick={handleToggleClick} />
             <ModalDiv className={className}>
                 <MyModalTable id={colorId} date={resultColor.date} title={resultColor.color} />
-                <ModalCloseIcon clickProps={handleToggleClick} />
+                <ModalCloseIcon toggleProps={handleToggleClick} />
                 <ResultContainerDiv>
                     <ResultImage image={resultColor.image} />
                 </ResultContainerDiv>

@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { ModalDiv } from './ModalDiv';
-import { BackgroundDiv, ModalCloseIcon, GrayButton, BlueButton, MyPersonalColorModal, TextModal } from '..';
+import { BlurBackgroundDiv, ModalCloseIcon, GrayButton, BlueButton, MyPersonalColorModal, TextModal } from '..';
 import { getColorList } from '../../utils/api/service';
 import { seasonPersonal } from '../../utils/data/season';
 
-export function MyPersonalListModal({ toggleClickProps, className }) {
+export function MyPersonalListModal({ toggleProps, checkProps, className }) {
     // API로 받아온 컬러 데이터 목록
     const [colorList, setColorList] = useState([]);
 
@@ -31,13 +31,14 @@ export function MyPersonalListModal({ toggleClickProps, className }) {
             setColorChoiceModal(true);
         } else {
             const chosenColor = seasonPersonal[chosen];
-            toggleClickProps({ chosenColor });
+            // eslint-disable-next-line no-unused-expressions
+            checkProps && checkProps({ chosenColor });
         }
     };
 
     // 마이퍼스널 목록 모달 닫는 토글 함수
     const handleClosedClick = () => {
-        toggleClickProps();
+        toggleProps();
     };
 
     // 컬러를 선택해주세요 모달 닫는 함수
@@ -62,14 +63,14 @@ export function MyPersonalListModal({ toggleClickProps, className }) {
 
     return (
         <>
-            <BackgroundDiv className={className} onClick={handleClosedClick} />
+            <BlurBackgroundDiv className={className} onClick={handleClosedClick} />
             <ModalTableDiv className={className}>
                 <TextP>회원님이 저장한 퍼스널 컬러 목록입니다.</TextP>
                 <PersonalTableDiv>
                     {colorList.length !== 0 ? (
                         <table>
                             <tbody>
-                                {colorList?.map(item => (
+                                {colorList.map(item => (
                                     <tr key={item.id}>
                                         <td className="checkbox">
                                             <CheckboxInput
@@ -94,19 +95,19 @@ export function MyPersonalListModal({ toggleClickProps, className }) {
                     ) : (
                         <p>저장된 퍼스널컬러가 없습니다.</p>
                     )}
-                    <ModalCloseIcon clickProps={handleClosedClick} />
+                    <ModalCloseIcon toggleProps={handleClosedClick} />
                 </PersonalTableDiv>
                 <BlueButton onClick={handlePropsClick}>확인</BlueButton>
             </ModalTableDiv>
             <MyPersonalColorModal
                 className={personalListModal && 'show'}
-                toggleClickProps={handleToggleClick}
+                toggleProps={handleToggleClick}
                 colorId={colorId}
             />
             {colorChoiceModal && (
                 <TextModal
                     text="색상을 선택해주세요."
-                    toggleClickProps={handleChoiceClick}
+                    toggleProps={handleChoiceClick}
                     className={colorChoiceModal && 'show'}
                 />
             )}

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { setUserOut } from '../../utils/api/service';
-import { BackgroundDiv, ModalCloseIcon, SubTitleP, HomeButton } from '..';
+import { BlurBackgroundDiv, ModalCloseIcon, SubTitleP, HomeButton } from '..';
 import { ModalDiv } from './ModalDiv';
 
 export function UserOutModal({ toggleClickProps, className, text }) {
@@ -14,7 +14,7 @@ export function UserOutModal({ toggleClickProps, className, text }) {
 
     return (
         <>
-            <BackgroundDiv className={className} onClick={handleToggleClick} />
+            <BlurBackgroundDiv className={className} onClick={handleToggleClick} />
             <ModalColumnDiv className={className}>
                 <SubTitleP className="text">{text}</SubTitleP>
                 <ButtonDiv>

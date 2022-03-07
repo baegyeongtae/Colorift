@@ -1,15 +1,21 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { MyStyleModal, GrayButton } from '../../components';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 import { getFashionList, setDeleteFashion } from '../../utils/api/service';
 
 export function MyPageFashion() {
+    const navigate = useNavigate();
+
     // 상세보기 모달
     const [fashionModal, setFashionModal] = useState(false);
 
-    // 상세보기 모달에서 선택한 컬러 ID 값
-    const [colorId, setColorId] = useState(0);
+    // 유저가 선택한 패션 사진의 정보
+    const [fasionInfo, setFashionInfo] = useState({
+        id: 0,
+        index: 0,
+    });
 
     // API로 받아온 패션 데이터 목록
     const [fashionList, setFashionList] = useState([]);
@@ -24,9 +30,14 @@ export function MyPageFashion() {
     const handleMoreClick = () => {
         setButtonClick(current => current + 1);
     };
+
     // 사진 이미지 클릭 했을 때
-    const handleToggleDetailClick = (id = colorId) => {
-        setColorId(id);
+    const handleToggleDetailClick = (id, index) => {
+        setFashionInfo(current => ({
+            ...current,
+            id,
+            index,
+        }));
         setFashionModal(current => !current);
     };
 
@@ -65,8 +76,8 @@ export function MyPageFashion() {
             {fashionModal && (
                 <MyStyleModal
                     className={fashionModal && 'show'}
-                    toggleClickProps={handleToggleClick}
-                    colorId={colorId}
+                    toggleProps={handleToggleClick}
+                    selectData={fasionInfo}
                 />
             )}
             <FashionDiv>
@@ -80,7 +91,7 @@ export function MyPageFashion() {
                                 type="image"
                                 src={item.image}
                                 alt={`패션 이미지 ${item.id}`}
-                                onClick={() => handleToggleDetailClick(item.id)}
+                                onClick={() => handleToggleDetailClick(item.id, index + 1)}
                             />
                         </div>
                     ))}

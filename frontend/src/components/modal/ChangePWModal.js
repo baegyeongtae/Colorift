@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import { BackgroundDiv, ModalCloseIcon, UserInputDiv, UserButton, TitleP } from '..';
+import { useNavigate } from 'react-router-dom';
+import { BlurBackgroundDiv, ModalCloseIcon, UserInputDiv, UserButton, TitleP } from '..';
 import { ModalDiv } from './ModalDiv';
 import { TextModal } from './TextModal';
 import { setUserPassword } from '../../utils/api/user';
 import { useUser } from '../../utils/hooks/useUser';
 import { checkRegexPassword } from '../../utils/data/checkRegexUser';
 
-export function ChangePWModal({ clickProps, className }) {
+export function ChangePWModal({ toggleProps, className }) {
+    const navigate = useNavigate();
+
     // 입력 값 가져오는 ref
     const { idRef, nicknameRef, passwordRef, passwordCheckRef } = useUser();
 
@@ -25,7 +28,7 @@ export function ChangePWModal({ clickProps, className }) {
 
     // 모달 ON/OFF 함수
     const handleClick = () => {
-        clickProps();
+        toggleProps();
     };
 
     // 변경하기 버튼 클릭 시 API 요청
@@ -57,12 +60,12 @@ export function ChangePWModal({ clickProps, className }) {
 
     const handleToggleModal = () => {
         setChangeModal(current => !current);
-        if (changeSuccess) window.open('/login', '_self');
+        if (changeSuccess) navigate('/login');
     };
 
     return (
         <>
-            <BackgroundDiv className={className} onClick={handleClick} />
+            <BlurBackgroundDiv className={className} onClick={handleClick} />
             <ModalGridDiv className={className}>
                 <form onSubmit={handleSubmit}>
                     <TitleP color="#3C64B1">
@@ -84,11 +87,11 @@ export function ChangePWModal({ clickProps, className }) {
                         비밀번호 변경
                     </UserButton>
                 </form>
-                <ModalCloseIcon clickProps={handleClick} />
+                <ModalCloseIcon toggleProps={handleClick} />
             </ModalGridDiv>
             <TextModal
                 className={changeModal && 'show'}
-                toggleClickProps={handleToggleModal}
+                toggleProps={handleToggleModal}
                 text={
                     changeSuccess ? (
                         <>

@@ -35,11 +35,11 @@ export function MyPageInfo() {
         <>
             <UserOutModal
                 className={userOutModal && 'show'}
-                toggleClickProps={handleUserOut}
+                toggleProps={handleUserOut}
                 text="정말 탈퇴하시겠습니까?"
             />
-            <MyChangePWModal className={changePasswordModal && 'show'} toggleClickProps={handleChangePassword} />
-            <ChangeNameModal className={changeNicknameModal && 'show'} toggleClickProps={handleChangeNickname} />
+            <MyChangePWModal className={changePasswordModal && 'show'} toggleProps={handleChangePassword} />
+            <ChangeNameModal className={changeNicknameModal && 'show'} toggleProps={handleChangeNickname} />
             <UserInfoDiv>
                 <p className="option">아이디</p>
                 <p className="id">{sessionStorage.getItem('userId')}</p>

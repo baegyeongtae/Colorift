@@ -1,7 +1,15 @@
 import styled from 'styled-components';
+import gameImages from '../../image/game';
 import { ContainerDiv, NavBackgroundDiv, Article } from '../../components';
 
 export function GameStart() {
+    // 0~39까지 난수 생성
+    const randomNumber = Math.floor(Math.random() * 10);
+
+    const handleClick = event => {
+        console.log(event.target.value);
+    };
+
     return (
         <Article>
             <NavBackgroundDiv />
@@ -11,12 +19,30 @@ export function GameStart() {
                     <br />
                     연예인의 퍼스널 컬러를 맞춰보세요 😀
                 </p>
-                <ImageDiv>연예인 사진</ImageDiv>
+                <ImageDiv>
+                    <img
+                        src={gameImages[randomNumber].src}
+                        alt={`${gameImages[randomNumber].name} 이미지`}
+                        width="360px"
+                        height="450px"
+                    />
+                </ImageDiv>
                 <ButtonsDiv>
-                    <ColorDiv>봄 웜톤</ColorDiv>
-                    <ColorDiv>여름 쿨톤</ColorDiv>
-                    <ColorDiv>가을 웜톤</ColorDiv>
-                    <ColorDiv>겨울 쿨톤</ColorDiv>
+                    <ColorLabel>
+                        <input type="radio" name="check" value="spring" onClick={handleClick} />봄 웜톤
+                    </ColorLabel>
+                    <ColorLabel>
+                        <input type="radio" name="check" value="summer" onClick={handleClick} />
+                        여름 쿨톤
+                    </ColorLabel>
+                    <ColorLabel>
+                        <input type="radio" name="check" value="autumn" onClick={handleClick} />
+                        가을 웜톤
+                    </ColorLabel>
+                    <ColorLabel>
+                        <input type="radio" name="check" value="winter" onClick={handleClick} />
+                        겨울 쿨톤
+                    </ColorLabel>
                 </ButtonsDiv>
             </GameContainerDiv>
         </Article>
@@ -37,8 +63,8 @@ const GameContainerDiv = styled(ContainerDiv)`
 `;
 
 const ImageDiv = styled.div`
-    width: 400px;
-    height: 500px;
+    width: 360px;
+    height: 450px;
 
     margin: 5vh 0;
 
@@ -47,20 +73,29 @@ const ImageDiv = styled.div`
 
 const ButtonsDiv = styled.div`
     width: 100%;
+    height: 50px;
 
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-column-gap: 10px;
+    grid-column-gap: 1vw;
 `;
 
-const ColorDiv = styled.div`
-    width: 200px;
-    height: 50px;
+const ColorLabel = styled.label`
+    width: 150px;
 
     border-radius: 100px;
 
     text-align: center;
     line-height: 50px;
+    color: white;
+    font-weight: bold;
 
     background-color: ${({ theme }) => theme.color.lightgray};
+
+    cursor: pointer;
+
+    input {
+        appearance: none;
+        -webkit-appearance: none;
+    }
 `;

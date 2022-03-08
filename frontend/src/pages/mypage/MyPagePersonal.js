@@ -48,14 +48,14 @@ export function MyPagePersonal() {
         }
     }
 
-    // 모달 뜬 상태에서는 스크롤 막기
-    useEffect(() => setScrollDisabled(personalModal), [personalModal]);
-
     // 컬러 목록 API 요청
     useEffect(async () => {
         const response = await getColorList();
         setColorList(response.data);
     }, []);
+
+    // 모달 뜬 상태에서는 스크롤 막기
+    useEffect(() => setScrollDisabled(personalModal), [personalModal]);
 
     return (
         <>

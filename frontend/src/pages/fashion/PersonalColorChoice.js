@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import {
@@ -12,7 +12,6 @@ import {
     TextModal,
 } from '../../components';
 import { fashionPageState } from '../../utils/data/atom';
-import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 
 function PersonalColorChoice() {
     // 로그인 여부 확인
@@ -103,9 +102,6 @@ function PersonalColorChoice() {
             setFashionPage(1);
         }
     };
-
-    // 모바일 버전 메뉴바 show 상태에서는 스크롤 막기
-    useEffect(() => setScrollDisabled(listModal), [listModal]);
 
     return (
         <>

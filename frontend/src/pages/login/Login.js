@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     ContainerDiv,
@@ -11,7 +11,6 @@ import {
     TextModal,
     Article,
 } from '../../components';
-import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 import { setUserLogin } from '../../utils/api/user';
 
 export function Login() {
@@ -50,8 +49,6 @@ export function Login() {
             });
         } else if (response.status === 401) setNoUserModal(true);
     };
-
-    useEffect(() => setScrollDisabled(findModal), [findModal]);
 
     return (
         <>

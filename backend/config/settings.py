@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-+(!5vblc2a41&k)=ef&zme8&qia2e=6s1-d@adrrf6y)@4#0!6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['elice-kdt-ai-3rd-team13.koreacentral.cloudapp.azure.com']
+ALLOWED_HOSTS = ['elice-kdt-ai-3rd-team13.koreacentral.cloudapp.azure.com', 'backend']
 
 
 # Application definition

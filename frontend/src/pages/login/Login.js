@@ -58,8 +58,8 @@ export function Login() {
                 text="아이디 또는 비밀번호를 잘못 입력했습니다"
             />
             <ChangePWModal className={findModal && 'show'} toggleProps={handlePasswordToggleModal} />
+            <NavBackgroundDiv />
             <Article>
-                <NavBackgroundDiv />
                 <ContainerDiv>
                     <LoginDiv>
                         <TitleP color="#3C64B1" className="column">

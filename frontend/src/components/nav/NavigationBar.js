@@ -299,6 +299,10 @@ const UserDiv = styled.div`
             background-color: ${({ theme }) => theme.color.blue};
 
             padding: 10px;
+
+            @media ${({ theme }) => theme.device.laptop} {
+                padding: 5px;
+            }
         }
 
         img {

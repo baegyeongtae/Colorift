@@ -68,8 +68,8 @@ export function SignUp() {
                 toggleProps={() => handleToggleModal()}
                 text={signUpSuccess ? '가입을 환영합니다.' : '존재하는 아이디입니다.'}
             />
+            <NavBackgroundDiv />
             <Article>
-                <NavBackgroundDiv />
                 <ContainerDiv>
                     <SignUpForm onSubmit={handleSubmit}>
                         <div className="title_div">

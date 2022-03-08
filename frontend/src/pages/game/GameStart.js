@@ -18,44 +18,52 @@ export function GameStart({ image, nextPage }) {
     };
 
     return (
-        <Article>
+        <>
             <NavBackgroundDiv />
-            <GameContainerDiv>
-                <p>
-                    나는야 퍼스널 컬러 전문가!
-                    <br />
-                    연예인의 퍼스널 컬러를 맞춰보세요 😀
-                </p>
-                <ImageDiv>
-                    {image && <img src={image?.src} alt={`${image?.name} 이미지`} width="360px" height="450px" />}
-                </ImageDiv>
-                <CheckDiv>
-                    <ColorLabel className={select === 'SP' && 'spring'}>
-                        <input type="radio" name="check" value="SP" onClick={handleLabelClick} />봄 웜톤
-                    </ColorLabel>
-                    <ColorLabel className={select === 'SU' && 'summer'}>
-                        <input type="radio" name="check" value="SU" onClick={handleLabelClick} />
-                        여름 쿨톤
-                    </ColorLabel>
-                    <ColorLabel className={select === 'AU' && 'autumn'}>
-                        <input type="radio" name="check" value="AU" onClick={handleLabelClick} />
-                        가을 웜톤
-                    </ColorLabel>
-                    <ColorLabel className={select === 'WI' && 'winter'}>
-                        <input type="radio" name="check" value="WI" onClick={handleLabelClick} />
-                        겨울 쿨톤
-                    </ColorLabel>
-                </CheckDiv>
-                <ArrowDiv onClick={handleResultClick}>
-                    <p>정답보기</p>
-                    <img src={arrowIcon} alt="오른쪽 슬라이드 화살표" className="arrow right" />
-                </ArrowDiv>
-            </GameContainerDiv>
-        </Article>
+            <GameArticle>
+                <GameContainerDiv>
+                    <p>
+                        나는야 퍼스널 컬러 전문가!
+                        <br />
+                        연예인의 퍼스널 컬러를 맞춰보세요 😀
+                    </p>
+                    <ImageDiv>{image && <img src={image?.src} alt={`${image?.name} 이미지`} />}</ImageDiv>
+                    <CheckDiv>
+                        <ColorLabel className={select === 'SP' && 'spring'}>
+                            <input type="radio" name="check" value="SP" onClick={handleLabelClick} />봄 웜톤
+                        </ColorLabel>
+                        <ColorLabel className={select === 'SU' && 'summer'}>
+                            <input type="radio" name="check" value="SU" onClick={handleLabelClick} />
+                            여름 쿨톤
+                        </ColorLabel>
+                        <ColorLabel className={select === 'AU' && 'autumn'}>
+                            <input type="radio" name="check" value="AU" onClick={handleLabelClick} />
+                            가을 웜톤
+                        </ColorLabel>
+                        <ColorLabel className={select === 'WI' && 'winter'}>
+                            <input type="radio" name="check" value="WI" onClick={handleLabelClick} />
+                            겨울 쿨톤
+                        </ColorLabel>
+                    </CheckDiv>
+                    <ArrowDiv onClick={handleResultClick}>
+                        <p>정답보기</p>
+                        <img src={arrowIcon} alt="오른쪽 슬라이드 화살표" className="arrow right" />
+                    </ArrowDiv>
+                </GameContainerDiv>
+            </GameArticle>
+        </>
     );
 }
 
 // styled-components
+
+export const GameArticle = styled(Article)`
+    @media ${({ theme }) => theme.device.tablet} {
+        position: relative;
+
+        height: auto;
+    }
+`;
 
 export const GameContainerDiv = styled(ContainerDiv)`
     width: 100%;
@@ -68,15 +76,26 @@ export const GameContainerDiv = styled(ContainerDiv)`
         font-weight: bold;
         text-align: center;
     }
+
+    @media ${({ theme }) => theme.device.tablet} {
+        padding-top: 5vh;
+    }
 `;
 
 export const ImageDiv = styled.div`
-    width: 360px;
-    height: 450px;
+    margin: 5vh 0;
 
-    margin: 3vh 0;
+    img {
+        height: 50vh;
+    }
 
-    background-color: gray;
+    @media screen and (max-width: 360px) {
+        width: 90%;
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
 `;
 
 export const CheckDiv = styled.div`
@@ -85,6 +104,16 @@ export const CheckDiv = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-column-gap: 1vw;
+
+    @media ${({ theme }) => theme.device.tablet} {
+        height: auto;
+
+        grid: unset;
+
+        display: grid;
+        grid-template-rows: repeat(4, 1fr);
+        grid-row-gap: 2vh;
+    }
 `;
 
 const ColorLabel = styled.label`
@@ -120,6 +149,12 @@ const ColorLabel = styled.label`
 
     &.winter {
         background-color: ${({ theme }) => theme.color.winter};
+    }
+
+    @media ${({ theme }) => theme.device.tablet} {
+        height: 50px;
+
+        font-size: ${({ theme }) => theme.fontSizes.mediumtext};
     }
 `;
 
@@ -164,6 +199,31 @@ export const ArrowDiv = styled.div`
         @media ${({ theme }) => theme.device.tablet} {
             width: 20px;
             height: 20px;
+        }
+    }
+
+    @media ${({ theme }) => theme.device.tablet} {
+        position: unset;
+        animation: unset;
+
+        width: 150px;
+        margin: 40px 0 20px 0;
+
+        border-radius: 5px;
+
+        background-color: ${({ theme }) => theme.color.blue};
+
+        p {
+            color: white;
+            font-weight: bold;
+            font-size: inherit;
+
+            text-align: center;
+            margin: auto;
+        }
+
+        img {
+            display: none;
         }
     }
 `;

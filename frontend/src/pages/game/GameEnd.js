@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { NavBackgroundDiv, Article } from '../../components';
+import { NavBackgroundDiv } from '../../components';
 import { seasonPersonal, season } from '../../utils/data/season';
-import { GameContainerDiv, ImageDiv, CheckDiv, ArrowDiv } from './GameStart';
+import { GameArticle, GameContainerDiv, ImageDiv, CheckDiv, ArrowDiv } from './GameStart';
 import { arrowIcon } from '../../image';
 
 export function GameEnd({ image, select, retry }) {
@@ -12,23 +12,23 @@ export function GameEnd({ image, select, retry }) {
     };
 
     return (
-        <Article>
+        <>
             <NavBackgroundDiv />
-            <GameContainerDiv>
-                <p>{text}</p>
-                <ImageDiv>
-                    {image && <img src={image?.src} alt={`${image?.name} 이미지`} width="360px" height="450px" />}
-                </ImageDiv>
-                <AnswerDiv>
-                    <p>{image?.name}</p>
-                    <ColorDiv className={season[image.season]}>{seasonPersonal?.[image?.season]}</ColorDiv>
-                </AnswerDiv>
-                <ArrowDiv onClick={handleRetryClick}>
-                    <p>다시풀기</p>
-                    <img src={arrowIcon} alt="오른쪽 슬라이드 화살표" className="arrow right" />
-                </ArrowDiv>
-            </GameContainerDiv>
-        </Article>
+            <GameArticle>
+                <GameContainerDiv>
+                    <p>{text}</p>
+                    <ImageDiv>{image && <img src={image?.src} alt={`${image?.name} 이미지`} />}</ImageDiv>
+                    <AnswerDiv>
+                        <p>{image?.name}</p>
+                        <ColorDiv className={season[image.season]}>{seasonPersonal?.[image?.season]}</ColorDiv>
+                    </AnswerDiv>
+                    <ArrowDiv onClick={handleRetryClick}>
+                        <p>다시풀기</p>
+                        <img src={arrowIcon} alt="오른쪽 슬라이드 화살표" className="arrow right" />
+                    </ArrowDiv>
+                </GameContainerDiv>
+            </GameArticle>
+        </>
     );
 }
 
@@ -38,6 +38,15 @@ const AnswerDiv = styled(CheckDiv)`
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
     justify-items: center;
+
+    @media ${({ theme }) => theme.device.tablet} {
+        height: auto;
+
+        grid: unset;
+
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
 `;
 
 const ColorDiv = styled.div`
@@ -66,5 +75,9 @@ const ColorDiv = styled.div`
 
     &.winter {
         background-color: ${({ theme }) => theme.color.winter};
+    }
+
+    @media ${({ theme }) => theme.device.tablet} {
+        font-size: ${({ theme }) => theme.fontSizes.mediumtext};
     }
 `;

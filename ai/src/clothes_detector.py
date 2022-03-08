@@ -3,7 +3,7 @@ import tensorflow as tf
 
 import tensorflow_hub as hub
 
-from display_crop_image import draw_boxes, display_image
+from src import display_crop_image
 
 # For measuring the inference time.
 import time
@@ -33,10 +33,10 @@ def run_detector(detector, path):
   print("Found %d objects." % len(result["detection_scores"]))
   print("Inference time: ", end_time-start_time)
 
-  image_with_boxes, cropped_image = draw_boxes(
+  image_with_boxes, cropped_image = display_crop_image.draw_boxes(
       img.numpy(), result["detection_boxes"],
       result["detection_class_entities"], result["detection_scores"])
 
-  display_image(cropped_image)
+  display_crop_image.display_image(cropped_image)
 
   return cropped_image

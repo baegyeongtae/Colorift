@@ -8,7 +8,7 @@ import seaborn as sns
 from color_fit import dataset, X, y
 
 
-sns.scatterplot(data=dataset, x="L", y="a", hue='Class', legend="full")
+sns.scatterplot(data=dataset, x="Class", y="H", hue='Class', legend="full")
 
 
 fontlabel = {"fontsize": "large", "color": "gray", "fontweight": "bold"}
@@ -46,7 +46,7 @@ fig.add_axes(ax)
 cmap = ListedColormap(sns.color_palette("husl"))
 
 # plot
-sc = ax.scatter(L, s, b, s=40, c=color, marker='o', cmap=cmap, alpha=1)
+sc = ax.scatter(h, s, v, s=40, c=color, marker='o', cmap=cmap, alpha=1)
 ax.set_xlabel('L')
 ax.set_ylabel('s')
 ax.set_zlabel('b')

@@ -36,6 +36,8 @@ export function GameEnd({ image, select, retry }) {
 
 const AnswerDiv = styled(CheckDiv)`
     grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    justify-items: center;
 `;
 
 const ColorDiv = styled.div`

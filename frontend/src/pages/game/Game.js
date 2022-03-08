@@ -7,7 +7,7 @@ export function Game() {
     const [retry, setRetry] = useState(0);
 
     // 0~39까지 난수 생성
-    const randomNumber = useMemo(() => Math.floor(Math.random() * 10), [retry]);
+    const randomNumber = useMemo(() => Math.floor(Math.random() * 40), [retry]);
 
     // 난수에 해당되는 이미지 정보
     const image = useMemo(() => gameImages[randomNumber], [randomNumber]);

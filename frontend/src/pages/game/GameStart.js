@@ -58,7 +58,7 @@ export function GameStart({ image, nextPage }) {
 // styled-components
 
 export const GameContainerDiv = styled(ContainerDiv)`
-    width: 50%;
+    width: 100%;
 
     ${({ theme }) => theme.flexStyled.flexColumn};
     ${({ theme }) => theme.flexStyled.flexCenter};
@@ -74,7 +74,7 @@ export const ImageDiv = styled.div`
     width: 360px;
     height: 450px;
 
-    margin: 5vh 0;
+    margin: 3vh 0;
 
     background-color: gray;
 `;
@@ -137,7 +137,9 @@ export const blinkKeyframes = keyframes`
 export const ArrowDiv = styled.div`
     position: absolute;
     top: 50%;
-    right: 0;
+    right: 10%;
+
+    height: 50px;
 
     ${({ theme }) => theme.flexStyled.flexRow};
 
@@ -148,12 +150,11 @@ export const ArrowDiv = styled.div`
     p {
         color: ${({ theme }) => theme.color.darkgray};
         font-weight: bold;
+
+        margin: auto 0;
     }
 
     img {
-        width: 50px;
-        height: 50px;
-
         transform: rotate(0.25turn);
 
         filter: invert(23%) sepia(7%) saturate(691%) hue-rotate(145deg) brightness(97%) contrast(93%);

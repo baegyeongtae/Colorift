@@ -32,12 +32,10 @@ export function Home() {
 
     useEffect(() => {
         const observer = new IntersectionObserver(onIntersect, options);
-        if (target1.current) observer.observe(target1.current);
-        if (target2.current) observer.observe(target2.current);
-        if (target3.current) observer.observe(target3.current);
-        if (target4.current) observer.observe(target4.current);
-        if (target5.current) observer.observe(target5.current);
-        if (target6.current) observer.observe(target6.current);
+        [target1, target2, target3, target4, target5, target6].forEach(target => {
+            if (target.current) observer.observe(target.current);
+        });
+
         return () => observer.disconnect(); // 관찰 종료
     }, []);
 

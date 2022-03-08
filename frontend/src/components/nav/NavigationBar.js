@@ -137,7 +137,7 @@ function NavigationBar() {
                 </Nav>
                 <BlurBackgroundDiv onClick={handleToggleClick} className={isToggle && 'show'} />
             </header>
-            <main style={{ minHeight: '100%' }}>
+            <main style={{ minHeight: '100%', paddingBottom: '5vh' }}>
                 <Outlet />
             </main>
             <Footer />

@@ -14,7 +14,7 @@ export function GameStart({ image, nextPage }) {
 
     // 정답보기 클릭 시 함수
     const handleResultClick = () => {
-        nextPage && nextPage(select);
+        nextPage && select && nextPage(select);
     };
 
     return (

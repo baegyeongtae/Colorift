@@ -1,7 +1,8 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { useState } from 'react';
 import gameImages from '../../image/game';
 import { ContainerDiv, NavBackgroundDiv, Article } from '../../components';
+import { arrowIcon } from '../../image';
 
 export function GameStart({ number }) {
     // 현재 선택된 체크박스
@@ -46,6 +47,10 @@ export function GameStart({ number }) {
                         겨울 쿨톤
                     </ColorLabel>
                 </CheckDiv>
+                <ArrowDiv>
+                    <p>정답보기</p>
+                    <img src={arrowIcon} alt="오른쪽 슬라이드 화살표" className="arrow right" />
+                </ArrowDiv>
             </GameContainerDiv>
         </Article>
     );
@@ -54,6 +59,8 @@ export function GameStart({ number }) {
 // styled-components
 
 const GameContainerDiv = styled(ContainerDiv)`
+    width: 50%;
+
     ${({ theme }) => theme.flexStyled.flexColumn};
     ${({ theme }) => theme.flexStyled.flexCenter};
 
@@ -74,7 +81,6 @@ const ImageDiv = styled.div`
 `;
 
 const CheckDiv = styled.div`
-    width: 100%;
     height: 50px;
 
     display: grid;
@@ -115,5 +121,58 @@ const ColorLabel = styled.label`
 
     &.winter {
         background-color: ${({ theme }) => theme.color.winter};
+    }
+`;
+
+const blinkKeyframes = keyframes`
+    0% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 1;
+    }
+`;
+
+const moveKeyframes = keyframes`
+0% {
+    margin-right: 5px;
+}
+100% {
+    margin-right: 0;
+}
+`;
+
+const ArrowDiv = styled.div`
+    position: absolute;
+    top: 50%;
+    right: 0;
+
+    ${({ theme }) => theme.flexStyled.flexRow};
+
+    animation: ${blinkKeyframes} 1s ease-in infinite alternate;
+
+    cursor: pointer;
+
+    p {
+        color: ${({ theme }) => theme.color.darkgray};
+        font-weight: bold;
+    }
+
+    img {
+        width: 50px;
+        height: 50px;
+
+        transform: rotate(0.25turn);
+
+        filter: invert(23%) sepia(7%) saturate(691%) hue-rotate(145deg) brightness(97%) contrast(93%);
+
+        cursor: pointer;
+
+        animation: ${moveKeyframes} 0.5s ease-in infinite alternate;
+
+        @media ${({ theme }) => theme.device.tablet} {
+            width: 20px;
+            height: 20px;
+        }
     }
 `;

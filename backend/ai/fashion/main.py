@@ -1,52 +1,59 @@
 import numpy as np
 import joblib
 
-# For measuring the inference time.
-import time
 
 from src import clothes_detector, color_extractor, color_conversion
 
 
-"""Clothes detection"""
-start_time = time.time()
-cropped_image = clothes_detector.run_detector(
-    clothes_detector.detector, 'dataset/fashion_img/2391192_1_500.jpg')
-end_time = time.time()
+def main(img):
+
+    """Clothes detection"""
+    cropped_image = clothes_detector.run_detector(img)
 
 
-"""Color extraction"""
-clt = color_extractor.clt
-img = cropped_image
-
-clt.fit(img.reshape(-1, 3))
-
-hist = color_extractor.centroid_histogram(clt)
-
-# color_extractor.show_img_compar(img, color_extractor.plot_colors(
-#     hist, clt.cluster_centers_))
-clothes_color = np.where(hist == max(hist))[0][0]
+    """Color extraction"""
+    test_rgb = color_extractor.run_extractor(cropped_image)
+    test_hsv = np.array(color_conversion.rgb_to_hsv(
+        test_rgb[0], test_rgb[1], test_rgb[2]))
+    test_lab = np.array(color_conversion.rgb_to_lab(
+        test_rgb[0], test_rgb[1], test_rgb[2]))
+    test = np.append(test_hsv[1:], test_lab)
 
 
-"""Tone prediction"""
-classifier = joblib.load('model/colorfit.pkl')
-scaler = joblib.load('model/scaler.pkl')
+    """Tone prediction"""
+    classifier = joblib.load('model/colorfit.pkl')
+    scaler = joblib.load('model/scaler.pkl')
 
-test_rgb = clt.cluster_centers_[clothes_color]
+    test = scaler.transform([test])
+    answer = classifier.predict(test)[0]
 
-test_hsv = np.array(color_conversion.rgb_to_hsv(
-    test_rgb[0], test_rgb[1], test_rgb[2]))
+    # distance, neighbors = classifier.kneighbors(test, 5, return_distance=True)
+    prob = classifier.predict_proba(test)[0]
+    classname = classifier.classes_
 
-test_lab = np.array(color_conversion.rgb_to_lab(
-    test_rgb[0], test_rgb[1], test_rgb[2]))
+    result_prob = [0, 0, 0, 0]
+    for i in range(4):
+        if classname[i]=="spring":
+            result_prob[0] = prob[i] * 100
+        if classname[i]=="summer":
+            result_prob[1] = prob[i] * 100
+        elif classname[i]=="fall":
+            result_prob[2] = prob[i] * 100
+        elif classname[i]=="winter":
+            result_prob[3] = prob[i] * 100
 
-test = np.append(test_hsv[1:], test_lab)
+    if answer == "spring":
+        answer = "SP"
+    elif answer == "summer":
+        answer = "SU"
+    elif answer == "fall":
+        answer = "AU"
+    elif answer == "winter":
+        answer = "WI"
 
-test = scaler.transform([test])
+    print(answer, result_prob)
+    return answer, result_prob
 
-answer = classifier.predict(test)
-
-# distance, neighbors = classifier.kneighbors(test, 5, return_distance=True)
-prob = classifier.predict_proba(test)
-
-max_index = np.argmax(prob)
-print(classifier.classes_[max_index], np.max(prob))
+if __name__=="__main__":
+    main(clothes_detector.load_img(
+        './dataset/fashion_img/2391192_1_500.jpg'))

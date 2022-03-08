@@ -31,8 +31,7 @@ def draw_boxes(image, boxes, class_names, scores, max_boxes=10, min_score=0.1):
                 ymin, xmin, ymax, xmax = tuple(boxes[i])
                 image_pil = Image.fromarray(np.uint8(image)).convert("RGB")
                 cropped = np.array(crop_image(image_pil, ymin, xmin, ymax, xmax))
-                np.copyto(image, np.array(image_pil))
 
-                return image, cropped
+                return cropped
 
-    return image, image
+    return image

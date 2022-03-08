@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
+import { Home, Example, Login, SignUp, MyPage, FashionMatchingPage, PersonalColorPage } from './pages';
+import { NavigationBar } from './components';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <BrowserRouter>
+            <RecoilRoot>
+                <Routes>
+                    <Route path="/" element={<NavigationBar />}>
+                        <Route path="" element={<Home />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/signup" element={<SignUp />} />
+                        <Route path="/mypage" element={<MyPage />} />
+                        <Route path="/example" element={<Example />} />
+                        <Route path="/personalcolor" element={<PersonalColorPage />} />
+                        <Route path="/fashion" element={<FashionMatchingPage />} />
+                    </Route>
+                </Routes>
+            </RecoilRoot>
+        </BrowserRouter>
+    );
 }
 
 export default App;

@@ -12,7 +12,7 @@ from color_fit import rgb_to_hsv, scaler, classifier
 
 """Clothes detection"""
 start_time = time.time()
-cropped_image = run_detector(detector, './dataset/fashion_img/01_1_front.jpg')
+cropped_image = run_detector(detector, 'dataset/fashion_img/2391192_1_500.jpg')
 end_time = time.time()
 print("Inference time:",end_time-start_time)
 
@@ -39,3 +39,6 @@ print(test)
 answer = classifier.predict(test)
 
 print(answer)
+prob = classifier.predict_proba(test)
+max_index = np.argmax(prob)
+print(classifier.classes_[max_index], np.max(prob))

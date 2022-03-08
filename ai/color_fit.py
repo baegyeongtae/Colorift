@@ -37,9 +37,6 @@ print(dataset.shape)  # (row개수, column개수)
 print(dataset.info())  # 데이터 타입, row 개수, column 개수, 컬럼 데이터 타입
 print(dataset.describe())  # 요약 통계 정보
 
-print(dataset.iloc[0:5])  # dataset.head()
-print(dataset.iloc[-5:])  # dataset.tail()
-
 H = pd.Series([])
 S = pd.Series([])
 V = pd.Series([])
@@ -85,7 +82,7 @@ for i in range(1, 31):
     errors.append(np.mean(pred_i != y_test))
 
 n_neighbors = errors.index(min(errors))+1
-n_neighbors
+print(n_neighbors)
 
 # k-NN 분류기를 생성
 classifier = KNeighborsClassifier(n_neighbors=n_neighbors)
@@ -94,7 +91,5 @@ classifier.fit(X_train, y_train)
 
 # 예측
 y_pred = classifier.predict(X_test)
-print(y_pred)
-print(X_test)
 
-classifier.score(X_test, y_test)
+print(classifier.score(X_test, y_test))

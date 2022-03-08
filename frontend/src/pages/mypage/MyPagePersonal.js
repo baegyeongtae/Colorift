@@ -67,7 +67,7 @@ export function MyPagePersonal() {
                 />
             )}
             <PersonalTableDiv className="personal">
-                {colorList?.length !== 0 ? (
+                {!colorList?.length ? (
                     <table>
                         <tbody>
                             {colorList?.map((item, index) => (

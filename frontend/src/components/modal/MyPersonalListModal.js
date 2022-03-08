@@ -57,7 +57,7 @@ export function MyPersonalListModal({ toggleProps, checkProps, className }) {
                 ...current,
                 id,
                 index,
-            }))
+            }));
             setPersonalListModal(true);
         }
     };
@@ -74,7 +74,7 @@ export function MyPersonalListModal({ toggleProps, checkProps, className }) {
             <ModalTableDiv className={className}>
                 <TextP>회원님이 저장한 퍼스널 컬러 목록입니다.</TextP>
                 <PersonalTableDiv>
-                    {colorList.length !== 0 ? (
+                    {!colorList.length ? (
                         <table>
                             <tbody>
                                 {colorList.map((item, index) => (
@@ -91,7 +91,10 @@ export function MyPersonalListModal({ toggleProps, checkProps, className }) {
                                         <td className="date">{item.date?.replace(/-/gi, '. ')}</td>
                                         <td className="color">{seasonPersonal[item.color]}</td>
                                         <td className="button">
-                                            <GrayButton width="90%" onClick={() => handleToggleClick(item.id, index + 1)}>
+                                            <GrayButton
+                                                width="90%"
+                                                onClick={() => handleToggleClick(item.id, index + 1)}
+                                            >
                                                 상세보기
                                             </GrayButton>
                                         </td>

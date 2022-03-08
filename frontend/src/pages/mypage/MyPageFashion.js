@@ -95,10 +95,13 @@ export function MyPageFashion() {
                         </div>
                     ))}
                 </FasionImageDiv>
-                {fashionList?.length === 0 ? (
+                {!fashionList?.length ? (
                     <p>매칭한 패션이 없습니다.</p>
                 ) : (
-                    <PlusButton disabled={4 * (buttonClick + 1) >= fashionList?.length} onClick={handleMoreClick}>
+                    <PlusButton
+                        disabled={fashionList && 4 * (buttonClick + 1) >= fashionList?.length}
+                        onClick={handleMoreClick}
+                    >
                         더보기
                     </PlusButton>
                 )}

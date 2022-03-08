@@ -45,6 +45,10 @@ function NavigationBar() {
             name: 'Fashion Matching',
             path: '/fashion',
         },
+        {
+            name: 'Mini Game',
+            path: '/game',
+        },
     ];
 
     // 메뉴바 클릭 상태 변환하는 함수
@@ -188,7 +192,7 @@ const ContainerGridDiv = styled(ContainerDiv)`
 
 const MenuBoxDiv = styled.div`
     display: grid;
-    grid-template-columns: 4fr 1.2fr;
+    grid-template-columns: 4fr 0.9fr;
 
     &.show {
         position: fixed;
@@ -216,7 +220,7 @@ const MenuBoxDiv = styled.div`
 
 const MenuDiv = styled.div`
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
 
     a {
         color: #616161;

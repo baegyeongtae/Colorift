@@ -23,7 +23,8 @@
         "import/prefer-default-export": "off",
         "react/prop-types": "off",
         "no-unused-vars": "off",
-        "no-console": "off"
+        "no-console": "off",
+        "no-unused-expressions": "off"
     },
     "extends": ["plugin:react/recommended", "airbnb", "prettier"]
 }

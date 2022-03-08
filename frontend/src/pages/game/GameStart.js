@@ -1,16 +1,20 @@
 import styled, { keyframes } from 'styled-components';
 import { useState } from 'react';
-import gameImages from '../../image/game';
 import { ContainerDiv, NavBackgroundDiv, Article } from '../../components';
 import { arrowIcon } from '../../image';
 
-export function GameStart({ number }) {
+export function GameStart({ image, nextPage }) {
     // 현재 선택된 체크박스
     const [select, setSelect] = useState('');
 
     // 체크박스 클릭 시 함수
-    const handleClick = event => {
+    const handleLabelClick = event => {
         setSelect(event.target.value);
+    };
+
+    // 정답보기 클릭 시 함수
+    const handleResultClick = () => {
+        nextPage && nextPage(select);
     };
 
     return (
@@ -23,31 +27,26 @@ export function GameStart({ number }) {
                     연예인의 퍼스널 컬러를 맞춰보세요 😀
                 </p>
                 <ImageDiv>
-                    <img
-                        src={gameImages[number].src}
-                        alt={`${gameImages[number].name} 이미지`}
-                        width="360px"
-                        height="450px"
-                    />
+                    {image && <img src={image?.src} alt={`${image?.name} 이미지`} width="360px" height="450px" />}
                 </ImageDiv>
                 <CheckDiv>
-                    <ColorLabel className={select === 'spring' && 'spring'}>
-                        <input type="radio" name="check" value="spring" onClick={handleClick} />봄 웜톤
+                    <ColorLabel className={select === 'SP' && 'spring'}>
+                        <input type="radio" name="check" value="SP" onClick={handleLabelClick} />봄 웜톤
                     </ColorLabel>
-                    <ColorLabel className={select === 'summer' && 'summer'}>
-                        <input type="radio" name="check" value="summer" onClick={handleClick} />
+                    <ColorLabel className={select === 'SU' && 'summer'}>
+                        <input type="radio" name="check" value="SU" onClick={handleLabelClick} />
                         여름 쿨톤
                     </ColorLabel>
-                    <ColorLabel className={select === 'autumn' && 'autumn'}>
-                        <input type="radio" name="check" value="autumn" onClick={handleClick} />
+                    <ColorLabel className={select === 'AU' && 'autumn'}>
+                        <input type="radio" name="check" value="AU" onClick={handleLabelClick} />
                         가을 웜톤
                     </ColorLabel>
-                    <ColorLabel className={select === 'winter' && 'winter'}>
-                        <input type="radio" name="check" value="winter" onClick={handleClick} />
+                    <ColorLabel className={select === 'WI' && 'winter'}>
+                        <input type="radio" name="check" value="WI" onClick={handleLabelClick} />
                         겨울 쿨톤
                     </ColorLabel>
                 </CheckDiv>
-                <ArrowDiv>
+                <ArrowDiv onClick={handleResultClick}>
                     <p>정답보기</p>
                     <img src={arrowIcon} alt="오른쪽 슬라이드 화살표" className="arrow right" />
                 </ArrowDiv>
@@ -58,7 +57,7 @@ export function GameStart({ number }) {
 
 // styled-components
 
-const GameContainerDiv = styled(ContainerDiv)`
+export const GameContainerDiv = styled(ContainerDiv)`
     width: 50%;
 
     ${({ theme }) => theme.flexStyled.flexColumn};
@@ -71,7 +70,7 @@ const GameContainerDiv = styled(ContainerDiv)`
     }
 `;
 
-const ImageDiv = styled.div`
+export const ImageDiv = styled.div`
     width: 360px;
     height: 450px;
 
@@ -80,7 +79,7 @@ const ImageDiv = styled.div`
     background-color: gray;
 `;
 
-const CheckDiv = styled.div`
+export const CheckDiv = styled.div`
     height: 50px;
 
     display: grid;
@@ -124,32 +123,25 @@ const ColorLabel = styled.label`
     }
 `;
 
-const blinkKeyframes = keyframes`
+export const blinkKeyframes = keyframes`
     0% {
         opacity: 0.3;
+        margin-right: 5px;
     }
     100% {
         opacity: 1;
+        margin-right: 0;
     }
 `;
 
-const moveKeyframes = keyframes`
-0% {
-    margin-right: 5px;
-}
-100% {
-    margin-right: 0;
-}
-`;
-
-const ArrowDiv = styled.div`
+export const ArrowDiv = styled.div`
     position: absolute;
     top: 50%;
     right: 0;
 
     ${({ theme }) => theme.flexStyled.flexRow};
 
-    animation: ${blinkKeyframes} 1s ease-in infinite alternate;
+    animation: ${blinkKeyframes} 0.5s ease-in infinite alternate;
 
     cursor: pointer;
 
@@ -167,8 +159,6 @@ const ArrowDiv = styled.div`
         filter: invert(23%) sepia(7%) saturate(691%) hue-rotate(145deg) brightness(97%) contrast(93%);
 
         cursor: pointer;
-
-        animation: ${moveKeyframes} 0.5s ease-in infinite alternate;
 
         @media ${({ theme }) => theme.device.tablet} {
             width: 20px;

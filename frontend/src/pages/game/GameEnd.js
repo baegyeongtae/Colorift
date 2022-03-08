@@ -1,56 +1,32 @@
 import styled from 'styled-components';
-import { useState } from 'react';
-import gameImages from '../../image/game';
-import { ContainerDiv, NavBackgroundDiv, Article } from '../../components';
+import { NavBackgroundDiv, Article } from '../../components';
+import { seasonPersonal, season } from '../../utils/data/season';
+import { GameContainerDiv, ImageDiv, CheckDiv, ArrowDiv } from './GameStart';
+import { arrowIcon } from '../../image';
 
-export function GameEnd() {
-    // 0~39까지 난수 생성
-    const randomNumber = Math.floor(Math.random() * 10);
+export function GameEnd({ image, select, retry }) {
+    const text = image.season === select ? '정답입니다 🥰' : '아쉽네요 😢 다시 생각해보세요';
 
-    console.log(randomNumber);
-
-    // 현재 선택된 체크박스
-    const [select, setSelect] = useState('');
-
-    // 체크박스 클릭 시 함수
-    const handleClick = event => {
-        setSelect(event.target.value);
+    const handleRetryClick = () => {
+        retry && retry();
     };
 
     return (
         <Article>
             <NavBackgroundDiv />
             <GameContainerDiv>
-                <p>
-                    나는야 퍼스널 컬러 전문가!
-                    <br />
-                    연예인의 퍼스널 컬러를 맞춰보세요 😀
-                </p>
+                <p>{text}</p>
                 <ImageDiv>
-                    <img
-                        src={gameImages[randomNumber].src}
-                        alt={`${gameImages[randomNumber].name} 이미지`}
-                        width="360px"
-                        height="450px"
-                    />
+                    {image && <img src={image?.src} alt={`${image?.name} 이미지`} width="360px" height="450px" />}
                 </ImageDiv>
-                <CheckDiv>
-                    <ColorLabel className={select === 'spring' && 'spring'}>
-                        <input type="radio" name="check" value="spring" onClick={handleClick} />봄 웜톤
-                    </ColorLabel>
-                    <ColorLabel className={select === 'summer' && 'summer'}>
-                        <input type="radio" name="check" value="summer" onClick={handleClick} />
-                        여름 쿨톤
-                    </ColorLabel>
-                    <ColorLabel className={select === 'autumn' && 'autumn'}>
-                        <input type="radio" name="check" value="autumn" onClick={handleClick} />
-                        가을 웜톤
-                    </ColorLabel>
-                    <ColorLabel className={select === 'winter' && 'winter'}>
-                        <input type="radio" name="check" value="winter" onClick={handleClick} />
-                        겨울 쿨톤
-                    </ColorLabel>
-                </CheckDiv>
+                <AnswerDiv>
+                    <p>{image?.name}</p>
+                    <ColorDiv className={season[image.season]}>{seasonPersonal?.[image?.season]}</ColorDiv>
+                </AnswerDiv>
+                <ArrowDiv onClick={handleRetryClick}>
+                    <p>다시풀기</p>
+                    <img src={arrowIcon} alt="오른쪽 슬라이드 화살표" className="arrow right" />
+                </ArrowDiv>
             </GameContainerDiv>
         </Article>
     );
@@ -58,36 +34,11 @@ export function GameEnd() {
 
 // styled-components
 
-const GameContainerDiv = styled(ContainerDiv)`
-    ${({ theme }) => theme.flexStyled.flexColumn};
-    ${({ theme }) => theme.flexStyled.flexCenter};
-
-    p {
-        font-size: ${({ theme }) => theme.fontSizes.bigtext};
-        font-weight: bold;
-        text-align: center;
-    }
+const AnswerDiv = styled(CheckDiv)`
+    grid-template-columns: repeat(2, 1fr);
 `;
 
-const ImageDiv = styled.div`
-    width: 360px;
-    height: 450px;
-
-    margin: 5vh 0;
-
-    background-color: gray;
-`;
-
-const CheckDiv = styled.div`
-    width: 100%;
-    height: 50px;
-
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-column-gap: 1vw;
-`;
-
-const ColorLabel = styled.label`
+const ColorDiv = styled.div`
     width: 150px;
 
     border-radius: 100px;
@@ -98,13 +49,6 @@ const ColorLabel = styled.label`
     font-weight: bold;
 
     background-color: ${({ theme }) => theme.color.lightgray};
-
-    cursor: pointer;
-
-    input {
-        appearance: none;
-        -webkit-appearance: none;
-    }
 
     &.spring {
         background-color: ${({ theme }) => theme.color.spring};

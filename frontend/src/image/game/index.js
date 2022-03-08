@@ -13,52 +13,52 @@ const gameImages = [
     {
         src: spring0,
         name: '슈퍼주니어 규현',
-        season: 'spring',
+        season: 'SP',
     },
     {
         src: spring1,
         name: '윤세아',
-        season: 'spring',
+        season: 'SP',
     },
     {
         src: spring2,
         name: '김선호',
-        season: 'spring',
+        season: 'SP',
     },
     {
         src: spring3,
         name: '수지',
-        season: 'spring',
+        season: 'SP',
     },
     {
         src: spring4,
         name: '아이유',
-        season: 'spring',
+        season: 'SP',
     },
     {
         src: spring5,
         name: '육성재',
-        season: 'spring',
+        season: 'SP',
     },
     {
         src: spring6,
         name: '정소민',
-        season: 'spring',
+        season: 'SP',
     },
     {
         src: spring7,
         name: '천우희',
-        season: 'spring',
+        season: 'SP',
     },
     {
         src: spring8,
         name: '한지민',
-        season: 'spring',
+        season: 'SP',
     },
     {
         src: spring9,
         name: '한효주',
-        season: 'spring',
+        season: 'SP',
     },
 ];
 

@@ -1,9 +1,16 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { GameStart, GameEnd } from '.';
+import gameImages from '../../image/game';
 
 export function Game() {
+    // 재도전 state
+    const [retry, setRetry] = useState(0);
+
     // 0~39까지 난수 생성
-    const randomNumber = Math.floor(Math.random() * 10);
+    const randomNumber = useMemo(() => Math.floor(Math.random() * 10), [retry]);
+
+    // 난수에 해당되는 이미지 정보
+    const image = useMemo(() => gameImages[randomNumber], [randomNumber]);
 
     // 페이지 state
     const [gamePage, setGamePage] = useState(0);
@@ -17,12 +24,18 @@ export function Game() {
         setGamePage(1);
     };
 
+    // 재도전 횟수 추가
+    const setRetryHandler = () => {
+        setRetry(current => current + 1);
+        setGamePage(0);
+    };
+
     // 페이지에 따라 컴포넌트 렌더링할 함수
     function renderHTML() {
         if (gamePage === 0) {
-            return <GameStart number={randomNumber} nextPage={setNextPage} />;
+            return <GameStart image={image} nextPage={setNextPage} />;
         }
-        return <GameEnd select={select} />;
+        return <GameEnd image={image} select={select} retry={setRetryHandler} />;
     }
 
     const renderPage = renderHTML();

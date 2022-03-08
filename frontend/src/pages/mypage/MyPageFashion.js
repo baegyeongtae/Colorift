@@ -52,12 +52,12 @@ export function MyPageFashion() {
         if (result) {
             const response = await setDeleteFashion(id);
             if (response.status === 204) {
-                window.open('/mypage', '_self');
-                // setFashionList(current => {
-                //     const newCurrent = current;
-                //     newCurrent.splice(index, 1);
-                //     return newCurrent;
-                // });
+                // window.open('/mypage', '_self');
+                setFashionList(current => {
+                    const newCurrent = [...current];
+                    newCurrent.splice(index, 1);
+                    return newCurrent;
+                });
             }
         }
     }

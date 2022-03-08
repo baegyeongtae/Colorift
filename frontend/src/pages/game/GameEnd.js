@@ -3,7 +3,12 @@ import { useState } from 'react';
 import gameImages from '../../image/game';
 import { ContainerDiv, NavBackgroundDiv, Article } from '../../components';
 
-export function GameStart({ number }) {
+export function GameEnd() {
+    // 0~39까지 난수 생성
+    const randomNumber = Math.floor(Math.random() * 10);
+
+    console.log(randomNumber);
+
     // 현재 선택된 체크박스
     const [select, setSelect] = useState('');
 
@@ -23,8 +28,8 @@ export function GameStart({ number }) {
                 </p>
                 <ImageDiv>
                     <img
-                        src={gameImages[number].src}
-                        alt={`${gameImages[number].name} 이미지`}
+                        src={gameImages[randomNumber].src}
+                        alt={`${gameImages[randomNumber].name} 이미지`}
                         width="360px"
                         height="450px"
                     />

@@ -7,4 +7,4 @@ export { SignUp } from './signup/SignUp';
 export { MyPage } from './mypage/MyPage';
 export { UploadFace, Loading, ColorResult, PersonalColorPage } from './personalcolor';
 export { PersonalColorChoice, MatchingLoading, UploadFashion, FashionResult, FashionMatchingPage } from './fashion';
-export { GameStart } from './game';
+export { Game } from './game/Game';

@@ -7,7 +7,7 @@ from clothes_detector import run_detector, detector
 
 from color_extractor import clt, centroid_histogram, show_img_compar, plot_colors
 
-from color_fit import rgb_to_hsv, scaler, classifier
+from color_fit import rgb_to_hsv, rgb_to_lab, scaler, classifier
 
 
 """Clothes detection"""
@@ -24,7 +24,7 @@ clt.fit(img.reshape(-1, 3))
 
 hist = centroid_histogram(clt)
 
-show_img_compar(img, plot_colors(hist, clt.cluster_centers_))
+# show_img_compar(img, plot_colors(hist, clt.cluster_centers_))
 clothes_color = np.where(hist == max(hist))[0][0]
 
 
@@ -34,11 +34,17 @@ test_rgb = clt.cluster_centers_[clothes_color]
 print(test_rgb)
 test_hsv = np.array(rgb_to_hsv(test_rgb[0], test_rgb[1], test_rgb[2]))
 print(test_hsv)
-test = scaler.transform([test_hsv])
+test_lab = np.array(rgb_to_lab(test_rgb[0], test_rgb[1], test_rgb[2]))
+print(test_lab)
+test = np.append(test_hsv, test_lab)
+print(test)
+test = scaler.transform([test])
 print(test)
 answer = classifier.predict(test)
 
 print(answer)
+# distance, neighbors = classifier.kneighbors(test, 5, return_distance=True)
 prob = classifier.predict_proba(test)
+print(prob)
 max_index = np.argmax(prob)
 print(classifier.classes_[max_index], np.max(prob))

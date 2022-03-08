@@ -28,6 +28,42 @@ def rgb_to_hsv(r, g, b):
     return h, s, v
 
 
+def lab_cal(t):
+    if (t > 0.008856):
+        return np.power(t, 1/3.0)
+    else:
+        return 7.787 * t + 16 / 116.0
+
+
+def rgb_to_lab(r, g, b):
+  #Conversion Matrix
+  matrix = [[0.412453, 0.357580, 0.180423],
+            [0.212671, 0.715160, 0.072169],
+            [0.019334, 0.119193, 0.950227]]
+
+  # RGB values lie between 0 to 1.0
+  rgb = [r/255, g/255, b/255]  # RGB
+
+  cie = np.dot(matrix, rgb)
+
+  cie[0] = cie[0] / 0.950456
+  cie[2] = cie[2] / 1.088754
+
+  # Calculate the L
+  L = 116 * np.power(cie[1], 1/3.0) - \
+      16.0 if cie[1] > 0.008856 else 903.3 * cie[1]
+
+  # Calculate the a
+  a = 500*(lab_cal(cie[0]) - lab_cal(cie[1]))
+
+  # Calculate the b
+  b = 200*(lab_cal(cie[1]) - lab_cal(cie[2]))
+
+  #  Values lie between -128 < b <= 127, -128 < a <= 127, 0 <= L <= 100
+
+  return L, a, b
+
+
 col_names = ['R', 'G', 'B', 'Class']
 
 dataset = pd.read_csv('./dataset/colorset_tone.CSV',
@@ -37,6 +73,7 @@ print(dataset.shape)  # (row개수, column개수)
 print(dataset.info())  # 데이터 타입, row 개수, column 개수, 컬럼 데이터 타입
 print(dataset.describe())  # 요약 통계 정보
 
+# HSV 값 추가
 H = pd.Series([])
 S = pd.Series([])
 V = pd.Series([])
@@ -51,7 +88,24 @@ dataset.insert(3, "H", H)
 dataset.insert(4, "S", S)
 dataset.insert(5, "V", V)
 
-X = dataset.iloc[:, 3:-1].to_numpy()  # DataFrame을 np.ndarray로 변환
+# Lab 값 추가
+L = pd.Series([])
+a = pd.Series([])
+b = pd.Series([])
+
+for i in range(len(dataset)):
+  Lab = rgb_to_lab(dataset["R"][i], dataset["G"][i], dataset["B"][i])
+  L[i] = round(Lab[0], 6)
+  a[i] = round(Lab[1], 6)
+  b[i] = round(Lab[2], 6)
+
+dataset.insert(6, "L", L)
+dataset.insert(7, "a", a)
+dataset.insert(8, "b", b)
+
+
+# DataFrame을 np.ndarray로 변환
+X = dataset.iloc[:, 3:-1].to_numpy()  
 y = dataset.iloc[:, -1].to_numpy()
 
 

@@ -82,7 +82,7 @@ export function MyPageFashion() {
             )}
             <FashionDiv>
                 <FasionImageDiv>
-                    {fashionList?.slice(0, imageMaxIndex + 1)?.map((item, index) => (
+                    {fashionList?.slice(0, imageMaxIndex)?.map((item, index) => (
                         <div key={item.id}>
                             <GrayButton width="70px" onClick={() => handleDeleteClick(item.id, index)}>
                                 삭제하기

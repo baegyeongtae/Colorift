@@ -3,7 +3,7 @@ import { ModalDiv } from './ModalDiv';
 
 export function TextModal({ toggleProps, className, text }) {
     const handleToggleClick = () => {
-        toggleProps();
+        toggleProps && toggleProps();
     };
 
     return (

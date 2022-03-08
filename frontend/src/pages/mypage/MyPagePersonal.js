@@ -34,12 +34,16 @@ export function MyPagePersonal() {
     };
 
     // 삭제하기 버튼 클릭 시 함수
-    async function handleDeleteClick(id) {
+    async function handleDeleteClick(id, index) {
         const result = window.confirm('정말 삭제하시겠습니까?');
         if (result) {
             const response = await setDeletePersonal(id);
             if (response.status === 204) {
-                window.open('/mypage', '_self');
+                setColorList(current => {
+                    const newCurrent = [...current];
+                    newCurrent.splice(index, 1);
+                    return newCurrent;
+                });
             }
         }
     }
@@ -72,12 +76,15 @@ export function MyPagePersonal() {
                                     <td className="date">{item.date}</td>
                                     <td className="color">{seasonPersonal[item.color]}</td>
                                     <td className="button">
-                                        <GrayButton width="90%" onClick={() => handleToggleDetailClick(item.id, index + 1)}>
+                                        <GrayButton
+                                            width="90%"
+                                            onClick={() => handleToggleDetailClick(item.id, index + 1)}
+                                        >
                                             상세보기
                                         </GrayButton>
                                     </td>
                                     <td className="button">
-                                        <GrayButton width="90%" onClick={() => handleDeleteClick(item.id)}>
+                                        <GrayButton width="90%" onClick={() => handleDeleteClick(item.id, index)}>
                                             삭제하기
                                         </GrayButton>
                                     </td>

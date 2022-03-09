@@ -1,13 +1,10 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { MyStyleModal, GrayButton } from '../../components';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 import { getFashionList, setDeleteFashion } from '../../utils/api/service';
 
 export function MyPageFashion() {
-    const navigate = useNavigate();
-
     // 상세보기 모달
     const [fashionModal, setFashionModal] = useState(false);
 
@@ -62,9 +59,11 @@ export function MyPageFashion() {
     }
 
     // 패션 목록 API 요청
-    useEffect(async () => {
-        const response = await getFashionList();
-        setFashionList(response.data);
+    useEffect(() => {
+        (async () => {
+            const response = await getFashionList();
+            setFashionList(response.data);
+        })();
     }, []);
 
     // 모달 뜬 상태에서는 스크롤 막기

@@ -1,4 +1,4 @@
-import { useRecoilValue, selector } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { fashionPageState } from '../../utils/data/atom';
 import { UploadFashion, MatchingLoading, PersonalColorChoice, FashionResult } from '.';
 

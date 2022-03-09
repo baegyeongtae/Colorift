@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import { useRef, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
@@ -59,10 +58,10 @@ function UploadFace() {
             setIsLoading(true);
             const checkedUser = sessionStorage.getItem('userId');
             if (checkedUser) {
-                const resultPercent = await postFacePhoto(imgData);
+                await postFacePhoto(imgData);
             }
             if (!checkedUser) {
-                const resultPercent = await postNotLoggedInFacePhoto(imgData);
+                await postNotLoggedInFacePhoto(imgData);
             }
             setIsLoading(false);
             setColorPage(2);

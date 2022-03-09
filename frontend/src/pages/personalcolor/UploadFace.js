@@ -14,6 +14,7 @@ import {
     BlueButton,
     WhiteButton,
     TextModal,
+    Article,
 } from '../../components';
 import { colorPageState } from '../../utils/data/atom';
 import { Loading } from '.';
@@ -113,6 +114,10 @@ function UploadFace() {
 export { UploadFace };
 
 // styled-components
+
+const TestArticle = styled(Article)`
+    ${({ theme }) => theme.flexStyled.flexColumn};
+`;
 
 const TextContainerDiv = styled(ContainerDiv)`
     @media ${({ theme }) => theme.device.mobile} {

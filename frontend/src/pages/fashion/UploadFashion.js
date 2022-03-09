@@ -88,7 +88,7 @@ function UploadFashion() {
                     <SubTitleP>매칭하고 싶은 옷을 올려주세요.</SubTitleP>
                     <ContentContainerDiv>
                         <PhotoContainerDiv>
-                            <PhotoUpload photoProps={photoUpload} />
+                            <PhotoUpload photoProps={photoUpload} clickProps={handleClick} />
                             <TextContainerDiv>
                                 <BestWorstLi />
                                 <ButtonContainerDiv>

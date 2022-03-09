@@ -82,7 +82,7 @@ function UploadFace() {
                     <SubTitleP>얼굴 사진을 올려주세요.</SubTitleP>
                     <ContentContainerDiv>
                         <PhotoContainerDiv>
-                            <PhotoUpload photoProps={photoUpload} />
+                            <PhotoUpload photoProps={photoUpload} clickProps={handleClick} />
                             <TextContainerDiv>
                                 <BestWorstLi />
                                 <ButtonContainerDiv>

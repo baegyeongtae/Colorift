@@ -40,7 +40,7 @@ const ButtonContainerDiv = styled.div`
     position: relative;
 
     .ButtonContainer {
-        width: 400px;
+        width: 350px;
         height: 350px;
 
         @media ${({ theme }) => theme.device.laptop} {
@@ -75,8 +75,8 @@ const ButtonContainerDiv = styled.div`
             width: 220px;
             height: 220px;
         }
-        width: 300px;
-        height: 300px;
+        width: 350px;
+        height: 350px;
     }
 
     .photoImg {
@@ -87,6 +87,6 @@ const ButtonContainerDiv = styled.div`
             height: 220px;
         }
         width: 100%;
-        height: 300px;
+        height: 100%;
     }
 `;

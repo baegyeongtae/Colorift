@@ -36,8 +36,8 @@ const CircleContainerDiv = styled(ContainerDiv)`
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    margin-bottom: 20px;
-    margin-top: 50px;
+    margin-top: 6vh;
+    margin-bottom: 6vh;
     color: white;
     width: 100%;
 
@@ -80,6 +80,8 @@ const CircleContainerDiv = styled(ContainerDiv)`
     }
 
     @media ${({ theme }) => theme.device.mobile} {
+        margin-top: 4vh;
+        margin-bottom: 4vh;
         .wrapper {
             width: 100%;
             height: auto;

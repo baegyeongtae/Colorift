@@ -10,13 +10,13 @@ import pickle
 import pandas as pd
 import numpy as np
 
-import color_conversion
+from . import color_conversion
 
 
 col_names = ['R', 'G', 'B', 'Class']
 
 dataset = pd.read_csv('./dataset/colorset_tone.CSV',
-                    encoding='UTF-8', header=None, names=col_names)
+                      encoding='UTF-8', header=None, names=col_names)
 
 # HSV 값 추가
 H = pd.Series([])
@@ -52,7 +52,7 @@ dataset.insert(8, "b", b)
 
 
 # DataFrame을 np.ndarray로 변환
-X = dataset.iloc[:, 4:-1].to_numpy()  
+X = dataset.iloc[:, 4:-1].to_numpy()
 y = dataset.iloc[:, -1].to_numpy()
 
 

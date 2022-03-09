@@ -2,14 +2,12 @@ import numpy as np
 import joblib
 
 
-from src import clothes_detector, color_extractor, color_conversion
+from .src import clothes_detector, color_extractor, color_conversion
 
 
 def main(img):
-
     """Clothes detection"""
     cropped_image = clothes_detector.run_detector(img)
-
 
     """Color extraction"""
     test_rgb = color_extractor.run_extractor(cropped_image)
@@ -18,7 +16,6 @@ def main(img):
     test_lab = np.array(color_conversion.rgb_to_lab(
         test_rgb[0], test_rgb[1], test_rgb[2]))
     test = np.append(test_hsv[1:], test_lab)
-
 
     """Tone prediction"""
     classifier = joblib.load('model/colorfit.pkl')
@@ -33,13 +30,13 @@ def main(img):
 
     result_prob = [0, 0, 0, 0]
     for i in range(4):
-        if classname[i]=="spring":
+        if classname[i] == "spring":
             result_prob[0] = prob[i] * 100
-        if classname[i]=="summer":
+        elif classname[i] == "summer":
             result_prob[1] = prob[i] * 100
-        elif classname[i]=="fall":
+        elif classname[i] == "fall":
             result_prob[2] = prob[i] * 100
-        elif classname[i]=="winter":
+        elif classname[i] == "winter":
             result_prob[3] = prob[i] * 100
 
     if answer == "spring":
@@ -52,8 +49,15 @@ def main(img):
         answer = "WI"
 
     print(answer, result_prob)
-    return answer, result_prob
+    res = {
+        'spring_rate': result_prob[0],
+        'summer_rate': result_prob[1],
+        'autumn_rate': result_prob[2],
+        'winter_rate': result_prob[3]
+    }
+    return answer, res
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     main(clothes_detector.load_img(
         './dataset/fashion_img/2391192_1_500.jpg'))

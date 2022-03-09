@@ -9,10 +9,10 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
 import pymysql
 from datetime import timedelta
 from pathlib import Path
+from .conf import aws
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,8 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
+    'rest_framework',
+    'app',
+    'rest_framework_simplejwt.token_blacklist',
+    "corsheaders",
 ]
-
 
 AUTH_USER_MODEL = 'app.User'
 
@@ -86,7 +90,6 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -95,6 +98,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -121,27 +126,25 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-"""
 
-pymysql.install_as_MySQLdb()
+# pymysql.install_as_MySQLdb()
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'colorfit',
-        'USER': 'colorfit',
-        'PASSWORD': 'colorfit',
-        'HOST': 'db',
-        'PORT': '3306'
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'colorfit',
+#         'USER': 'colorfit',
+#         'PASSWORD': 'colorfit',
+#         'HOST': 'db',
+#         'PORT': '3306'
+#     }
+# }
 
 
 # Password validation
@@ -160,6 +163,14 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+]
+
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.ScryptPasswordHasher',
 ]
 
 
@@ -184,3 +195,19 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# AWS
+AWS_ACCESS_KEY_ID = aws['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = aws['AWS_SECRET_ACCESS_KEY']
+AWS_REGION = aws['AWS_REGION']
+AWS_S3_FILE_OVERWRITE = False
+
+# S3 Storages
+AWS_STORAGE_BUCKET_NAME = aws['AWS_STORAGE_BUCKET_NAME']
+AWS_S3_CUSTOM_DOMAIN = aws['AWS_S3_CUSTOM_DOMAIN']
+AWS_S3_OBJECT_PARAMETERS = aws['AWS_S3_OBJECT_PARAMETERS']
+DEFAULT_FILE_STORAGE = aws['DEFAULT_FILE_STORAGE']
+
+
+CORS_ALLOW_ALL_ORIGINS = True

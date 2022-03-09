@@ -3,7 +3,7 @@ import tensorflow as tf
 
 import tensorflow_hub as hub
 
-from src import display_crop_image
+from . import display_crop_image
 
 
 module_handle = "https://tfhub.dev/google/faster_rcnn/openimages_v4/inception_resnet_v2/1"
@@ -17,6 +17,8 @@ def load_img(path):
 
 
 def run_detector(img):
+
+    img = tf.image.decode_jpeg(img, channels=3)
 
     converted_img = tf.image.convert_image_dtype(img, tf.float32)[
         tf.newaxis, ...]

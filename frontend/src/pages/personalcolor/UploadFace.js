@@ -31,6 +31,13 @@ function UploadFace() {
     };
 
     const handlePhoto = e => {
+        // 확장자 체크
+        const extension = e.target.value.split('.').pop().toLowerCase();
+        if (!['png', 'jpg', 'jpeg'].includes(extension)) {
+            alert('등록할 수 없는 파일입니다.');
+            return;
+        }
+
         const photoToAdd = e.target.files;
         const fileImg = URL.createObjectURL(photoToAdd?.[0]);
         const uploadFile = photoToAdd?.[0];
@@ -148,7 +155,7 @@ const PhotoContainerDiv = styled(ContainerDiv)`
         align-items: center;
         margin-bottom: 0px;
     }
-    margin: 30px;
+    margin: 50px 0;
     display: flex;
     flex-direction: row;
     justify-content: center;

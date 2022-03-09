@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
-import { Home, Example, Login, SignUp, MyPage, FashionMatchingPage, PersonalColorPage, Game } from './pages';
+import { Home, Example, Login, SignUp, MyPage, FashionMatchingPage, PersonalColorPage, Game, NotFound } from './pages';
 import { NavigationBar } from './components';
 
 function App() {
@@ -17,6 +17,7 @@ function App() {
                         <Route path="/personalcolor" element={<PersonalColorPage />} />
                         <Route path="/fashion" element={<FashionMatchingPage />} />
                         <Route path="/game" element={<Game />} />
+                        <Route path="/404" element={<NotFound />} />
                     </Route>
                 </Routes>
             </RecoilRoot>

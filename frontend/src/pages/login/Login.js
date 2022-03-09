@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     ContainerDiv,
@@ -12,6 +12,7 @@ import {
     Article,
 } from '../../components';
 import { setUserLogin } from '../../utils/api/user';
+import { useNotFound } from '../../utils/hooks/useNotFound';
 
 export function Login() {
     const navigate = useNavigate();
@@ -49,6 +50,9 @@ export function Login() {
             });
         } else if (response.status === 401) setNoUserModal(true);
     };
+
+    // 로그인 유저가 접근 시 404로 보내버리기
+    useNotFound(true);
 
     return (
         <>

@@ -5,6 +5,7 @@ import { setUserRegister } from '../../utils/api/user';
 import { useUser } from '../../utils/hooks/useUser';
 import { UserInputDiv, TitleP, UserButton, NavBackgroundDiv, TextModal, ContainerDiv, Article } from '../../components';
 import { checkRegexId, checkRegexNickname, checkRegexPassword } from '../../utils/data/checkRegexUser';
+import { useNotFound } from '../../utils/hooks/useNotFound';
 
 export function SignUp() {
     const navigate = useNavigate();
@@ -60,6 +61,9 @@ export function SignUp() {
         setRegisterModal(current => !current);
         if (signUpSuccess) navigate('/login', { replace: true });
     };
+
+    // 로그인 유저가 접근 시 404로 보내버리기
+    useNotFound(true);
 
     return (
         <>

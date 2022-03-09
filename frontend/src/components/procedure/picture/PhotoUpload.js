@@ -36,8 +36,8 @@ const ButtonContainerDiv = styled.div`
     position: relative;
 
     .ButtonContainer {
-        width: 350px;
-        height: 300px;
+        width: 400px;
+        height: 350px;
 
         @media ${({ theme }) => theme.device.laptop} {
             width: 300px;

@@ -14,6 +14,7 @@ import {
     BlueButton,
     WhiteButton,
     TextModal,
+    Article,
 } from '../../components';
 import { colorPageState } from '../../utils/data/atom';
 import { Loading } from '.';
@@ -71,41 +72,43 @@ function UploadFace() {
         <>
             <TextModal className={textModal && 'show'} toggleProps={handleToggleClick} text="사진을 올려주세요." />
             <NavBackgroundDiv />
-            {isLoading ? (
-                <>
-                    <Color number={1} />
-                    <Loading />
-                </>
-            ) : (
-                <>
-                    <Color number={0} />
-                    <SubTitleP>얼굴 사진을 올려주세요.</SubTitleP>
-                    <ContentContainerDiv>
-                        <PhotoContainerDiv>
-                            <PhotoUpload photoProps={photoUpload} />
-                            <TextContainerDiv>
-                                <BestWorstLi />
-                                <ButtonContainerDiv>
-                                    <Stack spacing={2} direction="row">
-                                        <BlueButton onClick={handleClick}>
-                                            <input
-                                                name="image"
-                                                type="file"
-                                                accept="image/jpg, image/jpeg, image/png"
-                                                ref={photoInput}
-                                                onChange={e => handlePhoto(e)}
-                                                style={{ display: 'none' }}
-                                            />
-                                            업로드
-                                        </BlueButton>
-                                        <WhiteButton onClick={() => fileCheck()}>결과보기</WhiteButton>
-                                    </Stack>
-                                </ButtonContainerDiv>
-                            </TextContainerDiv>
-                        </PhotoContainerDiv>
-                    </ContentContainerDiv>
-                </>
-            )}
+            <TestArticle>
+                {isLoading ? (
+                    <>
+                        <Color number={1} />
+                        <Loading />
+                    </>
+                ) : (
+                    <>
+                        <Color number={0} />
+                        <SubTitleP>얼굴 사진을 올려주세요.</SubTitleP>
+                        <ContentContainerDiv>
+                            <PhotoContainerDiv>
+                                <PhotoUpload photoProps={photoUpload} />
+                                <TextContainerDiv>
+                                    <BestWorstLi />
+                                    <ButtonContainerDiv>
+                                        <Stack spacing={2} direction="row">
+                                            <BlueButton onClick={handleClick}>
+                                                <input
+                                                    name="image"
+                                                    type="file"
+                                                    accept="image/jpg, image/jpeg, image/png"
+                                                    ref={photoInput}
+                                                    onChange={e => handlePhoto(e)}
+                                                    style={{ display: 'none' }}
+                                                />
+                                                업로드
+                                            </BlueButton>
+                                            <WhiteButton onClick={() => fileCheck()}>결과보기</WhiteButton>
+                                        </Stack>
+                                    </ButtonContainerDiv>
+                                </TextContainerDiv>
+                            </PhotoContainerDiv>
+                        </ContentContainerDiv>
+                    </>
+                )}
+            </TestArticle>
         </>
     );
 }
@@ -113,6 +116,10 @@ function UploadFace() {
 export { UploadFace };
 
 // styled-components
+
+const TestArticle = styled(Article)`
+    ${({ theme }) => theme.flexStyled.flexColumn};
+`;
 
 const TextContainerDiv = styled(ContainerDiv)`
     @media ${({ theme }) => theme.device.mobile} {

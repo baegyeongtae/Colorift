@@ -49,9 +49,11 @@ export function MyPagePersonal() {
     }
 
     // 컬러 목록 API 요청
-    useEffect(async () => {
-        const response = await getColorList();
-        setColorList(response.data);
+    useEffect(() => {
+        (async () => {
+            const response = await getColorList();
+            setColorList(response.data);
+        })();
     }, []);
 
     // 모달 뜬 상태에서는 스크롤 막기
@@ -67,10 +69,10 @@ export function MyPagePersonal() {
                 />
             )}
             <PersonalTableDiv className="personal">
-                {!colorList?.length ? (
+                {colorList?.length ? (
                     <table>
                         <tbody>
-                            {colorList?.map((item, index) => (
+                            {colorList.map((item, index) => (
                                 <tr key={item.id}>
                                     <td className="id">{index + 1}</td>
                                     <td className="date">{item.date}</td>

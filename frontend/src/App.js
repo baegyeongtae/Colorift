@@ -17,7 +17,7 @@ function App() {
                         <Route path="/personalcolor" element={<PersonalColorPage />} />
                         <Route path="/fashion" element={<FashionMatchingPage />} />
                         <Route path="/game" element={<Game />} />
-                        <Route path="/404" element={<NotFound />} />
+                        <Route path="*" element={<NotFound />} />
                     </Route>
                 </Routes>
             </RecoilRoot>

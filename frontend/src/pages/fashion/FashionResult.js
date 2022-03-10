@@ -14,6 +14,7 @@ import {
     MatchingResult,
     ContainerDiv,
     PercentResult,
+    ShareButton,
 } from '../../components';
 import { hue, saturation, value } from '../../image';
 
@@ -45,6 +46,15 @@ function FashionResult() {
             <SubTitleP>
                 종합 <ResultTextS color={resultColor}>{percentList[3]}%</ResultTextS>만큼 매칭됩니다.
             </SubTitleP>
+            <GridContainer>
+                {/* <FacebookShareButton url={currentUrl}>
+                        <FacebookIcon size={48} round borderRadius={24} />
+                    </FacebookShareButton>
+                    <TwitterShareButton url={currentUrl}>
+                        <TwitterIcon size={48} round borderRadius={24} />
+                    </TwitterShareButton> */}
+                <ShareButton />
+            </GridContainer>
             <ColorContainerDiv>
                 <div className="wrapper">
                     <div>
@@ -171,6 +181,14 @@ const ButtonContainerDiv = styled.div`
 
     color: ${({ theme }) => theme.color.white};
     background-color: ${props => props.theme.color.white};
+`;
+
+// 버튼을 배치시키는 컨테이너
+const GridContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 `;
 
 const CustomButton = styled(BlueButton)`

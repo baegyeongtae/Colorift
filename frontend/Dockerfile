@@ -4,6 +4,7 @@ WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json package-lock.json ./
 RUN npm install
+COPY .env ./
 COPY ./src ./src
 COPY ./public ./public
 RUN npm run build

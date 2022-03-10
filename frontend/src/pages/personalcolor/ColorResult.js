@@ -1,11 +1,12 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable react/style-prop-object */
 import styled from 'styled-components';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import Stack from '@mui/material/Stack';
 import { colorPageState } from '../../utils/data/atom';
 import { season, SeasonTone, seasonPersonal } from '../../utils/data/season';
-
 import {
     ResultImage,
     NavBackgroundDiv,
@@ -15,6 +16,7 @@ import {
     BlueButton,
     SeasonColor,
     MediumTextH,
+    ShareButton,
 } from '../../components';
 
 function ColorResult() {
@@ -35,6 +37,9 @@ function ColorResult() {
             <SubTitleP>
                 회원님은 <ResultTextS color={resultColor}>{seasonPersonal[seasonTone]}</ResultTextS> 입니다.
             </SubTitleP>
+            <GridContainer>
+                <ShareButton />
+            </GridContainer>
 
             <ColorContainerDiv>
                 <MediumTextLeftH>회원님에게 어울리는 컬러</MediumTextLeftH>
@@ -119,6 +124,14 @@ const ButtonContainerDiv = styled.div`
         margin-bottom: 20px;
         margin-top: 40px;
     }
+`;
+
+// 버튼을 배치시키는 컨테이너
+const GridContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 `;
 
 const MediumTextLeftH = styled(MediumTextH)`

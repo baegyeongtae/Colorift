@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { ModalDiv } from './ModalDiv';
@@ -57,7 +58,7 @@ export function MyPersonalListModal({ toggleProps, checkProps, className }) {
                 ...current,
                 id,
                 index,
-            }))
+            }));
             setPersonalListModal(true);
         }
     };
@@ -91,7 +92,10 @@ export function MyPersonalListModal({ toggleProps, checkProps, className }) {
                                         <td className="date">{item.date?.replace(/-/gi, '. ')}</td>
                                         <td className="color">{seasonPersonal[item.color]}</td>
                                         <td className="button">
-                                            <GrayButton width="90%" onClick={() => handleToggleClick(item.id, index + 1)}>
+                                            <GrayButton
+                                                width="90%"
+                                                onClick={() => handleToggleClick(item.id, index + 1)}
+                                            >
                                                 상세보기
                                             </GrayButton>
                                         </td>

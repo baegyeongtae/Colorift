@@ -1,30 +1,35 @@
 import styled from 'styled-components';
 import { ProgressBar } from '../progressbar/ProgressBar';
 
-export function PercentResult({ resultColor, hue, saturation, value }) {
+export function PercentResult({ resultColor, spring, summer, autumn, winter }) {
     return (
         <ContentContainerDiv>
             <ProgressDiv>
                 <dl>
-                    <dt className="progress">색상</dt>
-                    <dt className="progress">명도</dt>
-                    <dt className="progress">채도</dt>
+                    <dt className="progress">봄 웜톤</dt>
+                    <dt className="progress">여름 쿨톤</dt>
+                    <dt className="progress">가을 웜톤</dt>
+                    <dt className="progress">겨울 쿨톤</dt>
                 </dl>
                 <dl>
                     <dt className="progress">
-                        <ProgressBar percent={hue} resultColor={resultColor} />
+                        <ProgressBar percent={spring} resultColor={resultColor} />
                     </dt>
                     <dt className="progress">
-                        <ProgressBar percent={saturation} resultColor={resultColor} />
+                        <ProgressBar percent={summer} resultColor={resultColor} />
                     </dt>
                     <dt className="progress">
-                        <ProgressBar percent={value} resultColor={resultColor} />
+                        <ProgressBar percent={autumn} resultColor={resultColor} />
+                    </dt>
+                    <dt className="progress">
+                        <ProgressBar percent={winter} resultColor={resultColor} />
                     </dt>
                 </dl>
                 <dl>
-                    <dt className="progress">{hue}%</dt>
-                    <dt className="progress">{saturation}%</dt>
-                    <dt className="progress">{value}%</dt>
+                    <dt className="progress">{spring}%</dt>
+                    <dt className="progress">{summer}%</dt>
+                    <dt className="progress">{autumn}%</dt>
+                    <dt className="progress">{winter}%</dt>
                 </dl>
             </ProgressDiv>
         </ContentContainerDiv>

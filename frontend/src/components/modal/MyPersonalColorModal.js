@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { season, SeasonTone, seasonPersonal } from '../../utils/data/season';

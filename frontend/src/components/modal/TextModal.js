@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import { BlurBackgroundDiv, ModalCloseIcon, SubTitleP } from '..';
 import { ModalDiv } from './ModalDiv';
 

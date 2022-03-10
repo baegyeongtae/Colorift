@@ -14,18 +14,20 @@ export function MyPagePersonal() {
     const [personalInfo, setPersonalInfo] = useState({
         id: 0,
         index: 0,
+        title: '',
     });
 
     // API로 받아온 컬러 데이터 목록
     const [colorList, setColorList] = useState([]);
 
-    // colorList를 토대로 최대값 계절 문자열로 가져오기
-    // ex. ['봄 웜톤', '봄 웜톤 가을 웜톤', '겨울 쿨톤', ...]
+    // colorList를 토대로 최대값 계절 키워드로 가져오기
+    // ex. ['SP', 'AU', ...]
     const maxSeason = useMemo(() => {
         const season = colorList?.map(item => {
             const result = getMaxSeason(item.spring_rate, item.summer_rate, item.autumn_rate, item.winter_rate);
             return result;
         });
+
         return season;
     }, [colorList]);
 
@@ -36,11 +38,12 @@ export function MyPagePersonal() {
 
     // 상세보기 버튼 클릭했을 때
     const handleToggleDetailClick = useCallback(
-        (id, index) => {
+        (id, index, season) => {
             setPersonalInfo(current => ({
                 ...current,
                 id,
                 index,
+                season,
             }));
             setPersonalModal(current => !current);
         },
@@ -90,11 +93,13 @@ export function MyPagePersonal() {
                                 <tr key={item.id}>
                                     <td className="id">{index + 1}</td>
                                     <td className="date">{item.date}</td>
-                                    <td className="color">{maxSeason && maxSeason[index]}</td>
+                                    <td className="color">{maxSeason && seasonPersonal[maxSeason[index]]}</td>
                                     <td className="button">
                                         <GrayButton
                                             width="90%"
-                                            onClick={() => handleToggleDetailClick(item.id, index + 1)}
+                                            onClick={() =>
+                                                handleToggleDetailClick(item.id, index + 1, maxSeason[index])
+                                            }
                                         >
                                             상세보기
                                         </GrayButton>

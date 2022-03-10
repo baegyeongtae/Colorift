@@ -10,7 +10,7 @@ export function MyPersonalColorModal({ toggleProps, className, selectData }) {
     const [resultColor, setResultColor] = useState({});
 
     // 어울리는 컬러 목록을 위한 퍼스널컬러 추출
-    const colorList = season[resultColor?.color];
+    const colorList = season[selectData.season];
 
     // 퍼스널컬러 키워드에 따른 색상 추출
     const seasonColor = SeasonTone(season[resultColor?.color]);
@@ -27,20 +27,20 @@ export function MyPersonalColorModal({ toggleProps, className, selectData }) {
                 const response = await getColorDetailModal(selectData.id);
                 setResultColor(response);
             })();
-    }, [selectData.id]);
+    }, [selectData]);
 
     return (
         <>
             <BlurBackgroundDiv className={className} onClick={handleToggleClick} />
             <ModalDiv className={className}>
-                <MyModalTable id={selectData.index} date={resultColor.date} title={resultColor.color} />
+                <MyModalTable id={selectData.index} date={resultColor.date} title={selectData.season} />
                 <ModalCloseIcon toggleProps={handleToggleClick} />
                 <ResultContainerDiv>
                     <ResultImage image={resultColor.image} />
                 </ResultContainerDiv>
 
                 <SubTitleP>
-                    회원님은 <ResultTextS color={seasonColor}>{seasonPersonal[resultColor.color]}</ResultTextS> 입니다.
+                    회원님은 <ResultTextS color={seasonColor}>{seasonPersonal[selectData.season]}</ResultTextS> 입니다.
                 </SubTitleP>
 
                 <ColorContainerDiv>

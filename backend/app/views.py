@@ -146,7 +146,6 @@ class ColorTestDetail(APIView):
         color = self.get_object(pk)
         if request.user.id == color.user_id:
             serializer = ColorDetailSerializer(color)
-            serializer.data['id'] = serializer.data['id'].hashid
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(status=status.HTTP_403_FORBIDDEN)
@@ -185,11 +184,7 @@ class ColorTestList(APIView):
         user = request.user
         colors = user.color_set.all()
         serializer = ColorListSerializer(colors, many=True)
-        response_data = []
-        for d in serializer.data:
-            d['id'] = d['id'].hashid
-            response_data.append(d)            
-        return Response(response_data, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 """
@@ -242,7 +237,6 @@ class FashionTestDetail(APIView):
         fashion = self.get_object(pk)
         if request.user.id == fashion.user_id:
             serializer = FashionDetailSerializer(fashion)
-            serializer.data['id'] = serializer.data['id'].hashid
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(status=status.HTTP_403_FORBIDDEN)
@@ -281,8 +275,4 @@ class FashionTestList(APIView):
         user = request.user
         fashions = user.fashion_set.all()
         serializer = FashionListSerializer(fashions, many=True)
-        response_data = []
-        for d in serializer.data:
-            d['id'] = d['id'].hashid
-            response_data.append(d)            
-        return Response(response_data, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)

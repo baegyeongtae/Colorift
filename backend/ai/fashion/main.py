@@ -1,6 +1,7 @@
 import numpy as np
 import joblib
 import time
+import tensorflow as tf
 
 
 from . import clothes_detector
@@ -9,14 +10,12 @@ from . import color_conversion
 from . import utils
 
 
-def main(color, img_tensor):
+def main(color, file):
     """Clothes detection"""
     model = utils.Load_DeepFashion2_Yolov3()
-    # Read_Img_2_Tensor does:
-    # img_raw = tf.io.read_file(img_path)
-    # img = tf.image.decode_image(img_raw, channels=3, dtype=tf.dtypes.float32)
-    # img = tf.expand_dims(img, 0)  # fake a batch axis
-    # return img
+
+    img = tf.image.decode_image(file.read(), channels=3, dtype=tf.dtypes.float32)
+    img_tensor = tf.expand_dims(img, 0)  # fake a batch axis
 
     # backend랑 input 맞춰야함.
     # img_tensor = utils.Read_Img_2_Tensor(img)
@@ -72,7 +71,7 @@ def main(color, img_tensor):
         'winter_rate': result_prob[3]
     }
 
-    return {'spring_rate': 40, 'summer_rate': 30, 'autumn_rate': 20, 'winter_rate': 10, 'result': 'G'}
+    return {'spring_rate': round(result_prob[0]), 'summer_rate': round(result_prob[1]), 'autumn_rate': round(result_prob[2]), 'winter_rate': round(result_prob[3]), 'result': 'G'}
 
     return answer, res
 

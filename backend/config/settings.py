@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+
 #import pymysql
 from datetime import timedelta
 from pathlib import Path
@@ -129,7 +130,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -218,4 +218,3 @@ DEFAULT_FILE_STORAGE = aws['DEFAULT_FILE_STORAGE']
 
 
 CORS_ALLOW_ALL_ORIGINS = True
-

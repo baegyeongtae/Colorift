@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { UserButton, UserOutModal, MyChangePWModal, ChangeNameModal } from '../../components';
-import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 
 export function MyPageInfo() {
     // 회원탈퇴 모달
@@ -27,9 +26,6 @@ export function MyPageInfo() {
     const handleChangePassword = () => {
         setChangePasswordModal(current => !current);
     };
-
-    // 모달 뜬 상태에서는 스크롤 막기
-    useEffect(() => setScrollDisabled(userOutModal), [userOutModal]);
 
     return (
         <>

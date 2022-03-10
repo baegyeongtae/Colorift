@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     ContainerDiv,
@@ -11,8 +11,8 @@ import {
     TextModal,
     Article,
 } from '../../components';
-import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 import { setUserLogin } from '../../utils/api/user';
+import { useNotFound } from '../../utils/hooks/useNotFound';
 
 export function Login() {
     const navigate = useNavigate();
@@ -51,7 +51,8 @@ export function Login() {
         } else if (response.status === 401) setNoUserModal(true);
     };
 
-    useEffect(() => setScrollDisabled(findModal), [findModal]);
+    // 로그인 유저가 접근 시 404로 보내버리기
+    useNotFound(true);
 
     return (
         <>
@@ -61,8 +62,8 @@ export function Login() {
                 text="아이디 또는 비밀번호를 잘못 입력했습니다"
             />
             <ChangePWModal className={findModal && 'show'} toggleProps={handlePasswordToggleModal} />
+            <NavBackgroundDiv />
             <Article>
-                <NavBackgroundDiv />
                 <ContainerDiv>
                     <LoginDiv>
                         <TitleP color="#3C64B1" className="column">

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo, useCallback } from 'react';
 import { getColorList, setDeletePersonal } from '../../utils/api/service';
 import { GrayButton, MyPersonalColorModal } from '../../components';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
@@ -18,27 +18,34 @@ export function MyPagePersonal() {
 
     // API로 받아온 컬러 데이터 목록
     const [colorList, setColorList] = useState([]);
-    const maxSeason =
-        colorList &&
-        colorList.map(item => {
+
+    // colorList를 토대로 최대값 계절 문자열로 가져오기
+    // ex. ['봄 웜톤', '봄 웜톤 가을 웜톤', '겨울 쿨톤', ...]
+    const maxSeason = useMemo(() => {
+        const season = colorList?.map(item => {
             const result = getMaxSeason(item.spring_rate, item.summer_rate, item.autumn_rate, item.winter_rate);
             return result;
         });
+        return season;
+    }, [colorList]);
 
     // 상세보기 또는 삭제하기 클릭 시 모달 토클 함수
-    const handleToggleClick = () => {
+    const handleToggleClick = useCallback(() => {
         if (personalModal) setPersonalModal(current => !current);
-    };
+    }, [personalModal]);
 
     // 상세보기 버튼 클릭했을 때
-    const handleToggleDetailClick = (id, index) => {
-        setPersonalInfo(current => ({
-            ...current,
-            id,
-            index,
-        }));
-        setPersonalModal(current => !current);
-    };
+    const handleToggleDetailClick = useCallback(
+        (id, index) => {
+            setPersonalInfo(current => ({
+                ...current,
+                id,
+                index,
+            }));
+            setPersonalModal(current => !current);
+        },
+        [personalInfo, personalModal],
+    );
 
     // 삭제하기 버튼 클릭 시 함수
     async function handleDeleteClick(id, index) {

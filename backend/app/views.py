@@ -113,9 +113,11 @@ class ColorTest(APIView):
             data['user'] = request.user.id
 
         serializer = ColorTestSerializer(data=data)
+
         if serializer.is_valid():
             instance = serializer.save()
             return Response({
+                'id' : instance.id.hashid,
                 'spring_rate': instance.spring_rate,
                 'summer_rate': instance.summer_rate,
                 'autumn_rate': instance.autumn_rate,
@@ -206,6 +208,7 @@ class FashionTest(APIView):
         if serializer.is_valid():
             instance = serializer.save()
             return Response({
+                'id' : instance.id.hashid,
                 'spring_rate': instance.spring_rate,
                 'summer_rate': instance.summer_rate,
                 'autumn_rate': instance.autumn_rate,

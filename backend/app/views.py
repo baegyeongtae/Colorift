@@ -185,8 +185,11 @@ class ColorTestList(APIView):
         user = request.user
         colors = user.color_set.all()
         serializer = ColorListSerializer(colors, many=True)
-        serializer.data['id'] = serializer.data['id'].hashid
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        response_data = []
+        for d in serializer.data:
+            d['id'] = d['id'].hashid
+            response_data.append(d)            
+        return Response(response_data, status=status.HTTP_200_OK)
 
 
 """
@@ -278,5 +281,8 @@ class FashionTestList(APIView):
         user = request.user
         fashions = user.fashion_set.all()
         serializer = FashionListSerializer(fashions, many=True)
-        serializer.data['id'] = serializer.data['id'].hashid
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        response_data = []
+        for d in serializer.data:
+            d['id'] = d['id'].hashid
+            response_data.append(d)            
+        return Response(response_data, status=status.HTTP_200_OK)

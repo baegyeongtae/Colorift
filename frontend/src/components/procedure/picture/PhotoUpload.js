@@ -14,6 +14,7 @@ export function PhotoUpload({ photoProps, clickProps }) {
             <ButtonContainerDiv onClick={handleClick}>
                 <Button>
                     <div className="ButtonContainer">
+                        <p>클릭하여 사진 업로드</p>
                         <AddPhotoAlternateIcon />
                     </div>
                 </Button>
@@ -25,6 +26,7 @@ export function PhotoUpload({ photoProps, clickProps }) {
             <Button>
                 <div className="faceImg" key={photoProps}>
                     <img className="photoImg" alt="face" src={photoProps} />
+                    <p className="hover">클릭하여 사진 업로드</p>
                 </div>
             </Button>
         </ButtonContainerDiv>
@@ -72,13 +74,19 @@ const ButtonContainerDiv = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
+        width: 350px;
+        height: 350px;
+
+        position: relative;
+
+        .hover {
+            display: none;
+        }
 
         @media ${({ theme }) => theme.device.mobile} {
             width: 220px;
             height: 220px;
         }
-        width: 350px;
-        height: 350px;
     }
 
     .photoImg {
@@ -88,7 +96,18 @@ const ButtonContainerDiv = styled.div`
             width: 100%;
             height: 220px;
         }
+
         width: 100%;
         height: 100%;
+
+        :hover {
+            filter: blur(1px) contrast(50%);
+
+            + .hover {
+                display: initial;
+                position: absolute;
+                color: white;
+            }
+        }
     }
 `;

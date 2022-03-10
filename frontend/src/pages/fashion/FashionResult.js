@@ -21,9 +21,10 @@ import { hue, saturation, value } from '../../image';
 function FashionResult() {
     const navigate = useNavigate();
     const setFashionPage = useSetRecoilState(fashionPageState);
-    const seasonTone = sessionStorage.getItem('color');
-    const percentList = JSON.parse(sessionStorage.getItem('percent'));
-
+    const seasonTone = sessionStorage.getItem('fashionResult');
+    const percentList = JSON.parse(sessionStorage.getItem('fashionResult'));
+    console.log(seasonTone);
+    console.log(percentList);
     const resultColor = SeasonTone(season[seasonTone]);
 
     return (
@@ -39,20 +40,15 @@ function FashionResult() {
             </SubTitleP>
             <PercentResult
                 resultColor={resultColor}
-                hue={percentList[0]}
-                saturation={percentList[1]}
-                value={percentList[2]}
+                spring={percentList[0]}
+                summer={percentList[1]}
+                autumn={percentList[2]}
+                winter={percentList[3]}
             />
             <SubTitleP>
                 종합 <ResultTextS color={resultColor}>{percentList[3]}%</ResultTextS>만큼 매칭됩니다.
             </SubTitleP>
             <GridContainer>
-                {/* <FacebookShareButton url={currentUrl}>
-                        <FacebookIcon size={48} round borderRadius={24} />
-                    </FacebookShareButton>
-                    <TwitterShareButton url={currentUrl}>
-                        <TwitterIcon size={48} round borderRadius={24} />
-                    </TwitterShareButton> */}
                 <ShareButton />
             </GridContainer>
             <ColorContainerDiv>

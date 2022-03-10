@@ -72,10 +72,15 @@ export async function postFacePhoto(imgData) {
             },
         });
 
-        const season = response.data.color;
-        sessionStorage.setItem('season', season);
+        const userId = response.data.id;
+        const spring = response.data.spring_rate;
+        const summer = response.data.summer_rate;
+        const autumn = response.data.autumn_rate;
+        const winter = response.data.winter_rate;
+        const colorResult = [userId, spring, summer, autumn, winter];
 
-        return season;
+        sessionStorage.setItem('colorResult', colorResult);
+        return colorResult;
     } catch (error) {
         return error.response;
     }
@@ -93,13 +98,16 @@ export async function postFashionPhoto(fashionData) {
             },
         });
 
-        const hue = response.data.color_match_rate;
-        const value = response.data.brightness_match_rate;
-        const saturation = response.data.saturation_match_rate;
+        const userId = response.data.id;
+        const spring = response.data.spring_rate;
+        const summer = response.data.summer_rate;
+        const autumn = response.data.autumn_rate;
+        const winter = response.data.winter_rate;
+        const feeling = response.data.result;
+        const fashionResult = [userId, spring, summer, autumn, winter, feeling];
 
-        const average = (hue + saturation + value) / 3;
-
-        return [hue, value, saturation, average];
+        sessionStorage.setItem('fashionResult', fashionResult);
+        return fashionResult;
     } catch (error) {
         console.log(error.response);
         return error.response;

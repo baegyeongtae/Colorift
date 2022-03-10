@@ -1,7 +1,6 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/style-prop-object */
 import styled from 'styled-components';
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import Stack from '@mui/material/Stack';
@@ -17,12 +16,16 @@ import {
     SeasonColor,
     MediumTextH,
     ShareButton,
+    PercentResult,
 } from '../../components';
 
 function ColorResult() {
     const navigate = useNavigate();
     const setColorPage = useSetRecoilState(colorPageState);
-    const seasonTone = sessionStorage.getItem('season');
+    const seasonTone = sessionStorage.getItem('colorResult');
+    const percentList = JSON.parse(sessionStorage.getItem('colorResult'));
+    console.log(seasonTone);
+    console.log(percentList);
     const resultColor = SeasonTone(season[seasonTone]);
 
     return (
@@ -37,6 +40,13 @@ function ColorResult() {
             <SubTitleP>
                 회원님은 <ResultTextS color={resultColor}>{seasonPersonal[seasonTone]}</ResultTextS> 입니다.
             </SubTitleP>
+            <PercentResult
+                resultColor={resultColor}
+                spring={percentList[0]}
+                summer={percentList[1]}
+                autumn={percentList[2]}
+                winter={percentList[3]}
+            />
             <GridContainer>
                 <ShareButton />
             </GridContainer>

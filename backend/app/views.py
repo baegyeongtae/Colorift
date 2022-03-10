@@ -113,6 +113,7 @@ class ColorTest(APIView):
             data['user'] = request.user.id
 
         serializer = ColorTestSerializer(data=data)
+
         if serializer.is_valid():
             instance = serializer.save()
             return Response({

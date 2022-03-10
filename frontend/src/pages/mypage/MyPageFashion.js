@@ -1,13 +1,10 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { MyStyleModal, GrayButton } from '../../components';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 import { getFashionList, setDeleteFashion } from '../../utils/api/service';
 
 export function MyPageFashion() {
-    const navigate = useNavigate();
-
     // 상세보기 모달
     const [fashionModal, setFashionModal] = useState(false);
 
@@ -52,20 +49,21 @@ export function MyPageFashion() {
         if (result) {
             const response = await setDeleteFashion(id);
             if (response.status === 204) {
-                window.open('/mypage', '_self');
-                // setFashionList(current => {
-                //     const newCurrent = current;
-                //     newCurrent.splice(index, 1);
-                //     return newCurrent;
-                // });
+                setFashionList(current => {
+                    const newCurrent = [...current];
+                    newCurrent.splice(index, 1);
+                    return newCurrent;
+                });
             }
         }
     }
 
     // 패션 목록 API 요청
-    useEffect(async () => {
-        const response = await getFashionList();
-        setFashionList(response.data);
+    useEffect(() => {
+        (async () => {
+            const response = await getFashionList();
+            setFashionList(response.data);
+        })();
     }, []);
 
     // 모달 뜬 상태에서는 스크롤 막기
@@ -96,12 +94,15 @@ export function MyPageFashion() {
                         </div>
                     ))}
                 </FasionImageDiv>
-                {fashionList?.length === 0 ? (
-                    <p>매칭한 패션이 없습니다.</p>
-                ) : (
-                    <PlusButton disabled={4 * (buttonClick + 1) >= fashionList?.length} onClick={handleMoreClick}>
+                {fashionList?.length ? (
+                    <PlusButton
+                        disabled={fashionList && 4 * (buttonClick + 1) >= fashionList.length}
+                        onClick={handleMoreClick}
+                    >
                         더보기
                     </PlusButton>
+                ) : (
+                    <p>매칭한 패션이 없습니다.</p>
                 )}
             </FashionDiv>
         </>
@@ -160,7 +161,7 @@ const PlusButton = styled.button`
     width: 150px;
     height: 50px;
 
-    margin: 30px 0 100px 0;
+    margin-top: 30px;
 
     color: white;
     text-align: center;

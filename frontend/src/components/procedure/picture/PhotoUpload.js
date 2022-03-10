@@ -2,14 +2,19 @@ import styled from 'styled-components';
 import Button from '@mui/material/Button';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
-export function PhotoUpload({ photoProps }) {
+export function PhotoUpload({ photoProps, clickProps }) {
     sessionStorage.setItem('photoProps', photoProps);
+
+    const handleClick = () => {
+        clickProps && clickProps();
+    };
 
     if (photoProps === '') {
         return (
-            <ButtonContainerDiv>
+            <ButtonContainerDiv onClick={handleClick}>
                 <Button>
                     <div className="ButtonContainer">
+                        <p>클릭하여 사진 업로드</p>
                         <AddPhotoAlternateIcon />
                     </div>
                 </Button>
@@ -17,10 +22,13 @@ export function PhotoUpload({ photoProps }) {
         );
     }
     return (
-        <ButtonContainerDiv>
-            <div className="faceImg" key={photoProps}>
-                <img className="photoImg" alt="face" src={photoProps} />
-            </div>
+        <ButtonContainerDiv onClick={handleClick}>
+            <Button>
+                <div className="faceImg" key={photoProps}>
+                    <img className="photoImg" alt="face" src={photoProps} />
+                    <p className="hover">클릭하여 사진 업로드</p>
+                </div>
+            </Button>
         </ButtonContainerDiv>
     );
 }
@@ -37,7 +45,7 @@ const ButtonContainerDiv = styled.div`
 
     .ButtonContainer {
         width: 350px;
-        height: 300px;
+        height: 350px;
 
         @media ${({ theme }) => theme.device.laptop} {
             width: 300px;
@@ -66,13 +74,19 @@ const ButtonContainerDiv = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
+        width: 350px;
+        height: 350px;
+
+        position: relative;
+
+        .hover {
+            display: none;
+        }
 
         @media ${({ theme }) => theme.device.mobile} {
             width: 220px;
             height: 220px;
         }
-        width: 300px;
-        height: 300px;
     }
 
     .photoImg {
@@ -82,7 +96,18 @@ const ButtonContainerDiv = styled.div`
             width: 100%;
             height: 220px;
         }
+
         width: 100%;
-        height: 300px;
+        height: 100%;
+
+        :hover {
+            filter: blur(1px) contrast(50%);
+
+            + .hover {
+                display: initial;
+                position: absolute;
+                color: white;
+            }
+        }
     }
 `;

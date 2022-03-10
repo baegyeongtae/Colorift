@@ -41,15 +41,6 @@ def plot_colors(hist, centroids):
     return bar
 
 
-def palette(clusters):
-    width = 300
-    palette = np.zeros((50, width, 3), np.uint8)
-    steps = width/clusters.cluster_centers_.shape[0]
-    for idx, centers in enumerate(clusters.cluster_centers_):
-        palette[:, int(idx*steps):(int((idx+1)*steps)), :] = centers
-    return palette
-
-
 def show_img_compar(img_1, img_2):
     f, ax = plt.subplots(1, 2, figsize=(10, 10))
     ax[0].imshow(img_1)
@@ -58,3 +49,11 @@ def show_img_compar(img_1, img_2):
     ax[1].axis('off')
     f.tight_layout()
     plt.show()
+
+
+def run_extractor(img):
+    clt.fit(img.reshape(-1, 3))
+    hist = centroid_histogram(clt)
+    clothes_color = np.where(hist == max(hist))[0][0]
+    
+    return clt.cluster_centers_[clothes_color]

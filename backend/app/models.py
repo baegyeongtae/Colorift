@@ -1,10 +1,11 @@
 from django.db import models
 
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from hashid_field import HashidAutoField
 
 
 class UserManager(BaseUserManager):
-    # 일반 user 생성
+
     def create_user(self, username, nickname, password=None):
         if not username:
             raise ValueError('must have username(account)')  # 여기서 username nickname password 검증해줄필요 없을거같은데 지울까요?
@@ -20,7 +21,6 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    # 관리자 user 생성
     def create_superuser(self, username, nickname, password=None):
         user = self.create_user(
             username=username,
@@ -38,11 +38,9 @@ class User(AbstractBaseUser):
     nickname = models.CharField(default='', max_length=100, null=False, blank=False)
     password = models.CharField(default='', max_length=100, null=False, blank=False)
 
-    # User 모델의 필수 field
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
-    # 헬퍼 클래스 사용
     objects = UserManager()
 
     USERNAME_FIELD = 'username'
@@ -52,21 +50,46 @@ class User(AbstractBaseUser):
         return self.nickname
 
 
-SEASON_CHOICES = [('SP', 'spring'), ('SU', 'summer'), ('FA', 'fall'), ('WI', 'winter')]
-
-
 class Color(models.Model):
+    id = HashidAutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-    color = models.CharField(max_length=2, choices=SEASON_CHOICES, default='SP')
     image = models.ImageField(upload_to='face/')
     date = models.DateField()
+    spring_rate = models.IntegerField()
+    summer_rate = models.IntegerField()
+    autumn_rate = models.IntegerField()
+    winter_rate = models.IntegerField()
+
+
+SPRING = 'SP'
+SUMMER = 'SU'
+AUTUMN = 'AU'
+WINTER = 'WI'
+SEASON_CHOICES = [
+    (SPRING, 'spring'),
+    (SUMMER, 'summer'),
+    (AUTUMN, 'autumn'),
+    (WINTER, 'winter')
+]
+
+GOOD = 'G'
+SOSO = 'S'
+BAD = 'B'
+RESULT_CHOICES = [
+    (GOOD, 'good'),
+    (SOSO, 'soso'),
+    (BAD, 'bad')
+]
 
 
 class Fashion(models.Model):
+    id = HashidAutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-    color = models.CharField(max_length=2, choices=SEASON_CHOICES, default='SP')
+    color = models.CharField(max_length=2, choices=SEASON_CHOICES, default=SPRING)
     image = models.ImageField(upload_to='fashion/')
     date = models.DateField()
-    color_match_rate = models.IntegerField()
-    brightness_match_rate = models.IntegerField()
-    saturation_match_rate = models.IntegerField()
+    spring_rate = models.IntegerField()
+    summer_rate = models.IntegerField()
+    autumn_rate = models.IntegerField()
+    winter_rate = models.IntegerField()
+    result = models.CharField(max_length=1, choices=RESULT_CHOICES, default=GOOD)

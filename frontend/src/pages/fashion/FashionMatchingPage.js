@@ -1,10 +1,12 @@
-import { useRecoilValue } from 'recoil';
+import { useEffect } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { fashionPageState } from '../../utils/data/atom';
 import { UploadFashion, MatchingLoading, PersonalColorChoice, FashionResult } from '.';
 
 function FashionMatchingPage() {
-    // 0은 정보 입력, 1은 직군 선택
+    // 0은 컬러 선택 페이지, 1은 패션 선택 페이지, 2는 로딩, 3은 결과 페이지
     const fashionPage = useRecoilValue(fashionPageState);
+    const setFashionPage = useSetRecoilState(fashionPageState);
 
     // 페이지에 따라 컴포넌트 렌더링할 함수
     function renderHTML() {
@@ -22,6 +24,9 @@ function FashionMatchingPage() {
     }
 
     const renderPage = renderHTML();
+
+    // 페이지 초기화
+    useEffect(() => setFashionPage(0), []);
 
     return renderPage;
 }

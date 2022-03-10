@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
 import { Outlet, useLocation, NavLink } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 import Cookies from 'js-cookie';
@@ -8,15 +7,10 @@ import { ContainerDiv } from '../area/ContainerDiv';
 import { useGetScrollY } from '../../utils/hooks/useGetScrollY';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 import { xmarkIcon, menuIcon, profileIcon } from '../../image';
-import { colorPageState, fashionPageState } from '../../utils/data/atom';
 
 function NavigationBar() {
     // true 이면 메뉴 바 나옴
     const [isToggle, setIsToggle] = useState(false);
-
-    // true 이면 메뉴 바 나옴
-    const setColorPage = useSetRecoilState(colorPageState);
-    const setFashionPage = useSetRecoilState(fashionPageState);
 
     // 현재 url 받아오기
     const location = useLocation();
@@ -56,12 +50,6 @@ function NavigationBar() {
         setIsToggle(current => !current);
     };
 
-    // ColorAnalysis, FashionMatching 누르면 UploadFace, PersonalColorChoice페이지 나오게
-    const resetPages = () => {
-        setColorPage(0);
-        setFashionPage(0);
-    };
-
     // 쿠키, 세션 모두 리셋하는 함수
     function userSessionReset() {
         Cookies.remove('accessToken');
@@ -96,7 +84,6 @@ function NavigationBar() {
                                         key={menu.name}
                                         to={menu.path}
                                         className={pathname === '/' && scrollY === 0 && 'transparent'}
-                                        onClick={() => resetPages()}
                                     >
                                         {menu.name}
                                     </NavLink>

@@ -4,6 +4,7 @@ import { getColorList, setDeletePersonal } from '../../utils/api/service';
 import { GrayButton, MyPersonalColorModal } from '../../components';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 import { seasonPersonal } from '../../utils/data/season';
+import { getMaxSeason } from '../../utils/data/getMaxSeason';
 
 export function MyPagePersonal() {
     // 상세보기 모달
@@ -17,6 +18,12 @@ export function MyPagePersonal() {
 
     // API로 받아온 컬러 데이터 목록
     const [colorList, setColorList] = useState([]);
+    const maxSeason =
+        colorList &&
+        colorList.map(item => {
+            const result = getMaxSeason(item.spring_rate, item.summer_rate, item.autumn_rate, item.winter_rate);
+            return result;
+        });
 
     // 상세보기 또는 삭제하기 클릭 시 모달 토클 함수
     const handleToggleClick = () => {
@@ -76,7 +83,7 @@ export function MyPagePersonal() {
                                 <tr key={item.id}>
                                     <td className="id">{index + 1}</td>
                                     <td className="date">{item.date}</td>
-                                    <td className="color">{seasonPersonal[item.color]}</td>
+                                    <td className="color">{maxSeason && maxSeason[index]}</td>
                                     <td className="button">
                                         <GrayButton
                                             width="90%"

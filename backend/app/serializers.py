@@ -99,7 +99,7 @@ class FashionTestSerializer(serializers.ModelSerializer):
         fields = ['user', 'color', 'image']
 
     def ai_model(self, color, file):  # 아직 ai model 연결되지 않음
-        _, res = main(file.read())
+        _, res = main(color, file)
         print(res)
         return res
 

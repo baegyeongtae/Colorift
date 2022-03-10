@@ -48,6 +48,8 @@ INSTALLED_APPS = [
 
 AUTH_USER_MODEL = 'app.User'
 
+HASHID_FIELD_SALT = "wae98fawe9f8w7e978f7aw9e8f79aw"
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',

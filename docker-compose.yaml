@@ -29,6 +29,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    runtime: nvidia
     restart: always
     ports:
       - 8000:8000

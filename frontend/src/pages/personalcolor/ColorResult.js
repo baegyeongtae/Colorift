@@ -26,7 +26,8 @@ function ColorResult() {
     const percentList = JSON.parse(sessionStorage.getItem('colorResult'));
     console.log(seasonTone);
     console.log(percentList);
-    const resultColor = SeasonTone(season[seasonTone]);
+
+    const resultColor = [`#E6324B`, `#01456A`, `#CA5C3D`, `#F3E902`];
 
     return (
         <>

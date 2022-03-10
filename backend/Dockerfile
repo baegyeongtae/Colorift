@@ -1,15 +1,10 @@
-FROM nvidia/cuda:11.4.0-base-ubuntu20.04
+FROM tensorflow/tensorflow:2.8.0-gpu
 
 WORKDIR /app
 ADD . /app/
 
-ENV DEBIAN_FRONTEND=noninteractive
-
-RUN apt update
-RUN apt-get install -y python3 python3-pip
-RUN apt-get install -y python3-opencv
-RUN pip install cmake==3.22.2
-RUN pip install tensorflow-cpu
+RUN apt-get update
+RUN apt-get -y install libgl1-mesa-glx
 RUN pip install -r requirements.txt
 
 EXPOSE 8000

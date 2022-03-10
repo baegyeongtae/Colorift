@@ -3,10 +3,10 @@ import joblib
 import time
 
 
-import clothes_detector
-import color_extractor
-import color_conversion
-import utils
+from . import clothes_detector
+from . import color_extractor
+from . import color_conversion
+from . import utils
 
 
 def main(color, img_tensor):

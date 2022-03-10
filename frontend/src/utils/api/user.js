@@ -125,6 +125,12 @@ export async function postNotLoggedInFashionPhoto(fashionData) {
         const feeling = response.data.result;
         const fashionResult = [userId, spring, summer, autumn, winter, feeling];
 
+        const season = fashionResult.forEach(item => {
+            if (item === Math.max.apply(null, fashionResult)) {
+                return item;
+            }
+        });
+
         sessionStorage.setItem('fashionResult', fashionResult);
         return fashionResult;
     } catch (error) {

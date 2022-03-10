@@ -1,6 +1,20 @@
 import styled from 'styled-components';
+import { useEffect } from 'react';
+import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 
-export const ModalDiv = styled.div`
+export function ModalDiv({ children, className }) {
+    useEffect(() => {
+        if (className && className?.indexOf('show') >= 0) {
+            setScrollDisabled(true);
+        }
+        return () => {
+            setScrollDisabled(false);
+        };
+    }, [className]);
+    return <Div className={className}>{children}</Div>;
+}
+
+export const Div = styled.div`
     display: none;
 
     &.show {
@@ -28,6 +42,7 @@ export const ModalDiv = styled.div`
 
         @media ${({ theme }) => theme.device.tablet} {
             width: 90%;
+
             .text {
                 font-size: 1.5rem;
             }

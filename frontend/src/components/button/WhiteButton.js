@@ -12,6 +12,6 @@ export const WhiteButton = styled('span')`
     color: ${({ theme }) => theme.color.blue};
     transition: all 150ms ease;
     cursor: pointer;
-    width: 170px;
+    width: 150px;
     text-align: center;
 `;

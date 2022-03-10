@@ -36,9 +36,10 @@ const CircleContainerDiv = styled(ContainerDiv)`
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    margin-bottom: 20px;
-    margin-top: 50px;
+    margin-top: 6vh;
+    margin-bottom: 6vh;
     color: white;
+    width: 100%;
 
     .wrapper {
         width: 100%;
@@ -48,8 +49,6 @@ const CircleContainerDiv = styled(ContainerDiv)`
         justify-content: space-evenly;
         align-items: center;
         margin-bottom: 7px;
-        padding-left: 30px;
-        padding-right: 30px;
     }
 
     .wrapper::before {
@@ -81,16 +80,8 @@ const CircleContainerDiv = styled(ContainerDiv)`
     }
 
     @media ${({ theme }) => theme.device.mobile} {
-        all: unset;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-        margin-bottom: 20px;
-        margin-top: 120px;
-        color: white;
-
+        margin-top: 4vh;
+        margin-bottom: 4vh;
         .wrapper {
             width: 100%;
             height: auto;

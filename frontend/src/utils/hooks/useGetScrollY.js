@@ -9,7 +9,7 @@ export function useGetScrollY() {
     const [scrollY, setScrollY] = useState(0);
 
     const listener = () => {
-        if (window.pageYOffset <= 1) setScrollY(window.pageYOffset); // window.pageYOffset은 window.scrollY와 동일함 (오래된 브라우저 호환)
+        if (window.pageYOffset <= 100) setScrollY(window.pageYOffset); // window.pageYOffset은 window.scrollY와 동일함 (오래된 브라우저 호환)
     };
 
     useEffect(() => {

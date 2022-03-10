@@ -116,6 +116,7 @@ class ColorTest(APIView):
         if serializer.is_valid():
             instance = serializer.save()
             return Response({
+                'id': instance.id.hashid,
                 'spring_rate': instance.spring_rate,
                 'summer_rate': instance.summer_rate,
                 'autumn_rate': instance.autumn_rate,
@@ -144,6 +145,7 @@ class ColorTestDetail(APIView):
         color = self.get_object(pk)
         if request.user.id == color.user_id:
             serializer = ColorDetailSerializer(color)
+            serializer.data['id'] = serializer.data['id'].hashid
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(status=status.HTTP_403_FORBIDDEN)
@@ -182,6 +184,7 @@ class ColorTestList(APIView):
         user = request.user
         colors = user.color_set.all()
         serializer = ColorListSerializer(colors, many=True)
+        serializer.data['id'] = serializer.data['id'].hashid
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -206,6 +209,7 @@ class FashionTest(APIView):
         if serializer.is_valid():
             instance = serializer.save()
             return Response({
+                'id': instance.id.hashid,
                 'spring_rate': instance.spring_rate,
                 'summer_rate': instance.summer_rate,
                 'autumn_rate': instance.autumn_rate,
@@ -234,6 +238,7 @@ class FashionTestDetail(APIView):
         fashion = self.get_object(pk)
         if request.user.id == fashion.user_id:
             serializer = FashionDetailSerializer(fashion)
+            serializer.data['id'] = serializer.data['id'].hashid
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(status=status.HTTP_403_FORBIDDEN)
@@ -272,4 +277,5 @@ class FashionTestList(APIView):
         user = request.user
         fashions = user.fashion_set.all()
         serializer = FashionListSerializer(fashions, many=True)
+        serializer.data['id'] = serializer.data['id'].hashid
         return Response(serializer.data, status=status.HTTP_200_OK)

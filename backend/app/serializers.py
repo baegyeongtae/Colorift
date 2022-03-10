@@ -1,9 +1,6 @@
 from rest_framework import serializers
 from .models import User, Color, Fashion
 from datetime import date
-from ai import personal_color, main
-import numpy as np
-import cv2
 
 
 class RegisterUserSerializer(serializers.ModelSerializer):

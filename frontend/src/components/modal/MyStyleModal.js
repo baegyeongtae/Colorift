@@ -26,10 +26,13 @@ export function MyStyleModal({ toggleProps, className, selectData }) {
     };
 
     // 모달 켜지면 API 요청
-    useEffect(async () => {
-        const response = await getFashionDetailModal(selectData.id);
-        setResultFashion(response.data);
-    }, []);
+    useEffect(() => {
+        selectData &&
+            (async () => {
+                const response = await getFashionDetailModal(selectData.id);
+                setResultFashion(response.data);
+            })();
+    }, [selectData.id]);
 
     return (
         <>

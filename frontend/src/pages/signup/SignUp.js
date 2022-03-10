@@ -5,6 +5,7 @@ import { setUserRegister } from '../../utils/api/user';
 import { useUser } from '../../utils/hooks/useUser';
 import { UserInputDiv, TitleP, UserButton, NavBackgroundDiv, TextModal, ContainerDiv, Article } from '../../components';
 import { checkRegexId, checkRegexNickname, checkRegexPassword } from '../../utils/data/checkRegexUser';
+import { useNotFound } from '../../utils/hooks/useNotFound';
 
 export function SignUp() {
     const navigate = useNavigate();
@@ -61,6 +62,9 @@ export function SignUp() {
         if (signUpSuccess) navigate('/login', { replace: true });
     };
 
+    // 로그인 유저가 접근 시 404로 보내버리기
+    useNotFound(true);
+
     return (
         <>
             <TextModal
@@ -68,8 +72,8 @@ export function SignUp() {
                 toggleProps={() => handleToggleModal()}
                 text={signUpSuccess ? '가입을 환영합니다.' : '존재하는 아이디입니다.'}
             />
+            <NavBackgroundDiv />
             <Article>
-                <NavBackgroundDiv />
                 <ContainerDiv>
                     <SignUpForm onSubmit={handleSubmit}>
                         <div className="title_div">

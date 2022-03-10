@@ -50,14 +50,10 @@ export async function setUserLogin(_userId, _password) {
         Cookies.set('accessToken', response.data.access, {
             path: '/',
             expires: expire, // 테스트 기준 5분 (하루 단위로 응답)
-            secure: true,
-            // httpOnly: true, // 배포하면 주석 제거 필수 (보안용)
         });
         Cookies.set('refreshToken', response.data.refresh, {
             path: '/',
             expires: 90, // 테스트 기준 90일
-            secure: true,
-            // httpOnly: true, // 배포하면 주석 제거 필수 (보안용)
         });
 
         return response;

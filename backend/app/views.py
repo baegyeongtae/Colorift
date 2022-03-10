@@ -10,7 +10,6 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from app.models import User, Color, Fashion
 from app.serializers import *
-from datetime import date
 
 
 """ 
@@ -114,9 +113,16 @@ class ColorTest(APIView):
             data['user'] = request.user.id
 
         serializer = ColorTestSerializer(data=data)
+
         if serializer.is_valid():
             instance = serializer.save()
-            return Response({'color': instance.color}, status=status.HTTP_200_OK)
+            return Response({
+                'id' : instance.id.hashid,
+                'spring_rate': instance.spring_rate,
+                'summer_rate': instance.summer_rate,
+                'autumn_rate': instance.autumn_rate,
+                'winter_rate': instance.winter_rate
+            }, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -142,7 +148,6 @@ class ColorTestDetail(APIView):
             serializer = ColorDetailSerializer(color)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
-            # locked => 접근할수 없는 자원(내 자원이 아니어서)
             return Response(status=status.HTTP_403_FORBIDDEN)
 
     def delete(self, request, pk, format=None):
@@ -152,6 +157,20 @@ class ColorTestDetail(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
         else:
             return Response(status=status.HTTP_403_FORBIDDEN)
+
+
+class ColorShare(APIView):
+
+    def get_object(self, pk):
+        try:
+            return Color.objects.get(pk=pk)
+        except Color.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        color = self.get_object(pk)
+        serializer = ColorShareSerializer(color)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class ColorTestList(APIView):
@@ -189,9 +208,12 @@ class FashionTest(APIView):
         if serializer.is_valid():
             instance = serializer.save()
             return Response({
-                'color_match_rate': instance.color_match_rate,
-                'brightness_match_rate': instance.brightness_match_rate,
-                'saturation_match_rate': instance.saturation_match_rate
+                'id' : instance.id.hashid,
+                'spring_rate': instance.spring_rate,
+                'summer_rate': instance.summer_rate,
+                'autumn_rate': instance.autumn_rate,
+                'winter_rate': instance.winter_rate,
+                'result': instance.result
             }, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -217,7 +239,6 @@ class FashionTestDetail(APIView):
             serializer = FashionDetailSerializer(fashion)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
-            # locked => 접근할수 없는 자원(내 자원이 아니어서)
             return Response(status=status.HTTP_403_FORBIDDEN)
 
     def delete(self, request, pk, format=None):
@@ -227,6 +248,20 @@ class FashionTestDetail(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
         else:
             return Response(status=status.HTTP_403_FORBIDDEN)
+
+
+class FashionShare(APIView):
+
+    def get_object(self, pk):
+        try:
+            return Fashion.objects.get(pk=pk)
+        except Fashion.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        fashion = self.get_object(pk)
+        serializer = FashionShareSerializer(fashion)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class FashionTestList(APIView):

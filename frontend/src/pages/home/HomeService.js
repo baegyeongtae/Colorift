@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { ContainerDiv, HomeServiceIcon, BigTextP, BackgroundArticle } from '../../components';
 
 export const HomeService = React.forwardRef((props, ref) => (

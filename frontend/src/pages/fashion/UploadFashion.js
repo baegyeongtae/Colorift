@@ -80,6 +80,10 @@ function UploadFashion() {
         }
     };
 
+    const handleReturn = () => {
+        setFashionPage(0);
+    };
+
     return (
         <>
             <TextModal className={textModal && 'show'} toggleProps={handleToggleClick} text="사진을 올려주세요." />
@@ -111,6 +115,7 @@ function UploadFashion() {
                                             업로드
                                         </BlueButton>
                                         <WhiteButton onClick={handleFileCheck}>결과보기</WhiteButton>
+                                        <WhiteButton onClick={handleReturn}>컬러 다시선택</WhiteButton>
                                     </Stack>
                                 </ButtonContainerDiv>
                             </TextContainerDiv>

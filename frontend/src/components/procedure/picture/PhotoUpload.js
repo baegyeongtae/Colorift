@@ -21,10 +21,12 @@ export function PhotoUpload({ photoProps, clickProps }) {
         );
     }
     return (
-        <ButtonContainerDiv>
-            <div className="faceImg" key={photoProps}>
-                <img className="photoImg" alt="face" src={photoProps} />
-            </div>
+        <ButtonContainerDiv onClick={handleClick}>
+            <Button>
+                <div className="faceImg" key={photoProps}>
+                    <img className="photoImg" alt="face" src={photoProps} />
+                </div>
+            </Button>
         </ButtonContainerDiv>
     );
 }

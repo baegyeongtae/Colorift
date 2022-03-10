@@ -157,6 +157,20 @@ class ColorTestDetail(APIView):
             return Response(status=status.HTTP_403_FORBIDDEN)
 
 
+class ColorShare(APIView):
+
+    def get_object(self, pk):
+        try:
+            return Color.objects.get(pk=pk)
+        except Color.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        color = self.get_object(pk)
+        serializer = ColorShareSerializer(color)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
 class ColorTestList(APIView):
     """
     GET : personal color test 기록'들' 반환
@@ -195,7 +209,8 @@ class FashionTest(APIView):
                 'spring_rate': instance.spring_rate,
                 'summer_rate': instance.summer_rate,
                 'autumn_rate': instance.autumn_rate,
-                'winter_rate': instance.winter_rate
+                'winter_rate': instance.winter_rate,
+                'result': instance.result
             }, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -230,6 +245,20 @@ class FashionTestDetail(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
         else:
             return Response(status=status.HTTP_403_FORBIDDEN)
+
+
+class FashionShare(APIView):
+
+    def get_object(self, pk):
+        try:
+            return Fashion.objects.get(pk=pk)
+        except Fashion.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        fashion = self.get_object(pk)
+        serializer = FashionShareSerializer(fashion)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class FashionTestList(APIView):

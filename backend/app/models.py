@@ -1,6 +1,7 @@
 from django.db import models
 
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from hashid_field import HashidAutoField
 
 
 class UserManager(BaseUserManager):
@@ -50,6 +51,7 @@ class User(AbstractBaseUser):
 
 
 class Color(models.Model):
+    id = HashidAutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     image = models.ImageField(upload_to='face/')
     date = models.DateField()
@@ -70,8 +72,18 @@ SEASON_CHOICES = [
     (WINTER, 'winter')
 ]
 
+GOOD = 'G'
+SOSO = 'S'
+BAD = 'B'
+RESULT_CHOICES = [
+    (GOOD, 'good'),
+    (SOSO, 'soso'),
+    (BAD, 'bad')
+]
+
 
 class Fashion(models.Model):
+    id = HashidAutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     color = models.CharField(max_length=2, choices=SEASON_CHOICES, default=SPRING)
     image = models.ImageField(upload_to='fashion/')
@@ -80,3 +92,4 @@ class Fashion(models.Model):
     summer_rate = models.IntegerField()
     autumn_rate = models.IntegerField()
     winter_rate = models.IntegerField()
+    result = models.CharField(max_length=1, choices=RESULT_CHOICES, default=GOOD)

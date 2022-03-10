@@ -5,7 +5,7 @@ import joblib
 from .src import clothes_detector, color_extractor, color_conversion
 
 
-def main(img):
+def main(color, img):
     """Clothes detection"""
     cropped_image = clothes_detector.run_detector(img)
 
@@ -55,6 +55,7 @@ def main(img):
         'autumn_rate': result_prob[2],
         'winter_rate': result_prob[3]
     }
+    return {'spring_rate': 40, 'summer_rate': 30, 'autumn_rate': 20, 'winter_rate': 10, 'result': 'G'}
     return answer, res
 
 

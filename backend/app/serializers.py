@@ -52,14 +52,14 @@ class ColorTestSerializer(serializers.ModelSerializer):
         fields = ['user', 'image']
 
     def ai_model(self, file):
-        return 'SU'
+        return {'spring_rate': 50, 'summer_rate': 25, 'autumn_rate': 15, 'winter_rate': 10}
         nparr = np.fromstring(file.read(), np.uint8)
         img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
         return personal_color.analysis(img)
 
     def create(self, validated_data):
         res = self.ai_model(validated_data['image'])
-        return Color.objects.create(spring_rate=res['SP'], summer_rate=res['SU'], autumn_rate=res['AU'], winter_rate=res['WI'], date=date.today(), **validated_data)
+        return Color.objects.create(**res, date=date.today(), **validated_data)
 
 
 class ColorDetailSerializer(serializers.ModelSerializer):
@@ -68,6 +68,14 @@ class ColorDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Color
         fields = ['id', 'user', 'image', 'date', 'spring_rate', 'summer_rate', 'autumn_rate', 'winter_rate']
+
+
+class ColorShareSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(use_url=True)
+
+    class Meta:
+        model = Color
+        fields = ['image', 'spring_rate', 'summer_rate', 'autumn_rate', 'winter_rate']
 
 
 class ColorListSerializer(serializers.ModelSerializer):
@@ -90,7 +98,7 @@ class FashionTestSerializer(serializers.ModelSerializer):
         model = Fashion
         fields = ['user', 'color', 'image']
 
-    def ai_model(self, file):  # 아직 ai model 연결되지 않음
+    def ai_model(self, color, file):  # 아직 ai model 연결되지 않음
         _, res = main(file.read())
         print(res)
         return res
@@ -105,7 +113,15 @@ class FashionDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Fashion
-        fields = ['id', 'user', 'color', 'image', 'date', 'spring_rate', 'summer_rate', 'autumn_rate', 'winter_rate']
+        fields = ['id', 'user', 'color', 'image', 'date', 'spring_rate', 'summer_rate', 'autumn_rate', 'winter_rate', 'result']
+
+
+class FashionShareSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(use_url=True)
+
+    class Meta:
+        model = Fashion
+        fields = ['color', 'image', 'spring_rate', 'summer_rate', 'autumn_rate', 'winter_rate', 'result']
 
 
 class FashionListSerializer(serializers.ModelSerializer):

@@ -33,7 +33,7 @@ function UploadFace() {
     const handlePhoto = e => {
         // 확장자 체크
         const extension = e.target.value.split('.').pop().toLowerCase();
-        if (!['png', 'jpg', 'jpeg'].includes(extension)) {
+        if (!['', 'png', 'jpg', 'jpeg'].includes(extension)) {
             alert('등록할 수 없는 파일입니다.');
             return;
         }

@@ -1,10 +1,16 @@
 # backend
+conf.py
 db.sqlite3
 *.pyc
 __pycache__/
 env/
 
+# ai
+shape_predictor_68_face_landmarks.dat
+ai/ai_env/
+
 # frontend
+.env
 
 # dependencies
 node_modules/

@@ -10,7 +10,6 @@ import tensorflow as tf
 
 
 def Detect_Clothes(img, model_yolov3, eager_execution=True):
-    """Detect clothes in an image using Yolo-v3 model trained on DeepFashion2 dataset"""
     img = tf.image.resize(img, (416, 416))
 
     if eager_execution:
@@ -45,7 +44,7 @@ def Detect_Clothes_and_Crop(img_tensor, model, threshold=0.5):
     img_crop = img
     highest = threshold
 
-    # crop out one cloth
+    # crop out one clothes
     for obj in list_obj:
         if obj['confidence']>highest:
             img_crop = img[int(obj['y1']*img_height):int(obj['y2']*img_height), int(obj['x1']*img_width):int(obj['x2']*img_width), :]

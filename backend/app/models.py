@@ -8,9 +8,9 @@ class UserManager(BaseUserManager):
 
     def create_user(self, username, nickname, password=None):
         if not username:
-            raise ValueError('must have username(account)')  # 여기서 username nickname password 검증해줄필요 없을거같은데 지울까요?
-        if not nickname:                                    # 쉘로 접근해서 직접 Usermodel 만드는거 아니면 쓸일이 없을거같아서요
-            raise ValueError('must have user nickname')     # 그경우가 아니면 registeruserserailizer 에서 검증을 해주니까
+            raise ValueError('must have username(account)') 
+        if not nickname:                                    
+            raise ValueError('must have user nickname')
         if not password:
             raise ValueError('must have user password')
         user = self.model(
@@ -31,7 +31,9 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-
+"""
+user model
+"""
 class User(AbstractBaseUser):
     id = models.AutoField(primary_key=True)
     username = models.CharField(default='', max_length=100, null=False, blank=False, unique=True)
@@ -50,6 +52,9 @@ class User(AbstractBaseUser):
         return self.nickname
 
 
+"""
+color test result
+"""
 class Color(models.Model):
     id = HashidAutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
@@ -61,6 +66,9 @@ class Color(models.Model):
     winter_rate = models.IntegerField()
 
 
+"""
+fashion matching result
+"""
 SPRING = 'SP'
 SUMMER = 'SU'
 AUTUMN = 'AU'
@@ -80,7 +88,6 @@ RESULT_CHOICES = [
     (SOSO, 'soso'),
     (BAD, 'bad')
 ]
-
 
 class Fashion(models.Model):
     id = HashidAutoField(primary_key=True)

@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'app',
     'rest_framework_simplejwt.token_blacklist',
-    "corsheaders",
+    'corsheaders'
 ]
 
 AUTH_USER_MODEL = 'app.User'
@@ -128,13 +128,23 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'colorfit',
+#         'USER': 'colorfit',
+#         'PASSWORD': 'colorfit',
+#         'HOST': 'db',
+#         'PORT': '3306'
+#     }
+# }
 
 
 # pymysql.install_as_MySQLdb()

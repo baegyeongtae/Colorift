@@ -1,9 +1,8 @@
 from django.urls import path
+from rest_framework_simplejwt.views import TokenRefreshView
+
 from . import views
 
-from rest_framework_simplejwt.views import (
-    TokenRefreshView,
-)
 
 urlpatterns = [
     path('color/test/', views.ColorTest.as_view()),

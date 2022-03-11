@@ -3,6 +3,11 @@ from .models import User, Color, Fashion
 from datetime import date
 from hashid_field.rest import HashidSerializerCharField
 
+"""
+RegisterUserSerializer : 회원가입
+ChangePasswordSerializer : 비밀번호 변경
+"""
+
 
 class RegisterUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -38,6 +43,7 @@ class ChangePasswordSerializer(serializers.Serializer):
 """
 ColorTestSerializer : personal color test input 검증 및 db 저장
 ColorDetailSerializer : personal color test 상세 데이터
+ColorShareSerializer : sns 공유기능에 필요한 데이터
 ColorListSerializer : personal color test 요약 데이터 (전체 리스트)
 """
 
@@ -91,6 +97,7 @@ class ColorListSerializer(serializers.ModelSerializer):
 """
 FashionTestSerializer : personal color test input 검증 및 db 저장
 FashionDetailSerializer : personal color test 상세 데이터
+FashionShareSerializer : sns 공유기능에 필요한 데이터
 FashionListSerializer : personal color test 요약 데이터 (전체 리스트)
 """
 

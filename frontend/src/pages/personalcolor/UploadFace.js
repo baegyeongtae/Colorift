@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import { useRef, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
@@ -15,6 +14,7 @@ import {
     BlueButton,
     WhiteButton,
     TextModal,
+    Article,
 } from '../../components';
 import { colorPageState } from '../../utils/data/atom';
 import { Loading } from '.';
@@ -31,6 +31,13 @@ function UploadFace() {
     };
 
     const handlePhoto = e => {
+        // 확장자 체크
+        const extension = e.target.value.split('.').pop().toLowerCase();
+        if (!['', 'png', 'jpg', 'jpeg'].includes(extension)) {
+            alert('등록할 수 없는 파일입니다.');
+            return;
+        }
+
         const photoToAdd = e.target.files;
         const fileImg = URL.createObjectURL(photoToAdd?.[0]);
         const uploadFile = photoToAdd?.[0];
@@ -59,10 +66,10 @@ function UploadFace() {
             setIsLoading(true);
             const checkedUser = sessionStorage.getItem('userId');
             if (checkedUser) {
-                const resultPercent = await postFacePhoto(imgData);
+                await postFacePhoto(imgData);
             }
             if (!checkedUser) {
-                const resultPercent = await postNotLoggedInFacePhoto(imgData);
+                await postNotLoggedInFacePhoto(imgData);
             }
             setIsLoading(false);
             setColorPage(2);
@@ -83,7 +90,7 @@ function UploadFace() {
                     <SubTitleP>얼굴 사진을 올려주세요.</SubTitleP>
                     <ContentContainerDiv>
                         <PhotoContainerDiv>
-                            <PhotoUpload photoProps={photoUpload} />
+                            <PhotoUpload photoProps={photoUpload} clickProps={handleClick} />
                             <TextContainerDiv>
                                 <BestWorstLi />
                                 <ButtonContainerDiv>
@@ -115,6 +122,10 @@ export { UploadFace };
 
 // styled-components
 
+const TestArticle = styled(Article)`
+    ${({ theme }) => theme.flexStyled.flexColumn};
+`;
+
 const TextContainerDiv = styled(ContainerDiv)`
     @media ${({ theme }) => theme.device.mobile} {
         all: unset;
@@ -144,7 +155,7 @@ const PhotoContainerDiv = styled(ContainerDiv)`
         align-items: center;
         margin-bottom: 0px;
     }
-    margin: 30px;
+    margin: 50px 0;
     display: flex;
     flex-direction: row;
     justify-content: center;

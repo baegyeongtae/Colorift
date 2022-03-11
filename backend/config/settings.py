@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+
 import pymysql
 from datetime import timedelta
 from pathlib import Path
@@ -27,7 +28,7 @@ SECRET_KEY = 'django-insecure-+(!5vblc2a41&k)=ef&zme8&qia2e=6s1-d@adrrf6y)@4#0!6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['backend']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -47,6 +48,8 @@ INSTALLED_APPS = [
 ]
 
 AUTH_USER_MODEL = 'app.User'
+
+HASHID_FIELD_SALT = "wae98fawe9f8w7e978f7aw9e8f79aw"
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -126,7 +129,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-
 """
 DATABASES = {
     'default': {
@@ -147,7 +149,9 @@ DATABASES = {
         'HOST': 'db',
         'PORT': '3306'
     }
-}
+}    
+
+
 
 
 # Password validation

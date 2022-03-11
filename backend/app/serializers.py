@@ -1,9 +1,8 @@
 from rest_framework import serializers
+from hashid_field.rest import HashidSerializerCharField
 from .models import User, Color, Fashion
 from datetime import date
-from ai import personal_color, main
-import numpy as np
-import cv2
+from ai import main
 
 
 class RegisterUserSerializer(serializers.ModelSerializer):
@@ -63,6 +62,7 @@ class ColorTestSerializer(serializers.ModelSerializer):
 
 
 class ColorDetailSerializer(serializers.ModelSerializer):
+    id = HashidSerializerCharField(source_field='app.Color.id')
     image = serializers.ImageField(use_url=True)
 
     class Meta:
@@ -79,6 +79,8 @@ class ColorShareSerializer(serializers.ModelSerializer):
 
 
 class ColorListSerializer(serializers.ModelSerializer):
+    id = HashidSerializerCharField(source_field='app.Color.id')
+
     class Meta:
         model = Color
         fields = ['id', 'date', 'spring_rate', 'summer_rate', 'autumn_rate', 'winter_rate']
@@ -99,16 +101,17 @@ class FashionTestSerializer(serializers.ModelSerializer):
         fields = ['user', 'color', 'image']
 
     def ai_model(self, color, file):  # 아직 ai model 연결되지 않음
-        _, res = main(file.read())
+        _, res = main(color, file)
         print(res)
         return res
 
     def create(self, validated_data):
-        res = self.ai_model(validated_data['image'])
+        res = self.ai_model(validated_data['color'], validated_data['image'])
         return Fashion.objects.create(**validated_data, date=date.today(), **res)
 
 
 class FashionDetailSerializer(serializers.ModelSerializer):
+    id = HashidSerializerCharField(source_field='app.Fashion.id')
     image = serializers.ImageField(use_url=True)
 
     class Meta:
@@ -125,6 +128,7 @@ class FashionShareSerializer(serializers.ModelSerializer):
 
 
 class FashionListSerializer(serializers.ModelSerializer):
+    id = HashidSerializerCharField(source_field='app.Fashion.id')
     image = serializers.ImageField(use_url=True)
 
     class Meta:

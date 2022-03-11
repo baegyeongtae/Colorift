@@ -46,7 +46,7 @@ export function MyPersonalColorModal({ toggleProps, className, selectData }) {
             <ModalDiv className={className}>
                 <ModalCloseIcon toggleProps={handleToggleClick} />
                 <Div>
-                    <MyModalTable id={selectData.index} date={resultColor.date} title={selectData.season} />
+                    <MyModalTable id={selectData?.index} date={resultColor?.date} title={selectData?.season} />
 
                     <ResultContainerDiv>
                         <ResultImage image={resultColor.image} />
@@ -58,10 +58,10 @@ export function MyPersonalColorModal({ toggleProps, className, selectData }) {
                     </SubTitleP>
                     <PercentResult
                         resultColor={seasonColor}
-                        spring={resultColor.spring_rate}
-                        summer={resultColor.summer_rate}
-                        autumn={resultColor.autumn_rate}
-                        winter={resultColor.winter_rate}
+                        spring={resultColor.spring_rate || 0}
+                        summer={resultColor.summer_rate || 0}
+                        autumn={resultColor.autumn_rate || 0}
+                        winter={resultColor.winter_rate || 0}
                     />
                     <ColorContainerDiv>
                         <MediumTextLeftH>회원님에게 어울리는 컬러</MediumTextLeftH>

@@ -26,6 +26,9 @@ export function MyStyleModal({ toggleProps, className, selectData }) {
                 const response = await getFashionDetailModal(selectData.id);
                 setResultFashion(response.data);
             })();
+        return () => {
+            setResultFashion(undefined);
+        };
     }, [selectData.id]);
 
     return (
@@ -34,14 +37,14 @@ export function MyStyleModal({ toggleProps, className, selectData }) {
             <ModalDiv className={className}>
                 <ModalCloseIcon toggleProps={handleToggleClick} />
                 <Div>
-                    <MyModalTable id={selectData.index} date={resultFashion.date} title={resultFashion.color} />
+                    <MyModalTable id={selectData?.index} date={resultFashion?.date} title={resultFashion?.color} />
 
                     <ContentContainerDiv>
-                        <ResultImage image={resultFashion.image} />
+                        <ResultImage image={resultFashion?.image} />
                     </ContentContainerDiv>
 
                     <SubTitleP>
-                        이 옷은 <ResultTextS color={resultColor}>{seasonPersonal[resultFashion.color]}</ResultTextS>인
+                        이 옷은 <ResultTextS color={resultColor}>{seasonPersonal[resultFashion?.color]}</ResultTextS>인
                         회원님께
                     </SubTitleP>
                     <PercentResult
@@ -51,7 +54,7 @@ export function MyStyleModal({ toggleProps, className, selectData }) {
                         autumn={resultFashion.autumn_rate}
                         winter={resultFashion.winter_rate}
                     />
-                    <SubTitleP>{getFashionText(resultFashion.result)}</SubTitleP>
+                    <SubTitleP>{getFashionText(resultFashion?.result)}</SubTitleP>
                     <ColorContainerDiv />
                 </Div>
             </ModalDiv>

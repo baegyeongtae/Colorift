@@ -1,3 +1,4 @@
+from operator import index
 import numpy as np
 import joblib
 import time
@@ -33,8 +34,8 @@ def main(color, file):
     test = np.append(test_hsv[1:], test_lab)
 
     """Tone prediction"""
-    classifier = joblib.load('./built_model/colorfit.pkl')
-    scaler = joblib.load('./built_model/scaler.pkl')
+    classifier = joblib.load('/app/ai/fashion/built_model/colorfit.pkl')
+    scaler = joblib.load('/app/ai/fashion/built_model/scaler.pkl')
 
     test = scaler.transform([test])
     answer = classifier.predict(test)[0]
@@ -69,6 +70,19 @@ def main(color, file):
         'autumn_rate': result_prob[2],
         'winter_rate': result_prob[3]
     }
+    data = {'spring_rate': round(result_prob[0]), 'summer_rate': round(result_prob[1]), 'autumn_rate': round(result_prob[2]), 'winter_rate': round(result_prob[3])}
+    tmp = [(data['spring_rate'],'SP'),(data['summer_rate'],'SU'),(data['autumn_rate'],'AU'),(data['winter_rate'],'WI')]
+    for t in tmp:
+        if t[1] == color:
+            if 0<= t[0] < 30:
+                data['result'] = 'B'
+            elif 30 <= t[0] < 60:
+                data['result'] = 'S'
+            elif 60 <= t[0]:
+                data['result'] = 'G'
+    return data
+            
+            
 
     return {'spring_rate': round(result_prob[0]), 'summer_rate': round(result_prob[1]), 'autumn_rate': round(result_prob[2]), 'winter_rate': round(result_prob[3]), 'result': 'G'}
 

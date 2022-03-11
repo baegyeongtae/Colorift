@@ -55,16 +55,13 @@ requests==2.27.1
 requests-oauthlib==1.3.1
 rsa==4.8
 s3transfer==0.5.1
-scikit-learn==1.0.2
+scikit-learn==0.22.1
 scipy==1.8.0
 six==1.16.0
-sklearn==0.0
 sqlparse==0.4.2
 tensorboard==2.8.0
 tensorboard-data-server==0.6.1
 tensorboard-plugin-wit==1.8.1
-tensorflow==2.8.0
-tensorflow-hub==0.12.0
 tensorflow-io-gcs-filesystem==0.24.0
 termcolor==1.1.0
 tf-estimator-nightly==2.8.0.dev2021122109

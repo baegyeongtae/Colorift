@@ -2,7 +2,7 @@ from rest_framework import serializers
 from hashid_field.rest import HashidSerializerCharField
 from .models import User, Color, Fashion
 from datetime import date
-from ai import main
+from ai import predict_color, main 
 
 
 class RegisterUserSerializer(serializers.ModelSerializer):
@@ -51,10 +51,7 @@ class ColorTestSerializer(serializers.ModelSerializer):
         fields = ['user', 'image']
 
     def ai_model(self, file):
-        return {'spring_rate': 50, 'summer_rate': 25, 'autumn_rate': 15, 'winter_rate': 10}
-        nparr = np.fromstring(file.read(), np.uint8)
-        img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-        return personal_color.analysis(img)
+        return predict_color(file)
 
     def create(self, validated_data):
         res = self.ai_model(validated_data['image'])
@@ -101,9 +98,7 @@ class FashionTestSerializer(serializers.ModelSerializer):
         fields = ['user', 'color', 'image']
 
     def ai_model(self, color, file):  # 아직 ai model 연결되지 않음
-        _, res = main(color, file)
-        print(res)
-        return res
+        return main(color, file) # main('SP',<image object>)
 
     def create(self, validated_data):
         res = self.ai_model(validated_data['color'], validated_data['image'])

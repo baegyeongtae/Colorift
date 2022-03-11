@@ -1,7 +1,4 @@
-/* eslint-disable react/button-has-type */
-/* eslint-disable react/style-prop-object */
 import styled from 'styled-components';
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import Stack from '@mui/material/Stack';
@@ -30,7 +27,7 @@ function ColorResult() {
     const percentList = JSON.parse(sessionStorage.getItem('result'));
 
     // 퍼스널컬러 결과 (SP / SU / AU / WI)
-    const seasonTone = percentList?.keyword;
+    const seasonTone = sessionStorage.getItem('season');
 
     // 퍼스널 결과에 따른 색상코드
     const resultColor = SeasonTone(season[seasonTone]);

@@ -30,7 +30,6 @@ function FashionResult() {
 
     // API 호출 후 세션스토리지에 저장했던 결과 값
     const percentList = JSON.parse(sessionStorage.getItem('result'));
-    console.log(percentList);
 
     // 퍼스널컬러에 따른 대표 색상
     const resultColor = SeasonTone(season[seasonTone]);

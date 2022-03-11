@@ -1,7 +1,6 @@
-/* eslint-disable no-nested-ternary */
-/* eslint-disable consistent-return */
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import { getMaxSeason } from '../data/getMaxSeason';
 
 // access 토큰 유효기간 변수
 export const expire = (1 / 24 / 60) * 5; // 5분
@@ -9,7 +8,7 @@ export const expire = (1 / 24 / 60) * 5; // 5분
 // axios 기본 인스턴스 생성
 export const axiosUserConfig = axios.create({
     method: 'post',
-    // baseURL: `${process.env.REACT_APP_SERVER_ADDRESS}`, // 기본 서버 주소 입력 => 아직 미정
+    baseURL: `${process.env.REACT_APP_SERVER_ADDRESS}`, // 기본 서버 주소 입력 => 아직 미정
     headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -82,6 +81,7 @@ export async function setUserPassword(_userId, _nickname, _password) {
     }
 }
 
+// 퍼스널컬러 분석 결과 (비유저용)
 export async function postNotLoggedInFacePhoto(imgData) {
     try {
         const response = await axiosUserConfig({
@@ -93,28 +93,27 @@ export async function postNotLoggedInFacePhoto(imgData) {
             },
         });
 
-        const userId = response.data.id;
-        const spring = response.data.spring_rate;
-        const summer = response.data.summer_rate;
-        const autumn = response.data.autumn_rate;
-        const winter = response.data.winter_rate;
-        const seasonList = [spring, summer, autumn, winter];
-        const season =
-            Math.max(...seasonList) === seasonList[0]
-                ? 'SP'
-                : Math.max(...seasonList) === seasonList[1]
-                ? 'SU'
-                : Math.max(...seasonList) === seasonList[2]
-                ? 'AU'
-                : 'WI';
-        const colorResult = [userId, spring, summer, autumn, winter, season];
+        const result = {
+            id: response.data.id,
+            springRate: response.data.spring_rate,
+            summerRate: response.data.summer_rate,
+            autumnRate: response.data.autumn_rate,
+            winterRate: response.data.winter_rate,
+            keyword: getMaxSeason(
+                response.data.spring_rate,
+                response.data.summer_rate,
+                response.data.autumn_rate,
+                response.data.winter_rate,
+            ),
+        };
 
-        sessionStorage.setItem('colorResult', JSON.stringify(colorResult));
-        return colorResult;
+        sessionStorage.setItem('result', JSON.stringify(result));
+        return null;
     } catch (error) {
         return error.response;
     }
 }
+
 // 패션 사진 및 컬러 조합 결과 (비유저용)
 export async function postNotLoggedInFashionPhoto(fashionData) {
     try {

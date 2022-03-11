@@ -1,25 +1,34 @@
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { ModalDiv } from './ModalDiv';
 import { BlurBackgroundDiv, ModalCloseIcon, GrayButton, BlueButton, MyPersonalColorModal, TextModal } from '..';
 import { getColorList } from '../../utils/api/service';
 import { seasonPersonal } from '../../utils/data/season';
+import { getMaxSeason } from '../../utils/data/getMaxSeason';
 
 export function MyPersonalListModal({ toggleProps, checkProps, className }) {
     // API로 받아온 컬러 데이터 목록
     const [colorList, setColorList] = useState([]);
 
+    // colorList를 토대로 최대값 계절 키워드로 가져오기
+    // ex. ['SP', 'AU', ...]
+    const maxSeason = useMemo(() => {
+        const season = colorList?.map(item => {
+            const result = getMaxSeason(item.spring_rate, item.summer_rate, item.autumn_rate, item.winter_rate);
+            return result;
+        });
+
+        return season;
+    }, [colorList]);
+
     // 상세보기 모달 상태
-    const [personalListModal, setPersonalListModal] = useState(false);
+    const [personalModal, setPersonalModal] = useState(false);
 
     // 컬러 선택 모달
     const [colorChoiceModal, setColorChoiceModal] = useState(false);
 
     // 유저가 선택한 퍼스널컬러의 정보
-    const [personalInfo, setPersonalInfo] = useState({
-        id: 0,
-        index: 0,
-    });
+    const [personalInfo, setPersonalInfo] = useState(undefined);
 
     // CheckBox Button Select
     const [chosen, setChosen] = useState('');
@@ -50,15 +59,17 @@ export function MyPersonalListModal({ toggleProps, checkProps, className }) {
     };
 
     // 상세보기 모달을 클릭 할 때
-    const handleToggleClick = (id, index) => {
-        if (personalListModal) setPersonalListModal(false);
-        if (!personalListModal) {
-            setPersonalInfo(current => ({
-                ...current,
+    const handleToggleClick = (id, index, season) => {
+        if (personalModal) {
+            setPersonalModal(false);
+            setPersonalInfo(undefined);
+        } else {
+            setPersonalInfo({
                 id,
                 index,
-            }));
-            setPersonalListModal(true);
+                season,
+            });
+            setPersonalModal(true);
         }
     };
 
@@ -85,17 +96,17 @@ export function MyPersonalListModal({ toggleProps, checkProps, className }) {
                                             <CheckboxInput
                                                 type="radio"
                                                 name="checkbox"
-                                                value={item.color}
+                                                value={maxSeason[index]}
                                                 onChange={event => handleSelectChange(event)}
                                             />
                                         </td>
                                         <td className="id">{index + 1}</td>
                                         <td className="date">{item.date?.replace(/-/gi, '. ')}</td>
-                                        <td className="color">{seasonPersonal[item.color]}</td>
+                                        <td className="color">{seasonPersonal[maxSeason[index]]}</td>
                                         <td className="button">
                                             <GrayButton
                                                 width="90%"
-                                                onClick={() => handleToggleClick(item.id, index + 1)}
+                                                onClick={() => handleToggleClick(item.id, index + 1, maxSeason[index])}
                                             >
                                                 상세보기
                                             </GrayButton>
@@ -111,9 +122,9 @@ export function MyPersonalListModal({ toggleProps, checkProps, className }) {
                 </PersonalTableDiv>
                 <BlueButton onClick={handlePropsClick}>확인</BlueButton>
             </ModalTableDiv>
-            {personalListModal && (
+            {personalModal && (
                 <MyPersonalColorModal
-                    className={personalListModal && 'show'}
+                    className={personalModal && 'show'}
                     toggleProps={handleToggleClick}
                     selectData={personalInfo}
                 />

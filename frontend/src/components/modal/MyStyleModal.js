@@ -26,9 +26,6 @@ export function MyStyleModal({ toggleProps, className, selectData }) {
                 const response = await getFashionDetailModal(selectData.id);
                 setResultFashion(response.data);
             })();
-        return () => {
-            setResultFashion(undefined);
-        };
     }, [selectData.id]);
 
     return (

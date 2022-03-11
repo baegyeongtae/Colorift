@@ -96,6 +96,8 @@ const KakaoiconDiv = styled(ContainerDiv)`
     img {
         width: 50px;
 
+        cursor: pointer;
+
         @media ${({ theme }) => theme.device.mobile} {
             width: 30px;
         }

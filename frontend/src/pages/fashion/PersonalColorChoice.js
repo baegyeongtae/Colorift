@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import {
@@ -76,7 +76,7 @@ function PersonalColorChoice() {
         return `직전에 분석한 자료가 없습니다.`;
     };
 
-    const checkedColorText = checkedColor();
+    const checkedColorText = useMemo(() => checkedColor(), [seasonTone, select]);
 
     // 불러오기 클릭 시 모달 토글 함수 + 선택한 마이퍼스널컬러 가져오기
     const handleToggleClick = () => {

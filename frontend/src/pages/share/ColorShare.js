@@ -1,71 +1,71 @@
+/* eslint-disable react/button-has-type */
+/* eslint-disable react/style-prop-object */
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
+import { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
-import { colorPageState } from '../../utils/data/atom';
+import { getColorShare } from '../../utils/api/user';
+import { getMaxSeason } from '../../utils/data/getMaxSeason';
 import { season, SeasonTone, seasonPersonal } from '../../utils/data/season';
 import {
     ResultImage,
     NavBackgroundDiv,
-    Color,
     SubTitleP,
     ContainerDiv,
     BlueButton,
     SeasonColor,
     MediumTextH,
-    ShareButton,
     PercentResult,
 } from '../../components';
 
-function ColorResult() {
+function ColorShare() {
+    const [result, setResult] = useState({});
+    const location = useLocation();
+    const { pathname } = location;
+    const pathnameId = pathname.split('/')[3];
+    console.log(result);
     const navigate = useNavigate();
+    const seasonKeyword = getMaxSeason(result.springRate, result.summerRate, result.autumnRate, result.winterRate);
 
-    // 리코일 페이지 state
-    const setColorPage = useSetRecoilState(colorPageState);
-
-    // API 요청 결과
-    const percentList = JSON.parse(sessionStorage.getItem('result'));
-
-    // 퍼스널컬러 결과 (SP / SU / AU / WI)
-    const seasonTone = sessionStorage.getItem('season');
-
-    // 퍼스널 결과에 따른 색상코드
-    const resultColor = SeasonTone(season[seasonTone]);
+    useEffect(() => {
+        pathnameId &&
+            (async () => {
+                const response = await getColorShare(pathnameId);
+                setResult(response);
+            })();
+    }, [pathnameId]);
 
     return (
         <>
             <NavBackgroundDiv />
-            <Color number={2} />
-
             <ResultContainerDiv>
-                <ResultImage />
+                <ResultImage image={result.image} />
             </ResultContainerDiv>
             <SubTitleP>
-                회원님은 <ResultTextS color={resultColor}>{seasonPersonal[seasonTone]}</ResultTextS> 입니다.
+                회원님은
+                <ResultTextS color={SeasonTone(season[seasonKeyword])}>{seasonPersonal[seasonKeyword]}</ResultTextS>
+                입니다.
             </SubTitleP>
             <PercentResult
-                resultColor={resultColor}
-                spring={percentList?.springRate}
-                summer={percentList?.summerRate}
-                autumn={percentList?.autumnRate}
-                winter={percentList?.winterRate}
+                resultColor={SeasonTone(season[seasonKeyword])}
+                spring={result.springRate}
+                summer={result.summerRate}
+                autumn={result.autumnRate}
+                winter={result.winterRate}
             />
-            <GridContainer>
-                <ShareButton id={percentList?.id} path="/color/" />
-            </GridContainer>
 
             <ColorContainerDiv>
                 <MediumTextLeftH>회원님에게 어울리는 컬러</MediumTextLeftH>
-                <SeasonColor season={season[seasonTone]} />
+                <SeasonColor season={season[seasonKeyword]} />
             </ColorContainerDiv>
 
             <ButtonContainerDiv>
                 <Stack spacing={2} direction="row">
-                    <BlueButton type="submit" onClick={() => setColorPage(0)}>
-                        다시 분석하기
+                    <BlueButton type="submit" onClick={() => navigate('/personalcolor')}>
+                        나도 분석하기
                     </BlueButton>
-                    <BlueButton type="submit" onClick={() => navigate('/fashion')}>
-                        패션 매칭하기
+                    <BlueButton type="submit" onClick={() => navigate('/')}>
+                        홈으로
                     </BlueButton>
                 </Stack>
             </ButtonContainerDiv>
@@ -73,7 +73,7 @@ function ColorResult() {
     );
 }
 
-export { ColorResult };
+export { ColorShare };
 
 // styled-components
 

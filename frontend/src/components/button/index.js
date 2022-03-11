@@ -5,3 +5,5 @@ export { HomeButton } from './HomeButton';
 export { GrayButton } from './GrayButton';
 export { WhiteButton } from './WhiteButton';
 export { BlueButton } from './BlueButton';
+export { KakaoShareButton } from './KakaoShareButton';
+export { ShareButton } from './ShareButton';

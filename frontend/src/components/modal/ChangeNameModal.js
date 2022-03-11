@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import styled from 'styled-components';
 import { useState } from 'react';
 import { BlurBackgroundDiv, ModalCloseIcon, UserInputDiv, UserButton } from '..';

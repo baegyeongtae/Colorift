@@ -1,5 +1,5 @@
 // 봄 여름 가을 겨울 퍼센티지를 받아서 최대값 계절을 문자열로 반환하는 함수
-export function getMaxSeason(springRate, summerRate, autumnRate, winterRate) {
+export function getMaxSeason(springRate = 0, summerRate = 0, autumnRate = 0, winterRate = 0) {
     const index = {
         0: 'SP',
         1: 'SU',

@@ -3,15 +3,7 @@ import styled from 'styled-components';
 
 export function ResultImage({ image }) {
     const uploadedImage = sessionStorage.getItem('photoProps');
-    // if (colorPage === 2 && fashionPage !== 3)
-    //     return (
-    //         <BoxDiv>
-    //             <div className="faceImg">
-    //                 <img className="photoImg" alt="Img" src={faceImg} />
-    //             </div>
-    //         </BoxDiv>
-    //     );
-    // if (colorPage !== 2 && fashionPage === 3)
+
     return (
         <BoxDiv>
             <div className="faceImg">

@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie';
 import axiosConfig from './token';
+import { getMaxSeason } from '../data/getMaxSeason';
 
 // 닉네임 변경
 export async function setUserNickname(_nickname) {
@@ -72,10 +73,26 @@ export async function postFacePhoto(imgData) {
             },
         });
 
-        const season = response.data.color;
+        const season = getMaxSeason(
+            response.data.spring_rate,
+            response.data.summer_rate,
+            response.data.autumn_rate,
+            response.data.winter_rate,
+        );
+
+        const result = {
+            id: response.data.id,
+            springRate: response.data.spring_rate,
+            summerRate: response.data.summer_rate,
+            autumnRate: response.data.autumn_rate,
+            winterRate: response.data.winter_rate,
+            keyword: season,
+        };
+
+        sessionStorage.setItem('result', JSON.stringify(result));
         sessionStorage.setItem('season', season);
 
-        return season;
+        return null;
     } catch (error) {
         return error.response;
     }
@@ -94,6 +111,7 @@ export async function postFashionPhoto(fashionData) {
         });
 
         const result = {
+            id: response.data.id,
             springRate: response.data.spring_rate,
             summerRate: response.data.summer_rate,
             autumnRate: response.data.autumn_rate,
@@ -109,6 +127,7 @@ export async function postFashionPhoto(fashionData) {
     }
 }
 
+// 퍼스널컬러 상세보기
 export async function getColorDetailModal(id) {
     try {
         const response = await axiosConfig({

@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import { getMaxSeason } from '../data/getMaxSeason';
 
 // access 토큰 유효기간 변수
 export const expire = (1 / 24 / 60) * 5; // 5분
@@ -80,6 +81,7 @@ export async function setUserPassword(_userId, _nickname, _password) {
     }
 }
 
+// 퍼스널컬러 분석 결과 (비유저용)
 export async function postNotLoggedInFacePhoto(imgData) {
     try {
         const response = await axiosUserConfig({
@@ -91,11 +93,26 @@ export async function postNotLoggedInFacePhoto(imgData) {
             },
         });
 
-        console.log(response);
-        const season = response.data.color;
+        const season = getMaxSeason(
+            response.data.spring_rate,
+            response.data.summer_rate,
+            response.data.autumn_rate,
+            response.data.winter_rate,
+        );
+
+        const result = {
+            id: response.data.id,
+            springRate: response.data.spring_rate,
+            summerRate: response.data.summer_rate,
+            autumnRate: response.data.autumn_rate,
+            winterRate: response.data.winter_rate,
+            keyword: season,
+        };
+
+        sessionStorage.setItem('result', JSON.stringify(result));
         sessionStorage.setItem('season', season);
 
-        return season;
+        return null;
     } catch (error) {
         return error.response;
     }
@@ -114,6 +131,7 @@ export async function postNotLoggedInFashionPhoto(fashionData) {
         });
 
         const result = {
+            id: response.data.id,
             springRate: response.data.spring_rate,
             summerRate: response.data.summer_rate,
             autumnRate: response.data.autumn_rate,
@@ -123,6 +141,50 @@ export async function postNotLoggedInFashionPhoto(fashionData) {
 
         sessionStorage.setItem('result', JSON.stringify(result));
         return null;
+    } catch (error) {
+        return error.response;
+    }
+}
+
+// 패션 사진 및 컬러 조합 결과 (비유저용)
+export async function getColorShare(id) {
+    try {
+        const response = await axiosUserConfig({
+            method: 'get',
+            url: `/app/color/share/${id}/`,
+        });
+
+        const resultRate = {
+            springRate: response.data.spring_rate,
+            summerRate: response.data.summer_rate,
+            autumnRate: response.data.autumn_rate,
+            winterRate: response.data.winter_rate,
+            image: response.data.image,
+        };
+        console.log(resultRate);
+        return resultRate;
+    } catch (error) {
+        return error.response;
+    }
+}
+
+// 패션 사진 및 컬러 조합 결과 (비유저용)
+export async function getFashionShare(id) {
+    try {
+        const response = await axiosUserConfig({
+            method: 'get',
+            url: `/app/fashion/share/${id}/`,
+        });
+        const resultRate = {
+            color: response.data.color,
+            springRate: response.data.spring_rate,
+            summerRate: response.data.summer_rate,
+            autumnRate: response.data.autumn_rate,
+            winterRate: response.data.winter_rate,
+            image: response.data.image,
+        };
+        console.log(resultRate);
+        return resultRate;
     } catch (error) {
         return error.response;
     }

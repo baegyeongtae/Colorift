@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import styled from 'styled-components';
 import { setUserOut } from '../../utils/api/service';
 import { BlurBackgroundDiv, ModalCloseIcon, SubTitleP, HomeButton } from '..';

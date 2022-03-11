@@ -8,7 +8,7 @@ export { Article, BackgroundArticle, BlurBackgroundDiv, ContainerDiv } from './a
 export { ExampleTitle, ExampleImage, ExampleColor } from './example';
 export { ScrollUpIcon, ModalCloseIcon, Logo } from './icon';
 export { UserInputDiv, Input } from './login/UserInputDiv';
-export { HomeButton, UserButton, GrayButton, BlueButton, WhiteButton } from './button';
+export { HomeButton, UserButton, GrayButton, BlueButton, WhiteButton, ShareButton } from './button';
 export {
     Color,
     Fashion,

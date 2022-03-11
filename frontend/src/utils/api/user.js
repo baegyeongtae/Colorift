@@ -1,3 +1,5 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable consistent-return */
 import Cookies from 'js-cookie';
 import axios from 'axios';
 
@@ -91,16 +93,28 @@ export async function postNotLoggedInFacePhoto(imgData) {
             },
         });
 
-        console.log(response);
-        const season = response.data.color;
-        sessionStorage.setItem('season', season);
+        const userId = response.data.id;
+        const spring = response.data.spring_rate;
+        const summer = response.data.summer_rate;
+        const autumn = response.data.autumn_rate;
+        const winter = response.data.winter_rate;
+        const seasonList = [spring, summer, autumn, winter];
+        const season =
+            Math.max(...seasonList) === seasonList[0]
+                ? 'SP'
+                : Math.max(...seasonList) === seasonList[1]
+                ? 'SU'
+                : Math.max(...seasonList) === seasonList[2]
+                ? 'AU'
+                : 'WI';
+        const colorResult = [userId, spring, summer, autumn, winter, season];
 
-        return season;
+        sessionStorage.setItem('colorResult', JSON.stringify(colorResult));
+        return colorResult;
     } catch (error) {
         return error.response;
     }
 }
-
 // 패션 사진 및 컬러 조합 결과 (비유저용)
 export async function postNotLoggedInFashionPhoto(fashionData) {
     try {
@@ -123,6 +137,42 @@ export async function postNotLoggedInFashionPhoto(fashionData) {
 
         sessionStorage.setItem('result', JSON.stringify(result));
         return null;
+    } catch (error) {
+        return error.response;
+    }
+}
+
+// 패션 사진 및 컬러 조합 결과 (비유저용)
+export async function getColorShare(id) {
+    try {
+        const response = await axiosUserConfig({
+            method: 'get',
+            url: `/app/color/share/${id}/`,
+        });
+
+        const resultRate = {
+            springRate: response.data.spring_rate,
+            summerRate: response.data.summer_rate,
+            autumnRate: response.data.autumn_rate,
+            winterRate: response.data.winter_rate,
+            image: response.data.image,
+        };
+        console.log(resultRate);
+        return resultRate;
+    } catch (error) {
+        return error.response;
+    }
+}
+
+// 패션 사진 및 컬러 조합 결과 (비유저용)
+export async function getFashionShare(id) {
+    try {
+        const response = await axiosUserConfig({
+            method: 'get',
+            url: `/app/fashion/share/${id}/`,
+        });
+
+        return response;
     } catch (error) {
         return error.response;
     }

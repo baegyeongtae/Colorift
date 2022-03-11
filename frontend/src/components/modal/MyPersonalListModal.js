@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import styled from 'styled-components';
 import { useState, useEffect, useMemo } from 'react';
 import { ModalDiv } from './ModalDiv';

@@ -72,10 +72,15 @@ export async function postFacePhoto(imgData) {
             },
         });
 
-        const season = response.data.color;
-        sessionStorage.setItem('season', season);
+        const userId = response.data.id;
+        const spring = response.data.spring_rate;
+        const summer = response.data.summer_rate;
+        const autumn = response.data.autumn_rate;
+        const winter = response.data.winter_rate;
+        const colorResult = [userId, spring, summer, autumn, winter];
 
-        return season;
+        sessionStorage.setItem('colorResult', colorResult);
+        return colorResult;
     } catch (error) {
         return error.response;
     }

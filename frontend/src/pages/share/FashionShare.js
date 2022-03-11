@@ -1,10 +1,11 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import { useSetRecoilState } from 'recoil';
-import { season, SeasonTone, seasonPersonal } from '../../utils/data/season';
+import { season, SeasonTone } from '../../utils/data/season';
 import { fashionPageState } from '../../utils/data/atom';
-import { getFashionText } from '../../utils/data/getFashionText';
+import { getFashionShare } from '../../utils/api/user';
 import {
     ResultImage,
     NavBackgroundDiv,
@@ -19,21 +20,26 @@ import {
 } from '../../components';
 import { hue, saturation, value } from '../../image';
 
-function FashionResult() {
+function FashionShare({ pathnameId }) {
+    const [result, setResult] = useState({});
+
     const navigate = useNavigate();
-
-    // 리코일 페이지 state
     const setFashionPage = useSetRecoilState(fashionPageState);
-
-    // 유저가 선택한 퍼스널컬러
-    const seasonTone = sessionStorage.getItem('color');
-
-    // API 호출 후 세션스토리지에 저장했던 결과 값
-    const percentList = JSON.parse(sessionStorage.getItem('result'));
+    const seasonTone = sessionStorage.getItem('fashionResult');
+    const percentList = JSON.parse(sessionStorage.getItem('fashionResult'));
+    console.log(seasonTone);
     console.log(percentList);
-
-    // 퍼스널컬러에 따른 대표 색상
     const resultColor = SeasonTone(season[seasonTone]);
+
+    useEffect(() => {
+        pathnameId &&
+            (async () => {
+                const response = await getFashionShare(pathnameId);
+                setResult(response);
+            })();
+    }, [pathnameId]);
+
+    console.log(result);
 
     return (
         <>
@@ -44,16 +50,21 @@ function FashionResult() {
             </ContentContainerDiv>
 
             <SubTitleP>
-                이 옷은 <ResultTextS color={resultColor}>{seasonPersonal[seasonTone]}</ResultTextS>인 회원님께
+                이 옷은 <ResultTextS color={resultColor}>봄 웜톤</ResultTextS>인 회원님께
             </SubTitleP>
             <PercentResult
                 resultColor={resultColor}
-                spring={percentList?.springRate}
-                summer={percentList?.summerRate}
-                autumn={percentList?.autumnRate}
-                winter={percentList?.winterRate}
+                spring={percentList[0]}
+                summer={percentList[1]}
+                autumn={percentList[2]}
+                winter={percentList[3]}
             />
-            <SubTitleP>{getFashionText(percentList.match)}</SubTitleP>
+            <SubTitleP>
+                종합 <ResultTextS color={resultColor}>{percentList[3]}%</ResultTextS>만큼 매칭됩니다.
+            </SubTitleP>
+            <GridContainer>
+                <ShareButton />
+            </GridContainer>
             <ColorContainerDiv>
                 <div className="wrapper">
                     <div>
@@ -81,7 +92,7 @@ function FashionResult() {
             </ColorContainerDiv>
 
             <ContentContainerDiv>
-                <MatchingResult match={percentList.match} />
+                <MatchingResult average={percentList[3]} />
             </ContentContainerDiv>
             <ButtonContainerDiv>
                 <Stack spacing={2} direction="row">
@@ -97,7 +108,7 @@ function FashionResult() {
     );
 }
 
-export { FashionResult };
+export { FashionShare };
 
 // styled-components
 

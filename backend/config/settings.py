@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'app',
     'rest_framework_simplejwt.token_blacklist',
-    "corsheaders",
+    'corsheaders'
 ]
 
 AUTH_USER_MODEL = 'app.User'

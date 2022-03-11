@@ -2,7 +2,7 @@ from rest_framework import serializers
 from hashid_field.rest import HashidSerializerCharField
 from .models import User, Color, Fashion
 from datetime import date
-from ai import predict_color, main 
+from .ai import predict_color, predict_fashion
 
 
 class RegisterUserSerializer(serializers.ModelSerializer):
@@ -97,8 +97,8 @@ class FashionTestSerializer(serializers.ModelSerializer):
         model = Fashion
         fields = ['user', 'color', 'image']
 
-    def ai_model(self, color, file):  # 아직 ai model 연결되지 않음
-        return main(color, file) # main('SP',<image object>)
+    def ai_model(self, color, file):  
+        return predict_fashion(color, file) 
 
     def create(self, validated_data):
         res = self.ai_model(validated_data['color'], validated_data['image'])

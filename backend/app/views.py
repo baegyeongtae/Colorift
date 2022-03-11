@@ -8,7 +8,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework_simplejwt.settings import api_settings
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-from app.models import User, Color, Fashion
+from app.models import Color, Fashion
 from app.serializers import *
 
 
@@ -90,7 +90,7 @@ class DeleteUser(APIView):
         try:
             request.user.delete()
             return Response(status=status.HTTP_200_OK)
-        except:  # 적어두긴했지만 예외가 나올 순 없음
+        except:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 

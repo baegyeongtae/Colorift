@@ -103,7 +103,7 @@ class FashionTestSerializer(serializers.ModelSerializer):
         model = Fashion
         fields = ['user', 'color', 'image']
 
-    def ai_model(self, color, file):  
+    def ai_model(self, color, file):
         return predict_fashion(color, file) 
 
     def create(self, validated_data):

@@ -32,25 +32,28 @@ export function MyStyleModal({ toggleProps, className, selectData }) {
         <>
             <BlurBackgroundDiv className={className} onClick={handleToggleClick} />
             <ModalDiv className={className}>
-                <MyModalTable id={selectData.index} date={resultFashion.date} title={resultFashion.color} />
                 <ModalCloseIcon toggleProps={handleToggleClick} />
-                <ContentContainerDiv>
-                    <ResultImage image={resultFashion.image} />
-                </ContentContainerDiv>
+                <Div>
+                    <MyModalTable id={selectData.index} date={resultFashion.date} title={resultFashion.color} />
 
-                <SubTitleP>
-                    이 옷은 <ResultTextS color={resultColor}>{seasonPersonal[resultFashion.color]}</ResultTextS>인
-                    회원님께
-                </SubTitleP>
-                <PercentResult
-                    resultColor={resultColor}
-                    spring={resultFashion.spring_rate}
-                    summer={resultFashion.summer_rate}
-                    autumn={resultFashion.autumn_rate}
-                    winter={resultFashion.winter_rate}
-                />
-                <SubTitleP>{getFashionText(resultFashion.result)}</SubTitleP>
-                <ColorContainerDiv />
+                    <ContentContainerDiv>
+                        <ResultImage image={resultFashion.image} />
+                    </ContentContainerDiv>
+
+                    <SubTitleP>
+                        이 옷은 <ResultTextS color={resultColor}>{seasonPersonal[resultFashion.color]}</ResultTextS>인
+                        회원님께
+                    </SubTitleP>
+                    <PercentResult
+                        resultColor={resultColor}
+                        spring={resultFashion.spring_rate}
+                        summer={resultFashion.summer_rate}
+                        autumn={resultFashion.autumn_rate}
+                        winter={resultFashion.winter_rate}
+                    />
+                    <SubTitleP>{getFashionText(resultFashion.result)}</SubTitleP>
+                    <ColorContainerDiv />
+                </Div>
             </ModalDiv>
         </>
     );
@@ -108,7 +111,6 @@ const ModalDiv = styled(ContainerDiv)`
     display: none;
 
     &.show {
-        overflow-y: auto;
         position: fixed;
         z-index: 9999;
         top: 50%;
@@ -123,25 +125,32 @@ const ModalDiv = styled(ContainerDiv)`
 
         background-color: white;
 
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background-color: transparent;
-            border-radius: 100px;
-
-            margin: 20px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            border-radius: 100px;
-            background-color: #e9e9e9;
-            box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
-        }
-
         @media ${({ theme }) => theme.device.tablet} {
             width: 80%;
         }
+    }
+`;
+
+const Div = styled.div`
+    overflow-y: auto;
+
+    width: 100%;
+    height: 100%;
+
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background-color: transparent;
+        border-radius: 100px;
+
+        margin: 20px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: 100px;
+        background-color: #e9e9e9;
+        box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
     }
 `;

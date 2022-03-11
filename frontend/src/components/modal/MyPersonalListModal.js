@@ -43,8 +43,8 @@ export function MyPersonalListModal({ toggleProps, checkProps, className }) {
         if (!chosen) {
             setColorChoiceModal(true);
         } else {
+            sessionStorage.setItem('color', chosen);
             const chosenColor = seasonPersonal[chosen];
-            // eslint-disable-next-line no-unused-expressions
             checkProps && checkProps({ chosenColor });
         }
     };

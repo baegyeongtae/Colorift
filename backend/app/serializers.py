@@ -1,13 +1,13 @@
 from rest_framework import serializers
-from hashid_field.rest import HashidSerializerCharField
 from .models import User, Color, Fashion
 from datetime import date
-from .ai import predict_color, predict_fashion
+from hashid_field.rest import HashidSerializerCharField
 
 """
 RegisterUserSerializer : 회원가입
 ChangePasswordSerializer : 비밀번호 변경
 """
+
 
 class RegisterUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -56,7 +56,10 @@ class ColorTestSerializer(serializers.ModelSerializer):
         fields = ['user', 'image']
 
     def ai_model(self, file):
-        return predict_color(file)
+        return {'spring_rate': 10, 'summer_rate': 20, 'autumn_rate': 30, 'winter_rate': 40}
+        nparr = np.fromstring(file.read(), np.uint8)
+        img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        return personal_color.analysis(img)
 
     def create(self, validated_data):
         res = self.ai_model(validated_data['image'])
@@ -69,7 +72,8 @@ class ColorDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Color
-        fields = ['id', 'user', 'image', 'date', 'spring_rate', 'summer_rate', 'autumn_rate', 'winter_rate']
+        fields = ['id', 'user', 'image', 'date', 'spring_rate',
+                  'summer_rate', 'autumn_rate', 'winter_rate']
 
 
 class ColorShareSerializer(serializers.ModelSerializer):
@@ -77,7 +81,8 @@ class ColorShareSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Color
-        fields = ['image', 'spring_rate', 'summer_rate', 'autumn_rate', 'winter_rate']
+        fields = ['image', 'spring_rate',
+                  'summer_rate', 'autumn_rate', 'winter_rate']
 
 
 class ColorListSerializer(serializers.ModelSerializer):
@@ -85,7 +90,8 @@ class ColorListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Color
-        fields = ['id', 'date', 'spring_rate', 'summer_rate', 'autumn_rate', 'winter_rate']
+        fields = ['id', 'date', 'spring_rate',
+                  'summer_rate', 'autumn_rate', 'winter_rate']
 
 
 """
@@ -103,11 +109,14 @@ class FashionTestSerializer(serializers.ModelSerializer):
         model = Fashion
         fields = ['user', 'color', 'image']
 
-    def ai_model(self, color, file):
-        return predict_fashion(color, file) 
+    def ai_model(self, file):  # 아직 ai model 연결되지 않음
+        return {'spring_rate': 50, 'summer_rate': 10, 'autumn_rate': 20, 'winter_rate': 30, 'result': 'S'}
+        _, res = main(color, file)
+        print(res)
+        return res
 
     def create(self, validated_data):
-        res = self.ai_model(validated_data['color'], validated_data['image'])
+        res = self.ai_model(validated_data['image'])
         return Fashion.objects.create(**validated_data, date=date.today(), **res)
 
 
@@ -117,7 +126,8 @@ class FashionDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Fashion
-        fields = ['id', 'user', 'color', 'image', 'date', 'spring_rate', 'summer_rate', 'autumn_rate', 'winter_rate', 'result']
+        fields = ['id', 'user', 'color', 'image', 'date', 'spring_rate',
+                  'summer_rate', 'autumn_rate', 'winter_rate', 'result']
 
 
 class FashionShareSerializer(serializers.ModelSerializer):
@@ -125,7 +135,8 @@ class FashionShareSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Fashion
-        fields = ['color', 'image', 'spring_rate', 'summer_rate', 'autumn_rate', 'winter_rate', 'result']
+        fields = ['color', 'image', 'spring_rate', 'summer_rate',
+                  'autumn_rate', 'winter_rate', 'result']
 
 
 class FashionListSerializer(serializers.ModelSerializer):

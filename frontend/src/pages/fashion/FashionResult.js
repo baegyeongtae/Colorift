@@ -52,7 +52,7 @@ function FashionResult() {
                 autumn={percentList?.autumnRate}
                 winter={percentList?.winterRate}
             />
-            <SubTitleP>{getFashionText(percentList.match)}</SubTitleP>
+            <SubTitleP>{getFashionText(percentList?.match)}</SubTitleP>
             <ColorContainerDiv>
                 <div className="wrapper">
                     <div>
@@ -80,7 +80,7 @@ function FashionResult() {
             </ColorContainerDiv>
 
             <ContentContainerDiv>
-                <MatchingResult match={percentList.match} />
+                <MatchingResult match={percentList?.match} />
             </ContentContainerDiv>
             <ButtonContainerDiv>
                 <Stack spacing={2} direction="row">

@@ -56,7 +56,7 @@ export function MyStyleModal({ toggleProps, className, selectData }) {
                 />
                 <SubTitleP>
                     {getFashionText(
-                        resultFashion,
+                        resultFashion.color,
                         resultFashion.spring_rate,
                         resultFashion.summer_rate,
                         resultFashion.autumn_rate,

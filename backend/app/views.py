@@ -90,7 +90,7 @@ class DeleteUser(APIView):
         try:
             request.user.delete()
             return Response(status=status.HTTP_200_OK)
-        except:  # 적어두긴했지만 예외가 나올 순 없음
+        except:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 

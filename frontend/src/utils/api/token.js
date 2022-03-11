@@ -4,7 +4,7 @@ import { axiosUserConfig, expire } from './user';
 
 // axios 기본 인스턴스 생성 (토큰 검증 포함)
 const axiosConfig = axios.create({
-    baseURL: `${process.env.REACT_APP_SERVER_ADDRESS}`, // 기본 서버 주소 입력 => 아직 미정
+    // baseURL: `${process.env.REACT_APP_SERVER_ADDRESS}`, // 기본 서버 주소 입력 => 아직 미정
     headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',

@@ -23,7 +23,11 @@ def Read_Img_2_Tensor(img_path):
 def Load_DeepFashion2_Yolov3():
     t1 = time.time()
     model = YoloV3(classes=13)
+<<<<<<< HEAD
     model.load_weights('./built_model/deepfashion2_yolov3')
+=======
+    model.load_weights('./ai/fashion/built_model/deepfashion2_yolov3')
+>>>>>>> 0e2346c83364a411e924188464894902d6ae401f
     t2 = time.time()
     print('Load DeepFashion2 Yolo-v3 from disk: {:.2f} sec'.format(t2 - t1))
 

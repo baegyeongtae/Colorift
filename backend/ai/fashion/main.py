@@ -12,7 +12,9 @@ from . import utils
 
 
 def main(color, file):
-    """Clothes detection"""
+    """
+    Clothes detection
+    """
     model = utils.Load_DeepFashion2_Yolov3()
 
     img = tf.image.decode_image(file.read(), channels=3, dtype=tf.dtypes.float32)
@@ -22,7 +24,9 @@ def main(color, file):
     # img_tensor = utils.Read_Img_2_Tensor(img)
     cropped_image = clothes_detector.Detect_Clothes_and_Crop(img_tensor, model)
 
-    """Color extraction"""
+    """
+    Color extraction
+    """
     cropped_image *= 255
     cropped_image = cropped_image.astype(np.uint8)
 
@@ -33,7 +37,9 @@ def main(color, file):
         test_rgb[0], test_rgb[1], test_rgb[2]))
     test = np.append(test_hsv[1:], test_lab)
 
-    """Tone prediction"""
+    """
+    Tone prediction
+    """
     classifier = joblib.load('/app/ai/fashion/built_model/colorfit.pkl')
     scaler = joblib.load('/app/ai/fashion/built_model/scaler.pkl')
 

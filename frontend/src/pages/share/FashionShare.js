@@ -1,10 +1,11 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import { useSetRecoilState } from 'recoil';
 import { season, SeasonTone } from '../../utils/data/season';
 import { fashionPageState } from '../../utils/data/atom';
-import { getFashionText } from '../../utils/data/getFashionText';
+import { getFashionShare } from '../../utils/api/user';
 import {
     ResultImage,
     NavBackgroundDiv,
@@ -19,12 +20,26 @@ import {
 } from '../../components';
 import { hue, saturation, value } from '../../image';
 
-function FashionResult() {
+function FashionShare({ pathnameId }) {
+    const [result, setResult] = useState({});
+
     const navigate = useNavigate();
     const setFashionPage = useSetRecoilState(fashionPageState);
+    const seasonTone = sessionStorage.getItem('fashionResult');
     const percentList = JSON.parse(sessionStorage.getItem('fashionResult'));
-    const seasonTone = season[percentList[5]];
-    const resultColor = SeasonTone(seasonTone);
+    console.log(seasonTone);
+    console.log(percentList);
+    const resultColor = SeasonTone(season[seasonTone]);
+
+    useEffect(() => {
+        pathnameId &&
+            (async () => {
+                const response = await getFashionShare(pathnameId);
+                setResult(response);
+            })();
+    }, [pathnameId]);
+
+    console.log(result);
 
     return (
         <>
@@ -39,13 +54,13 @@ function FashionResult() {
             </SubTitleP>
             <PercentResult
                 resultColor={resultColor}
-                spring={percentList[1]}
-                summer={percentList[2]}
-                autumn={percentList[3]}
-                winter={percentList[4]}
+                spring={percentList[0]}
+                summer={percentList[1]}
+                autumn={percentList[2]}
+                winter={percentList[3]}
             />
             <SubTitleP>
-                <getFashionText result="G" />
+                종합 <ResultTextS color={resultColor}>{percentList[3]}%</ResultTextS>만큼 매칭됩니다.
             </SubTitleP>
             <GridContainer>
                 <ShareButton />
@@ -93,7 +108,7 @@ function FashionResult() {
     );
 }
 
-export { FashionResult };
+export { FashionShare };
 
 // styled-components
 

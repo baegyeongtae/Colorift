@@ -8,4 +8,5 @@ export { MyPage } from './mypage/MyPage';
 export { UploadFace, Loading, ColorResult, PersonalColorPage } from './personalcolor';
 export { PersonalColorChoice, MatchingLoading, UploadFashion, FashionResult, FashionMatchingPage } from './fashion';
 export { Game } from './game/Game';
+export { ColorShare, FashionShare } from './share';
 export { NotFound } from './error/NotFound';

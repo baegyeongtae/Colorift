@@ -13,16 +13,16 @@ export function PercentResult({ resultColor, spring, summer, autumn, winter }) {
                 </dl>
                 <dl>
                     <dt className="progress">
-                        <ProgressBar percent={spring} resultColor={resultColor[0]} />
+                        <ProgressBar percent={spring} resultColor={resultColor} />
                     </dt>
                     <dt className="progress">
-                        <ProgressBar percent={summer} resultColor={resultColor[1]} />
+                        <ProgressBar percent={summer} resultColor={resultColor} />
                     </dt>
                     <dt className="progress">
-                        <ProgressBar percent={autumn} resultColor={resultColor[2]} />
+                        <ProgressBar percent={autumn} resultColor={resultColor} />
                     </dt>
                     <dt className="progress">
-                        <ProgressBar percent={winter} resultColor={resultColor[3]} />
+                        <ProgressBar percent={winter} resultColor={resultColor} />
                     </dt>
                 </dl>
                 <dl>

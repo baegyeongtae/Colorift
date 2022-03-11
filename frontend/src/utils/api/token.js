@@ -4,7 +4,7 @@ import { axiosUserConfig, expire } from './user';
 
 // axios 기본 인스턴스 생성 (토큰 검증 포함)
 const axiosConfig = axios.create({
-    baseURL: `${process.env.REACT_APP_SERVER_ADDRESS}`, // 기본 서버 주소 입력 => 아직 미정
+    // baseURL: `${process.env.REACT_APP_SERVER_ADDRESS}`, // 기본 서버 주소 입력 => 아직 미정
     headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -16,7 +16,7 @@ const axiosConfig = axios.create({
 async function getAccessToken() {
     try {
         const response = await axiosUserConfig({
-            url: 'token/refresh/',
+            url: '/app/token/refresh/',
             data: {
                 refresh: Cookies.get('refreshToken'),
             },
@@ -25,15 +25,11 @@ async function getAccessToken() {
         Cookies.set('accessToken', response.data.access, {
             path: '/',
             expires: expire, // 테스트 기준 5분 (하루 단위로 응답)
-            // secure: true,
-            // httpOnly: true, // 배포하면 주석 제거 필수 (보안용)
         });
 
         Cookies.set('refreshToken', response.data.refresh, {
             path: '/',
             expires: 90, // 테스트 기준 90일
-            // secure: true,
-            // httpOnly: true, // 배포하면 주석 제거 필수 (보안용)
         });
 
         return response.data.access;

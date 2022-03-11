@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { xmarkIcon } from '../../image';
 
-export function ModalCloseIcon({ clickProps }) {
+export function ModalCloseIcon({ toggleProps }) {
     const handleClick = () => {
-        clickProps();
+        toggleProps();
     };
     return (
         <ModalCloseDiv onClick={handleClick}>

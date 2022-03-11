@@ -2,13 +2,13 @@
 
 export { Footer } from './footer/Footer';
 export { NavigationBar, NavBackgroundDiv } from './nav';
-export { BigTextP, DescriptionP, TitleP, SubTitleP, MediumTextH, RadioTextH, SeasonTone } from './text';
+export { BigTextP, DescriptionP, TitleP, SubTitleP, MediumTextH, RadioTextH } from './text';
 export { HomeServiceIcon, HomeColorBar, HomeContainerDiv } from './home';
-export { Article, BackgroundDiv, ContainerDiv } from './area';
+export { Article, BackgroundArticle, BlurBackgroundDiv, ContainerDiv } from './area';
 export { ExampleTitle, ExampleImage, ExampleColor } from './example';
 export { ScrollUpIcon, ModalCloseIcon, Logo } from './icon';
 export { UserInputDiv, Input } from './login/UserInputDiv';
-export { HomeButton, UserButton, GrayButton, BlueButton, WhiteButton } from './button';
+export { HomeButton, UserButton, GrayButton, BlueButton, WhiteButton, ShareButton } from './button';
 export {
     Color,
     Fashion,
@@ -20,4 +20,13 @@ export {
     MatchingResult,
     PercentResult,
 } from './procedure';
-export { FindPasswordModal, UserOutModal, TextModal } from './modal';
+export {
+    ChangePWModal,
+    UserOutModal,
+    TextModal,
+    MyPersonalColorModal,
+    MyStyleModal,
+    MyPersonalListModal,
+    MyChangePWModal,
+    ChangeNameModal,
+} from './modal';

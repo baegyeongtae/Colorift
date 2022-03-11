@@ -2,9 +2,12 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import { useSetRecoilState } from 'recoil';
+import { season, SeasonTone, seasonPersonal } from '../../utils/data/season';
 import { fashionPageState } from '../../utils/data/atom';
+import { getFashionText } from '../../utils/data/getFashionText';
 import {
     ResultImage,
+    NavBackgroundDiv,
     Fashion,
     SubTitleP,
     DescriptionP,
@@ -12,66 +15,83 @@ import {
     MatchingResult,
     ContainerDiv,
     PercentResult,
-    SeasonTone,
+    ShareButton,
 } from '../../components';
 import { hue, saturation, value } from '../../image';
 
 function FashionResult() {
     const navigate = useNavigate();
+
+    // 리코일 페이지 state
     const setFashionPage = useSetRecoilState(fashionPageState);
 
-    const season = {
-        spring: 'spring',
-        summer: 'summer',
-        autumn: 'autumn',
-        winter: 'winter',
-    };
-    const resultColor = SeasonTone(season.spring);
+    // 유저가 선택한 퍼스널컬러
+    const seasonTone = sessionStorage.getItem('color');
 
-    console.log(resultColor);
+    // API 호출 후 세션스토리지에 저장했던 결과 값
+    const percentList = JSON.parse(sessionStorage.getItem('result'));
+
+    // 퍼스널컬러에 따른 대표 색상
+    const resultColor = SeasonTone(season[seasonTone]);
 
     return (
         <>
+            <NavBackgroundDiv />
             <Fashion />
             <ContentContainerDiv>
                 <ResultImage />
             </ContentContainerDiv>
 
             <SubTitleP>
-                이 옷은 <ResultTextS color={resultColor}>봄 웜톤</ResultTextS>인 회원님께
+                이 옷은 <ResultTextS color={resultColor}>{seasonPersonal[seasonTone]}</ResultTextS>인 회원님께
             </SubTitleP>
-            <PercentResult resultColor={resultColor} />
-            <SubTitleP>
-                종합 <ResultTextS color={resultColor}>67%</ResultTextS>만큼 매칭됩니다.
-            </SubTitleP>
+            <PercentResult
+                resultColor={resultColor}
+                spring={percentList?.springRate}
+                summer={percentList?.summerRate}
+                autumn={percentList?.autumnRate}
+                winter={percentList?.winterRate}
+            />
+            <SubTitleP>{getFashionText(percentList.match)}</SubTitleP>
+            <GridContainer>
+                <ShareButton id={percentList?.id} path="/fashion/" />
+            </GridContainer>
             <ColorContainerDiv>
                 <div className="wrapper">
-                    <div>
-                        <DescriptionLeftTitleP>색상(Color, Hue)이란</DescriptionLeftTitleP>
-                        <DescriptionLeftSubTitleP>일반적으로 부르는 빛깔 이름을 뜻합니다.</DescriptionLeftSubTitleP>
-                        <ImgContainerDiv>
-                            <img src={hue} alt="Hue" />
-                        </ImgContainerDiv>
+                    <div className="wrapping">
+                        <div>
+                            <DescriptionLeftTitleP>색상(Color, Hue)이란</DescriptionLeftTitleP>
+                            <DescriptionLeftSubTitleP>일반적으로 부르는 빛깔 이름을 뜻합니다.</DescriptionLeftSubTitleP>
+                            <ImgContainerDiv>
+                                <img src={hue} alt="Hue" />
+                            </ImgContainerDiv>
+                        </div>
+                        <div>
+                            <DescriptionLeftTitleP>명도(Brightness, Value)란</DescriptionLeftTitleP>
+                            <DescriptionLeftSubTitleP>밝기로 색상을 표현하는 것을 말합니다.</DescriptionLeftSubTitleP>
+                            <ImgContainerDiv>
+                                <img src={saturation} alt="Brightness" />
+                            </ImgContainerDiv>
+                        </div>
+                        <div>
+                            <DescriptionLeftTitleP>채도(Saturation)란</DescriptionLeftTitleP>
+                            <DescriptionLeftSubTitleP>색의 선명함 정도를 말합니다.</DescriptionLeftSubTitleP>
+                            <ImgContainerDiv>
+                                <img src={value} alt="Saturation" />
+                            </ImgContainerDiv>
+                        </div>
                     </div>
-                    <div>
-                        <DescriptionLeftTitleP>명도(Brightness, Value)란</DescriptionLeftTitleP>
-                        <DescriptionLeftSubTitleP>밝기로 색상을 표현하는 것을 말합니다.</DescriptionLeftSubTitleP>
-                        <ImgContainerDiv>
-                            <img src={saturation} alt="Brightness" />
-                        </ImgContainerDiv>
-                    </div>
-                    <div>
-                        <DescriptionLeftTitleP>채도(Saturation)란</DescriptionLeftTitleP>
-                        <DescriptionLeftSubTitleP>색의 선명함 정도를 말합니다.</DescriptionLeftSubTitleP>
-                        <ImgContainerDiv>
-                            <img src={value} alt="Saturation" />
-                        </ImgContainerDiv>
-                    </div>
+                    <ContainerDiv>
+                        <DescriptionTextP>
+                            컬러핏 패션 매칭 알고리즘은 옷의 색상 / 명도 / 채도를 추출하여 퍼스널 컬러 및 회원님
+                            피부톤과의 조화도를 보여드립니다
+                        </DescriptionTextP>
+                    </ContainerDiv>
                 </div>
             </ColorContainerDiv>
 
             <ContentContainerDiv>
-                <MatchingResult />
+                <MatchingResult match={percentList?.match} />
             </ContentContainerDiv>
             <ButtonContainerDiv>
                 <Stack spacing={2} direction="row">
@@ -98,24 +118,30 @@ const ContentContainerDiv = styled.div`
     align-items: center;
     margin-bottom: 8px;
     margin-top: 8px;
-
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;
 
 const ColorContainerDiv = styled(ContainerDiv)`
     .wrapper {
         width: 1100px;
-        height: 250px;
+        height: 350px;
         border-radius: 20px;
         background-color: #efefef;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
         margin-top: 50px;
+        .wrapping {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            @media ${({ theme }) => theme.device.mobile} {
+                all: unset;
 
+                display: grid;
+                grid-template-rows: repeat(3, 1fr);
+                align-items: center;
+                justify-content: center;
+            }
+        }
         @media ${({ theme }) => theme.device.mobile} {
             all: unset;
-
+            margin-top: 30px;
             border-radius: 20px;
             width: 300px;
             height: 600px;
@@ -133,9 +159,6 @@ const ColorContainerDiv = styled(ContainerDiv)`
     align-items: center;
     margin-bottom: 8px;
     margin-top: 8px;
-
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;
 
 const ImgContainerDiv = styled(ContainerDiv)`
@@ -154,22 +177,23 @@ const ImgContainerDiv = styled(ContainerDiv)`
     align-items: center;
     margin-bottom: 8px;
     margin-top: 20px;
-
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;
 
 const ButtonContainerDiv = styled.div`
-    background-color: ${({ theme }) => theme.color.white};
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     margin-bottom: 50px;
     margin-top: 20px;
+`;
 
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
+// 버튼을 배치시키는 컨테이너
+const GridContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 `;
 
 const CustomButton = styled(BlueButton)`
@@ -203,6 +227,20 @@ const DescriptionLeftSubTitleP = styled.p`
     text-align: left;
 `;
 
+const DescriptionTextP = styled.p`
+    margin-top: 70px;
+    font-weight: bold;
+    text-align: center;
+    align-items: center;
+
+    @media ${({ theme }) => theme.device.mobile} {
+        font-size: ${({ theme }) => theme.fontSizes.smalltext};
+        margin-top: 20px;
+        width: 200px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+`;
 const ResultTextS = styled.span`
     font-weight: bold;
     color: ${props => `${props.color}`};

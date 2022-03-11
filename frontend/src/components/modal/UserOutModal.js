@@ -1,10 +1,12 @@
+/* eslint-disable no-unused-expressions */
 import styled from 'styled-components';
 import { setUserOut } from '../../utils/api/service';
-import { BackgroundDiv, ModalCloseIcon, SubTitleP, HomeButton } from '..';
+import { BlurBackgroundDiv, ModalCloseIcon, SubTitleP, HomeButton } from '..';
+import { ModalDiv } from './ModalDiv';
 
-export function UserOutModal({ toggleClickProps, className, text }) {
+export function UserOutModal({ toggleProps, className, text }) {
     const handleToggleClick = () => {
-        toggleClickProps();
+        toggleProps && toggleProps();
     };
 
     const handleUserOut = () => {
@@ -13,52 +15,24 @@ export function UserOutModal({ toggleClickProps, className, text }) {
 
     return (
         <>
-            <BackgroundDiv className={className} onClick={handleToggleClick} />
-            <ModalDiv className={className}>
+            <BlurBackgroundDiv className={className} onClick={handleToggleClick} />
+            <ModalColumnDiv className={className}>
                 <SubTitleP className="text">{text}</SubTitleP>
                 <ButtonDiv>
                     <HomeButton onClick={handleUserOut}>탈퇴</HomeButton>
                     <HomeButton onClick={handleToggleClick}>취소</HomeButton>
                 </ButtonDiv>
-                <ModalCloseIcon clickProps={handleToggleClick} />
-            </ModalDiv>
+                <ModalCloseIcon toggleProps={handleToggleClick} />
+            </ModalColumnDiv>
         </>
     );
 }
 
 // styled-components
 
-const ModalDiv = styled.div`
-    display: none;
-
+const ModalColumnDiv = styled(ModalDiv)`
     &.show {
-        position: fixed;
-        z-index: 9999;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-
-        padding: 50px 30px;
-
         ${({ theme }) => theme.flexStyled.flexColumn};
-        ${({ theme }) => theme.flexStyled.flexCenter};
-
-        width: 550px;
-        height: 300px;
-
-        background-color: white;
-
-        .text {
-            margin: 0;
-        }
-
-        @media ${({ theme }) => theme.device.tablet} {
-            .text {
-                font-size: 1.5rem;
-            }
-
-            width: 70%;
-        }
     }
 `;
 

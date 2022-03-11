@@ -1,19 +1,22 @@
 import styled from 'styled-components';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
-    Article,
     ContainerDiv,
     UserInputDiv,
     TitleP,
     UserButton,
-    FindPasswordModal,
+    ChangePWModal,
     NavBackgroundDiv,
     TextModal,
+    Article,
 } from '../../components';
-import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 import { setUserLogin } from '../../utils/api/user';
+import { useNotFound } from '../../utils/hooks/useNotFound';
 
 export function Login() {
+    const navigate = useNavigate();
+
     // 비밀번호 찾기 모달
     const [findModal, setFindModal] = useState(false);
 
@@ -21,46 +24,54 @@ export function Login() {
     const [noUserModal, setNoUserModal] = useState(false);
 
     // input 값을 받아오기 위한 ref
-    const emailRef = useRef();
+    const idRef = useRef();
     const passwordRef = useRef();
 
     // 비밀번호 찾기 모달의 상태 변환 함수
-    function handlePasswordToggleModal() {
+    const handlePasswordToggleModal = () => {
         setFindModal(current => !current);
-    }
+    };
 
-    // 존재하지 않는 아이디 모달의 상태 변환 함수
-    function handleNoUserToggleModal() {
+    // 아이디 비밀번호 오류 모달의 상태 변환 함수
+    const handleNoUserToggleModal = () => {
         setNoUserModal(current => !current);
-    }
+    };
 
     // 이메일, 비밀번호 form submit 함수
     const handleSubmit = async event => {
         event.preventDefault();
-        const response = await setUserLogin(emailRef.current.value, passwordRef.current.value);
-        if (response.status !== 200) setNoUserModal(true);
+        const response = await setUserLogin(idRef.current.value, passwordRef.current.value);
+        if (response.status === 200) {
+            navigate('/', {
+                replace: true,
+                state: {
+                    userId: sessionStorage.getItem('userId'),
+                },
+            });
+        } else if (response.status === 401) setNoUserModal(true);
     };
 
-    useEffect(() => setScrollDisabled(findModal), [findModal]);
+    // 로그인 유저가 접근 시 404로 보내버리기
+    useNotFound(true);
 
     return (
         <>
             <TextModal
                 className={noUserModal && 'show'}
-                toggleClickProps={() => handleNoUserToggleModal()}
-                text="존재하지 않는 아이디입니다."
+                toggleProps={handleNoUserToggleModal}
+                text="아이디 또는 비밀번호를 잘못 입력했습니다"
             />
-            <FindPasswordModal className={findModal && 'show'} clickProps={() => handlePasswordToggleModal()} />
+            <ChangePWModal className={findModal && 'show'} toggleProps={handlePasswordToggleModal} />
             <NavBackgroundDiv />
-            <Article height="88vh">
-                <CenterContainerDiv>
+            <Article>
+                <ContainerDiv>
                     <LoginDiv>
                         <TitleP color="#3C64B1" className="column">
                             Login
                         </TitleP>
                         <UserForm onSubmit={handleSubmit}>
-                            <UserInputDiv text="Email" type="text" name="email" ref={emailRef} />
-                            <UserInputDiv text="Password" type="password" name="password" ref={passwordRef} />
+                            <UserInputDiv text="Id" type="text" ref={idRef} />
+                            <UserInputDiv text="Password" type="password" ref={passwordRef} />
                             <UserButton type="submit" width="80%" height="80%" className="login_button column">
                                 로그인
                             </UserButton>
@@ -71,9 +82,9 @@ export function Login() {
                             width="80%"
                             height="50%"
                             className="button"
-                            onClick={() => handlePasswordToggleModal()}
+                            onClick={handlePasswordToggleModal}
                         >
-                            비밀번호 찾기
+                            비밀번호 변경
                         </UserButton>
                         <p>회원이 아니신가요?</p>
                         <UserButton
@@ -81,24 +92,18 @@ export function Login() {
                             width="80%"
                             height="50%"
                             className="button"
-                            onClick={() => window.open('/signup', '_self')}
+                            onClick={() => navigate('/signup')}
                         >
                             회원가입
                         </UserButton>
                     </LoginDiv>
-                </CenterContainerDiv>
+                </ContainerDiv>
             </Article>
         </>
     );
 }
 
 // styled-components
-
-export const CenterContainerDiv = styled(ContainerDiv)`
-    ${({ theme }) => theme.flexStyled.flexCenter};
-
-    height: 100%;
-`;
 
 export const LoginDiv = styled.div`
     display: grid;

@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import pymysql
 from datetime import timedelta
 from pathlib import Path
 from .conf import aws
@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-+(!5vblc2a41&k)=ef&zme8&qia2e=6s1-d@adrrf6y)@4#0!6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -43,8 +43,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'app',
     'rest_framework_simplejwt.token_blacklist',
-    "corsheaders",
+    'corsheaders'
 ]
+
+AUTH_USER_MODEL = 'app.User'
+
+HASHID_FIELD_SALT = "wae98fawe9f8w7e978f7aw9e8f79aw"
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -124,10 +128,17 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+
+pymysql.install_as_MySQLdb()
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'colorfit',
+        'USER': 'colorfit',
+        'PASSWORD': 'colorfit',
+        'HOST': 'db',
+        'PORT': '3306'
     }
 }
 

@@ -1,31 +1,35 @@
 import styled from 'styled-components';
-import { SubTitleP } from '../../index';
 import { ProgressBar } from '../progressbar/ProgressBar';
 
-export function PercentResult({ resultColor }) {
+export function PercentResult({ resultColor, spring, summer, autumn, winter }) {
     return (
         <ContentContainerDiv>
             <ProgressDiv>
                 <dl>
-                    <dt className="progress">색상</dt>
-                    <dt className="progress">명도</dt>
-                    <dt className="progress">채도</dt>
+                    <dt className="progress">봄 웜톤</dt>
+                    <dt className="progress">여름 쿨톤</dt>
+                    <dt className="progress">가을 웜톤</dt>
+                    <dt className="progress">겨울 쿨톤</dt>
                 </dl>
                 <dl>
                     <dt className="progress">
-                        <ProgressBar percent={82} resultColor={resultColor} />
+                        <ProgressBar percent={spring} resultColor={resultColor} />
                     </dt>
                     <dt className="progress">
-                        <ProgressBar percent={65} resultColor={resultColor} />
+                        <ProgressBar percent={summer} resultColor={resultColor} />
                     </dt>
                     <dt className="progress">
-                        <ProgressBar percent={70} resultColor={resultColor} />
+                        <ProgressBar percent={autumn} resultColor={resultColor} />
+                    </dt>
+                    <dt className="progress">
+                        <ProgressBar percent={winter} resultColor={resultColor} />
                     </dt>
                 </dl>
                 <dl>
-                    <dt className="progress">82%</dt>
-                    <dt className="progress">65%</dt>
-                    <dt className="progress">70%</dt>
+                    <dt className="progress">{spring}%</dt>
+                    <dt className="progress">{summer}%</dt>
+                    <dt className="progress">{autumn}%</dt>
+                    <dt className="progress">{winter}%</dt>
                 </dl>
             </ProgressDiv>
         </ContentContainerDiv>
@@ -41,9 +45,6 @@ const ContentContainerDiv = styled.div`
     align-items: center;
     margin-bottom: 8px;
     margin-top: 8px;
-
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;
 
 const ProgressDiv = styled.div`
@@ -68,6 +69,4 @@ const ProgressDiv = styled.div`
     .progress {
         margin: 8px;
     }
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;

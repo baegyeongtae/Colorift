@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Outlet, useLocation, NavLink } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 import Cookies from 'js-cookie';
-import { Logo, Footer, BackgroundDiv } from '..';
+import { Logo, Footer, BlurBackgroundDiv } from '..';
 import { ContainerDiv } from '../area/ContainerDiv';
 import { useGetScrollY } from '../../utils/hooks/useGetScrollY';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
@@ -15,6 +15,8 @@ function NavigationBar() {
     // 현재 url 받아오기
     const location = useLocation();
     const { pathname } = location;
+    const { userId } = location.state || '';
+    const isLogin = sessionStorage.getItem('userId') || '';
 
     // 현재 스크롤 위치 받아오기
     const { scrollY } = useGetScrollY();
@@ -37,10 +39,11 @@ function NavigationBar() {
             name: 'Fashion Matching',
             path: '/fashion',
         },
+        {
+            name: 'Mini Game',
+            path: '/game',
+        },
     ];
-
-    // 세션 스토리지에 정보가 있으면 받아오기 (로그인 상태 확인)
-    const [userEmail, setUserEmail] = useState(sessionStorage.getItem('userEmail') || '');
 
     // 메뉴바 클릭 상태 변환하는 함수
     const handleToggleClick = () => {
@@ -52,7 +55,6 @@ function NavigationBar() {
         Cookies.remove('accessToken');
         Cookies.remove('refreshToken');
         sessionStorage.clear();
-        setUserEmail('');
     }
 
     // 모바일 버전 메뉴바 show 상태에서는 스크롤 막기
@@ -62,10 +64,12 @@ function NavigationBar() {
     useEffect(() => setIsToggle(false), [pathname]);
 
     // 홈페이지가 꺼질 때 토큰도 정리하기
-    // useEffect(() => {
-    //     console.log('컴포넌트가 화면에 나타남');
-    //     return userSessionReset();
-    // });
+    useEffect(
+        () => () => {
+            userSessionReset();
+        },
+        [],
+    );
 
     return (
         <>
@@ -85,19 +89,19 @@ function NavigationBar() {
                                     </NavLink>
                                 ))}
                             </MenuDiv>
-                            <UserDiv className={isToggle && 'show'} login={userEmail}>
+                            <UserDiv className={isToggle && 'show'} login={userId || isLogin}>
                                 <NavLink
-                                    to={userEmail ? '/' : '/login'}
+                                    to={userId || isLogin ? '/' : '/login'}
                                     className={pathname === '/' && scrollY === 0 ? 'transparent login' : 'login'}
-                                    onClick={() => userEmail && userSessionReset()}
+                                    onClick={() => userId || (isLogin && userSessionReset())}
                                 >
-                                    {userEmail ? 'Logout' : 'Log In'}
+                                    {userId || isLogin ? 'Logout' : 'Log In'}
                                 </NavLink>
                                 <NavLink
-                                    to={userEmail ? `/mypage/${userEmail}` : '/signup'}
+                                    to={userId || isLogin ? `/mypage` : '/signup'}
                                     className={pathname === '/' && scrollY === 0 ? 'transparent signup' : 'signup'}
                                 >
-                                    {userEmail ? (
+                                    {userId || isLogin ? (
                                         <img
                                             src={profileIcon}
                                             alt="마이페이지 아이콘"
@@ -118,9 +122,9 @@ function NavigationBar() {
                         </MenuIconDiv>
                     </ContainerGridDiv>
                 </Nav>
-                <BackgroundDiv onClick={handleToggleClick} className={isToggle && 'show'} />
+                <BlurBackgroundDiv onClick={handleToggleClick} className={isToggle && 'show'} />
             </header>
-            <main>
+            <main style={{ minHeight: '100%', paddingBottom: '5vh' }}>
                 <Outlet />
             </main>
             <Footer />
@@ -175,7 +179,7 @@ const ContainerGridDiv = styled(ContainerDiv)`
 
 const MenuBoxDiv = styled.div`
     display: grid;
-    grid-template-columns: 4fr 1.2fr;
+    grid-template-columns: 4fr 0.9fr;
 
     &.show {
         position: fixed;
@@ -203,7 +207,7 @@ const MenuBoxDiv = styled.div`
 
 const MenuDiv = styled.div`
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
 
     a {
         color: #616161;
@@ -282,6 +286,10 @@ const UserDiv = styled.div`
             background-color: ${({ theme }) => theme.color.blue};
 
             padding: 10px;
+
+            @media ${({ theme }) => theme.device.laptop} {
+                padding: 5px;
+            }
         }
 
         img {

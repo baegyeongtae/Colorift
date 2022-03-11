@@ -1,51 +1,62 @@
-/* eslint-disable react/style-prop-object */
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import Stack from '@mui/material/Stack';
-import { colorPageState, seasonState } from '../../utils/data/atom';
+import { colorPageState } from '../../utils/data/atom';
+import { season, SeasonTone, seasonPersonal } from '../../utils/data/season';
 import {
     ResultImage,
+    NavBackgroundDiv,
     Color,
     SubTitleP,
     ContainerDiv,
     BlueButton,
     SeasonColor,
     MediumTextH,
-    SeasonTone,
+    ShareButton,
+    PercentResult,
 } from '../../components';
 
 function ColorResult() {
     const navigate = useNavigate();
+
+    // 리코일 페이지 state
     const setColorPage = useSetRecoilState(colorPageState);
-    const resultSeason = useRecoilValue(seasonState);
 
-    console.log(resultSeason);
+    // API 요청 결과
+    const percentList = JSON.parse(sessionStorage.getItem('result'));
 
-    const season = {
-        spring: 'spring',
-        summer: 'summer',
-        autumn: 'autumn',
-        winter: 'winter',
-    };
+    // 퍼스널컬러 결과 (SP / SU / AU / WI)
+    const seasonTone = sessionStorage.getItem('season');
 
-    const resultColor = SeasonTone(season.spring);
+    // 퍼스널 결과에 따른 색상코드
+    const resultColor = SeasonTone(season[seasonTone]);
 
     return (
         <>
+            <NavBackgroundDiv />
             <Color number={2} />
 
             <ResultContainerDiv>
                 <ResultImage />
             </ResultContainerDiv>
-
             <SubTitleP>
-                회원님은 <ResultTextS color={resultColor}>봄 웜톤</ResultTextS> 입니다.
+                회원님은 <ResultTextS color={resultColor}>{seasonPersonal[seasonTone]}</ResultTextS> 입니다.
             </SubTitleP>
+            <PercentResult
+                resultColor={resultColor}
+                spring={percentList?.springRate}
+                summer={percentList?.summerRate}
+                autumn={percentList?.autumnRate}
+                winter={percentList?.winterRate}
+            />
+            <GridContainer>
+                <ShareButton id={percentList?.id} path="/color/" />
+            </GridContainer>
 
             <ColorContainerDiv>
                 <MediumTextLeftH>회원님에게 어울리는 컬러</MediumTextLeftH>
-                <SeasonColor season={season.spring} />
+                <SeasonColor season={season[seasonTone]} />
             </ColorContainerDiv>
 
             <ButtonContainerDiv>
@@ -67,7 +78,6 @@ export { ColorResult };
 // styled-components
 
 const ColorContainerDiv = styled(ContainerDiv)`
-    background-color: ${({ theme }) => theme.color.white};
     align-items: center;
 
     width: 640px;
@@ -76,7 +86,6 @@ const ColorContainerDiv = styled(ContainerDiv)`
         all: unset;
 
         width: 270px;
-        background-color: ${({ theme }) => theme.color.white};
         align-items: center;
         margin-bottom: 8px;
         margin-left: 20px;
@@ -85,7 +94,6 @@ const ColorContainerDiv = styled(ContainerDiv)`
 `;
 
 const ResultContainerDiv = styled(ContainerDiv)`
-    background-color: ${({ theme }) => theme.color.white};
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -94,7 +102,6 @@ const ResultContainerDiv = styled(ContainerDiv)`
     margin-top: 8px;
 
     @media ${({ theme }) => theme.device.tablet} {
-        background-color: ${({ theme }) => theme.color.white};
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -104,7 +111,6 @@ const ResultContainerDiv = styled(ContainerDiv)`
     }
 
     @media ${({ theme }) => theme.device.mobile} {
-        background-color: ${({ theme }) => theme.color.white};
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -115,16 +121,15 @@ const ResultContainerDiv = styled(ContainerDiv)`
 `;
 
 const ButtonContainerDiv = styled.div`
-    background-color: ${({ theme }) => theme.color.white};
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     margin-bottom: 100px;
     margin-top: 50px;
+    padding-bottom: 100px;
 
     @media ${({ theme }) => theme.device.mobile} {
-        background-color: ${({ theme }) => theme.color.white};
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -132,6 +137,14 @@ const ButtonContainerDiv = styled.div`
         margin-bottom: 20px;
         margin-top: 40px;
     }
+`;
+
+// 버튼을 배치시키는 컨테이너
+const GridContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 `;
 
 const MediumTextLeftH = styled(MediumTextH)`

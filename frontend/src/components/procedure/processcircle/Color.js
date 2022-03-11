@@ -3,18 +3,18 @@ import { useRecoilValue } from 'recoil';
 import { ContainerDiv, DescriptionP } from '../..';
 import { colorPageState } from '../../../utils/data/atom';
 
-export function Color() {
+export function Color({ number }) {
     const currentPage = useRecoilValue(colorPageState);
 
     return (
         <CircleContainerDiv>
             <div className="wrapper">
-                <div className={` ${currentPage === 0 ? 'current_circle' : 'left_circle'}`}>
+                <div className={` ${currentPage === 0 && number === 0 ? 'current_circle' : 'left_circle'}`}>
                     <TextH0>
                         얼굴 사진 <br /> 업로드
                     </TextH0>
                 </div>
-                <div className={` ${currentPage === 1 ? 'current_circle' : 'left_circle'}`}>
+                <div className={` ${currentPage === 0 && number === 1 ? 'current_circle' : 'left_circle'}`}>
                     <TextH0>
                         피부톤 <br />
                         정밀 분석
@@ -32,14 +32,14 @@ export function Color() {
 
 // styled-components
 const CircleContainerDiv = styled(ContainerDiv)`
-    background-color: ${({ theme }) => theme.color.white};
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    margin-bottom: 20px;
-    margin-top: 120px;
+    margin-top: 6vh;
+    margin-bottom: 6vh;
     color: white;
+    width: 100%;
 
     .wrapper {
         width: 100%;
@@ -49,8 +49,6 @@ const CircleContainerDiv = styled(ContainerDiv)`
         justify-content: space-evenly;
         align-items: center;
         margin-bottom: 7px;
-        padding-left: 30px;
-        padding-right: 30px;
     }
 
     .wrapper::before {
@@ -82,17 +80,8 @@ const CircleContainerDiv = styled(ContainerDiv)`
     }
 
     @media ${({ theme }) => theme.device.mobile} {
-        all: unset;
-
-        background-color: ${({ theme }) => theme.color.white};
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-        margin-bottom: 20px;
-        margin-top: 120px;
-        color: white;
-
+        margin-top: 4vh;
+        margin-bottom: 4vh;
         .wrapper {
             width: 100%;
             height: auto;
@@ -145,6 +134,4 @@ const TextH0 = styled(DescriptionP)`
     margin-top: 38px;
     font-weight: bold;
     font-size: ${({ theme }) => theme.fontSizes.mediumtext};
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;

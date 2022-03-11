@@ -3,7 +3,7 @@ import { useRecoilValue } from 'recoil';
 import { ContainerDiv, DescriptionP } from '../..';
 import { fashionPageState } from '../../../utils/data/atom';
 
-export function Fashion() {
+export function Fashion({ number }) {
     const currentPage = useRecoilValue(fashionPageState);
 
     return (
@@ -14,12 +14,12 @@ export function Fashion() {
                         퍼스널 컬러 <br /> 선택
                     </TextH0>
                 </div>
-                <div className={` ${currentPage === 1 ? 'current_circle' : 'left_circle'}`}>
+                <div className={` ${currentPage === 1 && number === 1 ? 'current_circle' : 'left_circle'}`}>
                     <TextH0>
                         패션 사진 <br /> 업로드
                     </TextH0>
                 </div>
-                <div className={` ${currentPage === 2 ? 'current_circle' : 'left_circle'}`}>
+                <div className={` ${currentPage === 1 && number === 2 ? 'current_circle' : 'left_circle'}`}>
                     <TextH0>
                         퍼스널컬러와
                         <br /> 비교 매칭
@@ -38,13 +38,12 @@ export function Fashion() {
 
 // styled-components
 const CircleContainerDiv = styled(ContainerDiv)`
-    background-color: ${({ theme }) => theme.color.white};
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    margin-bottom: 50px;
-    margin-top: 120px;
+    margin-top: 6vh;
+    margin-bottom: 6vh;
     color: white;
 
     .wrapper {
@@ -88,15 +87,12 @@ const CircleContainerDiv = styled(ContainerDiv)`
     }
 
     @media ${({ theme }) => theme.device.mobile} {
-        all: unset;
-
-        background-color: ${({ theme }) => theme.color.white};
         display: flex;
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
-        margin-bottom: 20px;
-        margin-top: 100px;
+        margin-top: 4vh;
+        margin-bottom: 4vh;
         color: white;
 
         .wrapper {
@@ -151,6 +147,4 @@ const TextH0 = styled(DescriptionP)`
     margin-top: 38px;
     font-weight: bold;
     font-size: ${({ theme }) => theme.fontSizes.mediumtext};
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;

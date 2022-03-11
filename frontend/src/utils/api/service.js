@@ -94,14 +94,15 @@ export async function postFashionPhoto(fashionData) {
         });
 
         const result = {
-            springRate: response.data.sprint_rate,
+            springRate: response.data.spring_rate,
             summerRate: response.data.summer_rate,
             autumnRate: response.data.autumn_rate,
             winterRate: response.data.winter_rate,
-            result: response.data.result,
+            match: response.data.result,
         };
 
-        return result;
+        sessionStorage.setItem('result', JSON.stringify(result));
+        return null;
     } catch (error) {
         console.log(error.response);
         return error.response;

@@ -10,11 +10,11 @@ export function MyPagePersonal() {
     // 상세보기 모달
     const [personalModal, setPersonalModal] = useState(false);
 
-    // 유저가 선택한 패션 사진의 정보
+    // 유저가 선택한 퍼스널컬러의 정보
     const [personalInfo, setPersonalInfo] = useState({
         id: 0,
         index: 0,
-        title: '',
+        season: '',
     });
 
     // API로 받아온 컬러 데이터 목록

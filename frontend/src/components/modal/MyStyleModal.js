@@ -4,6 +4,7 @@ import { season, SeasonTone, seasonPersonal } from '../../utils/data/season';
 import { getFashionDetailModal } from '../../utils/api/service';
 import { ContainerDiv, BlurBackgroundDiv, ModalCloseIcon, SubTitleP, ResultImage, PercentResult } from '..';
 import { MyModalTable } from './MyModalTable';
+import { getFashionText } from '../../utils/data/getFashionText';
 
 export function MyStyleModal({ toggleProps, className, selectData }) {
     // API 요청 결과
@@ -54,7 +55,13 @@ export function MyStyleModal({ toggleProps, className, selectData }) {
                     value={resultFashion.saturation_match_rate}
                 />
                 <SubTitleP>
-                    종합 <ResultTextS color={resultColor}>{average}%</ResultTextS>만큼 매칭됩니다.
+                    {getFashionText(
+                        resultFashion,
+                        resultFashion.spring_rate,
+                        resultFashion.summer_rate,
+                        resultFashion.autumn_rate,
+                        resultFashion.winter_rate,
+                    )}
                 </SubTitleP>
                 <ColorContainerDiv />
             </ModalDiv>

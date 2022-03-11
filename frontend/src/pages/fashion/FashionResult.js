@@ -54,6 +54,17 @@ function FashionResult() {
                 winter={percentList?.winterRate}
             />
             <SubTitleP>{getFashionText(percentList.match)}</SubTitleP>
+            <GridContainer>
+                <ShareButton
+                    id={percentList?.id}
+                    path="/fashion/"
+                    springRate={percentList?.springRate}
+                    summerRate={percentList?.summerRate}
+                    autumnRate={percentList?.autumnRate}
+                    winterRate={percentList?.winterRate}
+                    result={percentList?.result}
+                />
+            </GridContainer>
             <ColorContainerDiv>
                 <div className="wrapper">
                     <div>

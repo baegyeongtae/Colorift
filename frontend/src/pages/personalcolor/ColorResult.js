@@ -1,7 +1,6 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/style-prop-object */
 import styled from 'styled-components';
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import Stack from '@mui/material/Stack';
@@ -46,7 +45,14 @@ function ColorResult() {
             </SubTitleP>
 
             <GridContainer>
-                <ShareButton id={percentList[0]} />
+                <ShareButton
+                    id={percentList[0]}
+                    path="/color/"
+                    springRate={percentList[1]}
+                    summerRate={percentList[2]}
+                    autumnRate={percentList[3]}
+                    winterRate={percentList[4]}
+                />
             </GridContainer>
 
             <ColorContainerDiv>

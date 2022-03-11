@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import { useSetRecoilState } from 'recoil';
-import { season, SeasonTone } from '../../utils/data/season';
-import { fashionPageState } from '../../utils/data/atom';
+import { season, SeasonTone, seasonPersonal } from '../../utils/data/season';
 import { getFashionShare } from '../../utils/api/user';
+import { fashionPageState } from '../../utils/data/atom';
+import { getFashionText } from '../../utils/data/getFashionText';
+import { getMaxSeason } from '../../utils/data/getMaxSeason';
 import {
     ResultImage,
     NavBackgroundDiv,
-    Fashion,
     SubTitleP,
     DescriptionP,
     BlueButton,
@@ -20,16 +21,23 @@ import {
 } from '../../components';
 import { hue, saturation, value } from '../../image';
 
-function FashionShare({ pathnameId }) {
+function FashionShare() {
     const [result, setResult] = useState({});
-
+    const location = useLocation();
+    const { pathname } = location;
+    // id값 추출
+    const pathnameId = pathname.split('/')[3];
+    console.log(result);
     const navigate = useNavigate();
+
+    // SP, SU, AU, WI 중 하나 추출
+    const seasonKeyword = getMaxSeason(result.springRate, result.summerRate, result.autumnRate, result.winterRate);
+
+    // 리코일 페이지 state
     const setFashionPage = useSetRecoilState(fashionPageState);
-    const seasonTone = sessionStorage.getItem('fashionResult');
-    const percentList = JSON.parse(sessionStorage.getItem('fashionResult'));
-    console.log(seasonTone);
-    console.log(percentList);
-    const resultColor = SeasonTone(season[seasonTone]);
+
+    // 퍼스널컬러에 따른 대표 색상
+    const resultColor = SeasonTone(season[seasonKeyword]);
 
     useEffect(() => {
         pathnameId &&
@@ -39,31 +47,34 @@ function FashionShare({ pathnameId }) {
             })();
     }, [pathnameId]);
 
-    console.log(result);
-
     return (
         <>
             <NavBackgroundDiv />
-            <Fashion />
             <ContentContainerDiv>
-                <ResultImage />
+                <ResultImage image={result?.image} />
             </ContentContainerDiv>
 
             <SubTitleP>
-                이 옷은 <ResultTextS color={resultColor}>봄 웜톤</ResultTextS>인 회원님께
+                이 옷은 <ResultTextS color={resultColor}>{seasonPersonal[seasonKeyword]}</ResultTextS>인 회원님께
             </SubTitleP>
             <PercentResult
                 resultColor={resultColor}
-                spring={percentList[0]}
-                summer={percentList[1]}
-                autumn={percentList[2]}
-                winter={percentList[3]}
+                spring={result?.springRate}
+                summer={result?.summerRate}
+                autumn={result?.autumnRate}
+                winter={result?.winterRate}
             />
-            <SubTitleP>
-                종합 <ResultTextS color={resultColor}>{percentList[3]}%</ResultTextS>만큼 매칭됩니다.
-            </SubTitleP>
+            <SubTitleP>{getFashionText(result.match)}</SubTitleP>
             <GridContainer>
-                <ShareButton />
+                <ShareButton
+                    id={result?.id}
+                    path="/fashion/"
+                    springRate={result?.springRate}
+                    summerRate={result?.summerRate}
+                    autumnRate={result?.autumnRate}
+                    winterRate={result?.winterRate}
+                    result={result?.result}
+                />
             </GridContainer>
             <ColorContainerDiv>
                 <div className="wrapper">
@@ -92,12 +103,12 @@ function FashionShare({ pathnameId }) {
             </ColorContainerDiv>
 
             <ContentContainerDiv>
-                <MatchingResult average={percentList[3]} />
+                <MatchingResult match={result.match} />
             </ContentContainerDiv>
             <ButtonContainerDiv>
                 <Stack spacing={2} direction="row">
                     <CustomButton type="submit" onClick={() => setFashionPage(0)}>
-                        다른 옷 매칭하기
+                        나도 패션매칭하기
                     </CustomButton>
                     <CustomButton type="submit" onClick={() => navigate('/personalcolor')}>
                         퍼스널 컬러 찾기

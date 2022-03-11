@@ -41,6 +41,11 @@ function ColorShare() {
             <ResultContainerDiv>
                 <ResultImage image={result.image} />
             </ResultContainerDiv>
+            <SubTitleP>
+                회원님은
+                <ResultTextS color={SeasonTone(season[seasonKeyword])}>{seasonPersonal[seasonKeyword]}</ResultTextS>
+                입니다.
+            </SubTitleP>
             <PercentResult
                 resultColor={SeasonTone(season[seasonKeyword])}
                 spring={result.springRate}
@@ -48,11 +53,6 @@ function ColorShare() {
                 autumn={result.autumnRate}
                 winter={result.winterRate}
             />
-            <SubTitleP>
-                회원님은{' '}
-                <ResultTextS color={SeasonTone(season[seasonKeyword])}>{seasonPersonal[seasonKeyword]}</ResultTextS>{' '}
-                입니다.
-            </SubTitleP>
 
             <ColorContainerDiv>
                 <MediumTextLeftH>회원님에게 어울리는 컬러</MediumTextLeftH>

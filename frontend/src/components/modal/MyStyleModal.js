@@ -9,17 +9,10 @@ import { getFashionText } from '../../utils/data/getFashionText';
 export function MyStyleModal({ toggleProps, className, selectData }) {
     // API 요청 결과
     const [resultFashion, setResultFashion] = useState({});
-    console.log('resultFashion.result', resultFashion.result);
 
     // 퍼스널컬러 결과에 따른 폰트 색상
+    // ex. "#E6324B"
     const resultColor = SeasonTone(season[resultFashion?.color]);
-
-    // 3가지 결과에 따른 평균 점수
-    const average =
-        (Number(resultFashion?.color_match_rate) +
-            Number(resultFashion?.saturation_match_rate) +
-            Number(resultFashion?.brightness_match_rate)) /
-        3;
 
     // 모달 ON/OFF 함수
     const handleToggleClick = () => {

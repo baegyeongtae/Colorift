@@ -18,10 +18,12 @@ export function MyPersonalColorModal({ toggleProps, className, selectData }) {
     // API 요청 결과
     const [resultColor, setResultColor] = useState({});
 
-    // 어울리는 컬러 목록을 위한 퍼스널컬러 추출
+    // 어울리는 컬러 목록을 위한 계절 추출
+    // ex. "spring"
     const colorList = season[selectData?.season];
 
     // 퍼스널컬러 키워드에 따른 색상 추출
+    // ex. "#E6324B"
     const seasonColor = SeasonTone(colorList);
 
     // 모달 ON/OFF 함수

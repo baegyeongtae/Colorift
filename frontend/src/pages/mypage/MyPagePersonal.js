@@ -1,37 +1,49 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo, useCallback } from 'react';
 import { getColorList, setDeletePersonal } from '../../utils/api/service';
 import { GrayButton, MyPersonalColorModal } from '../../components';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 import { seasonPersonal } from '../../utils/data/season';
+import { getMaxSeason } from '../../utils/data/getMaxSeason';
 
 export function MyPagePersonal() {
     // 상세보기 모달
     const [personalModal, setPersonalModal] = useState(false);
 
-    // 유저가 선택한 패션 사진의 정보
-    const [personalInfo, setPersonalInfo] = useState({
-        id: 0,
-        index: 0,
-    });
+    // 유저가 선택한 퍼스널컬러의 정보
+    const [personalInfo, setPersonalInfo] = useState(undefined);
 
     // API로 받아온 컬러 데이터 목록
     const [colorList, setColorList] = useState([]);
 
+    // colorList를 토대로 최대값 계절 키워드로 가져오기
+    // ex. ['SP', 'AU', ...]
+    const maxSeason = useMemo(() => {
+        const season = colorList?.map(item => {
+            const result = getMaxSeason(item.spring_rate, item.summer_rate, item.autumn_rate, item.winter_rate);
+            return result;
+        });
+
+        return season;
+    }, [colorList]);
+
     // 상세보기 또는 삭제하기 클릭 시 모달 토클 함수
-    const handleToggleClick = () => {
+    const handleToggleClick = useCallback(() => {
         if (personalModal) setPersonalModal(current => !current);
-    };
+    }, [personalModal]);
 
     // 상세보기 버튼 클릭했을 때
-    const handleToggleDetailClick = (id, index) => {
-        setPersonalInfo(current => ({
-            ...current,
-            id,
-            index,
-        }));
-        setPersonalModal(current => !current);
-    };
+    const handleToggleDetailClick = useCallback(
+        (id, index, season) => {
+            setPersonalInfo({
+                id,
+                index,
+                season,
+            });
+            setPersonalModal(current => !current);
+        },
+        [personalInfo, personalModal],
+    );
 
     // 삭제하기 버튼 클릭 시 함수
     async function handleDeleteClick(id, index) {
@@ -59,6 +71,9 @@ export function MyPagePersonal() {
     // 모달 뜬 상태에서는 스크롤 막기
     useEffect(() => setScrollDisabled(personalModal), [personalModal]);
 
+    // 모달이 닫힐 때 personalInfo도 초기화
+    useEffect(() => !personalModal && setPersonalInfo(undefined), [personalModal]);
+
     return (
         <>
             {personalModal && (
@@ -76,11 +91,13 @@ export function MyPagePersonal() {
                                 <tr key={item.id}>
                                     <td className="id">{index + 1}</td>
                                     <td className="date">{item.date}</td>
-                                    <td className="color">{seasonPersonal[item.color]}</td>
+                                    <td className="color">{maxSeason && seasonPersonal[maxSeason[index]]}</td>
                                     <td className="button">
                                         <GrayButton
                                             width="90%"
-                                            onClick={() => handleToggleDetailClick(item.id, index + 1)}
+                                            onClick={() =>
+                                                handleToggleDetailClick(item.id, index + 1, maxSeason[index])
+                                            }
                                         >
                                             상세보기
                                         </GrayButton>

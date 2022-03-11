@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import { BigTextP, ContainerDiv } from '../../index';
 import { happy, soso, bad } from '../../../image';
 
-export function MatchingResult({ average }) {
+export function MatchingResult({ match }) {
     const resultData = {
         Good: ['Happy Fashion', happy],
         SoSo: ['So So', soso],
         Bad: ['Bad', bad],
     };
 
-    const state = average < 34 ? 'Bad' : average < 67 ? 'SoSo' : 'Good';
+    const state = match === 'B' ? 'Bad' : match === 'G' ? 'Good' : 'SoSo';
 
     return (
         <>

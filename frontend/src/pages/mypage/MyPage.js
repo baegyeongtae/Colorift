@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { BackgroundArticle, ContainerDiv, NavBackgroundDiv } from '../../components';
 import { MyPageInfo, MyPagePersonal, MyPageFashion } from '.';
-import { useNotFound } from '../../utils/hooks/useNotFound';
 
 export function MyPage() {
     return (

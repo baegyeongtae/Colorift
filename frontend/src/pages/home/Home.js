@@ -37,7 +37,7 @@ export function Home() {
         });
 
         return () => observer.disconnect(); // 관찰 종료
-    }, []);
+    });
 
     // 이 페이지에 오면 스크롤바 맨 위로 올리기
     useScrollToTop();

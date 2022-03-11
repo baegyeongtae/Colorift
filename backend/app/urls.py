@@ -7,10 +7,12 @@ from rest_framework_simplejwt.views import (
 
 urlpatterns = [
     path('color/test/', views.ColorTest.as_view()),
-    path('color/detail/<int:pk>/', views.ColorTestDetail.as_view()),
+    path('color/detail/<str:pk>/', views.ColorTestDetail.as_view()),
+    path('color/share/<str:pk>/', views.ColorShare.as_view()),
     path('color/list/', views.ColorTestList.as_view()),
     path('fashion/test/', views.FashionTest.as_view()),
-    path('fashion/detail/<int:pk>/', views.FashionTestDetail.as_view()),
+    path('fashion/detail/<str:pk>/', views.FashionTestDetail.as_view()),
+    path('fashion/share/<str:pk>/', views.FashionShare.as_view()),
     path('fashion/list/', views.FashionTestList.as_view()),
 
     path('token/', views.MyTokenObtainPairView.as_view(), name='token_obtain_pair'),

@@ -44,26 +44,30 @@ export function MyPersonalColorModal({ toggleProps, className, selectData }) {
         <>
             <BlurBackgroundDiv className={className} onClick={handleToggleClick} />
             <ModalDiv className={className}>
-                <MyModalTable id={selectData.index} date={resultColor.date} title={selectData.season} />
                 <ModalCloseIcon toggleProps={handleToggleClick} />
-                <ResultContainerDiv>
-                    <ResultImage image={resultColor.image} />
-                </ResultContainerDiv>
+                <Div>
+                    <MyModalTable id={selectData?.index} date={resultColor?.date} title={selectData?.season} />
 
-                <SubTitleP>
-                    회원님은 <ResultTextS color={seasonColor}>{seasonPersonal[selectData.season]}</ResultTextS> 입니다.
-                </SubTitleP>
-                <PercentResult
-                    resultColor={seasonColor}
-                    spring={resultColor.spring_rate}
-                    summer={resultColor.summer_rate}
-                    autumn={resultColor.autumn_rate}
-                    winter={resultColor.winter_rate}
-                />
-                <ColorContainerDiv>
-                    <MediumTextLeftH>회원님에게 어울리는 컬러</MediumTextLeftH>
-                    <SeasonColor season={colorList} />
-                </ColorContainerDiv>
+                    <ResultContainerDiv>
+                        <ResultImage image={resultColor.image} />
+                    </ResultContainerDiv>
+
+                    <SubTitleP>
+                        회원님은 <ResultTextS color={seasonColor}>{seasonPersonal[selectData.season]}</ResultTextS>{' '}
+                        입니다.
+                    </SubTitleP>
+                    <PercentResult
+                        resultColor={seasonColor}
+                        spring={resultColor.spring_rate || 0}
+                        summer={resultColor.summer_rate || 0}
+                        autumn={resultColor.autumn_rate || 0}
+                        winter={resultColor.winter_rate || 0}
+                    />
+                    <ColorContainerDiv>
+                        <MediumTextLeftH>회원님에게 어울리는 컬러</MediumTextLeftH>
+                        <SeasonColor season={colorList} />
+                    </ColorContainerDiv>
+                </Div>
             </ModalDiv>
         </>
     );
@@ -117,16 +121,15 @@ const ModalDiv = styled(ContainerDiv)`
     display: none;
 
     &.show {
-        overflow-y: auto;
         position: fixed;
         z-index: 9999;
         top: 50%;
         left: 50%;
         height: 80%;
         transform: translate(-50%, -50%);
+        padding: 50px 30px;
 
         width: 100%;
-        padding: 50px 30px;
 
         ${({ theme }) => theme.flexStyled.flexColumn};
 
@@ -135,26 +138,33 @@ const ModalDiv = styled(ContainerDiv)`
         border: 1px solid #f3f3f3;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background-color: transparent;
-            border-radius: 100px;
-
-            margin: 20px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            border-radius: 100px;
-            background-color: #e9e9e9;
-            box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
-        }
-
         @media ${({ theme }) => theme.device.tablet} {
             width: 80%;
         }
+    }
+`;
+
+const Div = styled.div`
+    overflow-y: auto;
+
+    width: 100%;
+    height: 100%;
+
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background-color: transparent;
+        border-radius: 100px;
+
+        margin: 20px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: 100px;
+        background-color: #e9e9e9;
+        box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
     }
 `;
 

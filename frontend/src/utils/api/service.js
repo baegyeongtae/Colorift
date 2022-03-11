@@ -93,13 +93,16 @@ export async function postFashionPhoto(fashionData) {
             },
         });
 
-        const hue = response.data.color_match_rate;
-        const value = response.data.brightness_match_rate;
-        const saturation = response.data.saturation_match_rate;
+        const result = {
+            springRate: response.data.spring_rate,
+            summerRate: response.data.summer_rate,
+            autumnRate: response.data.autumn_rate,
+            winterRate: response.data.winter_rate,
+            match: response.data.result,
+        };
 
-        const average = (hue + saturation + value) / 3;
-
-        return [hue, value, saturation, average];
+        sessionStorage.setItem('result', JSON.stringify(result));
+        return null;
     } catch (error) {
         console.log(error.response);
         return error.response;

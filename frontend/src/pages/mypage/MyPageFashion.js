@@ -9,10 +9,7 @@ export function MyPageFashion() {
     const [fashionModal, setFashionModal] = useState(false);
 
     // 유저가 선택한 패션 사진의 정보
-    const [fasionInfo, setFashionInfo] = useState({
-        id: 0,
-        index: 0,
-    });
+    const [fasionInfo, setFashionInfo] = useState(undefined);
 
     // API로 받아온 패션 데이터 목록
     const [fashionList, setFashionList] = useState([]);
@@ -31,7 +28,6 @@ export function MyPageFashion() {
     // 사진 이미지 클릭 했을 때
     const handleToggleDetailClick = (id, index) => {
         setFashionInfo(current => ({
-            ...current,
             id,
             index,
         }));
@@ -68,6 +64,9 @@ export function MyPageFashion() {
 
     // 모달 뜬 상태에서는 스크롤 막기
     useEffect(() => setScrollDisabled(fashionModal), [fashionModal]);
+
+    // 모달이 닫힐 때 personalInfo도 초기화
+    useEffect(() => !fashionModal && setFashionInfo(undefined), [fashionModal]);
 
     return (
         <>

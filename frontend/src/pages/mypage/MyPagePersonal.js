@@ -11,11 +11,7 @@ export function MyPagePersonal() {
     const [personalModal, setPersonalModal] = useState(false);
 
     // 유저가 선택한 퍼스널컬러의 정보
-    const [personalInfo, setPersonalInfo] = useState({
-        id: 0,
-        index: 0,
-        season: '',
-    });
+    const [personalInfo, setPersonalInfo] = useState(undefined);
 
     // API로 받아온 컬러 데이터 목록
     const [colorList, setColorList] = useState([]);
@@ -39,12 +35,11 @@ export function MyPagePersonal() {
     // 상세보기 버튼 클릭했을 때
     const handleToggleDetailClick = useCallback(
         (id, index, season) => {
-            setPersonalInfo(current => ({
-                ...current,
+            setPersonalInfo({
                 id,
                 index,
                 season,
-            }));
+            });
             setPersonalModal(current => !current);
         },
         [personalInfo, personalModal],
@@ -75,6 +70,9 @@ export function MyPagePersonal() {
 
     // 모달 뜬 상태에서는 스크롤 막기
     useEffect(() => setScrollDisabled(personalModal), [personalModal]);
+
+    // 모달이 닫힐 때 personalInfo도 초기화
+    useEffect(() => !personalModal && setPersonalInfo(undefined), [personalModal]);
 
     return (
         <>

@@ -25,8 +25,8 @@ export function KakaoShareButton({ id, path }) {
                     description: '퍼스널 컬러 분석과 패션 매칭으로 완벽한 하루를 보내세요!',
                     imageUrl: `${logoIcon}`, // i.e. process.env.FETCH_URL + '/logo.png'
                     link: {
-                        mobileWebUrl: `http://localhost:3000/share${path}${id}`,
-                        webUrl: `http://localhost:3000/share${path}${id}`,
+                        mobileWebUrl: `http://elice-kdt-ai-3rd-team13.koreacentral.cloudapp.azure.com/share${path}${id}`,
+                        webUrl: `http://elice-kdt-ai-3rd-team13.koreacentral.cloudapp.azure.com/share${path}${id}`,
                     },
                 },
                 social: {
@@ -38,17 +38,16 @@ export function KakaoShareButton({ id, path }) {
                     {
                         title: '자세히 보기',
                         link: {
-                            mobileWebUrl: `http://localhost:3000/share${path}${id}`,
-                            webUrl: `http://localhost:3000/share${path}${id}`,
+                            mobileWebUrl: `http://elice-kdt-ai-3rd-team13.koreacentral.cloudapp.azure.com/share${path}${id}`,
+                            webUrl: `http://elice-kdt-ai-3rd-team13.koreacentral.cloudapp.azure.com/share${path}${id}`,
                         },
                     },
                 ],
                 itemContent: {
-                    titleImageText: `${
-                        path === '/color/'
-                            ? '회원님의 퍼스널컬러 결과를 확인해보세요.'
-                            : '회원님의 패션매칭 결과를 확인해보세요.'
-                    }`,
+                    titleImageText: `${path === '/color/'
+                        ? '회원님의 퍼스널컬러 결과를 확인해보세요.'
+                        : '회원님의 패션매칭 결과를 확인해보세요.'
+                        }`,
                 },
             });
         }

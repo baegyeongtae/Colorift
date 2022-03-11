@@ -65,8 +65,7 @@ class ColorDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Color
-        fields = ['id', 'user', 'image', 'date', 'spring_rate',
-                  'summer_rate', 'autumn_rate', 'winter_rate']
+        fields = ['id', 'user', 'image', 'date', 'spring_rate', 'summer_rate', 'autumn_rate', 'winter_rate']
 
 
 class ColorShareSerializer(serializers.ModelSerializer):
@@ -74,8 +73,7 @@ class ColorShareSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Color
-        fields = ['image', 'spring_rate',
-                  'summer_rate', 'autumn_rate', 'winter_rate']
+        fields = ['image', 'spring_rate', 'summer_rate', 'autumn_rate', 'winter_rate']
 
 
 class ColorListSerializer(serializers.ModelSerializer):
@@ -83,8 +81,7 @@ class ColorListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Color
-        fields = ['id', 'date', 'spring_rate',
-                  'summer_rate', 'autumn_rate', 'winter_rate']
+        fields = ['id', 'date', 'spring_rate', 'summer_rate', 'autumn_rate', 'winter_rate']
 
 
 """
@@ -115,8 +112,7 @@ class FashionDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Fashion
-        fields = ['id', 'user', 'color', 'image', 'date', 'spring_rate',
-                  'summer_rate', 'autumn_rate', 'winter_rate', 'result']
+        fields = ['id', 'user', 'color', 'image', 'date', 'spring_rate', 'summer_rate', 'autumn_rate', 'winter_rate', 'result']
 
 
 class FashionShareSerializer(serializers.ModelSerializer):
@@ -124,8 +120,7 @@ class FashionShareSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Fashion
-        fields = ['color', 'image', 'spring_rate', 'summer_rate',
-                  'autumn_rate', 'winter_rate', 'result']
+        fields = ['color', 'image', 'spring_rate', 'summer_rate', 'autumn_rate', 'winter_rate', 'result']
 
 
 class FashionListSerializer(serializers.ModelSerializer):

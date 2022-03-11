@@ -111,6 +111,7 @@ export async function postFashionPhoto(fashionData) {
         });
 
         const result = {
+            id: response.data.id,
             springRate: response.data.spring_rate,
             summerRate: response.data.summer_rate,
             autumnRate: response.data.autumn_rate,

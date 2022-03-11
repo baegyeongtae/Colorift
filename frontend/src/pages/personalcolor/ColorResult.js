@@ -51,14 +51,7 @@ function ColorResult() {
                 winter={percentList?.winterRate}
             />
             <GridContainer>
-                <ShareButton
-                    id={percentList?.id}
-                    path="/color/"
-                    springRate={percentList?.springRate}
-                    summerRate={percentList?.summerRate}
-                    autumnRate={percentList?.autumnRate}
-                    winterRate={percentList?.winterRate}
-                />
+                <ShareButton id={percentList?.id} path="/color/" />
             </GridContainer>
 
             <ColorContainerDiv>

@@ -15,11 +15,11 @@ export const seasonPersonal = {
 export function SeasonTone(_season) {
     const colorData = {
         spring: '#E6324B',
-        summer: '#01456A',
-        autumn: '#CA5C3D',
-        winter: '#F3E902',
+        summer: '#1F8CAB',
+        autumn: '#D5B009',
+        winter: '#C50778',
     };
-    
+
     const resultColor =
         (_season === 'spring' && colorData.spring) ||
         (_season === 'summer' && colorData.summer) ||

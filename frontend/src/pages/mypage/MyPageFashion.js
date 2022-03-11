@@ -161,7 +161,7 @@ const PlusButton = styled.button`
     width: 150px;
     height: 50px;
 
-    margin-top: 30px;
+    margin: 30px 0;
 
     color: white;
     text-align: center;

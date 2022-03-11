@@ -1,7 +1,16 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { season, SeasonTone, seasonPersonal } from '../../utils/data/season';
-import { ContainerDiv, ModalCloseIcon, ResultImage, SubTitleP, MediumTextH, SeasonColor, BlurBackgroundDiv } from '..';
+import {
+    ContainerDiv,
+    ModalCloseIcon,
+    ResultImage,
+    SubTitleP,
+    MediumTextH,
+    SeasonColor,
+    BlurBackgroundDiv,
+    PercentResult,
+} from '..';
 import { MyModalTable } from './MyModalTable';
 import { getColorDetailModal } from '../../utils/api/service';
 
@@ -9,11 +18,13 @@ export function MyPersonalColorModal({ toggleProps, className, selectData }) {
     // API 요청 결과
     const [resultColor, setResultColor] = useState({});
 
-    // 어울리는 컬러 목록을 위한 퍼스널컬러 추출
-    const colorList = season[resultColor?.color];
+    // 어울리는 컬러 목록을 위한 계절 추출
+    // ex. "spring"
+    const colorList = season[selectData?.season];
 
     // 퍼스널컬러 키워드에 따른 색상 추출
-    const seasonColor = SeasonTone(season[resultColor?.color]);
+    // ex. "#E6324B"
+    const seasonColor = SeasonTone(colorList);
 
     // 모달 ON/OFF 함수
     const handleToggleClick = () => {
@@ -27,22 +38,28 @@ export function MyPersonalColorModal({ toggleProps, className, selectData }) {
                 const response = await getColorDetailModal(selectData.id);
                 setResultColor(response);
             })();
-    }, [selectData.id]);
+    }, [selectData]);
 
     return (
         <>
             <BlurBackgroundDiv className={className} onClick={handleToggleClick} />
             <ModalDiv className={className}>
-                <MyModalTable id={selectData.index} date={resultColor.date} title={resultColor.color} />
+                <MyModalTable id={selectData.index} date={resultColor.date} title={selectData.season} />
                 <ModalCloseIcon toggleProps={handleToggleClick} />
                 <ResultContainerDiv>
                     <ResultImage image={resultColor.image} />
                 </ResultContainerDiv>
 
                 <SubTitleP>
-                    회원님은 <ResultTextS color={seasonColor}>{seasonPersonal[resultColor.color]}</ResultTextS> 입니다.
+                    회원님은 <ResultTextS color={seasonColor}>{seasonPersonal[selectData.season]}</ResultTextS> 입니다.
                 </SubTitleP>
-
+                <PercentResult
+                    resultColor={seasonColor}
+                    spring={resultColor.spring_rate}
+                    summer={resultColor.summer_rate}
+                    autumn={resultColor.autumn_rate}
+                    winter={resultColor.winter_rate}
+                />
                 <ColorContainerDiv>
                     <MediumTextLeftH>회원님에게 어울리는 컬러</MediumTextLeftH>
                     <SeasonColor season={colorList} />

@@ -58,27 +58,35 @@ function FashionResult() {
             </GridContainer>
             <ColorContainerDiv>
                 <div className="wrapper">
-                    <div>
-                        <DescriptionLeftTitleP>색상(Color, Hue)이란</DescriptionLeftTitleP>
-                        <DescriptionLeftSubTitleP>일반적으로 부르는 빛깔 이름을 뜻합니다.</DescriptionLeftSubTitleP>
-                        <ImgContainerDiv>
-                            <img src={hue} alt="Hue" />
-                        </ImgContainerDiv>
+                    <div className="wrapping">
+                        <div>
+                            <DescriptionLeftTitleP>색상(Color, Hue)이란</DescriptionLeftTitleP>
+                            <DescriptionLeftSubTitleP>일반적으로 부르는 빛깔 이름을 뜻합니다.</DescriptionLeftSubTitleP>
+                            <ImgContainerDiv>
+                                <img src={hue} alt="Hue" />
+                            </ImgContainerDiv>
+                        </div>
+                        <div>
+                            <DescriptionLeftTitleP>명도(Brightness, Value)란</DescriptionLeftTitleP>
+                            <DescriptionLeftSubTitleP>밝기로 색상을 표현하는 것을 말합니다.</DescriptionLeftSubTitleP>
+                            <ImgContainerDiv>
+                                <img src={saturation} alt="Brightness" />
+                            </ImgContainerDiv>
+                        </div>
+                        <div>
+                            <DescriptionLeftTitleP>채도(Saturation)란</DescriptionLeftTitleP>
+                            <DescriptionLeftSubTitleP>색의 선명함 정도를 말합니다.</DescriptionLeftSubTitleP>
+                            <ImgContainerDiv>
+                                <img src={value} alt="Saturation" />
+                            </ImgContainerDiv>
+                        </div>
                     </div>
-                    <div>
-                        <DescriptionLeftTitleP>명도(Brightness, Value)란</DescriptionLeftTitleP>
-                        <DescriptionLeftSubTitleP>밝기로 색상을 표현하는 것을 말합니다.</DescriptionLeftSubTitleP>
-                        <ImgContainerDiv>
-                            <img src={saturation} alt="Brightness" />
-                        </ImgContainerDiv>
-                    </div>
-                    <div>
-                        <DescriptionLeftTitleP>채도(Saturation)란</DescriptionLeftTitleP>
-                        <DescriptionLeftSubTitleP>색의 선명함 정도를 말합니다.</DescriptionLeftSubTitleP>
-                        <ImgContainerDiv>
-                            <img src={value} alt="Saturation" />
-                        </ImgContainerDiv>
-                    </div>
+                    <ContainerDiv>
+                        <DescriptionTextP>
+                            컬러핏 패션 매칭 알고리즘은 옷의 색상 / 명도 / 채도를 추출하여 퍼스널 컬러 및 회원님
+                            피부톤과의 조화도를 보여드립니다
+                        </DescriptionTextP>
+                    </ContainerDiv>
                 </div>
             </ColorContainerDiv>
 
@@ -110,24 +118,30 @@ const ContentContainerDiv = styled.div`
     align-items: center;
     margin-bottom: 8px;
     margin-top: 8px;
-
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;
 
 const ColorContainerDiv = styled(ContainerDiv)`
     .wrapper {
         width: 1100px;
-        height: 250px;
+        height: 350px;
         border-radius: 20px;
         background-color: #efefef;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
         margin-top: 50px;
+        .wrapping {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            @media ${({ theme }) => theme.device.mobile} {
+                all: unset;
 
+                display: grid;
+                grid-template-rows: repeat(3, 1fr);
+                align-items: center;
+                justify-content: center;
+            }
+        }
         @media ${({ theme }) => theme.device.mobile} {
             all: unset;
-
+            margin-top: 30px;
             border-radius: 20px;
             width: 300px;
             height: 600px;
@@ -145,9 +159,6 @@ const ColorContainerDiv = styled(ContainerDiv)`
     align-items: center;
     margin-bottom: 8px;
     margin-top: 8px;
-
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;
 
 const ImgContainerDiv = styled(ContainerDiv)`
@@ -166,22 +177,15 @@ const ImgContainerDiv = styled(ContainerDiv)`
     align-items: center;
     margin-bottom: 8px;
     margin-top: 20px;
-
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;
 
 const ButtonContainerDiv = styled.div`
-    background-color: ${({ theme }) => theme.color.white};
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     margin-bottom: 50px;
     margin-top: 20px;
-
-    color: ${({ theme }) => theme.color.white};
-    background-color: ${props => props.theme.color.white};
 `;
 
 // 버튼을 배치시키는 컨테이너
@@ -223,6 +227,20 @@ const DescriptionLeftSubTitleP = styled.p`
     text-align: left;
 `;
 
+const DescriptionTextP = styled.p`
+    margin-top: 70px;
+    font-weight: bold;
+    text-align: center;
+    align-items: center;
+
+    @media ${({ theme }) => theme.device.mobile} {
+        font-size: ${({ theme }) => theme.fontSizes.smalltext};
+        margin-top: 20px;
+        width: 200px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+`;
 const ResultTextS = styled.span`
     font-weight: bold;
     color: ${props => `${props.color}`};

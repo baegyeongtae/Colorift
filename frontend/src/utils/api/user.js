@@ -8,7 +8,7 @@ export const expire = (1 / 24 / 60) * 5; // 5분
 // axios 기본 인스턴스 생성
 export const axiosUserConfig = axios.create({
     method: 'post',
-    // baseURL: `${process.env.REACT_APP_SERVER_ADDRESS}`, // 기본 서버 주소 입력 => 아직 미정
+    baseURL: `${process.env.REACT_APP_SERVER_ADDRESS}`, // 기본 서버 주소 입력 => 아직 미정
     headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -182,6 +182,7 @@ export async function getFashionShare(id) {
             autumnRate: response.data.autumn_rate,
             winterRate: response.data.winter_rate,
             image: response.data.image,
+            match: response.data.result,
         };
         console.log(resultRate);
         return resultRate;

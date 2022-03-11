@@ -26,49 +26,58 @@ function ColorShare() {
     console.log(result);
     const navigate = useNavigate();
     const seasonKeyword = getMaxSeason(result.springRate, result.summerRate, result.autumnRate, result.winterRate);
+    const [errorStatus, setErrorStatus] = useState(false);
 
     useEffect(() => {
         pathnameId &&
             (async () => {
                 const response = await getColorShare(pathnameId);
+                if (response.status === 404) setErrorStatus(true);
                 setResult(response);
             })();
     }, [pathnameId]);
-
     return (
         <>
             <NavBackgroundDiv />
-            <ResultContainerDiv>
-                <ResultImage image={result.image} />
-            </ResultContainerDiv>
-            <SubTitleP>
-                회원님은
-                <ResultTextS color={SeasonTone(season[seasonKeyword])}>{seasonPersonal[seasonKeyword]}</ResultTextS>
-                입니다.
-            </SubTitleP>
-            <PercentResult
-                resultColor={SeasonTone(season[seasonKeyword])}
-                spring={result.springRate}
-                summer={result.summerRate}
-                autumn={result.autumnRate}
-                winter={result.winterRate}
-            />
-
-            <ColorContainerDiv>
-                <MediumTextLeftH>회원님에게 어울리는 컬러</MediumTextLeftH>
-                <SeasonColor season={season[seasonKeyword]} />
-            </ColorContainerDiv>
-
-            <ButtonContainerDiv>
-                <Stack spacing={2} direction="row">
-                    <BlueButton type="submit" onClick={() => navigate('/personalcolor')}>
-                        나도 분석하기
-                    </BlueButton>
-                    <BlueButton type="submit" onClick={() => navigate('/')}>
-                        홈으로
-                    </BlueButton>
-                </Stack>
-            </ButtonContainerDiv>
+            {errorStatus ? (
+                <ContainerDiv>
+                    <DescriptionTextP>삭제된 목록입니다.</DescriptionTextP>
+                </ContainerDiv>
+            ) : (
+                <>
+                    <ResultContainerDiv>
+                        <ResultImage image={result.image} />
+                    </ResultContainerDiv>
+                    <SubTitleP>
+                        회원님은
+                        <ResultTextS color={SeasonTone(season[seasonKeyword])}>
+                            {seasonPersonal[seasonKeyword]}
+                        </ResultTextS>
+                        입니다.
+                    </SubTitleP>
+                    <PercentResult
+                        resultColor={SeasonTone(season[seasonKeyword])}
+                        spring={result.springRate}
+                        summer={result.summerRate}
+                        autumn={result.autumnRate}
+                        winter={result.winterRate}
+                    />
+                    <ColorContainerDiv>
+                        <MediumTextLeftH>회원님에게 어울리는 컬러</MediumTextLeftH>
+                        <SeasonColor season={season[seasonKeyword]} />
+                    </ColorContainerDiv>
+                    <ButtonContainerDiv>
+                        <Stack spacing={2} direction="row">
+                            <BlueButton type="submit" onClick={() => navigate('/personalcolor')}>
+                                나도 분석하기
+                            </BlueButton>
+                            <BlueButton type="submit" onClick={() => navigate('/')}>
+                                홈으로
+                            </BlueButton>
+                        </Stack>
+                    </ButtonContainerDiv>
+                </>
+            )}
         </>
     );
 }
@@ -138,13 +147,19 @@ const ButtonContainerDiv = styled.div`
         margin-top: 40px;
     }
 `;
-
-// 버튼을 배치시키는 컨테이너
-const GridContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+const DescriptionTextP = styled.p`
+    margin-top: 70px;
+    font-weight: bold;
+    text-align: center;
     align-items: center;
+
+    @media ${({ theme }) => theme.device.mobile} {
+        font-size: ${({ theme }) => theme.fontSizes.smalltext};
+        margin-top: 20px;
+        width: 200px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
 `;
 
 const MediumTextLeftH = styled(MediumTextH)`

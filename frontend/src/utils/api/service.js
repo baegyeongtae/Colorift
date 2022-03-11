@@ -73,21 +73,25 @@ export async function postFacePhoto(imgData) {
             },
         });
 
+        const season = getMaxSeason(
+            response.data.spring_rate,
+            response.data.summer_rate,
+            response.data.autumn_rate,
+            response.data.winter_rate,
+        );
+
         const result = {
             id: response.data.id,
             springRate: response.data.spring_rate,
             summerRate: response.data.summer_rate,
             autumnRate: response.data.autumn_rate,
             winterRate: response.data.winter_rate,
-            keyword: getMaxSeason(
-                response.data.spring_rate,
-                response.data.summer_rate,
-                response.data.autumn_rate,
-                response.data.winter_rate,
-            ),
+            keyword: season,
         };
 
         sessionStorage.setItem('result', JSON.stringify(result));
+        sessionStorage.setItem('season', season);
+
         return null;
     } catch (error) {
         return error.response;

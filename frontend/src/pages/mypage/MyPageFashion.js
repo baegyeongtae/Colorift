@@ -61,7 +61,7 @@ export function MyPageFashion() {
                 const response = await getFashionList();
                 setFashionList(response.data);
             })();
-        }, [100]);
+        }, [200]);
 
         return () => {
             clearTimeout(timer);

@@ -20,7 +20,6 @@ def main(color, img_tensor):
 
     # backend랑 input 맞춰야함.
     # img_tensor = utils.Read_Img_2_Tensor(img)
-    t1 = time.time()
     cropped_image = clothes_detector.Detect_Clothes_and_Crop(img_tensor, model)
 
     """Color extraction"""
@@ -35,8 +34,8 @@ def main(color, img_tensor):
     test = np.append(test_hsv[1:], test_lab)
 
     """Tone prediction"""
-    classifier = joblib.load('model/colorfit.pkl')
-    scaler = joblib.load('model/scaler.pkl')
+    classifier = joblib.load('./built_model/colorfit.pkl')
+    scaler = joblib.load('./built_model/scaler.pkl')
 
     test = scaler.transform([test])
     answer = classifier.predict(test)[0]
@@ -81,4 +80,4 @@ if __name__ == "__main__":
     img_path = './images/1811945_6_500.jpg'
     img_tensor = utils.Read_Img_2_Tensor(img_path)
 
-    main(img_tensor)
+    main(0, img_tensor)

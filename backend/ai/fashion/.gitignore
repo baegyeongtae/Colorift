@@ -3,4 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-visual/
+*.jpg
+*.jpeg
+*.png
+*.gif

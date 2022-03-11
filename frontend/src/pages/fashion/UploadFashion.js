@@ -68,12 +68,10 @@ function UploadFashion() {
             setIsLoading(true);
             const checkedUser = sessionStorage.getItem('userId');
             if (checkedUser) {
-                const matchingResult = await postFashionPhoto(fashionData);
-                sessionStorage.setItem('percent', JSON.stringify(matchingResult));
+                await postFashionPhoto(fashionData);
             }
             if (!checkedUser) {
-                const matchingResult = await postNotLoggedInFashionPhoto(fashionData);
-                sessionStorage.setItem('percent', JSON.stringify(matchingResult));
+                await postNotLoggedInFashionPhoto(fashionData);
             }
             setIsLoading(false);
             setFashionPage(3);

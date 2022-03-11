@@ -1,7 +1,4 @@
-/* eslint-disable react/button-has-type */
-/* eslint-disable react/style-prop-object */
 import styled from 'styled-components';
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import Stack from '@mui/material/Stack';
@@ -22,10 +19,19 @@ import {
 
 function ColorResult() {
     const navigate = useNavigate();
+
+    // 리코일 페이지 state
     const setColorPage = useSetRecoilState(colorPageState);
-    const percentList = JSON.parse(sessionStorage.getItem('colorResult'));
-    const seasonTone = season[percentList[5]];
-    const resultColor = SeasonTone(seasonTone);
+
+    // API 요청 결과
+    const percentList = JSON.parse(sessionStorage.getItem('result'));
+
+    // 퍼스널컬러 결과 (SP / SU / AU / WI)
+    const seasonTone = sessionStorage.getItem('season');
+
+    // 퍼스널 결과에 따른 색상코드
+    const resultColor = SeasonTone(season[seasonTone]);
+
     return (
         <>
             <NavBackgroundDiv />
@@ -34,24 +40,23 @@ function ColorResult() {
             <ResultContainerDiv>
                 <ResultImage />
             </ResultContainerDiv>
+            <SubTitleP>
+                회원님은 <ResultTextS color={resultColor}>{seasonPersonal[seasonTone]}</ResultTextS> 입니다.
+            </SubTitleP>
             <PercentResult
                 resultColor={resultColor}
-                spring={percentList[1]}
-                summer={percentList[2]}
-                autumn={percentList[3]}
-                winter={percentList[4]}
+                spring={percentList?.springRate}
+                summer={percentList?.summerRate}
+                autumn={percentList?.autumnRate}
+                winter={percentList?.winterRate}
             />
-            <SubTitleP>
-                회원님은 <ResultTextS color={resultColor}>{seasonPersonal[percentList[5]]}</ResultTextS> 입니다.
-            </SubTitleP>
-
             <GridContainer>
-                <ShareButton id={percentList[0]} />
+                <ShareButton id={percentList?.id} />
             </GridContainer>
 
             <ColorContainerDiv>
                 <MediumTextLeftH>회원님에게 어울리는 컬러</MediumTextLeftH>
-                <SeasonColor season={seasonTone} />
+                <SeasonColor season={season[seasonTone]} />
             </ColorContainerDiv>
 
             <ButtonContainerDiv>

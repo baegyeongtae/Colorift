@@ -131,6 +131,7 @@ export async function postNotLoggedInFashionPhoto(fashionData) {
         });
 
         const result = {
+            id: response.data.id,
             springRate: response.data.spring_rate,
             summerRate: response.data.summer_rate,
             autumnRate: response.data.autumn_rate,
@@ -174,8 +175,16 @@ export async function getFashionShare(id) {
             method: 'get',
             url: `/app/fashion/share/${id}/`,
         });
-
-        return response;
+        const resultRate = {
+            color: response.data.color,
+            springRate: response.data.spring_rate,
+            summerRate: response.data.summer_rate,
+            autumnRate: response.data.autumn_rate,
+            winterRate: response.data.winter_rate,
+            image: response.data.image,
+        };
+        console.log(resultRate);
+        return resultRate;
     } catch (error) {
         return error.response;
     }

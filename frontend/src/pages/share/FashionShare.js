@@ -17,7 +17,6 @@ import {
     MatchingResult,
     ContainerDiv,
     PercentResult,
-    ShareButton,
 } from '../../components';
 import { hue, saturation, value } from '../../image';
 
@@ -30,14 +29,11 @@ function FashionShare() {
     console.log(result);
     const navigate = useNavigate();
 
-    // SP, SU, AU, WI 중 하나 추출
-    const seasonKeyword = getMaxSeason(result.springRate, result.summerRate, result.autumnRate, result.winterRate);
-
     // 리코일 페이지 state
     const setFashionPage = useSetRecoilState(fashionPageState);
 
     // 퍼스널컬러에 따른 대표 색상
-    const resultColor = SeasonTone(season[seasonKeyword]);
+    const resultColor = SeasonTone(result.color);
 
     useEffect(() => {
         pathnameId &&
@@ -55,7 +51,7 @@ function FashionShare() {
             </ContentContainerDiv>
 
             <SubTitleP>
-                이 옷은 <ResultTextS color={resultColor}>{seasonPersonal[seasonKeyword]}</ResultTextS>인 회원님께
+                이 옷은 <ResultTextS color={resultColor}>{seasonPersonal[result.color]}</ResultTextS>인 회원님께
             </SubTitleP>
             <PercentResult
                 resultColor={resultColor}
@@ -65,17 +61,7 @@ function FashionShare() {
                 winter={result?.winterRate}
             />
             <SubTitleP>{getFashionText(result.match)}</SubTitleP>
-            <GridContainer>
-                <ShareButton
-                    id={result?.id}
-                    path="/fashion/"
-                    springRate={result?.springRate}
-                    summerRate={result?.summerRate}
-                    autumnRate={result?.autumnRate}
-                    winterRate={result?.winterRate}
-                    result={result?.result}
-                />
-            </GridContainer>
+
             <ColorContainerDiv>
                 <div className="wrapper">
                     <div>

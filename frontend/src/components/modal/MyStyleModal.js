@@ -9,6 +9,7 @@ import { getFashionText } from '../../utils/data/getFashionText';
 export function MyStyleModal({ toggleProps, className, selectData }) {
     // API 요청 결과
     const [resultFashion, setResultFashion] = useState({});
+    console.log('resultFashion.result', resultFashion.result);
 
     // 퍼스널컬러 결과에 따른 폰트 색상
     const resultColor = SeasonTone(season[resultFashion?.color]);
@@ -50,19 +51,12 @@ export function MyStyleModal({ toggleProps, className, selectData }) {
                 </SubTitleP>
                 <PercentResult
                     resultColor={resultColor}
-                    hue={resultFashion.color_match_rate}
-                    saturation={resultFashion.brightness_match_rate}
-                    value={resultFashion.saturation_match_rate}
+                    spring={resultFashion.spring_rate}
+                    summer={resultFashion.summer_rate}
+                    autumn={resultFashion.autumn_rate}
+                    winter={resultFashion.winter_rate}
                 />
-                <SubTitleP>
-                    {getFashionText(
-                        resultFashion.color,
-                        resultFashion.spring_rate,
-                        resultFashion.summer_rate,
-                        resultFashion.autumn_rate,
-                        resultFashion.winter_rate,
-                    )}
-                </SubTitleP>
+                <SubTitleP>{getFashionText(resultFashion.result)}</SubTitleP>
                 <ColorContainerDiv />
             </ModalDiv>
         </>

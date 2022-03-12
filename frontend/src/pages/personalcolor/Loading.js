@@ -1,11 +1,19 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { ContainerDiv, SubTitleP } from '../../components';
-import { loader } from '../../image';
 
 function Loading() {
     return (
         <LoadingContainerDiv>
-            <img src={loader} alt="loader" width="130px" height="130px" />
+            <Spinner>
+                <div className="blockG" id="rotateG_01" />
+                <div className="blockG" id="rotateG_02" />
+                <div className="blockG" id="rotateG_03" />
+                <div className="blockG" id="rotateG_04" />
+                <div className="blockG" id="rotateG_05" />
+                <div className="blockG" id="rotateG_06" />
+                <div className="blockG" id="rotateG_07" />
+                <div className="blockG" id="rotateG_08" />
+            </Spinner>
             <SubTitleP>피부톤을 분석하는 중입니다.</SubTitleP>
         </LoadingContainerDiv>
     );
@@ -22,4 +30,103 @@ const LoadingContainerDiv = styled(ContainerDiv)`
     align-items: center;
     margin-bottom: 20px;
     margin-top: 100px;
+`;
+
+const spinnerAnimation = keyframes`
+    0% {
+		background-color:rgb(0,0,0);
+	}
+
+	100% {
+		background-color:rgb(255,255,255);
+	}
+`;
+
+const Spinner = styled.div`
+    position: relative;
+    width: 171px;
+    height: 212px;
+    margin: auto;
+
+    .blockG {
+        position: absolute;
+        background-color: rgb(255, 255, 255);
+        width: 28px;
+        height: 66px;
+        border-radius: 22px 22px 0 0;
+
+        transform: scale(0.4);
+
+        animation-name: ${spinnerAnimation};
+
+        animation-duration: 1.2s;
+
+        animation-iteration-count: infinite;
+
+        animation-direction: normal;
+    }
+
+    #rotateG_01 {
+        left: 0;
+        top: 77px;
+        animation-delay: 0.45s;
+
+        transform: rotate(-90deg);
+    }
+
+    #rotateG_02 {
+        left: 22px;
+        top: 28px;
+        animation-delay: 0.6s;
+
+        transform: rotate(-45deg);
+    }
+
+    #rotateG_03 {
+        left: 72px;
+        top: 8px;
+        animation-delay: 0.75s;
+
+        transform: rotate(0deg);
+    }
+
+    #rotateG_04 {
+        right: 22px;
+        top: 28px;
+        animation-delay: 0.9s;
+
+        transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+    }
+
+    #rotateG_05 {
+        right: 0;
+        top: 77px;
+        animation-delay: 1.05s;
+
+        transform: rotate(90deg);
+    }
+
+    #rotateG_06 {
+        right: 22px;
+        bottom: 19px;
+        animation-delay: 1.2s;
+
+        transform: rotate(135deg);
+    }
+
+    #rotateG_07 {
+        bottom: 0;
+        left: 72px;
+        animation-delay: 1.35s;
+
+        transform: rotate(180deg);
+    }
+
+    #rotateG_08 {
+        left: 22px;
+        bottom: 19px;
+        animation-delay: 1.5s;
+        transform: rotate(-135deg);
+    }
 `;

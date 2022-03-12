@@ -43,16 +43,6 @@ def predict_fashion(color, file):
     """
     Tone prediction
     """
-    
-    """
-    classifier = joblib.load('/app/ai/fashion/models/colorfit.pkl')
-    scaler = joblib.load('/app/ai/fashion/models/scaler.pkl')
-    
-    test = scaler.transform([test])
-    prob = classifier.predict_proba(test)[0]
-    classname = classifier.classes_
-    """
-
     test = LoadConfig.scaler.transform([test])
     prob = LoadConfig.classifier.predict_proba(test)[0]
     classname = LoadConfig.classifier.classes_

@@ -52,12 +52,12 @@ Personal Color는 개인 고유의 신체색을 의미하며, 개인의 특성�
 
 ## 4. 서비스 주요 기능 설명
 
-  - 얼굴 사진을 업로드하면 퍼스널 컬러를 분석하여 '봄 웜톤', '여름 쿨톤', '가을 웜톤', '겨울 쿨톤'의 결과를 제공합니다.![image-20220312094403147](C:\Users\bss57\AppData\Roaming\Typora\typora-user-images\image-20220312094403147.png)
-  - 옷 사진을 업로드하면 옷과 각 계절별 톤과의 적합도를 persentage로, 사용자의 퍼스널 컬러와의 적합도를 세 가지 state로 제공합니다.![](C:\Users\bss57\Downloads\캡처.JPG)
+  - 얼굴 사진을 업로드하면 퍼스널 컬러를 분석하여 '봄 웜톤', '여름 쿨톤', '가을 웜톤', '겨울 쿨톤'의 결과를 제공합니다.![image-20220312094403147](./docs/color-result.png)
+  - 옷 사진을 업로드하면 옷과 각 계절별 톤과의 적합도를 persentage로, 사용자의 퍼스널 컬러와의 적합도를 세 가지 state로 제공합니다.![](./docs/clothes-result.JPG)
 
 - 퍼스널 컬러를 맞춰보는 미니 게임을 제공합니다.
 
-  ![image-20220312094301536](C:\Users\bss57\AppData\Roaming\Typora\typora-user-images\image-20220312094301536.png)
+  ![image-20220312094301536](./docs/minigame.png)
 
 
 

@@ -8,7 +8,6 @@ export const expire = (1 / 24 / 60) * 5; // 5분
 // axios 기본 인스턴스 생성
 export const axiosUserConfig = axios.create({
     method: 'post',
-    // baseURL: `${process.env.REACT_APP_SERVER_ADDRESS}`, // 기본 서버 주소 입력 => 아직 미정
     headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -48,8 +47,10 @@ export async function setUserLogin(_userId, _password) {
         sessionStorage.setItem('userId', _userId);
         sessionStorage.setItem('userNickname', response.data.nickname);
 
+        // 토큰 유효성 검사할 때 필요
         sessionStorage.setItem('accessToken', response.data.access);
 
+        // 토큰 유효기간 검사용으로 필요
         Cookies.set('accessToken', response.data.access, {
             path: '/',
             expires: expire, // 테스트 기준 5분 (하루 단위로 응답)

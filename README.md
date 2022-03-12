@@ -13,13 +13,13 @@ Personal Color는 개인 고유의 신체색을 의미하며, 개인의 특성�
 
 ## 2. 기술 스택
 
-<img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=white"><img src="https://img.shields.io/badge/Python-3.8-3776AB?style=for-the-badge&logo=Python&logoColor=white"><img src="https://img.shields.io/badge/Tensorflow-2.8-FF6F00?style=for-the-badge&logo=TensorFlow&logoColor=white">
+<img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=white">  <img src="https://img.shields.io/badge/Python-3.8-3776AB?style=for-the-badge&logo=Python&logoColor=white">  <img src="https://img.shields.io/badge/Tensorflow-2.8-FF6F00?style=for-the-badge&logo=TensorFlow&logoColor=white">
 
-#### Back-end : <img src="https://img.shields.io/badge/django-092E20?style=for-the-badge&logo=django&logoColor=white"> <img src="https://img.shields.io/badge/nginx-009639?style=for-the-badge&logo=nginx&logoColor=white"> <img src="https://img.shields.io/badge/gunicorn-499848?style=for-the-badge&logo=gunicorn&logoColor=white"> <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> <img src="https://img.shields.io/badge/aws S3-FF9900?style=for-the-badge&logo=Amazon S3&logoColor=white">
+#### Back-end : <img src="https://img.shields.io/badge/django-092E20?style=for-the-badge&logo=django&logoColor=white">  <img src="https://img.shields.io/badge/nginx-009639?style=for-the-badge&logo=nginx&logoColor=white">  <img src="https://img.shields.io/badge/gunicorn-499848?style=for-the-badge&logo=gunicorn&logoColor=white">  <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">  <img src="https://img.shields.io/badge/aws S3-FF9900?style=for-the-badge&logo=Amazon S3&logoColor=white">
 
-#### Front-end : <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white"><img src="https://img.shields.io/badge/axios-5a29e4?style=for-the-badge&logo=axios&logoColor=white"><img src="https://img.shields.io/badge/recoil-0079f4?style=for-the-badge&logo=recoil&logoColor=white"><img src="https://img.shields.io/badge/styled components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white">
+#### Front-end : <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white">  <img src="https://img.shields.io/badge/axios-5a29e4?style=for-the-badge&logo=axios&logoColor=white">  <img src="https://img.shields.io/badge/recoil-0079f4?style=for-the-badge&logo=recoil&logoColor=white">  <img src="https://img.shields.io/badge/styled components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white">
 
-#### AI : <img src="https://img.shields.io/badge/yolo-v3-00FFFF?style=for-the-badge&logo=yolo&logoColor=white"><img src="https://img.shields.io/badge/mobilenet-v2-f59af8?style=for-the-badge&logo=mobilenet&logoColor=white">
+#### AI : <img src="https://img.shields.io/badge/yolo-v3-00FFFF?style=for-the-badge&logo=yolo&logoColor=white">  <img src="https://img.shields.io/badge/mobilenet-v2-f59af8?style=for-the-badge&logo=mobilenet&logoColor=white">
 
 
 

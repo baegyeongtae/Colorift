@@ -1,12 +1,13 @@
 # ColorFit
 
-13팀 인공지능 프로젝트 'ColorFit'의 레포지토리 입니다.
+AI가 제공해주는 나만의 퍼스널컬러 진단을 받아보고, 나에게 어울리는 옷 색상을 알아보세요!
 
 ## 1. 프로젝트 소개
 
 Personal Color는 개인 고유의 신체색을 의미하며, 개인의 특성을 분석하여 퍼스널컬러 타입 분류체계의 한 타입에 개인을 대응시켜 그에 조화를 이루는 색을 진단하여 적합한 메이크업, 헤어, 의상 등의 색채 이미지를 연출하는 시스템입니다.
 
 `ColorFit`은 사용자가 업로드한 사진을 딥러닝 모델을 적용하여 퍼스널컬러 타입을 진단하고, 진단 결과와 퍼스널컬러 팔레트를 기반으로 패션 매칭 서비스를 제공합니다. 기존에 사람의 눈에 의해 판단되었던 주관적인 퍼스널 컬러 타입의 진단 과정을 사용자에게 제공받은 사진을 Face Detection, Align, Crop 등 전처리를 거쳐 얻은 데이터로 학습한 딥러닝 모델로 사용자의 퍼스널 컬러 타입을 진단합니다.
+
 
 
 
@@ -19,6 +20,7 @@ Personal Color는 개인 고유의 신체색을 의미하며, 개인의 특성�
 #### Front-end : <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white"><img src="https://img.shields.io/badge/axios-5a29e4?style=for-the-badge&logo=axios&logoColor=white"><img src="https://img.shields.io/badge/recoil-0079f4?style=for-the-badge&logo=recoil&logoColor=white"><img src="https://img.shields.io/badge/styled components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white">
 
 #### AI : <img src="https://img.shields.io/badge/yolo-v3-00FFFF?style=for-the-badge&logo=yolo&logoColor=white"><img src="https://img.shields.io/badge/mobilenet-v2-f59af8?style=for-the-badge&logo=mobilenet&logoColor=white">
+
 
 
 
@@ -50,6 +52,7 @@ Personal Color는 개인 고유의 신체색을 의미하며, 개인의 특성�
 
     
 
+
 ## 4. 서비스 주요 기능 설명
 
   - 얼굴 사진을 업로드하면 퍼스널 컬러를 분석하여 '봄 웜톤', '여름 쿨톤', '가을 웜톤', '겨울 쿨톤'의 결과를 제공합니다.![image-20220312094403147](./docs/color-result.png)
@@ -58,6 +61,7 @@ Personal Color는 개인 고유의 신체색을 의미하며, 개인의 특성�
 - 퍼스널 컬러를 맞춰보는 미니 게임을 제공합니다.
 
   ![image-20220312094301536](./docs/minigame.png)
+
 
 
 
@@ -74,7 +78,8 @@ Personal Color는 개인 고유의 신체색을 의미하며, 개인의 특성�
 
 
 
+
 ## 6. 프로젝트 상세 기획 내용
 
-[프로젝트]: https://kdt-gitlab.elice.io/ai_track/class_03/ai_project/team13/colorfit/-/wikis/home
+[프로젝트 기획서](https://kdt-gitlab.elice.io/ai_track/class_03/ai_project/team13/colorfit/-/wikis/home)
 

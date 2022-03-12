@@ -56,16 +56,10 @@ export function MyPageFashion() {
 
     // 패션 목록 API 요청
     useEffect(() => {
-        const timer = setTimeout(() => {
-            (async () => {
-                const response = await getFashionList();
-                setFashionList(response.data);
-            })();
-        }, [200]);
-
-        return () => {
-            clearTimeout(timer);
-        };
+        (async () => {
+            const response = await getFashionList();
+            setFashionList(response.data);
+        })();
     }, []);
 
     // 모달 뜬 상태에서는 스크롤 막기

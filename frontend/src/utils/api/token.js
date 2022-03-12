@@ -22,7 +22,14 @@ async function getAccessToken() {
             },
         });
 
+        // 토큰 유효성 검사할 때 필요
         sessionStorage.setItem('accessToken', response.data.access);
+
+        // 토큰 유효기간 검사용으로 필요
+        Cookies.set('accessToken', response.data.access, {
+            path: '/',
+            expires: expire, // 테스트 기준 5분 (하루 단위로 응답)
+        });
 
         Cookies.set('refreshToken', response.data.refresh, {
             path: '/',
@@ -54,21 +61,25 @@ async function isVerify() {
 
 // access 토큰 유효성 검증 함수
 async function accessAvailableCheck() {
+    const isExistence = Cookies.get('accessToken');
     const refreshToken = Cookies.get('refreshToken');
 
     try {
-        // 리프레스 토큰이 존재하지 않으면 로그아웃
+        // 리프레시 토큰이 존재하지 않으면 로그아웃
         if (!refreshToken) {
             sessionStorage.clear();
             window.open('/', '_self');
         }
 
-        // 액세스 토큰 존재 여부 확인
-        const response = await isVerify();
+        // 액세스 토큰 시간이 지났다면
+        // 유효성 검사 해본다
+        if (!isExistence) {
+            const response = await isVerify();
 
-        if (response.status === 401) {
-            await getAccessToken();
-            // setHeaderAccess();
+            // 서버에서도 토큰이 존재하지 않는다면 재발급 요청
+            if (response.status === 401) {
+                await getAccessToken();
+            }
         }
 
         return sessionStorage.getItem('accessToken');

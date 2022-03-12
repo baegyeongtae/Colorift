@@ -48,7 +48,7 @@ def predict_fashion(color, file):
     classname = LoadConfig.classifier.classes_
     
     """
-    process for return result
+    Process for return result
     """
     data = {}
     for i in range(4):

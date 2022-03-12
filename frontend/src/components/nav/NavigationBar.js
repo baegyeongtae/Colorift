@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { Outlet, useLocation, NavLink } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 import Cookies from 'js-cookie';
@@ -13,11 +13,10 @@ function NavigationBar() {
     // true 이면 메뉴 바 나옴
     const [isToggle, setIsToggle] = useState(false);
 
-    // 현재 url 받아오기
+    // 현재 url과 로그인 여부 체크하기
     const location = useLocation();
     const { pathname } = location;
-    const { userId } = location.state || '';
-    const isLogin = sessionStorage.getItem('userId') || '';
+    const isLogin = useMemo(() => sessionStorage.getItem('userId') || '', [pathname]);
 
     // 현재 스크롤 위치 받아오기
     const { scrollY } = useGetScrollY();
@@ -93,19 +92,19 @@ function NavigationBar() {
                                     </NavLink>
                                 ))}
                             </MenuDiv>
-                            <UserDiv className={isToggle && 'show'} login={userId || isLogin}>
+                            <UserDiv className={isToggle && 'show'} login={isLogin}>
                                 <NavLink
-                                    to={userId || isLogin ? '/' : '/login'}
+                                    to={isLogin ? '/' : '/login'}
                                     className={pathname === '/' && scrollY === 0 ? 'transparent login' : 'login'}
-                                    onClick={() => userId || (isLogin && userSessionReset())}
+                                    onClick={() => (isLogin ? userSessionReset() : undefined)}
                                 >
-                                    {userId || isLogin ? 'Logout' : 'Log In'}
+                                    {isLogin ? 'Logout' : 'Log In'}
                                 </NavLink>
                                 <NavLink
-                                    to={userId || isLogin ? `/mypage` : '/signup'}
+                                    to={isLogin ? `/mypage` : '/signup'}
                                     className={pathname === '/' && scrollY === 0 ? 'transparent signup' : 'signup'}
                                 >
-                                    {userId || isLogin ? (
+                                    {isLogin ? (
                                         <img
                                             src={profileIcon}
                                             alt="마이페이지 아이콘"

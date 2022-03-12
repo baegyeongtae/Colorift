@@ -42,12 +42,7 @@ export function Login() {
         event.preventDefault();
         const response = await setUserLogin(idRef.current.value, passwordRef.current.value);
         if (response.status === 200) {
-            navigate('/', {
-                replace: true,
-                state: {
-                    userId: sessionStorage.getItem('userId'),
-                },
-            });
+            navigate('/');
         } else if (response.status === 401) setNoUserModal(true);
     };
 

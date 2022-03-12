@@ -46,7 +46,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
 
 
 """
-[user related api] CreateUser, ChangePassword, DeleteUser
+[user related api] CreateUser, ChangePassword, ChangeNickname, DeleteUser
 """
 
 
@@ -95,7 +95,7 @@ class DeleteUser(APIView):
 
 
 """
-[personal color] : ColorTest(personal color test), ColorTestDetail(test 상세 결과), ColorTestList(test 결과 리스트)
+[personal color] : ColorTest(personal color test), ColorTestDetail(test 상세 결과), ColorShare(SNS 공유), ColorTestList(test 결과 리스트)
 """
 
 
@@ -160,6 +160,9 @@ class ColorTestDetail(APIView):
 
 
 class ColorShare(APIView):
+    """
+    GET : SNS 공유용 정보 반환 (테스트 결과)
+    """    
 
     def get_object(self, pk):
         try:
@@ -188,7 +191,7 @@ class ColorTestList(APIView):
 
 
 """
-[fashion matching test] : FashionTest(fashion matching test), FashionTestDetail(test 상세 결과), FashionTestList(test 결과 리스트)
+[fashion matching test] : FashionTest(fashion matching test), FashionTestDetail(test 상세 결과), FashionShare(SNS 공유), FashionTestList(test 결과 리스트)
 """
 
 
@@ -251,6 +254,9 @@ class FashionTestDetail(APIView):
 
 
 class FashionShare(APIView):
+    """
+    GET : SNS 공유용 정보 반환 (테스트 결과)
+    """
 
     def get_object(self, pk):
         try:

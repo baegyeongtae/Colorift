@@ -53,9 +53,10 @@ function FashionResult() {
                 winter={percentList?.winterRate}
             />
             <SubTitleP>{getFashionText(percentList.match)}</SubTitleP>
-            <GridContainer>
-                <ShareButton id={percentList?.id} path="/fashion/" />
-            </GridContainer>
+            <ContentContainerDiv>
+                <MatchingResult match={percentList?.match} />
+            </ContentContainerDiv>
+
             <ColorContainerDiv>
                 <div className="wrapper">
                     <div className="wrapping">
@@ -89,10 +90,9 @@ function FashionResult() {
                     </ContainerDiv>
                 </div>
             </ColorContainerDiv>
-
-            <ContentContainerDiv>
-                <MatchingResult match={percentList?.match} />
-            </ContentContainerDiv>
+            <GridContainer>
+                <ShareButton id={percentList?.id} path="/fashion/" />
+            </GridContainer>
             <ButtonContainerDiv>
                 <Stack spacing={2} direction="row">
                     <CustomButton type="submit" onClick={() => setFashionPage(0)}>
@@ -114,7 +114,6 @@ export { FashionResult };
 const ContentContainerDiv = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
     align-items: center;
     margin-bottom: 8px;
     margin-top: 8px;
@@ -126,7 +125,8 @@ const ColorContainerDiv = styled(ContainerDiv)`
         height: 350px;
         border-radius: 20px;
         background-color: #efefef;
-        margin-top: 50px;
+        margin: 50px 0;
+
         .wrapping {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -140,12 +140,8 @@ const ColorContainerDiv = styled(ContainerDiv)`
             }
         }
         @media ${({ theme }) => theme.device.mobile} {
-            all: unset;
-            margin-top: 30px;
-            border-radius: 20px;
             width: 300px;
             height: 600px;
-            background-color: #efefef;
             display: grid;
             grid-template-rows: repeat(3, 1fr);
             align-items: center;
@@ -184,16 +180,13 @@ const ButtonContainerDiv = styled.div`
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    margin-bottom: 50px;
-    margin-top: 20px;
+    margin: 50px 0;
 `;
 
 // 버튼을 배치시키는 컨테이너
 const GridContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    ${({ theme }) => theme.flexStyled.flexColumn};
+    ${({ theme }) => theme.flexStyled.flexCenter};
 `;
 
 const CustomButton = styled(BlueButton)`

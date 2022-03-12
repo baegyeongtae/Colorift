@@ -27,15 +27,13 @@ export function MatchingResult({ match }) {
 const ResultText = styled(BigTextP)`
     @media ${({ theme }) => theme.device.mobile} {
         font-size: ${({ theme }) => theme.fontSizes.bigtext};
-        margin-top: 20px;
     }
     font-size: 3rem;
-    margin-top: 80px;
+    margin-top: 30px;
 `;
 
 const ImgContainerDiv = styled(ContainerDiv)`
     margin-top: 20px;
-    margin-bottom: 30px;
 
     img {
         @media ${({ theme }) => theme.device.mobile} {

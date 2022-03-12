@@ -16,7 +16,7 @@ function NavigationBar() {
     // 현재 url과 로그인 여부 체크하기
     const location = useLocation();
     const { pathname } = location;
-    const isLogin = useMemo(() => sessionStorage.getItem('userId') || '', [pathname]);
+    const isLogin = sessionStorage.getItem('userId') || '';
 
     // 현재 스크롤 위치 받아오기
     const { scrollY } = useGetScrollY();

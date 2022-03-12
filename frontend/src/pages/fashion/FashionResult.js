@@ -42,9 +42,9 @@ function FashionResult() {
                 <ResultImage />
             </ContentContainerDiv>
 
-            <SubTitleP>
+            <MainP>
                 이 옷은 <ResultTextS color={resultColor}>{seasonPersonal[seasonTone]}</ResultTextS>인 회원님께
-            </SubTitleP>
+            </MainP>
             <PercentResult
                 resultColor={resultColor}
                 spring={percentList?.springRate}
@@ -52,7 +52,7 @@ function FashionResult() {
                 autumn={percentList?.autumnRate}
                 winter={percentList?.winterRate}
             />
-            <SubTitleP>{getFashionText(percentList.match)}</SubTitleP>
+            <MainP>{getFashionText(percentList.match)}</MainP>
             <ContentContainerDiv>
                 <MatchingResult match={percentList?.match} />
             </ContentContainerDiv>
@@ -237,4 +237,11 @@ const DescriptionTextP = styled.p`
 const ResultTextS = styled.span`
     font-weight: bold;
     color: ${props => `${props.color}`};
+`;
+
+const MainP = styled(SubTitleP)`
+    @media ${({ theme }) => theme.device.mobile} {
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+    }
 `;

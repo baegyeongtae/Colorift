@@ -40,9 +40,9 @@ function ColorResult() {
             <ResultContainerDiv>
                 <ResultImage />
             </ResultContainerDiv>
-            <SubTitleP>
+            <MainP>
                 회원님은 <ResultTextS color={resultColor}>{seasonPersonal[seasonTone]}</ResultTextS> 입니다.
-            </SubTitleP>
+            </MainP>
             <PercentResult
                 resultColor={resultColor}
                 spring={percentList?.springRate}
@@ -50,15 +50,14 @@ function ColorResult() {
                 autumn={percentList?.autumnRate}
                 winter={percentList?.winterRate}
             />
-            <GridContainer>
-                <ShareButton id={percentList?.id} path="/color/" />
-            </GridContainer>
 
             <ColorContainerDiv>
                 <MediumTextLeftH>회원님에게 어울리는 컬러</MediumTextLeftH>
                 <SeasonColor season={season[seasonTone]} />
             </ColorContainerDiv>
-
+            <GridContainer>
+                <ShareButton id={percentList?.id} path="/color/" />
+            </GridContainer>
             <ButtonContainerDiv>
                 <Stack spacing={2} direction="row">
                     <BlueButton type="submit" onClick={() => setColorPage(0)}>
@@ -81,6 +80,9 @@ const ColorContainerDiv = styled(ContainerDiv)`
     align-items: center;
 
     width: 640px;
+
+    margin-top: 100px;
+    margin-bottom: 50px;
 
     @media ${({ theme }) => theme.device.mobile} {
         all: unset;
@@ -125,9 +127,7 @@ const ButtonContainerDiv = styled.div`
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    margin-bottom: 100px;
-    margin-top: 50px;
-    padding-bottom: 100px;
+    margin: 50px 0;
 
     @media ${({ theme }) => theme.device.mobile} {
         display: flex;
@@ -141,14 +141,11 @@ const ButtonContainerDiv = styled.div`
 
 // 버튼을 배치시키는 컨테이너
 const GridContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    ${({ theme }) => theme.flexStyled.flexColumn};
+    ${({ theme }) => theme.flexStyled.flexCenter};
 `;
 
 const MediumTextLeftH = styled(MediumTextH)`
-    margin-top: 120px;
     margin-bottom: 20px;
     margin-left: 30px;
     text-align: left;
@@ -165,4 +162,11 @@ const MediumTextLeftH = styled(MediumTextH)`
 const ResultTextS = styled.span`
     font-weight: bold;
     color: ${props => `${props.color}`};
+`;
+
+const MainP = styled(SubTitleP)`
+    @media ${({ theme }) => theme.device.mobile} {
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+    }
 `;

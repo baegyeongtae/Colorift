@@ -122,7 +122,6 @@ export async function postFashionPhoto(fashionData) {
         sessionStorage.setItem('result', JSON.stringify(result));
         return null;
     } catch (error) {
-        console.log(error.response);
         return error.response;
     }
 }

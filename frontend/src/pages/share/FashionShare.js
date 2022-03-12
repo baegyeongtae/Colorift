@@ -35,8 +35,7 @@ function FashionShare() {
 
     // 퍼스널컬러에 따른 대표 색상
     const resultColor = SeasonTone(season[result.color]);
-    console.log(resultColor);
-    console.log(result);
+
     useEffect(() => {
         pathnameId &&
             (async () => {

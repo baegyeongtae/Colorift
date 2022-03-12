@@ -8,7 +8,7 @@ const axiosConfig = axios.create({
     headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        Authorization: `Bearer ${Cookies.get('accessToken')}`,
+        Authorization: `Bearer ${sessionStorage.getItem('accessToken')}`,
     },
 });
 
@@ -22,17 +22,31 @@ async function getAccessToken() {
             },
         });
 
-        Cookies.set('accessToken', response.data.access, {
-            path: '/',
-            expires: expire, // 테스트 기준 5분 (하루 단위로 응답)
-        });
+        sessionStorage.setItem('accessToken', response.data.access);
 
         Cookies.set('refreshToken', response.data.refresh, {
             path: '/',
             expires: 90, // 테스트 기준 90일
         });
 
-        return response.data.access;
+        return null;
+    } catch (error) {
+        return error.response;
+    }
+}
+
+// 액세스 토큰 존재 여부 확인
+async function isVerify() {
+    try {
+        // 액세스 토큰 존재 여부 확인
+        const response = await axiosUserConfig({
+            url: '/app/token/verify/',
+            data: {
+                token: sessionStorage.getItem('accessToken'),
+            },
+        });
+
+        return response;
     } catch (error) {
         return error.response;
     }
@@ -40,29 +54,27 @@ async function getAccessToken() {
 
 // access 토큰 유효성 검증 함수
 async function accessAvailableCheck() {
-    const accessToken = Cookies.get('accessToken');
     const refreshToken = Cookies.get('refreshToken');
 
     try {
-        // accessToken이 존재할 경우 그대로 반환
-        if (accessToken) {
-            return accessToken;
+        // 리프레스 토큰이 존재하지 않으면 로그아웃
+        if (!refreshToken) {
+            sessionStorage.clear();
+            window.open('/', '_self');
         }
 
-        // accessToken이 존재하지 않고, refreshToken은 존재할 경우
-        if (refreshToken) {
-            const reAccessToken = await getAccessToken();
-            return reAccessToken;
+        // 액세스 토큰 존재 여부 확인
+        const response = await isVerify();
+
+        if (response.status === 401) {
+            await getAccessToken();
+            // setHeaderAccess();
         }
 
-        // accessToken이 존재하지 않고, refreshToken도 존재하지 않을 경우
-        sessionStorage.clear();
-        window.open('/', '_self');
+        return sessionStorage.getItem('accessToken');
     } catch (error) {
-        console.log(error);
+        return error;
     }
-
-    return accessToken;
 }
 
 // axios 인터셉터 생성

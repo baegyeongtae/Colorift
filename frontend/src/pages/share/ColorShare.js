@@ -23,7 +23,6 @@ function ColorShare() {
     const location = useLocation();
     const { pathname } = location;
     const pathnameId = pathname.split('/')[3];
-    console.log(result);
     const navigate = useNavigate();
     const seasonKeyword = getMaxSeason(result.springRate, result.summerRate, result.autumnRate, result.winterRate);
     const [errorStatus, setErrorStatus] = useState(false);

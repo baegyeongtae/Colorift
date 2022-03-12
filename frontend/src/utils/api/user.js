@@ -48,10 +48,7 @@ export async function setUserLogin(_userId, _password) {
         sessionStorage.setItem('userId', _userId);
         sessionStorage.setItem('userNickname', response.data.nickname);
 
-        Cookies.set('accessToken', response.data.access, {
-            path: '/',
-            expires: expire, // 테스트 기준 5분 (하루 단위로 응답)
-        });
+        sessionStorage.setItem('accessToken', response.data.access);
         Cookies.set('refreshToken', response.data.refresh, {
             path: '/',
             expires: 90, // 테스트 기준 90일
@@ -161,7 +158,7 @@ export async function getColorShare(id) {
             winterRate: response.data.winter_rate,
             image: response.data.image,
         };
-        console.log(resultRate);
+
         return resultRate;
     } catch (error) {
         return error.response;
@@ -184,7 +181,7 @@ export async function getFashionShare(id) {
             image: response.data.image,
             match: response.data.result,
         };
-        console.log(resultRate);
+
         return resultRate;
     } catch (error) {
         return error.response;

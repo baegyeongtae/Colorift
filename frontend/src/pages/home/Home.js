@@ -1,5 +1,4 @@
 import { useRef, useEffect } from 'react';
-import { useScrollToTop } from '../../utils/hooks/useScrollToTop';
 import { HomeHeader, HomeService, HomeSeason, HomeAI, HomeFooter } from '.';
 import { HomeColorBar, ScrollUpIcon } from '../../components';
 
@@ -38,9 +37,6 @@ export function Home() {
 
         return () => observer.disconnect(); // 관찰 종료
     });
-
-    // 이 페이지에 오면 스크롤바 맨 위로 올리기
-    useScrollToTop();
 
     return (
         <>

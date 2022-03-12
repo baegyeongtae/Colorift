@@ -7,6 +7,7 @@ import { ContainerDiv } from '../area/ContainerDiv';
 import { useGetScrollY } from '../../utils/hooks/useGetScrollY';
 import { setScrollDisabled } from '../../utils/data/setScrollDisabled';
 import { xmarkIcon, menuIcon, profileIcon } from '../../image';
+import { useScrollToTop } from '../../utils/hooks/useScrollToTop';
 
 function NavigationBar() {
     // true 이면 메뉴 바 나옴
@@ -56,6 +57,9 @@ function NavigationBar() {
         Cookies.remove('refreshToken');
         sessionStorage.clear();
     }
+
+    // pathname이 바뀔 때 스크롤바 위로 이동
+    useScrollToTop(pathname);
 
     // 모바일 버전 메뉴바 show 상태에서는 스크롤 막기
     useEffect(() => setScrollDisabled(isToggle), [isToggle]);

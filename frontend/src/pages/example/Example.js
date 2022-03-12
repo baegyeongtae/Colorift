@@ -1,4 +1,3 @@
-import { useScrollToTop } from '../../utils/hooks/useScrollToTop';
 import { ExampleHeader, ExampleArticle } from '.';
 import { ScrollUpIcon, NavBackgroundDiv } from '../../components';
 
@@ -9,8 +8,6 @@ function Example() {
         autumn: 'Autumn 가을 웜톤',
         winter: 'Winter 겨울 쿨톤',
     };
-
-    useScrollToTop();
 
     return (
         <>

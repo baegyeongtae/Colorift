@@ -57,12 +57,14 @@ Personal Color는 개인 고유의 신체색을 의미하며, 개인의 특성�
 
 ## 4. 폴더 구조 개요
 ```
-colorfit/ai => personal color training 하면서 겪은 시행착오들 및 결과
+colorfit/ai => personal color training 과정 및 결과
 
-colorfit/backend => backend
-colorfit/backend/app/ai => 실제 서비스에 사용되는 모델과 이미지 처리 로직이 들어있는 폴더 color, fashion으로 구분
-colorfit/backend/app/apps.py => 모델을 처음 한번만 로드할 수 있도록 메타데이터로 모델을 로드해 사용
-colorfit/backend/config/conf.py => git ignored, aws 설정값
+# colorfit/backend => backend
+### colorfit/backend/app/ai => 실제 서비스에 사용되는 모델과 이미지 처리 로직이 들어있는 폴더
+#### colorfit/backend/app/ai/color => personal color test 인공지능 모델
+#### colorfit/backend/app/ai/fashion => fashion matching test 인공지능 모델
+### colorfit/backend/app/apps.py => 모델을 처음 한번만 로드할 수 있도록 메타데이터로 모델을 로드해 사용
+### colorfit/backend/config/conf.py => git ignored, aws 설정값
 
 colorfit/frontend => frontend
 

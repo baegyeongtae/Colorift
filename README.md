@@ -59,6 +59,7 @@ Personal Color는 개인 고유의 신체색을 의미하며, 개인의 특성�
 ```
 colorfit/ai => personal color training 과정 및 결과
 
+# backend & ai
 colorfit/backend => backend
 colorfit/backend/app/ai => 실제 서비스에 사용되는 모델과 이미지 처리 로직이 들어있는 폴더
 colorfit/backend/app/ai/color => personal color test 인공지능 모델
@@ -68,8 +69,10 @@ colorfit/backend/app/serializers.py => serializer code (인공지능 모델 호�
 colorfit/backend/app/views.py => view code (class based views)
 colorfit/backend/config/conf.py => git ignored, aws 설정값
 
+# frontend
 colorfit/frontend => frontend
 
+# docs
 colorfit/docs => 개발하면서 참고할 문서정리    
 ```
 

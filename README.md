@@ -64,6 +64,8 @@ colorfit/backend/app/ai => 실제 서비스에 사용되는 모델과 이미지 
 colorfit/backend/app/ai/color => personal color test 인공지능 모델
 colorfit/backend/app/ai/fashion => fashion matching test 인공지능 모델
 colorfit/backend/app/apps.py => 모델을 처음 한번만 로드할 수 있도록 메타데이터로 모델을 로드해 사용
+colorfit/backend/app/serializers.py => serializer code (인공지능 모델 호출을 view가 아니라 여기서 실행)
+colorfit/backend/app/views.py => view code (class based views)
 colorfit/backend/config/conf.py => git ignored, aws 설정값
 
 colorfit/frontend => frontend

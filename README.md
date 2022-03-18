@@ -50,6 +50,10 @@ Personal Color는 개인 고유의 신체색을 의미하며, 개인의 특성�
 
 12. `colorfit$ docker-compose down`으로 종료
 
+13. 기타 추가해야할 사항
+- kakao talk share api (https://ellismin.com/2020/09/share-kakao/)
+- boto3, django storages 사용해서 aws s3와 연결 (backend/config/conf.py라는 파일을 생성하고 필요한 키 값들을 넣어준다. backend/config/settings.py 하단에서 사용된다)
+
     
 
 

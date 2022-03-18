@@ -54,10 +54,22 @@ Personal Color는 개인 고유의 신체색을 의미하며, 개인의 특성�
 - kakao talk share api (https://ellismin.com/2020/09/share-kakao/)
 - boto3, django storages 사용해서 aws s3와 연결 (backend/config/conf.py라는 파일을 생성하고 필요한 키 값들을 넣어준다. backend/config/settings.py 하단에서 사용된다)
 
-    
 
+## 4. 폴더 구조 개요
+```
+colorfit/ai => personal color training 하면서 겪은 시행착오들 및 결과
 
-## 4. 서비스 주요 기능 설명
+colorfit/backend => backend
+colorfit/backend/app/ai => 실제 서비스에 사용되는 모델과 이미지 처리 로직이 들어있는 폴더 color, fashion으로 구분
+colorfit/backend/app/apps.py => 모델을 처음 한번만 로드할 수 있도록 메타데이터로 모델을 로드해 사용
+colorfit/backend/config/conf.py => git ignored, aws 설정값
+
+colorfit/frontend => frontend
+
+colorfit/docs => 개발하면서 참고할 문서정리    
+```
+
+## 5. 서비스 주요 기능 설명
 
   - 얼굴 사진을 업로드하면 퍼스널 컬러를 분석하여 '봄 웜톤', '여름 쿨톤', '가을 웜톤', '겨울 쿨톤'의 결과를 제공합니다.![image-20220312094403147](./docs/color-result.png)
   - 옷 사진을 업로드하면 옷과 각 계절별 톤과의 적합도를 persentage로, 사용자의 퍼스널 컬러와의 적합도를 세 가지 state로 제공합니다.![](./docs/clothes-result.JPG)
@@ -69,7 +81,7 @@ Personal Color는 개인 고유의 신체색을 의미하며, 개인의 특성�
 
 
 
-## 5. 프로젝트 팀원
+## 6. 프로젝트 팀원
 
 | 이름 | 담당 업무 |
 | ------ | ------ |
@@ -83,7 +95,7 @@ Personal Color는 개인 고유의 신체색을 의미하며, 개인의 특성�
 
 
 
-## 6. 프로젝트 상세 기획 내용
+## 7. 프로젝트 상세 기획 내용
 
 [프로젝트 기획서](https://kdt-gitlab.elice.io/ai_track/class_03/ai_project/team13/colorfit/-/wikis/home)
 

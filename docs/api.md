@@ -1,9 +1,118 @@
 # api docs
 
 <br></br>
-## 로그인, 탈퇴
+## 회원가입
+아이디, 닉네임, 비밀번호를 입력하면 회원가입을 진행한다.
+```
+아이디 : 4글자 이상 / 영문 숫자 가능 / 한글 특수문자 공백 불가
+닉네임 : 4글자 이상 / 한글 영문 숫자 가능 / 특수문자 공백 불가
+비밀번호 : 8글자 이상 / 영문 숫자 특수문자 가능 / 한글 공백 불가
+※ 특수문자 : ~!@#$%<>^&*
+```
 
-이외 모듈 완료 후 논의하기로 하였다.
+* **URL**
+
+  `/register/`
+
+* **Method:**
+
+  `POST`
+  
+* **URL Params**
+
+  `None`
+
+* **Data Params**
+
+  `{ "username" : "아이디", "nickname" : "닉네임", "password" : "패스워드" }`<br />
+
+* **Success Response:**
+
+  * **Code:** `201 Created` <br />
+    **Content:** `None`<br />
+ 
+* **Error Response:**
+
+  * **Code:** `400 Bad Request` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `405 Method Not Allowed` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+<br></br>
+## 로그인
+아이디, 비밀번호를 입력하면 로그인을 진행한다.
+
+* **URL**
+
+  `/token/`
+
+* **Method:**
+
+  `POST`
+  
+* **URL Params**
+
+  `None`
+
+* **Data Params**
+
+  `{ "username" : "아이디", "password" : "패스워드" }`<br />
+
+* **Success Response:**
+
+  * **Code:** `200 OK` <br />
+    **Content:** `{
+	"refresh":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0(-중략-)4ifQ.Y0_HK_GPdn5w83KbE4Tdr0BnzthV6nArVkRxPv-MYyo",
+	"access":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0(-중략-)biJ9.OQ_1bb1b5qatht60ZQPQc2r7jTE0hZ8bYLu19M22S_Q",
+	"nickname": "helloworld"
+}`<br />
+ 
+* **Error Response:**
+
+  * **Code:** `400 Bad Request` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `401 Unauthorized` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `405 Method Not Allowed` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+<br></br>
+## 회원탈퇴
+
+* **URL**
+
+  `/quit/`
+
+* **Method:**
+
+  `DELETE`
+  
+* **URL Params**
+
+  `None`
+
+* **Data Params**
+
+  `None`
+
+* **Success Response:**
+
+  * **Code:** `200 OK` <br />
+    **Content:** `None`
+ 
+* **Error Response:**
+
+  * **Code:** `400 Bad Request` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `401 Unauthorized` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `405 Method Not Allowed` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
 
 <br></br>
 ## 퍼스널 컬러 테스트
@@ -11,7 +120,7 @@
 
 * **URL**
 
-  `/color/test`
+  `/color/test/`
 
 * **Method:**
 

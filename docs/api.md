@@ -80,6 +80,73 @@
     **Content:** `{ "error" : "django built-in error message" }`<br />
 
 <br></br>
+## 비밀번호 변경
+아이디와 닉네임을 맞추면 비밀번호를 변경해준다.
+
+* **URL**
+
+  `/edit/password/`
+
+* **Method:**
+
+  `PATCH`
+  
+* **URL Params**
+
+  `None`
+
+* **Data Params**
+
+  `{ "username" : "아이디", "nickname" : "닉네임", "password" : "변경할 패스워드" }`<br />
+
+* **Success Response:**
+
+  * **Code:** `200 OK` <br />
+    **Content:** `None`<br />
+ 
+* **Error Response:**
+
+  * **Code:** `400 Bad Request` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `405 Method Not Allowed` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+<br></br>
+## 닉네임 변경
+로그인 유저는 닉네임을 변경해준다.
+
+* **URL**
+
+  `/edit/nickname/`
+
+* **Method:**
+
+  `PATCH`
+  
+* **URL Params**
+
+  `None`
+
+* **Data Params**
+
+  `{ "nickname" : "변경할 닉네임" }`<br />
+
+* **Success Response:**
+
+  * **Code:** `200 OK` <br />
+    **Content:** `None`<br />
+ 
+* **Error Response:**
+
+  * **Code:** `400 Bad Request` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `405 Method Not Allowed` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+
+<br></br>
 ## 회원탈퇴
 
 * **URL**
@@ -113,6 +180,82 @@
 
   * **Code:** `405 Method Not Allowed` <br />
     **Content:** `{ "error" : "django built-in error message" }`<br />
+
+<br></br>
+## 토큰 재발급
+refresh 토큰을 보내주면 access 토큰과 refresh 토큰을 재발급 해준다.
+
+* **URL**
+
+  `/token/refresh/`
+
+* **Method:**
+
+  `POST`
+  
+* **URL Params**
+
+  `None`
+
+* **Data Params**
+
+  `{ "refresh" : "리프레시 토큰" }`<br />
+
+* **Success Response:**
+
+  * **Code:** `200 OK` <br />
+    **Content:** `{
+	"access":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0(-중략-)biJ9.0ttdBrEwL1jxMF1dy_8Le4yticaHj8QlG_ScQgci6oE",
+	"refresh":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0(-중략-)4ifQ.V_ma04WqsMrUXt61ljL587EUwVkj7-MtZNUilSy8hLw"
+}`<br />
+ 
+* **Error Response:**
+
+  * **Code:** `400 Bad Request` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `401 Unauthorized` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `405 Method Not Allowed` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+<br></br>
+## 토큰 유효성 체크
+access 또는 refresh 토큰을 보내주면 해당 토큰이 유효한지 확인해준다.
+
+* **URL**
+
+  `/token/verify/`
+
+* **Method:**
+
+  `POST`
+  
+* **URL Params**
+
+  `None`
+
+* **Data Params**
+
+  `{ "token" : "access 토큰 또는 refresh 토큰" }`<br />
+
+* **Success Response:**
+
+  * **Code:** `200 OK` <br />
+    **Content:** `{}`<br />
+ 
+* **Error Response:**
+
+  * **Code:** `400 Bad Request` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `401 Unauthorized` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `405 Method Not Allowed` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
 
 <br></br>
 ## 퍼스널 컬러 테스트

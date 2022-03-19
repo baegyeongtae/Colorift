@@ -71,6 +71,11 @@ colorfit/backend/config/conf.py => git ignored, aws 설정값
 
 # frontend
 colorfit/frontend => frontend
+colorfit/frontend/public => html 파일, 폰트
+colorfit/frontend/src/components => 페이지별 자주 쓰이는 스타일 컴포넌트, jsx
+colorfit/frontend/src/image => 이미지, 아이콘
+colorfit/frontend/src/pages => 하나의 페이지를 구성하는 큰 컴포넌트 모음
+colorfit/frontend/src/utils => API 모듈, 커스텀 훅, 함수, recoil atom, 글로벌 스타일 등등
 
 # docs
 colorfit/docs => 개발하면서 참고할 문서정리    

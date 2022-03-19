@@ -136,12 +136,21 @@
 
 * **Success Response:**
 
-  * **Code:** `201 Created` <br />
-    **Content:** `{ "color" : "summer" }`<br />
+  * **Code:** `200 OK` <br />
+    **Content:** `{
+	"id" : "OwLxW8D",
+	"spring_rate" : 40,
+	"summer_rate" : 30,
+	"autumn_rate" : 20,
+	"winter_rate" : 10
+}`<br />
  
 * **Error Response:**
 
   * **Code:** `400 Bad Request` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `405 Method Not Allowed` <br />
     **Content:** `{ "error" : "django built-in error message" }`<br />
 
 <br></br>
@@ -150,7 +159,7 @@
 
 * **URL**
 
-  `/color/test-list` or `/color/test-records`
+  `/color/list/`
 
 * **Method:**
 
@@ -167,11 +176,35 @@
 * **Success Response:**
 
   * **Code:** `200 OK` <br />
-    **Content:** `{ "colorTestList" : [ { "id" : 3, "color" : "winter", "date" : "2022-02-18" }, ... ] }`<br />
+    **Content:** `[
+    {
+        "id": "AJEM7LK",
+        "date": "2022-02-21",
+        "spring_rate" : 40,
+				"summer_rate" : 30,
+				"autumn_rate" : 20,
+				"winter_rate" : 10
+    },
+    {
+        "id": "AJEM7LK",
+        "date": "2022-02-22",
+        "spring_rate" : 40,
+				"summer_rate" : 30,
+				"autumn_rate" : 20,
+				"winter_rate" : 10
+    },
+    ...
+]`<br />
  
 * **Error Response:**
 
-  * **Code:** `404 Not Found` <br />
+  * **Code:** `400 Bad Request` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `401 Unauthorized` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `405 Method Not Allowed` <br />
     **Content:** `{ "error" : "django built-in error message" }`<br />
 
 <br></br>
@@ -180,7 +213,7 @@
 
 * **URL**
 
-  `/color/test-detail/:id`
+  `/color/detail/:id/`
 
 * **Method:**
 
@@ -188,7 +221,7 @@
   
 * **URL Params**
 
-  `id:[integer]`
+  `:id 는 Color table의 아이디로 테스트결과에 대한 아이디이다. 유저 아이디가 아니다. /app/color/list/ url 에서 리턴되는 id를 가지고 있다가 그걸 통해서 접근하는 방식으로 구현하면 된다.`
 
 * **Data Params**
 
@@ -197,11 +230,28 @@
 * **Success Response:**
 
   * **Code:** `200 OK` <br />
-    **Content:** `{ "colorTestDetail" : { "id" : 3, "color" : "winter", "date" : "2022-02-18", "imageURL" : "http://s3-hosted-image-url" } }`<br />
+    **Content:** `{
+	"id":"N8VNa8z",
+	"user":7,
+	"spring_rate" : 40,
+	"summer_rate" : 30,
+	"autumn_rate" : 20,
+	"winter_rate" : 10,
+	"image":"https://colorfit.s3.ap-northeast-2.amazonaws.com/face/onebin.jpg",
+	"date":"2022-02-22"
+}`<br />
  
 * **Error Response:**
+  * **Code:** `400 Bad Request` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `401 Unauthorized` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
 
   * **Code:** `404 Not Found` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `405 Method Not Allowed` <br />
     **Content:** `{ "error" : "django built-in error message" }`<br />
 
 <br></br>
@@ -210,7 +260,7 @@
 
 * **URL**
 
-  `/color/test-detail/:id`
+  `/color/detail/:id/`
 
 * **Method:**
 
@@ -218,7 +268,7 @@
   
 * **URL Params**
 
-  `id:[integer]`
+  `:id 는 Color table의 아이디로 테스트결과에 대한 아이디이다. 유저 아이디가 아니다. /app/color/list/ url 에서 리턴되는 id를 가지고 있다가 그걸 통해서 접근하는 방식으로 구현하면 된다.`
 
 * **Data Params**
 
@@ -227,11 +277,20 @@
 * **Success Response:**
 
   * **Code:** `200 OK` <br />
-    **Content:** `{ "success" : "record successfully deleted" }`<br />
+    **Content:** `None`<br />
  
 * **Error Response:**
 
-  * **Code:** `404 Not Found / 400 Bad Request / 500 Internal Server Error ...` <br />
+  * **Code:** `401 Unauthorized` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `403 Forbidden` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `404 Not Found` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `405 Method Not Allowed` <br />
     **Content:** `{ "error" : "django built-in error message" }`<br />
 
 <br></br>
@@ -240,7 +299,7 @@
 
 * **URL**
 
-  `/fashion/test`
+  `/fashion/test/`
 
 * **Method:**
 
@@ -252,16 +311,26 @@
 
 * **Data Params**
 
-  `image file (.jpg or .png)`
+  `{ "color" : "(‘SP’, ’SU’, ’AU’, ’WI’) 중 하나", "image" : "(.jpg or .png)" }`
 
 * **Success Response:**
 
-  * **Code:** `201 Created` <br />
-    **Content:** `{ "color" : "summer" }`<br />
+  * **Code:** `200 OK` <br />
+    **Content:** `{
+	"id" : "OwLxW8D",
+	"spring_rate" : 40,
+	"summer_rate" : 30,
+	"autumn_rate" : 20,
+	"winter_rate" : 10,
+	"result" : 'G' 또는 'B' 또는 'S'
+}`<br />
  
 * **Error Response:**
 
   * **Code:** `400 Bad Request` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `405 Method Not Allowed` <br />
     **Content:** `{ "error" : "django built-in error message" }`<br />
 
 <br></br>
@@ -270,7 +339,7 @@
 
 * **URL**
 
-  `/fashion/test-list` or `/fashion/test-records`
+  `/fashion/list/`
 
 * **Method:**
 
@@ -287,11 +356,29 @@
 * **Success Response:**
 
   * **Code:** `200 OK` <br />
-    **Content:** `{ "fashionTestList" : [ { "id" : 3, "date" : "2022-02-18", "imageURL" : "http://s3-hosted-image-url" }, ... ] }`<br />
+    **Content:** `[
+	{
+		"id":"AJEM7LK",
+		"date":"2022-02-24",
+		"image":"https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/gucci.jpg"
+	},
+	{
+		"id":"AJEM7LK",
+		"date":"2022-02-24",
+		"image":"https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/moncler.jpg"
+	},
+  ...
+]`<br />
  
 * **Error Response:**
 
-  * **Code:** `404 Not Found` <br />
+  * **Code:** `400 Bad Request` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `401 Unauthorized` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `405 Method Not Allowed` <br />
     **Content:** `{ "error" : "django built-in error message" }`<br />
 
 <br></br>
@@ -300,7 +387,7 @@
 
 * **URL**
 
-  `/fashion/test-detail/:id`
+  `/fashion/detail/:id/`
 
 * **Method:**
 
@@ -308,7 +395,7 @@
   
 * **URL Params**
 
-  `id:[integer]`
+  `:id 는 Fashion table의 아이디로 테스트결과에 대한 아이디이다. 유저 아이디가 아니다. /app/fashion/list/ url 에서 리턴되는 id를 가지고 있다가 그걸 통해서 접근하는 방식으로 구현하면 된다.`
 
 * **Data Params**
 
@@ -317,11 +404,31 @@
 * **Success Response:**
 
   * **Code:** `200 OK` <br />
-    **Content:** `{ "fashionTestDetail" : { "id" : 3, "color" : "winter", "colorMatchRate" : 82, "brightnessMatchRate" : 60, "saturationMatchRate" : 75, "totalMatchRate" : 67, "date" : "2022-02-18", "imageURL" : "http://s3-hosted-image-url" } }`<br />
+    **Content:** `{
+	"id":"AJEM7LK",
+	"user":1,
+	"color":"SP",
+	"image":"https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/northface_Qdo5niU.jpg",
+	"date":"2022-02-24",
+  "spring_rate" : 40,
+	"summer_rate" : 30,
+	"autumn_rate" : 20,
+	"winter_rate" : 10,
+	"result" : G,
+}`<br />
  
 * **Error Response:**
 
+  * **Code:** `401 Unauthorized` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `403 Forbidden` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
   * **Code:** `404 Not Found` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `405 Method Not Allowed` <br />
     **Content:** `{ "error" : "django built-in error message" }`<br />
 
 <br></br>
@@ -330,7 +437,7 @@
 
 * **URL**
 
-  `/fashion/test-detail/:id`
+  `/fashion/detail/:id/`
 
 * **Method:**
 
@@ -338,7 +445,7 @@
   
 * **URL Params**
 
-  `id:[integer]`
+  `:id 는 Fashion table의 아이디로 테스트결과에 대한 아이디이다. 유저 아이디가 아니다. /app/color/list/ url 에서 리턴되는 id를 가지고 있다가 그걸 통해서 접근하는 방식으로 구현하면 된다.`
 
 * **Data Params**
 
@@ -347,9 +454,18 @@
 * **Success Response:**
 
   * **Code:** `200 OK` <br />
-    **Content:** `{ "success" : "record successfully deleted" }`<br />
+    **Content:** `None`<br />
  
 * **Error Response:**
 
-  * **Code:** `404 Not Found / 400 Bad Request / 500 Internal Server Error ...` <br />
+  * **Code:** `401 Unauthorized` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `403 Forbidden` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `404 Not Found` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `405 Method Not Allowed` <br />
     **Content:** `{ "error" : "django built-in error message" }`<br />

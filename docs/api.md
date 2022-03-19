@@ -114,7 +114,8 @@
 
 <br></br>
 ## 닉네임 변경
-로그인 유저는 닉네임을 변경해준다.
+로그인 유저는 닉네임을 변경해준다. <br />
+Bearer 필요함
 
 * **URL**
 
@@ -148,6 +149,8 @@
 
 <br></br>
 ## 회원탈퇴
+탈퇴 요청이 오면 데이터베이스에서 제거한다.<br />
+Bearer 필요함
 
 * **URL**
 
@@ -298,7 +301,8 @@ access 또는 refresh 토큰을 보내주면 해당 토큰이 유효한지 확�
 
 <br></br>
 ## 퍼스널 컬러 테스트 기록 리스트 조회
-유저의 지난 퍼스널 컬러 테스트 기록들을 리턴해준다.
+유저의 지난 퍼스널 컬러 테스트 기록들을 리턴해준다. <br />
+Bearer 필요함
 
 * **URL**
 
@@ -352,7 +356,8 @@ access 또는 refresh 토큰을 보내주면 해당 토큰이 유효한지 확�
 
 <br></br>
 ## 퍼스널 컬러 테스트 기록 상세 조회
-하나의 퍼스널 컬러 테스트 기록에 대한 상세 조회를 요청하면, 해당 테스트의 상세 데이터를 전송해준다.
+하나의 퍼스널 컬러 테스트 기록에 대한 상세 조회를 요청하면, 해당 테스트의 상세 데이터를 전송해준다. <br />
+Bearer 필요함
 
 * **URL**
 
@@ -399,7 +404,8 @@ access 또는 refresh 토큰을 보내주면 해당 토큰이 유효한지 확�
 
 <br></br>
 ## 퍼스널 컬러 테스트 기록 삭제
-하나의 퍼스널 컬러 테스트 기록에 대한 삭제를 요청하면, 해당 기록을 삭제해준다.
+하나의 퍼스널 컬러 테스트 기록에 대한 삭제를 요청하면, 해당 기록을 삭제해준다. <br />
+Bearer 필요함
 
 * **URL**
 
@@ -478,7 +484,8 @@ access 또는 refresh 토큰을 보내주면 해당 토큰이 유효한지 확�
 
 <br></br>
 ## 패션매칭 테스트 기록 리스트 조회
-유저의 지난 패션매칭 테스트 기록들을 리턴해준다.
+유저의 지난 패션매칭 테스트 기록들을 리턴해준다. <br />
+Bearer 필요함
 
 * **URL**
 
@@ -526,7 +533,8 @@ access 또는 refresh 토큰을 보내주면 해당 토큰이 유효한지 확�
 
 <br></br>
 ## 패션매칭 테스트 기록 상세 조회
-하나의 패션매칭 테스트 기록에 대한 상세 조회를 요청하면, 해당 테스트의 상세 데이터를 전송해준다.
+하나의 패션매칭 테스트 기록에 대한 상세 조회를 요청하면, 해당 테스트의 상세 데이터를 전송해준다. <br />
+Bearer 필요함
 
 * **URL**
 
@@ -576,7 +584,8 @@ access 또는 refresh 토큰을 보내주면 해당 토큰이 유효한지 확�
 
 <br></br>
 ## 패션매칭 테스트 기록 삭제
-하나의 패션매칭 테스트 기록에 대한 삭제를 요청하면, 해당 기록을 삭제해준다.
+하나의 패션매칭 테스트 기록에 대한 삭제를 요청하면, 해당 기록을 삭제해준다. <br />
+Bearer 필요함
 
 * **URL**
 
@@ -598,6 +607,99 @@ access 또는 refresh 토큰을 보내주면 해당 토큰이 유효한지 확�
 
   * **Code:** `200 OK` <br />
     **Content:** `None`<br />
+ 
+* **Error Response:**
+
+  * **Code:** `401 Unauthorized` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `403 Forbidden` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `404 Not Found` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `405 Method Not Allowed` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+<br></br>
+## 퍼스널컬러 공유 페이지 조회
+공유 페이지로 들어오면 관련 정보를 보여준다.
+
+* **URL**
+
+  `/color/share/:id/`
+
+* **Method:**
+
+  `GET`
+  
+* **URL Params**
+
+  `:id 는 Color table의 아이디로 테스트결과에 대한 아이디이다. 유저 아이디가 아니다.`
+
+* **Data Params**
+
+  `None`
+
+* **Success Response:**
+
+  * **Code:** `200 OK` <br />
+    **Content:** `{
+	"id":"N8VNa8z",
+	"spring_rate" : 40,
+	"summer_rate" : 30,
+	"autumn_rate" : 20,
+	"winter_rate" : 10,
+	"image":"https://colorfit.s3.ap-northeast-2.amazonaws.com/face/onebin.jpg",
+}`<br />
+ 
+* **Error Response:**
+
+  * **Code:** `401 Unauthorized` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `403 Forbidden` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `404 Not Found` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+  * **Code:** `405 Method Not Allowed` <br />
+    **Content:** `{ "error" : "django built-in error message" }`<br />
+
+<br></br>
+## 패션매칭 공유 페이지 조회
+공유 페이지로 들어오면 관련 정보를 보여준다.
+
+* **URL**
+
+  `/fashion/share/:id/`
+
+* **Method:**
+
+  `GET`
+  
+* **URL Params**
+
+  `:id 는 Fashion table의 아이디로 테스트결과에 대한 아이디이다.`
+
+* **Data Params**
+
+  `None`
+
+* **Success Response:**
+
+  * **Code:** `200 OK` <br />
+    **Content:** `{
+	"color":"SP",
+	"image":"https://colorfit.s3.ap-northeast-2.amazonaws.com/fashion/northface_Qdo5niU.jpg",
+  "spring_rate" : 40,
+	"summer_rate" : 30,
+	"autumn_rate" : 20,
+	"winter_rate" : 10
+	"result" : 'G' 또는 'B' 또는 'S'
+}`<br />
  
 * **Error Response:**
 
